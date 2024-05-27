@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>aspnet-ApiEndPoint-28d32c54-c378-4314-8bd1-586c92fa8c12</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0" NoWarn="NU1605" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="2.15.2" />
+    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.15.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\1-Domain\Core\MAhface.Domain.Core\MAhface.Domain.Core1.csproj" />
+    <ProjectReference Include="..\..\..\1-Domain\Services\AppService\Mahface.Services.AppServices\Mahface.Services.AppServices.csproj" />
+    <ProjectReference Include="..\..\..\2-Infrastucture\MAhface.Infrastructure.EfCore\MAhface.Infrastructure.EfCore\MAhface.Infrastructure.EfCore.csproj" />
+  </ItemGroup>
+
+</Project>
