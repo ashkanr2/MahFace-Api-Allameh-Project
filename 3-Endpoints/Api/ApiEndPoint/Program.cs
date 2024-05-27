@@ -1,5 +1,9 @@
+using Mahface.Services.AppServices.Service;
 using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core1.Interface.IRipositories;
+using MAhface.Domain.Core1.Interface.IServices;
 using MAhface.Infrastructure.EfCore.DBContext;
+using MAhface.Infrastructure.EfCore.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +34,12 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<AllamehPrroject>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
+
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddControllers();
+
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<User>();
@@ -75,7 +85,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapIdentityApi<User>();
+//app.MapIdentityApi<User>();
 
 app.MapControllers();
 
