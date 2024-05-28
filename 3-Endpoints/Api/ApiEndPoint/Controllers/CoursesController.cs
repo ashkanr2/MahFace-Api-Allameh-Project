@@ -163,5 +163,35 @@ namespace ApiEndPoint.Controllers
             var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             return File(fileStream, "image/jpeg"); // You can set appropriate MIME type here
         }
+
+        [HttpDelete("DeleteImage/{id}")]
+        public async Task<IActionResult> DeleteImage(Guid id)
+        {
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null || string.IsNullOrEmpty(course.ImageUrl))
+            {
+                return NotFound();
+            }
+
+            // Get the file path of the image
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ImageUrl);
+
+            // Check if file exists
+            if (System.IO.File.Exists(filePath))
+            {
+                // Delete the file
+                System.IO.File.Delete(filePath);
+
+                // Clear the image URL in the course entity
+                course.ImageUrl = null;
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Image deleted successfully" });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

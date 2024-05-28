@@ -8,7 +8,7 @@ namespace ApiEndPoint.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoriesControllerAShkan : ControllerBase
+    public class CategoriesControllerAShkan: ControllerBase
     {
         private readonly ICategoryService _categoryService;
 

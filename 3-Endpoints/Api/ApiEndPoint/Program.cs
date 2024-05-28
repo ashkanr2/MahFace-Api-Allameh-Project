@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Identity;
 using MAhface.Domain.Core.Interface.IRipositories;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +40,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
+builder.Services.AddIdentityApiEndpoints<User>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedEmail = false;
@@ -54,12 +55,10 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 .AddEntityFrameworkStores<AllamehPrroject>();
 
 var app = builder.Build();
-
+app.MapIdentityApi<User>();
 app.UseSwagger();
 app.UseSwaggerUI();
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
