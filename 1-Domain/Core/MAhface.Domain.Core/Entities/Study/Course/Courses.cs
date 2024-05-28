@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 
 namespace MAhface.Domain.Core.Entities.Study.Course
 {
@@ -50,6 +51,11 @@ namespace MAhface.Domain.Core.Entities.Study.Course
         public Category category { get; set; }
 
         public List<Seasons> Seasons { get; set; }
+
+        public Image Image { get; set; }
+
+        // Foreign key
+        public Guid? ImageId { get; set; }
 
     }
 }

@@ -349,6 +349,9 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Property<bool>("ISActive")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -367,6 +370,10 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ImageId")
+                        .IsUnique()
+                        .HasFilter("[ImageId] IS NOT NULL");
 
                     b.HasIndex("TeacherId");
 
@@ -469,6 +476,51 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasIndex("seasonId");
 
                     b.ToTable("Section", "Study");
+                });
+
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Business.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Code"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ISActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -666,9 +718,15 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MAhface.Domain.Core1.Entities.BasicInfo.Business.Image", "Image")
+                        .WithOne()
+                        .HasForeignKey("MAhface.Domain.Core.Entities.Study.Course.Courses", "ImageId");
+
                     b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
+
+                    b.Navigation("Image");
 
                     b.Navigation("Teacher");
 
