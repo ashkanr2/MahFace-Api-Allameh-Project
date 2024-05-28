@@ -26,8 +26,8 @@ namespace ApiEndPoint.ViewModel
         [DefaultValue(0)]
         public int View { get; set; }
 
-
-
+        [DefaultValue(0)]
+        public decimal cost { get; set; }
 
         //public Category category { get; set; }
 

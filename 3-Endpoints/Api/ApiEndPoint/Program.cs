@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Identity;
+using MAhface.Domain.Core.Interface.IRipositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

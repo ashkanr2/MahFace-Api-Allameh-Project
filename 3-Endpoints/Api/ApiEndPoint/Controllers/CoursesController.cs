@@ -34,7 +34,7 @@ namespace ApiEndPoint.Controllers
 
             //    }
             //    return courses; 
-            var courses = _CourseService.GetAll();
+            var courses = _context.Courses.ToList();
             return Ok(courses);
 
         }
@@ -64,6 +64,7 @@ namespace ApiEndPoint.Controllers
             course.Title= CourseVm.Title;
             course.CategoryId= CourseVm.CategoryId;
             course.CourseLevelId=1;
+            course.Cost=CourseVm.cost;
             course.CourseDescription= CourseVm.CourseDescription;
             course.TeacherId= CourseVm.TeacherId;
             _context.Courses.Add(course);
@@ -96,6 +97,67 @@ namespace ApiEndPoint.Controllers
         private bool CourseExists(Guid id)
         {
             return _context.Courses.Any(e => e.Id == id);
+        }
+
+        [HttpPost("UploadImage/{id}")]
+        public async Task<ActionResult> UploadImage(Guid id, IFormFile file)
+        {
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            // Check if file is null or not
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("File is null or empty");
+            }
+
+            // Get file extension
+            var extension = Path.GetExtension(file.FileName);
+
+            // Generate a unique filename for the image
+            var fileName = $"{Guid.NewGuid()}{extension}";
+
+            // Path to save the image
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+
+            // Save the image to the server
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Update course with image URL
+            course.ImageUrl = $"images/{fileName}";
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Image uploaded successfully", imageUrl = course.ImageUrl });
+        }
+
+        // GET: api/Courses/DownloadImage/{id}
+        [HttpGet("DownloadImage/{id}")]
+        public async Task<IActionResult> DownloadImage(Guid id)
+        {
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null || string.IsNullOrEmpty(course.ImageUrl))
+            {
+                return NotFound();
+            }
+
+            // Get the file path of the image
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", course.ImageUrl);
+
+            // Check if file exists
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            // Read the file and return as FileStreamResult
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "image/jpeg"); // You can set appropriate MIME type here
         }
     }
 }
