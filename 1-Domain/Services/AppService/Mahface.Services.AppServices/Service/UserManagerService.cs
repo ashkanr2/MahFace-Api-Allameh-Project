@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Mahface.Services.AppServices.Service
 {
-    public class UserService : IUserService
+    public class UserManagerService : IUserManagerService
     {
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserManagerService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

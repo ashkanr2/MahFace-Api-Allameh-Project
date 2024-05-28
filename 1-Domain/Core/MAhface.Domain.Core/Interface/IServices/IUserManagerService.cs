@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core1.Interface.IServices
 {
-    public interface IUserService
+    public interface IUserManagerService
     {
         Task<User> GetUserByIdAsync(Guid id);
         Task<IEnumerable<User>> GetAllUsersAsync();

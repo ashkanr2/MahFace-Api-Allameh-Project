@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\1-Domain\Core\MAhface.Domain.Core\MAhface.Domain.Core1.csproj" />
+    <ProjectReference Include="..\..\..\1-Domain\Services\AppService\Mahface.Services.AppServices\Mahface.Services.AppServices.csproj" />
   </ItemGroup>
 
 </Project>
