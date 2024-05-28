@@ -34,4 +34,8 @@
     <ProjectReference Include="..\..\..\2-Infrastucture\MAhface.Infrastructure.EfCore\MAhface.Infrastructure.EfCore\MAhface.Infrastructure.EfCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>

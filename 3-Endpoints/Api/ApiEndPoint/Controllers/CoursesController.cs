@@ -14,12 +14,17 @@ namespace ApiEndPoint.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly AllamehPrroject _context;
-        private readonly ICourseService _CourseService;
+        //private readonly ICourseService _CourseService;
 
-        public CoursesController(AllamehPrroject context, ICourseService CourseService)
+        public CoursesController(AllamehPrroject context )
         {
             _context = context;
-            _CourseService=CourseService;
+            //_CourseService=CourseService;
+            var imagesFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
+            if (!Directory.Exists(imagesFolderPath))
+            {
+                Directory.CreateDirectory(imagesFolderPath);
+            }
         }
 
         // GET: api/Courses
@@ -98,7 +103,6 @@ namespace ApiEndPoint.Controllers
         {
             return _context.Courses.Any(e => e.Id == id);
         }
-
         [HttpPost("UploadImage/{id}")]
         public async Task<ActionResult> UploadImage(Guid id, IFormFile file)
         {
@@ -121,7 +125,7 @@ namespace ApiEndPoint.Controllers
             var fileName = $"{Guid.NewGuid()}{extension}";
 
             // Path to save the image
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Images", fileName);
 
             // Save the image to the server
             using (var stream = new FileStream(filePath, FileMode.Create))
@@ -130,7 +134,7 @@ namespace ApiEndPoint.Controllers
             }
 
             // Update course with image URL
-            course.ImageUrl = $"images/{fileName}";
+            course.ImageUrl = $"Images/{fileName}";
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Image uploaded successfully", imageUrl = course.ImageUrl });
@@ -147,7 +151,7 @@ namespace ApiEndPoint.Controllers
             }
 
             // Get the file path of the image
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", course.ImageUrl);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ImageUrl);
 
             // Check if file exists
             if (!System.IO.File.Exists(filePath))
