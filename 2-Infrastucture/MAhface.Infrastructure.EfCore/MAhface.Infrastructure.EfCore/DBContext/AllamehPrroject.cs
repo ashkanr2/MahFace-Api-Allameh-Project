@@ -43,6 +43,7 @@ namespace MAhface.Infrastructure.EfCore.DBContext
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             //modelBuilder.ApplyConfiguration(new SectionConfiguration());
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(new ErrorLogConfiguration());
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
