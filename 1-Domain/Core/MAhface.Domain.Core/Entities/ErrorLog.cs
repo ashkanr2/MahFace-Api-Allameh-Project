@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core1.Entities
 {
-
+    [Table("ErrorLog", Schema = "System")]
     public class ErrorLog
     {
         public Guid Id { get; set; }
