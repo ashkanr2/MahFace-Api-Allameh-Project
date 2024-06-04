@@ -17,6 +17,13 @@ namespace MAhface.Domain.Core.Entities.Study.Season
 
         public Courses Course { get; set; }
 
+       
+        public  string   Title   { get; set; }
+
+     
+        public string   Descrption {  get; set; }
+
+
         //public List<Section> Sections { get; set; }
 
     }
