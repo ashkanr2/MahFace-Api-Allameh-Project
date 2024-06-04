@@ -5,6 +5,7 @@ using MAhface.Domain.Core.Interface.IServices;
 using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiEndPoint.Controllers
 {
@@ -164,6 +165,45 @@ namespace ApiEndPoint.Controllers
             return File(fileStream, "image/jpeg"); // You can set appropriate MIME type here
         }
 
+
+
+        [HttpGet("ImageBase64/{id}")]
+        public async Task<IActionResult> ImageBase64(Guid id)
+        {
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null || string.IsNullOrEmpty(course.ImageUrl))
+            {
+                return NotFound();
+            }
+
+            // Get the file path of the image
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ImageUrl);
+
+            // Check if file exists
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            // Read the file as byte array
+            byte[] fileBytes;
+            try
+            {
+                fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            }
+            catch (Exception ex)
+            {
+                // Handle exception if file read fails
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+
+            // Convert byte array to base64 string
+            var base64String = Convert.ToBase64String(fileBytes);
+
+            // Return base64 string as JSON response
+            return Ok(new { base64Image = base64String });
+        }
+
         [HttpDelete("DeleteImage/{id}")]
         public async Task<IActionResult> DeleteImage(Guid id)
         {
@@ -194,4 +234,6 @@ namespace ApiEndPoint.Controllers
             }
         }
     }
+    
+
 }
