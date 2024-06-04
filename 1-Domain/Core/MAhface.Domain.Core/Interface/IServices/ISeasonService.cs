@@ -22,7 +22,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         public string Create(SeasonsDto season);
 
-
+        public TimeOnly CalculateSumSections(Guid SeasonId);
 
        
     }

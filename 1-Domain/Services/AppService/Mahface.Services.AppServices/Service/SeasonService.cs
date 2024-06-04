@@ -26,6 +26,11 @@ namespace Mahface.Services.AppServices.Service
             _mapper = mapper;
         }
 
+        public TimeOnly CalculateSumSections(Guid SeasonId)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Create(SeasonsDto seasonDto)
         {
             var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
@@ -37,7 +42,12 @@ namespace Mahface.Services.AppServices.Service
         public List<SeasonsDto> GetAll()
         {
             var seasons = _seasonRepository.GetAll();
-            return _mapper.Map<List<SeasonsDto>>(seasons);
+           var seasonsDto = _mapper.Map<List<SeasonsDto>>(seasons);
+            foreach (var season in seasonsDto)
+            {
+                //season.SumSections=
+            }
+            return seasonsDto;
         }
 
         public List<SeasonsDto> GetAllCourseSeasons(Guid courseId)
