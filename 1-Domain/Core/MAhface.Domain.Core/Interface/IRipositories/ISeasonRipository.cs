@@ -10,7 +10,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
 {
     public interface ISeasonRipository
     {
-        public List <Seasons> GetAll { get; set; }
+        public List<Seasons> GetAll();
 
         public Seasons GetById(Guid Id);
 
