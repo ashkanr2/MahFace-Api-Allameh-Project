@@ -60,7 +60,7 @@ public class SeasonController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("Update/{id}")]
+    [HttpPut("Update")]
     public ActionResult<string> Update( SeasonVm seasonVm)
     {
         SeasonsDto seasonDto = new SeasonsDto();

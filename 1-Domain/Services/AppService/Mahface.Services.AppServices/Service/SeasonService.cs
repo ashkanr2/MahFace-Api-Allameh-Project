@@ -4,6 +4,7 @@ using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,21 @@ namespace Mahface.Services.AppServices.Service
     public class SeasonService : ISeasonService
     {
         private readonly ISeasonRipository _seasonRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper)
+        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _seasonRepository = seasonRepository;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
 
         public string Create(SeasonsDto seasonDto)
         {
+            var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
             var season = _mapper.Map<Seasons>(seasonDto);
+            season.Description="Created By Ip = "+ ip;
             return _seasonRepository.Create(season);
         }
 
@@ -58,7 +63,9 @@ namespace Mahface.Services.AppServices.Service
 
         public string Update(SeasonsDto seasonDto)
         {
+            var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
             var season = _mapper.Map<Seasons>(seasonDto);
+            season.Description="**Updated By Ip = "+ ip +"date : "+DateTime.Now.ToString();
             return _seasonRepository.Update(season);
         }
     }

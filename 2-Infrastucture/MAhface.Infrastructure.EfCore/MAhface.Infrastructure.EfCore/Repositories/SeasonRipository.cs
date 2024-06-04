@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -84,7 +85,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 existingSeason.Title = season.Title;
                 existingSeason.SeasonsDescription = season.SeasonsDescription;
                 existingSeason.CourseId = season.CourseId;
-                existingSeason.Description=" Updated at "+ DateTime.Now.ToString();
+                existingSeason.Description=existingSeason.Description + season.Description;
                 _context.SaveChanges();
                 return "Season updated successfully.";
             }
