@@ -43,8 +43,11 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public string Create(Seasons season)
         {
+            var CreateUserId = _context.Users.FirstOrDefault(x => x.IsSystemAccount).Id;
             try
             {
+                season.CreatedDate= DateTime.Now;
+                season.CreatedUserID=CreateUserId;
                 _context.Seasons.Add(season);
                 _context.SaveChanges();
                 return "Season created successfully.";
@@ -79,9 +82,9 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 }
 
                 existingSeason.Title = season.Title;
-                existingSeason.Description = season.Description;
+                existingSeason.SeasonsDescription = season.SeasonsDescription;
                 existingSeason.CourseId = season.CourseId;
-
+                existingSeason.Description=" Updated at "+ DateTime.Now.ToString();
                 _context.SaveChanges();
                 return "Season updated successfully.";
             }
