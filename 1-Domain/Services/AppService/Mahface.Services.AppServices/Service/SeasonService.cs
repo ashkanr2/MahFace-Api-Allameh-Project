@@ -1,4 +1,7 @@
-﻿using MAhface.Domain.Core.Dto;
+﻿using AutoMapper;
+using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.Study.Course;
+using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
 using System;
@@ -11,39 +14,53 @@ namespace Mahface.Services.AppServices.Service
 {
     public class SeasonService : ISeasonService
     {
-        private readonly ISeasonRipository _seasonRipository;
-        public SeasonService(ISeasonRipository seasonRipository)
+        private readonly ISeasonRipository _seasonRepository;
+        private readonly IMapper _mapper;
+
+        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper)
         {
-            _seasonRipository= seasonRipository;
+            _seasonRepository = seasonRepository;
+            _mapper = mapper;
         }
-        public string Create(SeasonsDto season)
+
+        public string Create(SeasonsDto seasonDto)
         {
-            throw new NotImplementedException();
+            var season = _mapper.Map<Seasons>(seasonDto);
+            return _seasonRepository.Create(season);
         }
 
         public List<SeasonsDto> GetAll()
         {
-            throw new NotImplementedException();
+            var seasons = _seasonRepository.GetAll();
+            return _mapper.Map<List<SeasonsDto>>(seasons);
         }
 
-        public List<SeasonsDto> GetAllCourseSeasons(Guid CourseId)
+        public List<SeasonsDto> GetAllCourseSeasons(Guid courseId)
         {
-            throw new NotImplementedException();
+            var seasons = _seasonRepository.GetAll().Where(s => s.CourseId == courseId).ToList();
+            return _mapper.Map<List<SeasonsDto>>(seasons);
         }
 
-        public SeasonsDto GetById(Guid Id)
+        public SeasonsDto GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var season = _seasonRepository.GetById(id);
+            return _mapper.Map<SeasonsDto>(season);
         }
 
-        public List<SeasonsDto> GetBySectionId(Guid SectionId)
+        public SeasonsDto GetBySectionId(Guid sectionId)
         {
-            throw new NotImplementedException();
+            var date = new DateTime();
+            date=DateTime.Now;
+            ///var seasons = _seasonRepository.GetAll().Where(s => s..Any(sec => sec.Id == sectionId)).ToList();
+            var seasons = _seasonRepository.GetAll().FirstOrDefault();
+            return _mapper.Map<SeasonsDto>(seasons);
         }
 
-        public string Update(SeasonsDto season)
+        public string Update(SeasonsDto seasonDto)
         {
-            throw new NotImplementedException();
+            var season = _mapper.Map<Seasons>(seasonDto);
+            return _seasonRepository.Update(season);
         }
     }
+
 }

@@ -10,6 +10,8 @@ using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Identity;
 using MAhface.Domain.Core.Interface.IRipositories;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Mahface.Services.AppServices.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,8 +39,13 @@ builder.Services.AddDbContext<AllamehPrroject>(options =>
 //builder.Services.AddScoped<IUserManagerService, UserManagerService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ISeasonRipository, SeasonRepository>();
+builder.Services.AddScoped<ISeasonService, SeasonService>();
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
 builder.Services.AddIdentityApiEndpoints<User>(options =>
 {

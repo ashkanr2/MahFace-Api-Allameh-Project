@@ -21,7 +21,7 @@ namespace MAhface.Domain.Core.Entities.Study.Season
         public  string   Title   { get; set; }
 
      
-        public string   Descrption {  get; set; }
+        public string SeasonsDescription {  get; set; }
 
 
         //public List<Section> Sections { get; set; }

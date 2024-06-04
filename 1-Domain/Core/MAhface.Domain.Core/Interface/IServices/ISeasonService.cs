@@ -14,7 +14,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         public List<SeasonsDto> GetAllCourseSeasons(Guid CourseId);
 
-        public List<SeasonsDto> GetBySectionId(Guid SectionId);
+        public SeasonsDto GetBySectionId(Guid SectionId);
         
         public SeasonsDto GetById(Guid Id);
 
