@@ -1,6 +1,8 @@
 ﻿using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core1.Entities;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Infrastructure.EfCore.DBContext;
+using MAhface.Infrastructure.EfCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,8 +30,13 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 }
                 catch (Exception ex)
                 {
-                   
-                    return new List<Seasons>(); 
+                ErrorLog error = new ErrorLog();
+                error.Entityname="Season";
+                error.ActionName="GetAll";
+                error.Exeption=ex.Message;
+                error.ActionType="Ripository";
+                _context.ErrorLogs.Add(error);
+                return new List<Seasons>(); 
                 }
             
         }
@@ -44,6 +51,13 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
             catch (Exception ex)
             {
+                ErrorLog error = new ErrorLog();
+                error.Entityname="Season";
+                error.ActionName="Create";
+                error.Exeption=ex.Message;
+                error.ActionType="Ripository";
+                error.UserId=season.CreatedUserID;
+                _context.ErrorLogs.Add(error);
                 // Log exception
                 return $"Error: {ex.Message}";
             }
@@ -73,6 +87,13 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
             catch (Exception ex)
             {
+                ErrorLog error = new ErrorLog();
+                error.Entityname="Season";
+                error.ActionName="Update";
+                error.Exeption=ex.Message;
+                error.ActionType="Ripository";
+                error.UserId = season.CreatedUserID;
+                _context.ErrorLogs.Add(error);
                 // Log exception
                 return $"Error: {ex.Message}";
             }
