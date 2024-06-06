@@ -13,7 +13,7 @@ namespace MAhface.Domain.Core1.Entities.BasicInfo.Business
    [Table("Image", Schema = "BasicInfo")]
     public class Image:BaseEntity
     {
-        public Guid ImageId { get; set; }
+        //public Guid ImageId { get; set; }
 
        
         public string Url { get; set; }

@@ -1,5 +1,6 @@
 ﻿
 using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.Study.Course;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +9,12 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core.Interface.IServices
 {
-    public interface ICourseService
+    public interface ICoursesService
     {
-        public List<CourseDto> GetAll();
-
-        public CourseDto GetById(Guid Id);
-
-        public string Update(CourseDto course);
-
-        public string Create(CourseDto course);
-
-        public string IsDeleted(Guid Id);
-
-        public List<CourseDto> GetByCategoryId(Guid categoryId);
-
-        public List<CourseDto> GetByTeacherId(Guid teacherId);
-
-        public List<CourseDto> GetStudentId(Guid studentId);
-
-
+        Task<CourseDto> GetCourseById(Guid id);
+        Task<IEnumerable<CourseDto>> GetAllCourses();
+        Task AddCourse(CourseDto courseDto);
+        Task UpdateCourse(CourseDto courseDto);
+        Task DeleteCourse(Guid id);
     }
 }

@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core1.Dto
 {
-    internal class ImageDto
+    public class ImageDto
     {
+        public Guid Id { get; set; }
+
+
+        public string Url { get; set; }
+
+        public string Base64File { get; set; }
     }
 }

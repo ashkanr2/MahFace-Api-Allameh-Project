@@ -8,134 +8,56 @@ using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Interface.IRipositories;
 using MAhface.Domain.Core.Interface.IServices;
+using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Interface.IServices;
 namespace Mahface.Services.AppServices.Service
 {
-    public class CourseServices : ICourseService
+    public class CoursesService : ICoursesService
     {
-        private readonly ICourseripository _courseRepository;
-        private readonly IMapper _mapper;
-
-        public CourseServices(ICourseripository courseRepository, IMapper mapper)
+        private readonly ICourseripository _coursesRepository;
+        private readonly IMapper _mapper; // Assuming you are using AutoMapper
+        //private readonly IImageService _imageService;
+        public CoursesService(ICourseripository coursesRepository, IMapper mapper)
         {
-            _courseRepository = courseRepository;
+            _coursesRepository = coursesRepository;
             _mapper = mapper;
+            //_imageService = imageService;
         }
 
-        public string Create(CourseDto courseDto)
+        public async Task<CourseDto> GetCourseById(Guid id)
         {
-            try
-            {
-                var course = _mapper.Map<Courses>(courseDto);
-                return _courseRepository.Create(course);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return $"Error: {ex.Message}";
-            }
+            var course = await _coursesRepository.GetCourseById(id);
+            return _mapper.Map<CourseDto>(course);
         }
 
-        public List<CourseDto> GetAll()
+        public async Task<IEnumerable<CourseDto>> GetAllCourses()
         {
-            try
-            {
-                var courses = _courseRepository.GetAll();
-                return _mapper.Map<List<CourseDto>>(courses);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return new List<CourseDto> { new CourseDto { Title = $"Error: {ex.Message}" } };
-            }
+            var courses = await _coursesRepository.GetAllCourses();
+            return _mapper.Map<IEnumerable<CourseDto>>(courses);
         }
 
-        public List<CourseDto> GetByCategoryId(Guid categoryId)
+        public async Task AddCourse(CourseDto courseDto)
         {
-            try
-            {
-                var courses = _courseRepository.GetAll().Where(c => c.CategoryId == categoryId).ToList();
-                return _mapper.Map<List<CourseDto>>(courses);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return new List<CourseDto> { new CourseDto { Title = $"Error: {ex.Message}" } };
-            }
+            var course = _mapper.Map<Courses>(courseDto);
+            //if (courseDto.ImageFile!= null)
+            //{
+            //    ImageDto imageDto = new ImageDto() { Base64File=courseDto.ImageFile};
+            //   var result = await _imageService.AddImage(imageDto);
+            //    if (result!=null) course.ImageId=result.Id;
+            //}
+            await _coursesRepository.AddCourse(course);
         }
 
-        public CourseDto GetById(Guid id)
+        public async Task UpdateCourse(CourseDto courseDto)
         {
-            try
-            {
-                var course = _courseRepository.GetById(id);
-                return _mapper.Map<CourseDto>(course);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return new CourseDto { Title = $"Error: {ex.Message}" };
-            }
+            var course = _mapper.Map<Courses>(courseDto);
+            await _coursesRepository.UpdateCourse(course);
         }
 
-        public List<CourseDto> GetByTeacherId(Guid teacherId)
+        public async Task DeleteCourse(Guid id)
         {
-            try
-            {
-                var courses = _courseRepository.GetAll().Where(c => c.TeacherId == teacherId).ToList();
-                return _mapper.Map<List<CourseDto>>(courses);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return new List<CourseDto> { new CourseDto { Title = $"Error: {ex.Message}" } };
-            }
-        }
-
-        public List<CourseDto> GetStudentId(Guid studentId)
-        {
-            try
-            {
-                var courses = _courseRepository.GetAll().Where(c => c.Students.Any(s => s.Id == studentId)).ToList();
-                return _mapper.Map<List<CourseDto>>(courses);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return new List<CourseDto> { new CourseDto { Title = $"Error: {ex.Message}" } };
-            }
-        }
-
-        public string IsDeleted(Guid id)
-        {
-            try
-            {
-                var course = _courseRepository.GetById(id);
-                if (course != null)
-                {
-                    course.IsDeleted = true; // Assuming there's an IsDeleted property
-                    return _courseRepository.Update(course);
-                }
-                return "Course not found";
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return $"Error: {ex.Message}";
-            }
-        }
-
-        public string Update(CourseDto courseDto)
-        {
-            try
-            {
-                var course = _mapper.Map<Courses>(courseDto);
-                return _courseRepository.Update(course);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                return $"Error: {ex.Message}";
-            }
+            await _coursesRepository.DeleteCourse(id);
         }
     }
 }

@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using MAhface.Domain.Core1.Dto;
 
 namespace MAhface.Domain.Core.Dto
 {
     public class CourseDto 
     {
-         
+        public Guid Id { get; set; }
+
         [MaxLength(30)]
         [DefaultValue(null)]
         [Required]
@@ -31,9 +33,9 @@ namespace MAhface.Domain.Core.Dto
         [Required]
         public string CourseDescription { get; set; }
         [AllowNull]
-        public string ImageUrl { get; set; }
+        public string ImageFile { get; set; }
 
-        //public Guid ImageId { get; set; }
+        public Guid ImageId { get; set; }
         [DefaultValue(0)]
         public decimal Cost { get; set; }
 
@@ -44,6 +46,8 @@ namespace MAhface.Domain.Core.Dto
 
 
         public CategoryDto category { get; set; }
+
+        public ImageDto image { get; set; }
 
         public List<SeasonsDto> Seasons { get; set; }
     }

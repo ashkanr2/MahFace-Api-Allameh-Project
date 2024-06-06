@@ -29,10 +29,11 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             return await _context.Images.ToListAsync();
         }
 
-        public async Task AddImage(Image image)
+        public async Task<Image> AddImage(Image image)
         {
             _context.Images.Add(image);
-            await _context.SaveChangesAsync();
+           var result =  await _context.SaveChangesAsync();
+            return image;
         }
 
         public async Task UpdateImage(Image image)

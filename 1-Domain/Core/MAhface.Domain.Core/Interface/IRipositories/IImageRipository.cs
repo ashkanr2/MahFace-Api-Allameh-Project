@@ -1,4 +1,5 @@
 ﻿
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
     {
         Task<Image> GetImageById(Guid id);
         Task<IEnumerable<Image>> GetAllImages();
-        Task AddImage(Image image);
+        public Task<Image> AddImage(Image image);
         Task UpdateImage(Image image);
         Task DeleteImage(Guid id);
     }

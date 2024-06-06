@@ -12,6 +12,8 @@ using MAhface.Domain.Core.Interface.IRipositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Mahface.Services.AppServices.AutoMapper;
+using MAhface.Domain.Core.Interface.IServices;
+using Microsoft.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +43,11 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISeasonRipository, SeasonRepository>();
 builder.Services.AddScoped<ISeasonService, SeasonService>();
+builder.Services.AddScoped<ICourseripository,CoursesRepository>();
+builder.Services.AddScoped<ICoursesService,CoursesService>();
+builder.Services.AddScoped<IImageRepository,ImageRepository>();
+builder.Services.AddScoped<IImageService,ImageService>();
+
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace Mahface.Services.AppServices.AutoMapper
         {
             CreateMap<Seasons, SeasonsDto>();
             CreateMap<SeasonsDto, Seasons>();
+
+            CreateMap<Courses, CourseDto>();
+            CreateMap<CourseDto, Courses>();
         }
     }
 }

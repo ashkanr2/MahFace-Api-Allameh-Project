@@ -12,12 +12,12 @@ namespace ApiEndPoint.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class LastCoursesController : ControllerBase
     {
         private readonly AllamehPrroject _context;
         //private readonly ICourseService _CourseService;
 
-        public CoursesController(AllamehPrroject context )
+        public LastCoursesController(AllamehPrroject context )
         {
             _context = context;
             //_CourseService=CourseService;
@@ -32,14 +32,7 @@ namespace ApiEndPoint.Controllers
         [HttpGet("GetAllCourses")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetAllCourses()
         {
-            //    var courseVm = new List <CourseVm> ();
-            //    var courses= await _context.Courses.ToListAsync();
-            //    foreach (var course in courses)
-            //    {
-            //        var view = _context.Views.Any(x => !x.IsDeleted && x.CourseId==course.Id);
-
-            //    }
-            //    return courses; 
+           
             var courses = _context.Courses.ToList();
             return Ok(courses);
 
@@ -70,7 +63,7 @@ namespace ApiEndPoint.Controllers
             course.Title= CourseVm.Title;
             course.CategoryId= CourseVm.CategoryId;
             course.CourseLevelId=1;
-            course.Cost=CourseVm.cost;
+            course.Cost=CourseVm.Cost;
             course.CourseDescription= CourseVm.CourseDescription;
             course.TeacherId= CourseVm.TeacherId;
             _context.Courses.Add(course);
@@ -150,18 +143,16 @@ namespace ApiEndPoint.Controllers
                 return NotFound();
             }
 
-            // Get the file path of the image
+         
             var filePath = Path.Combine(Directory.GetCurrentDirectory());
 
-            // Check if file exists
+          
             if (!System.IO.File.Exists(filePath))
             {
                 return NotFound();
             }
-
-            // Read the file and return as FileStreamResult
             var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            return File(fileStream, "image/jpeg"); // You can set appropriate MIME type here
+            return File(fileStream, "image/jpeg"); 
         }
 
 
@@ -174,8 +165,6 @@ namespace ApiEndPoint.Controllers
             {
                 return NotFound();
             }
-
-            // Get the file path of the image
             var filePath = Path.Combine(Directory.GetCurrentDirectory());
 
             // Check if file exists
@@ -183,9 +172,7 @@ namespace ApiEndPoint.Controllers
             {
                 return NotFound();
             }
-
-            // Read the file as byte array
-            byte[] fileBytes;
+             byte[] fileBytes;
             try
             {
                 fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
