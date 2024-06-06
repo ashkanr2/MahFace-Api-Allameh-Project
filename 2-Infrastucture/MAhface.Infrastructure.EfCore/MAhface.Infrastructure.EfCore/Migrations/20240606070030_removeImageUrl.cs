@@ -5,34 +5,27 @@
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     /// <inheritdoc />
-    public partial class allownullimage : Migration
+    public partial class removeImageUrl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
+            migrationBuilder.DropColumn(
                 name: "ImageUrl",
                 schema: "Study",
-                table: "Course",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                table: "Course");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
+            migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
                 schema: "Study",
                 table: "Course",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+                defaultValue: "");
         }
     }
 }

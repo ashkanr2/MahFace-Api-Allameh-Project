@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core1.Entities.BasicInfo.Business
 {
-    //[Table("Image", Schema = "BasicInfo")]
+   [Table("Image", Schema = "BasicInfo")]
     public class Image:BaseEntity
     {
         public Guid ImageId { get; set; }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    [Migration("20240604072205_errorlogUpdateSchema")]
-    partial class errorlogUpdateSchema
+    [Migration("20240606070030_removeImageUrl")]
+    partial class removeImageUrl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,9 +355,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Property<Guid?>("ImageId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -373,9 +370,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("TeacherId");
 
@@ -412,15 +407,15 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Descrption")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("ISActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("SeasonsDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -530,7 +525,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.ToTable("Image", "BasicInfo");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.ErrorLog", b =>
@@ -759,8 +754,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .IsRequired();
 
                     b.HasOne("MAhface.Domain.Core1.Entities.BasicInfo.Business.Image", "Image")
-                        .WithOne()
-                        .HasForeignKey("MAhface.Domain.Core.Entities.Study.Course.Courses", "ImageId");
+                        .WithMany()
+                        .HasForeignKey("ImageId");
 
                     b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.Teacher", "Teacher")
                         .WithMany()

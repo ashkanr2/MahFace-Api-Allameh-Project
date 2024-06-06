@@ -35,10 +35,8 @@ namespace MAhface.Domain.Core.Entities.Study.Course
 
         [Required]
         public string CourseDescription { get; set; }
-        [AllowNull]
-        public string ImageUrl { get; set; }
 
-        //public Guid ImageId { get; set; }
+
         [DefaultValue(0)]
         public decimal Cost { get; set; }
 
@@ -54,7 +52,6 @@ namespace MAhface.Domain.Core.Entities.Study.Course
 
         public Image Image { get; set; }
 
-        // Foreign key
         public Guid? ImageId { get; set; }
 
     }

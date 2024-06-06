@@ -135,10 +135,9 @@ namespace ApiEndPoint.Controllers
             }
 
             // Update course with image URL
-            course.ImageUrl = $"Images/{fileName}";
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Image uploaded successfully", imageUrl = course.ImageUrl });
+            return Ok(new { message = "Image uploaded successfully" });
         }
 
         // GET: api/Courses/DownloadImage/{id}
@@ -146,13 +145,13 @@ namespace ApiEndPoint.Controllers
         public async Task<IActionResult> DownloadImage(Guid id)
         {
             var course = await _context.Courses.FindAsync(id);
-            if (course == null || string.IsNullOrEmpty(course.ImageUrl))
+            if (course == null)
             {
                 return NotFound();
             }
 
             // Get the file path of the image
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ImageUrl);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory());
 
             // Check if file exists
             if (!System.IO.File.Exists(filePath))
@@ -171,13 +170,13 @@ namespace ApiEndPoint.Controllers
         public async Task<IActionResult> ImageBase64(Guid id)
         {
             var course = await _context.Courses.FindAsync(id);
-            if (course == null || string.IsNullOrEmpty(course.ImageUrl))
+            if (course == null )
             {
                 return NotFound();
             }
 
             // Get the file path of the image
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ImageUrl);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory());
 
             // Check if file exists
             if (!System.IO.File.Exists(filePath))
@@ -208,13 +207,13 @@ namespace ApiEndPoint.Controllers
         public async Task<IActionResult> DeleteImage(Guid id)
         {
             var course = await _context.Courses.FindAsync(id);
-            if (course == null || string.IsNullOrEmpty(course.ImageUrl))
+            if (course == null )
             {
                 return NotFound();
             }
 
             // Get the file path of the image
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ImageUrl);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory());
 
             // Check if file exists
             if (System.IO.File.Exists(filePath))
@@ -223,7 +222,7 @@ namespace ApiEndPoint.Controllers
                 System.IO.File.Delete(filePath);
 
                 // Clear the image URL in the course entity
-                course.ImageUrl = null;
+               
                 await _context.SaveChangesAsync();
 
                 return Ok(new { message = "Image deleted successfully" });

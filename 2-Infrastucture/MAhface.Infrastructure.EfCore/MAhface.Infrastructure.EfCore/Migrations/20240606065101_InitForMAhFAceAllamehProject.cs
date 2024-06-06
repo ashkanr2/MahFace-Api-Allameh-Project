@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitForMAhFAceAllamehProject : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,6 +16,9 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
             migrationBuilder.EnsureSchema(
                 name: "Study");
+
+            migrationBuilder.EnsureSchema(
+                name: "System");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -82,6 +85,47 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ErrorLog",
+                schema: "System",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Entityname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ActionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Exeption = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ErrorLog", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Image",
+                schema: "BasicInfo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Code = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ISActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -320,6 +364,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SeasonsDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Code = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -526,6 +572,14 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "CoursesStudent");
+
+            migrationBuilder.DropTable(
+                name: "ErrorLog",
+                schema: "System");
+
+            migrationBuilder.DropTable(
+                name: "Image",
+                schema: "BasicInfo");
 
             migrationBuilder.DropTable(
                 name: "Views",

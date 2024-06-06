@@ -9,8 +9,8 @@ using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core.Entities.Study.Sections;
 using MAhface.Domain.Core.Entities;
 using MAhface.Infrastructure.EfCore.Configurations;
-using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Entities;
+using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 
 namespace MAhface.Infrastructure.EfCore.DBContext
 {
@@ -27,14 +27,14 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<Seasons> Seasons { get; set; }
         public DbSet<Sections> Sections { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Image>Images { get; set; }
+        public DbSet<Image> Images { get; set; }
         public DbSet<View> Views { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }
-
+  
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-       => optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahfacea_db; User Id=mahfacea_sa; password=3zlq11G9rTw#wwQa; TrustServerCertificate=True;Integrated Security=false;");
+       => optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahfacea_AllamehPrroject; User Id=mahfacea_sa1; password=3zlq11G9rTw#wwQa; TrustServerCertificate=True;Integrated Security=false;");
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

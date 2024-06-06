@@ -2,7 +2,6 @@
 using MAhface.Domain.Core1.Entities;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Infrastructure.EfCore.DBContext;
-using MAhface.Infrastructure.EfCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
