@@ -2,6 +2,8 @@
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,9 @@ namespace Mahface.Services.AppServices.AutoMapper
 
             CreateMap<Courses, CourseDto>();
             CreateMap<CourseDto, Courses>();
+
+            CreateMap<Image,ImageDto> ();
+            CreateMap<ImageDto, ImageDto> ();
         }
     }
 }

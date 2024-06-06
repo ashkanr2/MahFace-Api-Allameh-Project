@@ -115,6 +115,30 @@ namespace ApiEndPoint.Controllers
             return NoContent();
         }
 
+        [HttpPost("downloadFromBase64")]
+        public IActionResult DownloadImageFromBase64([FromBody] string base64String)
+        {
+            if (string.IsNullOrEmpty(base64String))
+            {
+                return BadRequest("Invalid base64 string.");
+            }
+
+            try
+            {
+                // Convert base64 to byte array
+                byte[] imageBytes = Convert.FromBase64String(base64String);
+
+                // Define file name and type (assuming PNG for this example)
+                string fileName = "downloaded_image.png";
+                string mimeType = "image/png";
+
+                return File(imageBytes, mimeType, fileName);
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Invalid base64 string format.");
+            }
+        }
 
     }
 }

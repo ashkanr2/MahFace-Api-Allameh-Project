@@ -11,8 +11,10 @@ namespace MAhface.Domain.Core1.Interface.IServices
     {
         Task<ImageDto> GetImageById(Guid id);
         Task<IEnumerable<ImageDto>> GetAllImages();
-        public Task<ImageDto> AddImage(ImageDto imageDto);
-        Task UpdateImage(ImageDto image);
+        Task<ImageDto> AddImage(ImageDto imageDto);
+        Task UpdateImage(ImageDto imageDto);
         Task DeleteImage(Guid id);
+        Task<byte[]> GetImageBytes(Guid id);
+        Task<byte[]> GetImageBytesFromBase64(string base64String);
     }
 }

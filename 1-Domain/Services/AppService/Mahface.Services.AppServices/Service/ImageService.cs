@@ -37,10 +37,22 @@ namespace Mahface.Services.AppServices.Service
 
         public async Task<ImageDto> AddImage(ImageDto imageDto)
         {
-            var Image = _mapper.Map<Image>(imageDto);
-            var ImageResult = await _imageRepository.AddImage(Image);
-            var ImageDto = _mapper.Map<ImageDto>(ImageResult);
-            return ImageDto;
+            Image image = new Image();
+            image.Base64File = imageDto.Base64File;
+            image.Url = imageDto.Url;
+            var imageResult = await _imageRepository.AddImage(image);
+            return _mapper.Map<ImageDto>(imageResult);
+            //try
+            //{
+            //    var image = _mapper.Map<Image>(imageDto);
+            //    var imageResult = await _imageRepository.AddImage(image);
+            //    return _mapper.Map<ImageDto>(imageResult);
+            //}
+            //catch (Exception ex) {
+            //    return null;
+            //}
+
+
         }
 
         public async Task UpdateImage(ImageDto imageDto)
@@ -52,6 +64,25 @@ namespace Mahface.Services.AppServices.Service
         public async Task DeleteImage(Guid id)
         {
             await _imageRepository.DeleteImage(id);
+        }
+
+        public async Task<byte[]> GetImageBytes(Guid id)
+        {
+            var image = await _imageRepository.GetImageById(id);
+            if (image == null) return null;
+            return Convert.FromBase64String(image.Base64File);
+        }
+
+        public async Task<byte[]> GetImageBytesFromBase64(string base64String)
+        {
+            try
+            {
+                return Convert.FromBase64String(base64String);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
         }
     }
 }
