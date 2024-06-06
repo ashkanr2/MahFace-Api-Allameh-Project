@@ -16,13 +16,13 @@ namespace Mahface.Services.AppServices.Service
     public class CoursesService : ICoursesService
     {
         private readonly ICourseripository _coursesRepository;
-        private readonly IMapper _mapper; // Assuming you are using AutoMapper
+        private readonly IMapper _mapper;
         //private readonly IImageService _imageService;
         public CoursesService(ICourseripository coursesRepository, IMapper mapper)
         {
             _coursesRepository = coursesRepository;
             _mapper = mapper;
-            //_imageService = imageService;
+            
         }
 
         public async Task<CourseDto> GetCourseById(Guid id)
@@ -42,9 +42,9 @@ namespace Mahface.Services.AppServices.Service
             var course = _mapper.Map<Courses>(courseDto);
             //if (courseDto.ImageFile!= null)
             //{
-            //    ImageDto imageDto = new ImageDto() { Base64File=courseDto.ImageFile};
-            //   var result = await _imageService.AddImage(imageDto);
-            //    if (result!=null) course.ImageId=result.Id;
+            //    ImageDto imageDto = new ImageDto() { Base64File=courseDto.ImageFile,Url="CourseId="+courseDto.Id.ToString() };
+            //    var image = _imageService.AddImage(imageDto);
+                
             //}
             await _coursesRepository.AddCourse(course);
         }

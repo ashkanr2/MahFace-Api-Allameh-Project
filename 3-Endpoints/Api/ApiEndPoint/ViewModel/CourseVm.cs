@@ -28,8 +28,8 @@ namespace ApiEndPoint.ViewModel
 
         [DefaultValue(0)]
         public decimal Cost { get; set; }
-        //[AllowNull]
-        //[DefaultValue(null)]
-        //public string? ImageBase64 { get; set; }
+        [AllowNull]
+        [DefaultValue(null)]
+        public string? ImageBase64 { get; set; }
     }
 }

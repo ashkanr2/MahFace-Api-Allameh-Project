@@ -75,8 +75,8 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseVm.CategoryId,
                 CourseDescription = courseVm.CourseDescription,
                 Cost = courseVm.Cost,
-                //ImageFile = courseVm.ImageBase64
-                // Map other properties as needed
+                ImageFile = courseVm.ImageBase64
+              
             };
 
             await _coursesService.AddCourse(courseDto);

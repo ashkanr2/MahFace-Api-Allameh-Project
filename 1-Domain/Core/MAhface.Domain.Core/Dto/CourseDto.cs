@@ -35,7 +35,7 @@ namespace MAhface.Domain.Core.Dto
         [AllowNull]
         public string ImageFile { get; set; }
 
-        public Guid ImageId { get; set; }
+
         [DefaultValue(0)]
         public decimal Cost { get; set; }
 
@@ -47,7 +47,8 @@ namespace MAhface.Domain.Core.Dto
 
         public CategoryDto category { get; set; }
 
-        public ImageDto image { get; set; }
+
+        public Guid? ImageId { get; set; }
 
         public List<SeasonsDto> Seasons { get; set; }
     }

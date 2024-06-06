@@ -21,6 +21,5 @@ namespace MAhface.Domain.Core1.Entities.BasicInfo.Business
 
         public string Base64File { get; set; }
 
-        //public Courses? Courses { get; set; }
     }
 }

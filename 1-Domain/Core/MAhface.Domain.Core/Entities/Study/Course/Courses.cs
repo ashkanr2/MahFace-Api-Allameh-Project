@@ -50,9 +50,8 @@ namespace MAhface.Domain.Core.Entities.Study.Course
 
         public List<Seasons> Seasons { get; set; }
 
-        //public Image? Image { get; set; }
 
-        //public Guid? ImageId { get; set; }
+        public Guid? ImageId { get; set; }
 
     }
 }
