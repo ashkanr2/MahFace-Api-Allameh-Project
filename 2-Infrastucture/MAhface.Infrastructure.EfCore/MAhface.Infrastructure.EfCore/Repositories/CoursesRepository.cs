@@ -25,8 +25,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             try
             {
                 return await _context.Courses
-                    .Include(c => c.Image)
-                    .FirstOrDefaultAsync(c => c.Id == id);
+                  .FirstOrDefaultAsync(c => c.Id == id);
             }
             catch (Exception ex)
             {
@@ -40,8 +39,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             try
             {
                 return await _context.Courses
-                    .Include(c => c.Image)
-                    .ToListAsync();
+                   .ToListAsync();
             }
             catch (Exception ex)
             {

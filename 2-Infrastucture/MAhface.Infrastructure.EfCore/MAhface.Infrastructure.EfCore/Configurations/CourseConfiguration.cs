@@ -21,7 +21,7 @@ namespace MAhface.Infrastructure.EfCore.Configurations
             builder.Property(c => c.CategoryId).IsRequired(true);
             builder.Property(c => c.CourseDescription).IsRequired(true);
             builder.Property(c => c.Title).IsRequired(true);
-            builder.Property(c=>c.ImageId).IsRequired(false);
+            //builder.Property(c=>c.ImageId).IsRequired(false);
         }
     }
 }
