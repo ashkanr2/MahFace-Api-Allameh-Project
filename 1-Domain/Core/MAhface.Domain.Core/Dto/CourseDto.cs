@@ -32,8 +32,7 @@ namespace MAhface.Domain.Core.Dto
 
         [Required]
         public string CourseDescription { get; set; }
-        [AllowNull]
-        public string ImageFile { get; set; }
+
 
 
         [DefaultValue(0)]
@@ -48,8 +47,7 @@ namespace MAhface.Domain.Core.Dto
         public CategoryDto category { get; set; }
 
 
-        public Guid? ImageId { get; set; }
-
+        public ImageDto ImageDto { get; set; }
         public List<SeasonsDto> Seasons { get; set; }
     }
 }

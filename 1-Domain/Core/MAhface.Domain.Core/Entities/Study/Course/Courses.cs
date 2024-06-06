@@ -52,6 +52,7 @@ namespace MAhface.Domain.Core.Entities.Study.Course
 
 
         public Guid? ImageId { get; set; }
+        public Image  Image { get; set; }
 
     }
 }

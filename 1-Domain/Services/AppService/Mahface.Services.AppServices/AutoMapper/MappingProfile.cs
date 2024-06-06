@@ -19,11 +19,14 @@ namespace Mahface.Services.AppServices.AutoMapper
             CreateMap<Seasons, SeasonsDto>();
             CreateMap<SeasonsDto, Seasons>();
 
-            CreateMap<Courses, CourseDto>();
-            CreateMap<CourseDto, Courses>();
+           
+            CreateMap<CourseDto, Courses>()
+            .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageDto));
+            CreateMap<Image, ImageDto>();
 
-            CreateMap<Image,ImageDto> ();
-            CreateMap<ImageDto, ImageDto> ();
+            CreateMap<Courses, CourseDto>()
+             .ForMember(dest => dest.ImageDto, opt => opt.MapFrom(src => src.Image));
+            CreateMap<Image, ImageDto>();
         }
     }
 }

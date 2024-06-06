@@ -17,18 +17,20 @@ namespace Mahface.Services.AppServices.Service
     {
         private readonly ICourseripository _coursesRepository;
         private readonly IMapper _mapper;
-        //private readonly IImageService _imageService;
-        public CoursesService(ICourseripository coursesRepository, IMapper mapper)
+        private readonly IImageService _imageService;
+        public CoursesService(ICourseripository coursesRepository, IMapper mapper, IImageService imageService)
         {
             _coursesRepository = coursesRepository;
             _mapper = mapper;
-            
+            _imageService=imageService;
         }
 
         public async Task<CourseDto> GetCourseById(Guid id)
         {
             var course = await _coursesRepository.GetCourseById(id);
-            return _mapper.Map<CourseDto>(course);
+            var CourseDto =  _mapper.Map<CourseDto>(course);
+          
+            return CourseDto;
         }
 
         public async Task<IEnumerable<CourseDto>> GetAllCourses()
@@ -40,12 +42,6 @@ namespace Mahface.Services.AppServices.Service
         public async Task AddCourse(CourseDto courseDto)
         {
             var course = _mapper.Map<Courses>(courseDto);
-            //if (courseDto.ImageFile!= null)
-            //{
-            //    ImageDto imageDto = new ImageDto() { Base64File=courseDto.ImageFile,Url="CourseId="+courseDto.Id.ToString() };
-            //    var image = _imageService.AddImage(imageDto);
-                
-            //}
             await _coursesRepository.AddCourse(course);
         }
 

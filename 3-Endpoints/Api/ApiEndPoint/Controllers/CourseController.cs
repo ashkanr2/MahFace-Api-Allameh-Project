@@ -27,13 +27,15 @@ namespace ApiEndPoint.Controllers
 
             var courseVm = new CourseVm
             {
+                Id=courseDto.Id,
                 Title = courseDto.Title,
                 CourseLevelId = courseDto.CourseLevelId,
                 TeacherId = courseDto.TeacherId,
                 CategoryId = courseDto.CategoryId,
                 CourseDescription = courseDto.CourseDescription,
                 Cost = courseDto.Cost,
-                //ImageBase64 = courseDto.ImageFile,
+                ImageBase64 = courseDto.ImageDto.Base64File,
+               
                 // Map other properties as needed
             };
 
@@ -49,14 +51,15 @@ namespace ApiEndPoint.Controllers
             {
                 var courseVm = new CourseVm
                 {
+                    Id= courseDto.Id,
                     Title = courseDto.Title,
                     CourseLevelId = courseDto.CourseLevelId,
                     TeacherId = courseDto.TeacherId,
                     CategoryId = courseDto.CategoryId,
                     CourseDescription = courseDto.CourseDescription,
                     Cost = courseDto.Cost,
-                    //ImageBase64 = courseDto.ImageFile
-                    // Map other properties as needed
+                    ImageBase64 = courseDto.ImageDto?.Base64File
+                   
                 };
                 courseVms.Add(courseVm);
             }
@@ -75,7 +78,11 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseVm.CategoryId,
                 CourseDescription = courseVm.CourseDescription,
                 Cost = courseVm.Cost,
-                ImageFile = courseVm.ImageBase64
+                ImageDto = new MAhface.Domain.Core1.Dto.ImageDto()
+                {
+                    Url= courseVm.ImageUrl,
+                    Base64File= courseVm.ImageBase64
+                }
               
             };
 
@@ -100,8 +107,11 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseVm.CategoryId,
                 CourseDescription = courseVm.CourseDescription,
                 Cost = courseVm.Cost,
-                //ImageFile = courseVm.ImageBase64
-                // Map other properties as needed
+                ImageDto = new MAhface.Domain.Core1.Dto.ImageDto()
+                {
+                    Url= courseVm.ImageUrl,
+                    Base64File= courseVm.ImageBase64
+                }
             };
 
             await _coursesService.UpdateCourse(courseDto);

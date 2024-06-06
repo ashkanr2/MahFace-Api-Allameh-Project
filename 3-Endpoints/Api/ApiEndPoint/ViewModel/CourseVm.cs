@@ -31,5 +31,9 @@ namespace ApiEndPoint.ViewModel
         [AllowNull]
         [DefaultValue(null)]
         public string? ImageBase64 { get; set; }
+
+        [AllowNull]
+        [DefaultValue(null)]
+        public String? ImageUrl { get; set; }
     }
 }
