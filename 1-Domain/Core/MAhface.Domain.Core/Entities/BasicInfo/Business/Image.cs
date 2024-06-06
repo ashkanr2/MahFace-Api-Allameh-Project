@@ -15,9 +15,10 @@ namespace MAhface.Domain.Core1.Entities.BasicInfo.Business
     {
         public Guid ImageId { get; set; }
 
-        [Required]
+       
         public string Url { get; set; }
 
+        public string Base64File { get; set; }
 
     }
 }

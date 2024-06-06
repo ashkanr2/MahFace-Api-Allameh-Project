@@ -12,44 +12,46 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 {
     public class ImageRepository : IImageRepository
     {
-        //private readonly AllamehPrroject _context;
+        private readonly AllamehPrroject _context;
 
-        //public ImageRepository(AllamehPrroject context)
-        //{
-        //    _context = context;
-        //}
+        public ImageRepository(AllamehPrroject context)
+        {
+            _context = context;
+        }
 
-        //public async Task<Image> GetImageByIdAsync(Guid id)
-        //{
-        //    return await _context.Images.FindAsync(id);
-        //}
+        public async Task<Image> GetImageById(Guid id)
+        {
+            return await _context.Images.FindAsync(id);
+        }
 
-        //public async Task<IEnumerable<Image>> GetAllImagesAsync()
-        //{
-        //    return await _context.Images.ToListAsync();
-        //}
+        public async Task<IEnumerable<Image>> GetAllImages()
+        {
+            return await _context.Images.ToListAsync();
+        }
 
-        //public async Task AddImageAsync(Image image)
-        //{
-        //    _context.Images.Add(image);
-        //    await _context.SaveChangesAsync();
-        //}
+        public async Task AddImage(Image image)
+        {
+            _context.Images.Add(image);
+            await _context.SaveChangesAsync();
+        }
 
-        //public async Task UpdateImageAsync(Image image)
-        //{
-        //    _context.Images.Update(image);
-        //    await _context.SaveChangesAsync();
-        //}
+        public async Task UpdateImage(Image image)
+        {
+            _context.Images.Update(image);
+            await _context.SaveChangesAsync();
+        }
 
-        //public async Task DeleteImageAsync(Guid id)
-        //{
-        //    var image = await _context.Images.FindAsync(id);
-        //    if (image != null)
-        //    {
-        //        _context.Images.Remove(image);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
+        public async Task DeleteImage(Guid id)
+        {
+            var image = await _context.Images.FindAsync(id);
+            if (image != null)
+            {
+                _context.Images.Remove(image);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+      
     }
 
 }

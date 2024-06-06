@@ -1,4 +1,5 @@
 ﻿
+using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
 {
     public interface IImageRepository
     {
-        //Task<Image> GetImageByIdAsync(Guid id);
-        //Task<IEnumerable<Image>> GetAllImagesAsync();
-        //Task AddImageAsync(Image image);
-        //Task UpdateImageAsync(Image image);
-        //Task DeleteImageAsync(Guid id);
+        Task<Image> GetImageById(Guid id);
+        Task<IEnumerable<Image>> GetAllImages();
+        Task AddImage(Image image);
+        Task UpdateImage(Image image);
+        Task DeleteImage(Guid id);
     }
 
 }
