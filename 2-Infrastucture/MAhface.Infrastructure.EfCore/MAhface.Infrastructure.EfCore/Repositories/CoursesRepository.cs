@@ -22,37 +22,78 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public async Task<Courses> GetCourseById(Guid id)
         {
-            return await _context.Courses
-                .Include(c => c.Image)
-                .FirstOrDefaultAsync(c => c.Id == id);
+            try
+            {
+                return await _context.Courses
+                    .Include(c => c.Image)
+                    .FirstOrDefaultAsync(c => c.Id == id);
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception("Error occurred while getting course by id", ex);
+            }
         }
 
         public async Task<IEnumerable<Courses>> GetAllCourses()
         {
-            return await _context.Courses
-                .Include(c => c.Image)
-                .ToListAsync();
+            try
+            {
+                return await _context.Courses
+                    .Include(c => c.Image)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception("Error occurred while getting all courses", ex);
+            }
         }
 
         public async Task AddCourse(Courses course)
         {
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Courses.Add(course);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                await Console.Out.WriteLineAsync(ex.ToString());
+                throw new Exception("Error occurred while adding course", ex);
+            }
         }
 
         public async Task UpdateCourse(Courses course)
         {
-            _context.Courses.Update(course);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Courses.Update(course);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception("Error occurred while updating course", ex);
+            }
         }
 
         public async Task DeleteCourse(Guid id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course != null)
+            try
             {
-                _context.Courses.Remove(course);
-                await _context.SaveChangesAsync();
+                var course = await _context.Courses.FindAsync(id);
+                if (course != null)
+                {
+                    _context.Courses.Remove(course);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception("Error occurred while deleting course", ex);
             }
         }
     }

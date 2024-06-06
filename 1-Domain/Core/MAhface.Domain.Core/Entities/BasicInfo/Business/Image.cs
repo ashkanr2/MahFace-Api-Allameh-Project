@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities;
+using MAhface.Domain.Core.Entities.Study.Course;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,5 +21,6 @@ namespace MAhface.Domain.Core1.Entities.BasicInfo.Business
 
         public string Base64File { get; set; }
 
+        public Courses? Courses { get; set; }
     }
 }

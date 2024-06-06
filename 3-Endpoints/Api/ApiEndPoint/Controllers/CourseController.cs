@@ -33,7 +33,7 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseDto.CategoryId,
                 CourseDescription = courseDto.CourseDescription,
                 Cost = courseDto.Cost,
-                ImageBase64 = courseDto.ImageFile,
+                //ImageBase64 = courseDto.ImageFile,
                 // Map other properties as needed
             };
 
@@ -55,7 +55,7 @@ namespace ApiEndPoint.Controllers
                     CategoryId = courseDto.CategoryId,
                     CourseDescription = courseDto.CourseDescription,
                     Cost = courseDto.Cost,
-                    ImageBase64 = courseDto.ImageFile
+                    //ImageBase64 = courseDto.ImageFile
                     // Map other properties as needed
                 };
                 courseVms.Add(courseVm);
@@ -75,7 +75,7 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseVm.CategoryId,
                 CourseDescription = courseVm.CourseDescription,
                 Cost = courseVm.Cost,
-                ImageFile = courseVm.ImageBase64
+                //ImageFile = courseVm.ImageBase64
                 // Map other properties as needed
             };
 
@@ -100,7 +100,7 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseVm.CategoryId,
                 CourseDescription = courseVm.CourseDescription,
                 Cost = courseVm.Cost,
-                ImageFile = courseVm.ImageBase64
+                //ImageFile = courseVm.ImageBase64
                 // Map other properties as needed
             };
 

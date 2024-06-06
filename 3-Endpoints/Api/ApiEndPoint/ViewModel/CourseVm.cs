@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ApiEndPoint.ViewModel
 {
@@ -8,7 +9,6 @@ namespace ApiEndPoint.ViewModel
         public Guid Id { get; set; }
 
         [MaxLength(30)]
-        [DefaultValue(null)]
         [Required]
         public string Title { get; set; }
 
@@ -28,7 +28,8 @@ namespace ApiEndPoint.ViewModel
 
         [DefaultValue(0)]
         public decimal Cost { get; set; }
-
-        public string ImageBase64 { get; set; }
+        //[AllowNull]
+        //[DefaultValue(null)]
+        //public string? ImageBase64 { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20240606085334_ImageIsAllowNull")]
+    partial class ImageIsAllowNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,9 +370,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("TeacherId");
 
@@ -754,8 +755,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .IsRequired();
 
                     b.HasOne("MAhface.Domain.Core1.Entities.BasicInfo.Business.Image", "Image")
-                        .WithOne("Courses")
-                        .HasForeignKey("MAhface.Domain.Core.Entities.Study.Course.Courses", "ImageId");
+                        .WithMany()
+                        .HasForeignKey("ImageId");
 
                     b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.Teacher", "Teacher")
                         .WithMany()
@@ -849,11 +850,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
             modelBuilder.Entity("MAhface.Domain.Core.Entities.Study.Course.Courses", b =>
                 {
                     b.Navigation("Seasons");
-                });
-
-            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Business.Image", b =>
-                {
-                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }
