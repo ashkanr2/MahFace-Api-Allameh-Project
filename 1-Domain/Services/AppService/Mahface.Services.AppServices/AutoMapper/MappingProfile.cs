@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core1.Dto;
@@ -27,6 +28,12 @@ namespace Mahface.Services.AppServices.AutoMapper
             CreateMap<Courses, CourseDto>()
              .ForMember(dest => dest.ImageDto, opt => opt.MapFrom(src => src.Image));
             CreateMap<Image, ImageDto>();
+
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
+
+
+
         }
     }
 }

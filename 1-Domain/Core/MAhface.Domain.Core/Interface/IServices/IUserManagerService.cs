@@ -9,10 +9,10 @@ namespace MAhface.Domain.Core1.Interface.IServices
 {
     public interface IUserManagerService
     {
-        Task<User> GetUserByIdAsync(Guid id);
-        Task<IEnumerable<User>> GetAllUsersAsync();
-        Task AddUserAsync(User user);
-        Task UpdateUserAsync(User user);
-        Task DeleteUserAsync(Guid id);
+        public Task<User> GetUserByIdAsync(Guid id);
+        public Task<IEnumerable<User>> GetAllUsersAsync();
+        public Task AddUserAsync(User user);
+        public Task UpdateUserAsync(User user);
+        public Task DeleteUserAsync(Guid id);
     }
 }

@@ -16,6 +16,9 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Accounting
     {
 
 
+        public string  Firstname { get; set; }
+        public string  LastName { get; set; }
+        public DateTime BirthDate { get; set; }
 
         [Required]
         [DefaultValue(false)]
@@ -31,6 +34,9 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Accounting
         [DefaultValue(false)]
         public bool IsTeacher { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+        public bool IsActived { get; set; } 
 
 
 
