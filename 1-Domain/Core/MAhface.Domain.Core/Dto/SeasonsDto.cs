@@ -14,5 +14,6 @@ namespace MAhface.Domain.Core.Dto
         public string Title { get; set; }
         public TimeOnly? SumSections { get; set; }
         public string SeasonsDescription { get; set; }
+        public DateTime CreatedDate { get; set; }
     }
 }

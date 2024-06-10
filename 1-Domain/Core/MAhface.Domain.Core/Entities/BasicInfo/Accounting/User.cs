@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 
 namespace MAhface.Domain.Core.Entities.BasicInfo.Accounting
 {
@@ -38,6 +39,8 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Accounting
 
         public bool IsActived { get; set; } 
 
+        public Image? Image { get; set; }
+        public Guid? ProfileImageId { get; set; }
 
 
     }

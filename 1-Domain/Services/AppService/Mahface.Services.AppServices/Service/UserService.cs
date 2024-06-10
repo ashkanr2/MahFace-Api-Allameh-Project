@@ -3,6 +3,7 @@ using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Mahface.Services.AppServices.Service
     {
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        
         public UserService(UserManager<User>userManager , IMapper mapper)
         {
            _userManager = userManager;
@@ -25,24 +27,39 @@ namespace Mahface.Services.AppServices.Service
         public async Task<string> AddUser(UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
+            user.PasswordHash=null;
+            user.SecurityStamp=null;
+            user.BirthDate=DateTime.Now;
+            user.Id=new Guid();
+            var password = "Admin123";
             try
             {
-            await _userManager.CreateAsync(user);
-                return "User Add successfully";
+                var result = await _userManager.CreateAsync(user, password);
+
+                if (result.Succeeded)
+                {
+                    return "User added successfully";
+                }
+                else
+                {
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                    throw new Exception($"User creation failed: {errors}");
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception("Error occurred while adding User", ex);
-                return "Error occurred while adding User";
             }
         }
 
         public async Task<string>DeleteUser(Guid id)
         {
-            //var user = await _userManager.Users.FirstOrDefault(x=>x.Id == id);
+            var user =  _userManager.Users.FirstOrDefault(x=>x.Id == id);
             try
             {
-                return "ss";
+                user.IsDeleted=true;
+               await _userManager.UpdateAsync(user);
+                return "User Deleted successfully";
             }
             catch (Exception ex)
             {
@@ -50,19 +67,33 @@ namespace Mahface.Services.AppServices.Service
             }
         }
 
-        public Task<IEnumerable<UserDto>> GetAllUsers()
+        public async Task<IEnumerable<UserDto>> GetAllUsers()
         {
-            throw new NotImplementedException();
+            var User = await _userManager.Users.ToListAsync();
+            var UserDto =  _mapper.Map<List<UserDto>>(User);
+            return UserDto;
         }
 
-        public Task<UserDto> GetUserById(Guid id)
+        public async Task<UserDto> GetUserById(Guid id)
         {
-            throw new NotImplementedException();
+           var User =  _userManager.Users.FirstOrDefaultAsync(x=>x.Id == id); 
+            var UserDto = _mapper.Map<UserDto>(User);
+            return UserDto;
         }
 
-        public Task<string> UpdateUser(UserDto userDto)
+        public async Task<string> UpdateUser(UserDto userDto)
         {
-            throw new NotImplementedException();
+            var User = _mapper.Map<User>(userDto);
+            try
+            {
+                await _userManager.UpdateAsync(User);
+                return "User Update successfully";
+            }
+            catch(Exception ex) 
+            {
+                throw new Exception("Error occurred while Updating User", ex);
+            }
+
         }
     }
 }

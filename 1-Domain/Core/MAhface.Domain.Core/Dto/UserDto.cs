@@ -25,6 +25,8 @@ namespace MAhface.Domain.Core1.Dto
         public string PasswordHash { get; set; }
         public bool PhoneNumberConfirm { get; set; }   
         public string PhoneNumber{ get; set;}
+        public ImageDto? Image { get; set; }
+        public Guid? ImageId { get; set; }
 
     }
 }

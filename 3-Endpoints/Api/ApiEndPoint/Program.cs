@@ -39,6 +39,7 @@ builder.Services.AddDbContext<AllamehPrroject>(options =>
 //// Register repositories and services
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IUserManagerService, UserManagerService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISeasonRipository, SeasonRepository>();

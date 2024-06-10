@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.AspNetCore.Identity;
+using MAhface.Domain.Core1.Interface.IServices;
+using MAhface.Domain.Core1.Dto;
 
 namespace ApiEndPoint.Controllers
 {
@@ -15,95 +17,69 @@ namespace ApiEndPoint.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly AllamehPrroject _context;
-        private readonly UserManager<User> _userManager;
-
-        public UsersController(AllamehPrroject context, UserManager<User>userManager)
+      
+        private readonly IUserService _UserService;
+        public UsersController( IUserService userService)
         {
-            _userManager = userManager;
-            _context = context;
+            _UserService = userService;
+                       
         }
 
         // GET: api/Users
         [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
             //return await _context.Users.ToListAsync();
-            return await _userManager.Users.ToListAsync();
+            var Users =  await _UserService.GetAllUsers();
+            if (User==null)
+            {
+                return NotFound();
+            }
+            return Ok(Users);
         }
 
         // GET: api/Users/5
         [HttpGet("GetById")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<UserDto>> GetUser(Guid id)
         {
-            var user = await _userManager.Users.FirstAsync(x=>x.Id==id);
+            var user = await _UserService.GetUserById(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return Ok(user);
         }
 
         [HttpPut("UpdateUser")]
-        public async Task<IActionResult> PutUser(Guid id, User user)
+        public async Task<IActionResult> PutUser(Guid id, UserDto userDto)
         {
-            if (id != user.Id)
+            if (id != userDto.Id)
             {
                 return BadRequest();
             }
+           var result =  await _UserService.UpdateUser(userDto);
 
-            await _userManager.UpdateAsync(user);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(result);
         }
 
  
         [HttpPost("AddUser")]
-        public async Task<ActionResult<User>> AddUser(User user)
+        public async Task<ActionResult> AddUser(UserDto userDto)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            var result = _UserService.AddUser(userDto);
+            
+            return Ok(result);
         }
 
-        // DELETE: api/Users/5
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            var result = _UserService.DeleteUser(id);
+            return Ok(result);
         }
 
-        private bool UserExists(Guid id)
-        {
-            return _context.Users.Any(e => e.Id == id);
-        }
+        
     }
 }

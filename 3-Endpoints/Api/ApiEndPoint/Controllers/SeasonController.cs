@@ -37,7 +37,7 @@ public class SeasonController : ControllerBase
     [HttpGet("GetAllByCourseId")]
     public ActionResult<List<SeasonsDto>> GetAllCourseSeasons(Guid courseId)
     {
-        var seasons = _seasonService.GetAllCourseSeasons(courseId);
+        var seasons = _seasonService.GetAllCourseSeasons(courseId).OrderBy(x=>x.CreatedDate);
         return Ok(seasons);
     }
 

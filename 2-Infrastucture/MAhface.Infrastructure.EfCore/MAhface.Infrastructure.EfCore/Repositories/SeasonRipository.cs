@@ -26,7 +26,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             
                 try
                 {
-                    return _context.Seasons.Include(s => s.Course).ToList();
+                    return _context.Seasons.Include(s => s.Course).OrderBy(x=>x.CreatedDate).ToList();
                 }
                 catch (Exception ex)
                 {
