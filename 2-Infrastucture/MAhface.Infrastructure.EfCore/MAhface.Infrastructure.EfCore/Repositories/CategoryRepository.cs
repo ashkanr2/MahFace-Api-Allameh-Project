@@ -27,7 +27,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
-            var sss = await _context.Categories.ToListAsync();
+            var sss = await _context.Categories.Where(x=>!x.IsDeleted).ToListAsync();
             return await _context.Categories.ToListAsync();
 
         }
@@ -49,7 +49,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
-                _context.Categories.Remove(category);
+                category.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }
         }

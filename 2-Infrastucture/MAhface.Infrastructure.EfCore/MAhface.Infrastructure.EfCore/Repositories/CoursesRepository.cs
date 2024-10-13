@@ -41,6 +41,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             {
                 return await _context.Courses
                      .Include(c => c.Image)
+                     .Where(x => !x.IsDeleted)
                    .ToListAsync();
             }
             catch (Exception ex)
@@ -86,7 +87,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 var course = await _context.Courses.FindAsync(id);
                 if (course != null)
                 {
-                    _context.Courses.Remove(course);
+                    course.IsDeleted=true;
                     await _context.SaveChangesAsync();
                 }
             }

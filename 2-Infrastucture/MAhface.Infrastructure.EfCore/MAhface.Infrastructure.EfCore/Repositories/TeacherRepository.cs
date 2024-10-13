@@ -41,7 +41,8 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                     CreatedUserID = userId, // Assuming the teacher created himself/herself
                     CreatedDate = DateTime.Now
                 };
-
+                user.IsTeacher=true;
+                user.IsStudent=false;
                 _context.Teachers.Add(teacher);
                 await _context.SaveChangesAsync();
                 return teacher;
@@ -126,10 +127,20 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-        public Task<Teacher> GetTeacherById(Guid teacherId)
+        public async Task<Teacher> GetTeacherById(Guid teacherId)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                var result = await _context.Teachers.FirstOrDefaultAsync(x => x.Id==teacherId);
+                return result;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
-
 }
