@@ -1,0 +1,110 @@
+﻿using ApiEndPoint.ViewModel;
+using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Interface.IServices;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace ApiEndPoint.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TeacherController : ControllerBase
+    {
+        private readonly ITeacherService _teacherService;
+
+        public TeacherController(ITeacherService teacherService)
+        {
+            _teacherService = teacherService;
+        }
+
+        // GET: api/teacher/GetAllActive
+        [HttpGet("GetAllActive")]
+        public async Task<ActionResult<IEnumerable<TeacherDto>>> GetAllActiveTeachers()
+        {
+            var teachers = await _teacherService.GetAllActiveTeachers();
+            return Ok(teachers);
+        }
+
+        // GET: api/teacher/GetAllInactive
+        [HttpGet("GetAllInactive")]
+        public async Task<ActionResult<IEnumerable<TeacherDto>>> GetAllInactiveTeachers()
+        {
+            var teachers = await _teacherService.GetAllInactiveTeachers();
+            return Ok(teachers);
+        }
+
+        // GET: api/teacher/GetById/{id}
+        [HttpGet("GetById/{teacherId}")]
+        public async Task<ActionResult<TeacherDto>> GetTeacherById(Guid teacherId)
+        {
+            var teacher = await _teacherService.GetTeacherById(teacherId);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            return Ok(teacher);
+        }
+
+        [HttpGet("GetByUserId/{userId}")]
+        public async Task<ActionResult<TeacherDto>> GetTeacherByUserId(Guid userId)
+        {
+            var teacher = await _teacherService.GetTeacherByUSerId(userId);
+            if (teacher == null)
+            {
+                return NotFound();
+            }
+            return Ok(teacher);
+        }
+
+
+        // POST: api/teacher/Create
+        [HttpPost("Create")]
+        public async Task<ActionResult<TeacherDto>> CreateTeacher([FromBody] Guid userId)
+        {
+            if (userId == Guid.Empty)
+            {
+                return BadRequest("Invalid User ID.");
+            }
+
+            try
+            {
+                var teacher = await _teacherService.CreateTeacher(userId);
+                return CreatedAtAction(nameof(GetTeacherById), new { id = teacher.Id }, teacher);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        // PUT: api/teacher/Update/{id}
+        [HttpPut("Update/{id}")]
+        public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherDto teacherDto)
+        {
+            if (id != teacherDto.Id)
+            {
+                return BadRequest("Teacher ID mismatch.");
+            }
+
+            try
+            {
+                await _teacherService.UpdateTeacher(teacherDto);
+                return NoContent(); // Successful update, no content needed
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        // DELETE: api/teacher/Delete/{id}
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> DeleteTeacher(Guid id)
+        {
+            await _teacherService.DeleteTeacher(id);
+            return NoContent(); // Successful deletion, no content needed
+        }
+    }
+}

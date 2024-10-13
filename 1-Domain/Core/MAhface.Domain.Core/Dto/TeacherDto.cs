@@ -13,7 +13,12 @@ namespace MAhface.Domain.Core.Dto
 {
     public class TeacherDto
     {
-        
-        
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public string UserName { get; set; } // Assuming you want to expose the user's name
+        public bool IsActive { get; set; }
+        public string Description { get; set; } // Optional, depending on your needs
+        public DateTime CreatedDate { get; set; }
     }
+
 }

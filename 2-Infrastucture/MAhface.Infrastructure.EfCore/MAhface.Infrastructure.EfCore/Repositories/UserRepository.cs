@@ -7,16 +7,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MAhface.Domain.Core1.Dto;
+using Microsoft.AspNetCore.Identity;
+using MAhface.Infrastructure.EfCore.DBContext;
 
 namespace MAhface.Infrastructure.EfCore.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DbContext _context;
-
-        public UserRepository(DbContext context)
+        private readonly AllamehPrroject _context;
+        private readonly UserManager<User> _userManager;
+        public UserRepository(AllamehPrroject context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager=userManager;
         }
 
         public async Task<User> GetUserByIdAsync(Guid id)
@@ -91,5 +94,31 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 throw new AppException("Error deleting user.", ex);
             }
         }
+
+        public async Task<bool> Register(User user , string password)
+        {
+            try
+            {
+                var result = await _userManager.CreateAsync(user ,password );
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+                return false;
+            }
+            return false;
+        }
+
+        public Task<IQueryable<User>> GetallUsers()
+        {
+            return Task.FromResult(_context.Set<User>().AsQueryable());
+        }
+
+
+
     }
 }

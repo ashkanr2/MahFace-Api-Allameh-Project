@@ -65,14 +65,7 @@ namespace ApiEndPoint.Controllers
         }
 
  
-        [HttpPost("AddUser")]
-        public async Task<ActionResult> AddUser(UserDto userDto)
-        {
-            var result = _UserService.AddUser(userDto);
-            
-            return Ok(result);
-        }
-
+      
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {
