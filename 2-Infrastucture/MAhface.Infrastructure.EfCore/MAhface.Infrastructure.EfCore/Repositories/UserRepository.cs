@@ -108,7 +108,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             {
 
                 throw;
-                return false;
+                 
             }
             return false;
         }

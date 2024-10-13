@@ -145,7 +145,7 @@ namespace Mahface.Services.AppServices.Service
 
                 else
                 {
-                    return "خطایی در فرآیند ثبت‌نام رخ داده است.";
+                    return "خطایی در فرآیند ثبت‌ نام رخ داده است.";
                 }
             }
             catch (Exception ex)
