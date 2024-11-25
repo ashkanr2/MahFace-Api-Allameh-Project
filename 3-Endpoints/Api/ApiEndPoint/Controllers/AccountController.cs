@@ -5,6 +5,7 @@ using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 
 namespace ApiEndPoint.Controllers
 {
@@ -39,8 +40,15 @@ namespace ApiEndPoint.Controllers
         }
 
 
+        [HttpPost("EditProfile")]
+        public async Task<UpdateStatus> EditProfile(EditUserVm editUserVm)
+        {
 
-        
+            UpdateStatus updateStatus = new UpdateStatus();
+            var result = await _userService.EditProfile(editUserVm);
+
+            return updateStatus;
+        }
 
     }
 }

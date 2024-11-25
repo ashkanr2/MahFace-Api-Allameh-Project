@@ -84,20 +84,6 @@ namespace Mahface.Services.AppServices.Service
             return UserDto;
         }
 
-        public async Task<string> UpdateUser(UserDto userDto)
-        {
-            var User = _mapper.Map<User>(userDto);
-            try
-            {
-                await _userManager.UpdateAsync(User);
-                return "User Update successfully";
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error occurred while Updating User", ex);
-            }
-
-        }
 
         public async Task<string> Register(AddUser addUser)
         {
@@ -117,27 +103,28 @@ namespace Mahface.Services.AppServices.Service
                 }
 
                 User user = new User
-                { 
-                UserName = addUser.UserName,
-                Email = addUser.Email,
-                EmailConfirmed = false,
-                IsActived = true,
-                IsDeleted=false,
-                BirthDate=addUser.BirthDate,
-                TwoFactorEnabled = false,
-                LockoutEnabled = false,
-                PhoneNumberConfirmed = false,
-                PhoneNumber=addUser.PhoneNumber,
-                LastName=addUser.LastName,
-                Firstname=addUser.Firstname,
-                IsStudent=true,
-                IsTeacher=false,
-                IsSystemAccount=false,
-                IsSystemAdmin=false,
+                {
+                    UserName = addUser.UserName,
+                    Email = addUser.Email,
+                    EmailConfirmed = false,
+                    IsActived = true,
+                    IsDeleted=false,
+                    BirthDate=addUser.BirthDate,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    PhoneNumberConfirmed = false,
+                    PhoneNumber=addUser.PhoneNumber,
+                    LastName=addUser.LastName,
+                    Firstname=addUser.Firstname,
+                    NationalCode = addUser.NationalCode,
+                    IsStudent=true,
+                    IsTeacher=false,
+                    IsSystemAccount=false,
+                    IsSystemAdmin=false,
 
                 };
-                
-                bool result = await _userRepository.Register(user, addUser.Password );
+
+                bool result = await _userRepository.Register(user, addUser.Password);
                 if (result)
                 {
                     return "Successful";
@@ -155,5 +142,42 @@ namespace Mahface.Services.AppServices.Service
             }
         }
 
+        public async Task<UpdateStatus> EditProfile(EditUserVm editUserVm)
+        {
+
+            UpdateStatus updateStatus = new UpdateStatus();
+            try
+            {
+                var model = await _userRepository.GetUserByIdAsync(editUserVm.Id);
+                if (model == null)
+                {
+                    updateStatus.IsValid = false;
+                    updateStatus.StatusMessage=".کاربری با این ایدی  پیدا نشد ";
+                }
+                User user = new User();
+
+                user.Firstname = editUserVm.Firstname;
+                user.LastName = editUserVm.LastName;
+                user.PhoneNumber = editUserVm.PhoneNumber;
+                user.BirthDate = editUserVm.BirthDate;
+                user.NationalCode = editUserVm.NationalCode;
+                user.PhoneNumber = editUserVm.PhoneNumber;
+
+                var result = await _userRepository.UpdateUserAsync(user);
+
+                updateStatus.IsValid = true;
+                updateStatus.StatusMessage= result; 
+
+                return updateStatus;
+            }
+            catch (Exception ex)
+            {
+                throw new AppException("خطایی در فرآیند ویرایش رخ داده است.", ex);
+            }
+        }
+        public Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

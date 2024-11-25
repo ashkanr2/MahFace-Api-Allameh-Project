@@ -20,6 +20,8 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Accounting
         public string?  Firstname { get; set; }
         public string?  LastName { get; set; }
         public DateTime BirthDate { get; set; }
+        [MaxLength(10)]
+        public  string NationalCode { get; set; }
 
         [Required]
         [DefaultValue(false)]

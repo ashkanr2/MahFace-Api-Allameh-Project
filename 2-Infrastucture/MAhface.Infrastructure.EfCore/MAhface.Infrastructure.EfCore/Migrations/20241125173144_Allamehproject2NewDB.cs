@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     /// <inheritdoc />
-    public partial class newhost14030521 : Migration
+    public partial class Allamehproject2NewDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -125,9 +125,10 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NationalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     IsSystemAccount = table.Column<bool>(type: "bit", nullable: false),
                     IsSystemAdmin = table.Column<bool>(type: "bit", nullable: false),
                     IsStudent = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
@@ -408,8 +409,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Section",
-                schema: "Study",
+                name: "Sections",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -417,7 +417,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     SeasionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     categoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseLevel = table.Column<int>(type: "int", nullable: false),
-                    seasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SeasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -430,10 +430,10 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Section", x => x.Id);
+                    table.PrimaryKey("PK_Sections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Section_Season_seasonId",
-                        column: x => x.seasonId,
+                        name: "FK_Sections_Season_SeasonId",
+                        column: x => x.SeasonId,
                         principalSchema: "Study",
                         principalTable: "Season",
                         principalColumn: "Id",
@@ -470,10 +470,9 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Views_Section_SectionId",
+                        name: "FK_Views_Sections_SectionId",
                         column: x => x.SectionId,
-                        principalSchema: "Study",
-                        principalTable: "Section",
+                        principalTable: "Sections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -552,10 +551,9 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Section_seasonId",
-                schema: "Study",
-                table: "Section",
-                column: "seasonId");
+                name: "IX_Sections_SeasonId",
+                table: "Sections",
+                column: "SeasonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Student_UserId",
@@ -619,8 +617,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                 schema: "BasicInfo");
 
             migrationBuilder.DropTable(
-                name: "Section",
-                schema: "Study");
+                name: "Sections");
 
             migrationBuilder.DropTable(
                 name: "Season",

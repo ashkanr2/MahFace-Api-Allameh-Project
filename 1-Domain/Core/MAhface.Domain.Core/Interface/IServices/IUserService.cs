@@ -13,7 +13,8 @@ namespace MAhface.Domain.Core1.Interface.IServices
         public Task<UserDto> GetUserById(Guid id);
         public Task<IEnumerable<UserDto>> GetAllUsers();
         public Task<string> AddUser(UserDto userDto);
-        public Task<string> UpdateUser(UserDto userDto);
+        public Task<UpdateStatus> EditProfile(EditUserVm editUserVm);
+        public Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm);
         public Task<string> DeleteUser(Guid id);
         public Task<string> Register(AddUser addUser);
     }

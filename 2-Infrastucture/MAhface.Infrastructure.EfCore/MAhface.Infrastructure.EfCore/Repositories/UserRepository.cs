@@ -78,12 +78,13 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<string> UpdateUserAsync(User user)
         {
             try
             {
                 _context.Set<User>().Update(user);
                 await _context.SaveChangesAsync();
+                return "با موفقیت تغییر کرد";
             }
             catch (Exception ex)
             {

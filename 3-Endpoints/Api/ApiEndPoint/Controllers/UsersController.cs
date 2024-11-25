@@ -52,18 +52,7 @@ namespace ApiEndPoint.Controllers
             return Ok(user);
         }
 
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> PutUser(Guid id, UserDto userDto)
-        {
-            if (id != userDto.Id)
-            {
-                return BadRequest();
-            }
-           var result =  await _UserService.UpdateUser(userDto);
-
-            return Ok(result);
-        }
-
+       
  
       
         [HttpDelete("Delete")]
