@@ -27,6 +27,12 @@ namespace MAhface.Domain.Core.Entities.Study.Course
         [Required]
         public int? CourseLevelId { get; set; }
 
+
+        [Required]
+        [MinLength(1)]
+        [MaxLength(5)]
+        public int StarsNumber { get; set; }
+
         [Required]
         public Guid? TeacherId { get; set; }
 

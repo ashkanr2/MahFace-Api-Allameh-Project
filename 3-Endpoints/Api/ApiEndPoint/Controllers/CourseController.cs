@@ -1,6 +1,7 @@
 ﻿using ApiEndPoint.ViewModel;
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Interface.IServices;
+using MAhface.Domain.Core1.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEndPoint.Controllers
@@ -25,7 +26,7 @@ namespace ApiEndPoint.Controllers
                 return NotFound();
             }
 
-            var courseVm = new CourseVm
+            var addcourseVm = new AddCourseVm
             {
                 Id=courseDto.Id,
                 Title = courseDto.Title,
@@ -39,7 +40,7 @@ namespace ApiEndPoint.Controllers
                 // Map other properties as needed
             };
 
-            return Ok(courseVm);
+            return Ok(addcourseVm);
         }
 
         [HttpGet("GetAllCourses")]
@@ -69,8 +70,9 @@ namespace ApiEndPoint.Controllers
         }
 
         [HttpPost("AddCourse")]
-        public async Task<ActionResult<CourseVm>> AddCourse(CourseVm courseVm)
+        public async Task<AddStatusVm> AddCourse(CourseVm courseVm)
         {
+            AddStatusVm addStatusVm = new AddStatusVm();
             var courseDto = new CourseDto
             {
                 Title = courseVm.Title,
@@ -79,29 +81,22 @@ namespace ApiEndPoint.Controllers
                 CategoryId = courseVm.CategoryId,
                 CourseDescription = courseVm.CourseDescription,
                 Cost = courseVm.Cost,
-                ImageDto = new MAhface.Domain.Core1.Dto.ImageDto()
-                {
-                    Url= courseVm.ImageUrl,
-                    Base64File= courseVm.ImageBase64
-                }
-              
+                ImageId = courseVm.ImageId,
+                StarsNumber= courseVm.StarsNumber??2,
             };
 
-            await _coursesService.AddCourse(courseDto);
+           var result =  await _coursesService.AddCourse(courseDto);
 
-            return CreatedAtAction(nameof(GetCourse), new { id = courseDto }, courseVm);
+            return result;
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCourse(Guid id, CourseVm courseVm)
+        public async Task<IActionResult> UpdateCourse( CourseVm courseVm)
         {
-            if (id != courseVm.Id)
-            {
-                return BadRequest();
-            }
+           
 
             var courseDto = new CourseDto
             {
-                Id = id,
+                Id = courseVm.Id,
                 Title = courseVm.Title,
                 CourseLevelId = courseVm.CourseLevelId,
                 TeacherId = courseVm.TeacherId,

@@ -1,5 +1,4 @@
-﻿using MAhface.Domain.Core.Entities.Study.Course;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
@@ -7,21 +6,17 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using MAhface.Domain.Core1.Dto;
 
-namespace MAhface.Domain.Core.Dto
+namespace MAhface.Domain.Core1.Dto
 {
-    public class CourseDto 
+    public class AddCourseVm
     {
         public Guid Id { get; set; }
 
         [MaxLength(30)]
-        [DefaultValue(null)]
         [Required]
         public string Title { get; set; }
 
-        [Required]
         public int? CourseLevelId { get; set; }
 
         [Required]
@@ -30,31 +25,28 @@ namespace MAhface.Domain.Core.Dto
         [Required]
         public Guid CategoryId { get; set; }
 
+
+        public string  TecherFullName { get; set; }
         [Required]
         public string CourseDescription { get; set; }
 
-
+        [DefaultValue(0)]
+        public int View { get; set; }
 
         [DefaultValue(0)]
         public decimal Cost { get; set; }
+        [AllowNull]
+        [DefaultValue(null)]
+        public string? ImageBase64 { get; set; }
 
 
-        [Required]
-        [MinLength(1)]
-        [MaxLength(5)]
-        public int StarsNumber { get; set; }
 
-        public List<StudentDto> Students { get; set; }
+        public int? StarsNumber { get; set; }
 
-        public TeacherDto Teacher { get; set; }
-
-
-        public CategoryDto category { get; set; }
-
-
-        public ImageDto ImageDto { get; set; }
+        [AllowNull]
+        [DefaultValue(null)]
+        public String? ImageUrl { get; set; }
 
         public Guid? ImageId { get; set; }
-        public List<SeasonsDto> Seasons { get; set; }
     }
 }

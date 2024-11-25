@@ -85,21 +85,26 @@ namespace Mahface.Services.AppServices.Service
         }
 
 
-        public async Task<string> Register(AddUser addUser)
+        public async Task<AddStatusVm> Register(AddUser addUser)
         {
+            AddStatusVm vm = new AddStatusVm();
             try
             {
                 var usersQuery = await _userRepository.GetallUsers();
                 var existEmail = usersQuery.Any(user => user.Email == addUser.Email);
                 if (existEmail)
                 {
-                    return "ایمیل وارد شده قبلاً ثبت شده است.";
+                    vm.IsValid=false;
+                    vm.StatusMessage= "ایمیل وارد شده قبلاً ثبت شده است.";
+                    return vm;
                 }
 
                 var existUsername = usersQuery.Any(u => u.UserName == addUser.UserName);
                 if (existUsername)
                 {
-                    return "نام کاربری وارد شده قبلاً ثبت شده است.";
+                    vm.IsValid=false;
+                    vm.StatusMessage= "نام کاربری وارد شده قبلاً ثبت شده است.";
+                    return vm;
                 }
 
                 User user = new User
@@ -124,16 +129,10 @@ namespace Mahface.Services.AppServices.Service
 
                 };
 
-                bool result = await _userRepository.Register(user, addUser.Password);
-                if (result)
-                {
-                    return "Successful";
-                }
+                var result = await _userRepository.Register(user, addUser.Password);
 
-                else
-                {
-                    return "خطایی در فرآیند ثبت‌ نام رخ داده است.";
-                }
+                return result;
+                
             }
             catch (Exception ex)
             {

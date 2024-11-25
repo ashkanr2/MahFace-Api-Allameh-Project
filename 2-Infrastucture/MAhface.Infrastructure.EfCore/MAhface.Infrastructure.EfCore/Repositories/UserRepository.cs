@@ -112,13 +112,17 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-        public async Task<bool> Register(User user , string password)
+        public async Task<AddStatusVm> Register(User user , string password)
         {
+            AddStatusVm vm = new AddStatusVm();
             try
             {
+                
                 var result = await _userManager.CreateAsync(user ,password );
+                vm.IsValid = result.Succeeded;
+                vm.StatusMessage = result.Errors.FirstOrDefault()?.Description ?? "با موقیت اضافه شد ";
                 await _context.SaveChangesAsync();
-                return true;
+                return vm;
             }
 
             catch (Exception)
@@ -127,8 +131,8 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 throw;
                  
             }
-            return false;
-        }
+           
+        } 
 
         public Task<IQueryable<User>> GetallUsers()
         {

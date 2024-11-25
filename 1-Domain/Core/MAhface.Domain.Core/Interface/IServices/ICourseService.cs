@@ -1,6 +1,7 @@
 ﻿
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Course;
+using MAhface.Domain.Core1.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace MAhface.Domain.Core.Interface.IServices
     {
         Task<CourseDto> GetCourseById(Guid id);
         Task<IEnumerable<CourseDto>> GetAllCourses();
-        Task AddCourse(CourseDto courseDto);
+        Task<AddStatusVm> AddCourse(CourseDto courseDto);
         Task UpdateCourse(CourseDto courseDto);
         Task DeleteCourse(Guid id);
     }

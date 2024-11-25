@@ -18,19 +18,26 @@ namespace ApiEndPoint.Controllers
             _imageService = imageService;
         }
 
-       
+
         [HttpPost("AddImage")]
-        public async Task<ActionResult<ImageDto>> AddImage([FromBody] ImageDto imageDto)
+        public async Task<IActionResult> AddImage([FromBody] ImageDto imageDto)
         {
             if (imageDto == null)
             {
-                return BadRequest();
+                return BadRequest("Image data is required.");
             }
+
             var createdImage = await _imageService.AddImage(imageDto);
-            return CreatedAtAction("GetImage", new { id = createdImage.Id }, createdImage);
+            if (createdImage == null || createdImage.Id == Guid.Empty)
+            {
+                return NotFound("Unable to create the image.");
+            }
+
+            return Ok(createdImage.Id);
         }
 
- 
+
+
         [HttpGet("GetByImageId")]
         public async Task<ActionResult<ImageDto>> GetImage(Guid id)
         {

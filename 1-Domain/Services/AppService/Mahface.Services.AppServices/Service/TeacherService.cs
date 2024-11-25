@@ -1,5 +1,6 @@
 ﻿using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using System;
 using System.Collections.Generic;
@@ -43,10 +44,11 @@ public class TeacherService : ITeacherService
     }
 
     // Create a new teacher (uses repository)
-    public async Task<TeacherDto> CreateTeacher(Guid userId)
-    {
-        var teacher = await _teacherRepository.CreateTeacher(userId);
-        return MapToDto(teacher);
+    public async Task<AddStatusVm> CreateTeacher(Guid userId)
+    { 
+        AddStatusVm vm = new AddStatusVm();
+        var result = await _teacherRepository.CreateTeacher(userId);
+        return result;
     }
 
     // Get all active teachers

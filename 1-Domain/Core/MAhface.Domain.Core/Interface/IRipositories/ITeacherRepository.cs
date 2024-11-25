@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core1.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
 {
     public interface ITeacherRepository
     {
-        Task<Teacher> CreateTeacher(Guid userId);
+        Task<AddStatusVm> CreateTeacher(Guid userId);
         Task<IEnumerable<Teacher>> GetAllActiveTeachers();
         Task<IEnumerable<Teacher>> GetAllInactiveTeachers();
         Task DeleteTeacher(Guid teacherId);

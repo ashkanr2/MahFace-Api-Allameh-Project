@@ -1,5 +1,7 @@
 ﻿using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Interface.IRipositories;
+using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,9 +16,10 @@ namespace MAhface.Infrastructure.EfCore.Repositories
     public class CoursesRepository : ICourseripository
     {
         private readonly AllamehPrroject _context;
-
-        public CoursesRepository(AllamehPrroject context)
+        private readonly IUserRepository _userRepository;
+        public CoursesRepository(AllamehPrroject context , IUserRepository userRepository)
         {
+            _userRepository = userRepository;   
             _context = context;
         }
 
@@ -26,6 +29,8 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             {
                 return await _context.Courses
                     .Include(c=>c.Image)
+                    .Include(c=>c.Teacher)
+                    .ThenInclude(c=>c.User)
                   .FirstOrDefaultAsync(c => c.Id == id);
             }
             catch (Exception ex)
@@ -51,12 +56,21 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-        public async Task AddCourse(Courses course)
+        public async Task<AddStatusVm> AddCourse(Courses course)
         {
+            AddStatusVm vm = new AddStatusVm(); 
             try
             {
+                var adminid= await _userRepository.GetAdminUserId();
+                course.CreatedDate=DateTime.Now;
+                course.CreatedUserID=adminid;
+
+
                 _context.Courses.Add(course);
-                await _context.SaveChangesAsync();
+               await _context.SaveChangesAsync();
+                vm.IsValid = true;
+                vm.StatusMessage="با موفقیت اضافه شد";
+                return vm;
             }
             catch (Exception ex)
             {

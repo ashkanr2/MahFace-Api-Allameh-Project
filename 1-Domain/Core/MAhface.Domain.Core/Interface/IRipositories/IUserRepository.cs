@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core1.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
         Task AddUserAsync(User user);
         Task<string> UpdateUserAsync(User user);
         Task DeleteUserAsync(Guid id);
-        Task<bool> Register(User user, string password);
+        Task<AddStatusVm> Register(User user, string password);
         Task<IQueryable<User>> GetallUsers();
          
 

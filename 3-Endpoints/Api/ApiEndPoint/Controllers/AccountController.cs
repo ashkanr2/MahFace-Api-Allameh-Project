@@ -23,20 +23,8 @@ namespace ApiEndPoint.Controllers
         public async Task<AddStatusVm> Register(AddUser addUser)
         {
 
-            AddStatusVm addStatus = new AddStatusVm();
             var result = await _userService.Register(addUser);
-            addStatus.StatusMessage=result;
-            if (result == "Successful")
-            {
-               addStatus.IsValid = true;    
-                addStatus.StatusMessage="Successful";
-            }
-            else
-            {
-                addStatus.IsValid=false;
-                addStatus.StatusMessage="Error";
-            }
-            return addStatus;
+            return result;
         }
 
 

@@ -1,6 +1,8 @@
 ﻿using ApiEndPoint.ViewModel;
 using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Interface.IServices;
+using MAhface.Domain.Core1.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -61,41 +63,56 @@ namespace ApiEndPoint.Controllers
 
         // POST: api/teacher/Create
         [HttpPost("Create")]
-        public async Task<ActionResult<TeacherDto>> CreateTeacher([FromBody] Guid userId)
+        public async Task<AddStatusVm> CreateTeacher( Guid userId)
         {
-            if (userId == Guid.Empty)
-            {
-                return BadRequest("Invalid User ID.");
-            }
-
+            AddStatusVm vm = new AddStatusVm();
+            
             try
             {
+                var existTeacher = await _teacherService.GetTeacherByUSerId(userId);
+                if (existTeacher != null)
+                {
+                    vm.IsValid = false;
+                    vm.StatusMessage="استادی با این ایدی وجود دارد";
+                    return vm;
+                }
+
                 var teacher = await _teacherService.CreateTeacher(userId);
-                return CreatedAtAction(nameof(GetTeacherById), new { id = teacher.Id }, teacher);
+                return teacher;
+
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                vm.IsValid=false;
+                vm.StatusMessage = ex.Message;
+                return vm;
             }
         }
 
         // PUT: api/teacher/Update/{id}
-        [HttpPut("Update/{id}")]
-        public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherDto teacherDto)
+        [HttpPut("ChangeActivation")]
+        public async Task<UpdateStatus> UpdateTeacher(Guid id, bool teacherActivation)
         {
-            if (id != teacherDto.Id)
-            {
-                return BadRequest("Teacher ID mismatch.");
-            }
-
+           
+            UpdateStatus updateStatus = new UpdateStatus(); 
             try
             {
-                await _teacherService.UpdateTeacher(teacherDto);
-                return NoContent(); // Successful update, no content needed
+                var techerDto = await _teacherService.GetTeacherById(id);
+                if (techerDto == null) 
+                {
+                    updateStatus.IsValid = false;
+                    updateStatus.StatusMessage="دیتایی پیدا نشد ";
+                    return updateStatus;
+                }
+                techerDto.IsActive=teacherActivation;
+                await _teacherService.UpdateTeacher(techerDto);
+                updateStatus.IsValid = true;
+                updateStatus.StatusMessage="با موفقیت انجام شد ";
+                return updateStatus;
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return updateStatus;
             }
         }
 

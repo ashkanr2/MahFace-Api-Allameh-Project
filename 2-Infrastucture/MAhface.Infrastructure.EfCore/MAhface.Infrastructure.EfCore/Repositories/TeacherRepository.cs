@@ -1,6 +1,7 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Entities.Study;
 using MAhface.Domain.Core.Interface.IRipositories;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
@@ -22,14 +23,17 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         }
 
         // Method to create a teacher using UserId
-        public async Task<Teacher> CreateTeacher(Guid userId)
+        public async Task<AddStatusVm> CreateTeacher(Guid userId)
         {
+            AddStatusVm vm = new AddStatusVm();
             try
             {
                 var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
                 if (user == null)
                 {
-                    throw new Exception("User not found");
+                    vm.IsValid = false;
+                    vm.StatusMessage="کاربر یافت نشد ";
+                   
                 }
 
                 var teacher = new Teacher
@@ -45,7 +49,10 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 user.IsStudent=false;
                 _context.Teachers.Add(teacher);
                 await _context.SaveChangesAsync();
-                return teacher;
+                vm.IsValid=true;
+                vm.StatusMessage="با موفقیت اضافه شد";
+
+                return vm;
             }
             catch (Exception ex)
             {

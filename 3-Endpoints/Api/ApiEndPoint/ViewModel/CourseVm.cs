@@ -15,7 +15,7 @@ namespace ApiEndPoint.ViewModel
         public int? CourseLevelId { get; set; }
 
         [Required]
-        public Guid? TeacherId { get; set; }
+        public Guid TeacherId { get; set; }
 
         [Required]
         public Guid CategoryId { get; set; }
@@ -32,8 +32,14 @@ namespace ApiEndPoint.ViewModel
         [DefaultValue(null)]
         public string? ImageBase64 { get; set; }
 
+
+
+        public int? StarsNumber { get; set; }
+
         [AllowNull]
         [DefaultValue(null)]
         public String? ImageUrl { get; set; }
+
+        public Guid? ImageId { get; set; }
     }
 }
