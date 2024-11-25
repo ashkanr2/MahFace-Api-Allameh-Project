@@ -25,17 +25,22 @@ namespace ApiEndPoint.Controllers
             AddStatusVm addStatus = new AddStatusVm();
             var result = await _userService.Register(addUser);
             addStatus.StatusMessage=result;
-            if (result=="Successful")
+            if (result == "Successful")
             {
-               
-                addStatus.StatusCode=1;
+               addStatus.IsValid = true;    
+                addStatus.StatusMessage="Successful";
             }
             else
             {
-              addStatus.StatusCode = 4;
+                addStatus.IsValid=false;
+                addStatus.StatusMessage="Error";
             }
             return addStatus;
         }
+
+
+
+        
 
     }
 }

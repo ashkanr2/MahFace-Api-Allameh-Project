@@ -9,11 +9,11 @@ namespace MAhface.Domain.Core.Interface.IRipositories
 {
     public interface ICourseripository
     {
-        Task<Courses> GetCourseById(Guid id);
-        Task<IEnumerable<Courses>> GetAllCourses();
-        Task AddCourse(Courses course);
-        Task UpdateCourse(Courses course);
-        Task DeleteCourse(Guid id);
+       public Task<Courses> GetCourseById(Guid id);
+       public Task<IEnumerable<Courses>> GetAllCourses();
+       public Task AddCourse(Courses course);
+       public Task UpdateCourse(Courses course);
+       public Task DeleteCourse(Guid id);
 
     }
 }

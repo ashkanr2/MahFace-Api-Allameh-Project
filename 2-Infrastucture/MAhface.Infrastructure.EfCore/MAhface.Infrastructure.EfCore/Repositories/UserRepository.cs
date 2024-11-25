@@ -21,6 +21,22 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             _context = context;
             _userManager=userManager;
         }
+       
+
+        public async Task<Guid> GetAdminUserId()
+        {
+            try
+            {
+                var admin = await _context.Users.FirstOrDefaultAsync(x => x.IsSystemAdmin);
+                return admin.Id;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (log it, rethrow it, etc.)
+                throw new AppException("Error fetching user by id.", ex);
+            }
+        }
+
 
         public async Task<User> GetUserByIdAsync(Guid id)
         {

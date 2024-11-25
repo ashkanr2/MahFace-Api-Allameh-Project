@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MAhface.Domain.Core.Entities.Study.Season;
 
-namespace MAhface.Domain.Core.Entities.Study.Sections
+namespace MAhface.Domain.Core.Entities.Study.Section
 {
-    [Table("Section", Schema = "Study")]
+   
     public class Sections : BaseEntity
     {
         [Required]
@@ -26,6 +26,6 @@ namespace MAhface.Domain.Core.Entities.Study.Sections
         public int CourseLevel { get; set; }
 
 
-        public Seasons season { get; set; }
+        public Seasons Season { get; set; }
     }
 }

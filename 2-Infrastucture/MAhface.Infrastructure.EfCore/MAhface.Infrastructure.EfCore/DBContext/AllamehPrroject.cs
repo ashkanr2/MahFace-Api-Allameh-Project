@@ -6,7 +6,7 @@ using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
-using MAhface.Domain.Core.Entities.Study.Sections;
+using MAhface.Domain.Core.Entities.Study.Section;
 using MAhface.Domain.Core.Entities;
 using MAhface.Infrastructure.EfCore.Configurations;
 using MAhface.Domain.Core1.Entities;
@@ -32,9 +32,9 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<ErrorLog> ErrorLogs { get; set; }
   
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-       => optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahface2_AllamehProject; User Id=mahface2_mahface2; password=wX8eP84hFw@%8W; TrustServerCertificate=True;Integrated Security=false;");
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//       => optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahface2_AllamehProject; User Id=mahface2_mahface2; password=wX8eP84hFw@%8W; TrustServerCertificate=True;Integrated Security=false;");
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

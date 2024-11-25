@@ -57,6 +57,7 @@ namespace ApiEndPoint.Controllers
                     TeacherId = courseDto.TeacherId,
                     CategoryId = courseDto.CategoryId,
                     CourseDescription = courseDto.CourseDescription,
+                    
                     Cost = courseDto.Cost,
                     ImageBase64 = courseDto.ImageDto?.Base64File
                    

@@ -6,6 +6,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
     <UserSecretsId>aspnet-ApiEndPoint-28d32c54-c378-4314-8bd1-586c92fa8c12</UserSecretsId>
+  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+   <DocumentationFile>bin\Debug\netcoreappX.Y\YourProjectName.xml</DocumentationFile>
+	  
+
   </PropertyGroup>
 
   <ItemGroup>

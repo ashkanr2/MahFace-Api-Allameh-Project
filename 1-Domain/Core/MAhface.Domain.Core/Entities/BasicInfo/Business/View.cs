@@ -1,5 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
-using MAhface.Domain.Core.Entities.Study.Sections;
+using MAhface.Domain.Core.Entities.Study.Section;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core.Entities.Study.Section;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using System;
@@ -32,6 +34,11 @@ namespace Mahface.Services.AppServices.AutoMapper
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
 
+
+            CreateMap<View, ViewDTO>();
+            CreateMap<ViewDTO ,View >();
+
+            CreateMap<Sections, SectionDto>().ReverseMap();
 
 
         }

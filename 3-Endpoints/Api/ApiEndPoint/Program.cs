@@ -22,7 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddDbContext<AllamehPrroject>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -33,11 +33,14 @@ builder.Services.AddSwaggerGen(options =>
         apiDesc.RelativePath = apiDesc.RelativePath.Replace("v1", "v1/SpecificController");
         return true;
     });
+
+    var xmlFile = Path.Combine(AppContext.BaseDirectory, "YourProjectName.xml"); 
+    options.IncludeXmlComments(xmlFile); 
 });
 
-// Register DbContext
-builder.Services.AddDbContext<AllamehPrroject>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
+//// Register DbContext
+//builder.Services.AddDbContext<AllamehPrroject>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
 
 //// Register repositories and services
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -55,8 +58,10 @@ builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<ITeacherService, TeacherService>();  
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService ,  UserService>();  
-
-
+builder.Services.AddScoped<IViewRepository, ViewRepository>();
+builder.Services.AddScoped<IViewService , ViewService>();
+builder.Services.AddScoped<ISectionService, SectionService>();
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();    
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(MappingProfile));

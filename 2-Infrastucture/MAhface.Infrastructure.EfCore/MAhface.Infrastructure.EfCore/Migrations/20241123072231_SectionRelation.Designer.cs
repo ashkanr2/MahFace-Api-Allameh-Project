@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20241123072231_SectionRelation")]
+    partial class SectionRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -490,17 +493,17 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Property<Guid>("SeasionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SeasonId")
+                    b.Property<Guid>("categoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("categoryId")
+                    b.Property<Guid>("seasonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SeasonId");
+                    b.HasIndex("seasonId");
 
-                    b.ToTable("Sections");
+                    b.ToTable("Section", "Study");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Business.Image", b =>
@@ -811,13 +814,13 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.Study.Section.Sections", b =>
                 {
-                    b.HasOne("MAhface.Domain.Core.Entities.Study.Season.Seasons", "Season")
+                    b.HasOne("MAhface.Domain.Core.Entities.Study.Season.Seasons", "season")
                         .WithMany("Sections")
-                        .HasForeignKey("SeasonId")
+                        .HasForeignKey("seasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Season");
+                    b.Navigation("season");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
