@@ -28,12 +28,12 @@ namespace ApiEndPoint.Controllers
             }
 
             var createdImage = await _imageService.AddImage(imageDto);
-            if (createdImage == null || createdImage.Id == Guid.Empty)
+            if (createdImage == null || createdImage.AddedId == Guid.Empty)
             {
                 return NotFound("Unable to create the image.");
             }
 
-            return Ok(createdImage.Id);
+            return Ok(createdImage.AddedId);
         }
 
 
@@ -80,7 +80,7 @@ namespace ApiEndPoint.Controllers
             };
 
             var createdImage = await _imageService.AddImage(imageDto);
-            return CreatedAtAction(nameof(GetImage), new { id = createdImage.Id }, createdImage);
+            return CreatedAtAction(nameof(GetImage), new { id = createdImage.AddedId }, createdImage);
         }
 
         // GET: api/Image/download/{id}

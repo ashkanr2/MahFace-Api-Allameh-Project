@@ -17,5 +17,6 @@ namespace MAhface.Domain.Core1.Interface.IServices
         public Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm);
         public Task<string> DeleteUser(Guid id);
         public Task<AddStatusVm> Register(AddUser addUser);
+        Task<LoginResponseVm> Login(string email, string password);
     }
 }

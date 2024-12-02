@@ -13,103 +13,58 @@ using System.Threading.Tasks;
 namespace MAhface.Infrastructure.EfCore.Repositories
 {
 
-    public class CoursesRepository : ICourseripository
+    public class CoursesRepository : ICourseRipository
     {
         private readonly AllamehPrroject _context;
-        private readonly IUserRepository _userRepository;
-        public CoursesRepository(AllamehPrroject context , IUserRepository userRepository)
+
+        public CoursesRepository(AllamehPrroject context)
         {
-            _userRepository = userRepository;   
             _context = context;
+        }
+
+        public async Task<List<Courses>> GetAllCourses()
+        {
+            return await _context.Courses
+                .Include(c => c.Teacher)
+                .Include(c => c.category)
+                .Include(c => c.Seasons)
+                    .ThenInclude(s => s.Sections)
+                .Include(c => c.Image)
+                .ToListAsync();
         }
 
         public async Task<Courses> GetCourseById(Guid id)
         {
-            try
-            {
-                return await _context.Courses
-                    .Include(c=>c.Image)
-                    .Include(c=>c.Teacher)
-                    .ThenInclude(c=>c.User)
-                  .FirstOrDefaultAsync(c => c.Id == id);
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                throw new Exception("Error occurred while getting course by id", ex);
-            }
+            return await _context.Courses
+                .Include(c => c.Teacher)
+                .Include(c => c.category)
+                .Include(c => c.Seasons)
+                    .ThenInclude(s => s.Sections)
+                .Include(c => c.Image)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<IEnumerable<Courses>> GetAllCourses()
+        public async Task AddCourse(Courses course)
         {
-            try
-            {
-                return await _context.Courses
-                     .Include(c => c.Image)
-                     .Where(x => !x.IsDeleted)
-                   .ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                throw new Exception("Error occurred while getting all courses", ex);
-            }
-        }
-
-        public async Task<AddStatusVm> AddCourse(Courses course)
-        {
-            AddStatusVm vm = new AddStatusVm(); 
-            try
-            {
-                var adminid= await _userRepository.GetAdminUserId();
-                course.CreatedDate=DateTime.Now;
-                course.CreatedUserID=adminid;
-
-
-                _context.Courses.Add(course);
-               await _context.SaveChangesAsync();
-                vm.IsValid = true;
-                vm.StatusMessage="با موفقیت اضافه شد";
-                return vm;
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                await Console.Out.WriteLineAsync(ex.ToString());
-                throw new Exception("Error occurred while adding course", ex);
-            }
+            await _context.Courses.AddAsync(course);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateCourse(Courses course)
         {
-            try
-            {
-                _context.Courses.Update(course);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                throw new Exception("Error occurred while updating course", ex);
-            }
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteCourse(Guid id)
         {
-            try
+            var course = await GetCourseById(id);
+            if (course != null)
             {
-                var course = await _context.Courses.FindAsync(id);
-                if (course != null)
-                {
-                    course.IsDeleted=true;
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception
-                throw new Exception("Error occurred while deleting course", ex);
+                _context.Courses.Remove(course);
+                await _context.SaveChangesAsync();
             }
         }
     }
+
 }

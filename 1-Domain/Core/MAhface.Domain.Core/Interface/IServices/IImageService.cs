@@ -11,7 +11,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
     {
         Task<ImageDto> GetImageById(Guid id);
         Task<IEnumerable<ImageDto>> GetAllImages();
-        Task<ImageDto> AddImage(ImageDto imageDto);
+        Task<AddStatusVm> AddImage(ImageDto imageDto);
         Task UpdateImage(ImageDto imageDto);
         Task DeleteImage(Guid id);
         Task<byte[]> GetImageBytes(Guid id);

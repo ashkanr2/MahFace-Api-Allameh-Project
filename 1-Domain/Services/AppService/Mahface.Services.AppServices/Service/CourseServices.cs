@@ -1,90 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Course;
-using MAhface.Domain.Core.Interface.IRipositories;
-using MAhface.Domain.Core.Interface.IServices;
-using MAhface.Domain.Core1.Dto;
-using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Interface.IServices;
-namespace Mahface.Services.AppServices.Service
+using MAhface.Domain.Core1.Interface.IRipositories;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using MAhface.Domain.Core.Interface.IRipositories;
+using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core.Interface.IServices;
+
+namespace  Mahface.Services.AppServices.Service
 {
-    public class CoursesService : ICoursesService
+    public class CoursesService : ICourseService
     {
-        private readonly ICourseripository _coursesRepository;
+        private readonly ICourseRipository _repository;
         private readonly IMapper _mapper;
-        private readonly IImageService _imageService;
-        private readonly ITeacherService _tcherService;
-  
-        public CoursesService(ITeacherService teacherService, ICourseripository coursesRepository, IMapper mapper, IImageService imageService)
+
+        public CoursesService(ICourseRipository repository, IMapper mapper)
         {
-            _coursesRepository = coursesRepository;
+            _repository = repository;
             _mapper = mapper;
-            _imageService=imageService;
-            _tcherService = teacherService;
         }
 
+        // Get all courses
+        public async Task<List<CourseDto>> GetAllCourses()
+        {
+            var courses = await _repository.GetAllCourses();
+            return _mapper.Map<List<CourseDto>>(courses);
+        }
+
+        // Get a single course by ID
         public async Task<CourseDto> GetCourseById(Guid id)
         {
-            var course = await _coursesRepository.GetCourseById(id);
-            var CourseDto = _mapper.Map<CourseDto>(course);
-
-            return CourseDto;
+            var course = await _repository.GetCourseById(id);
+            return _mapper.Map<CourseDto>(course);
         }
 
-        public async Task<IEnumerable<CourseDto>> GetAllCourses()
-        {
-            var courses = await _coursesRepository.GetAllCourses();
-            return _mapper.Map<IEnumerable<CourseDto>>(courses);
-        }
-
+        // Add a new course
         public async Task<AddStatusVm> AddCourse(CourseDto courseDto)
         {
-            AddStatusVm addStatusVm = new AddStatusVm();
-            Courses courses = new Courses();
-            courses.Title= courseDto.Title;
-            courses.Cost= courseDto.Cost;
-            courses.CategoryId  = courseDto.CategoryId;
-            courses.CourseLevelId = courseDto.CourseLevelId;
-            courses.CourseDescription  = courseDto.CourseDescription;
-            courses.Cost = courseDto.Cost;
-            courses.ImageId = courseDto.ImageId;
-            courses.TeacherId=courseDto.TeacherId;
-            courses.StarsNumber= courseDto.StarsNumber;
-            var teacher = await _tcherService.GetTeacherById(courseDto.TeacherId);
-            if (teacher == null)
+            try
             {
-
-                addStatusVm.IsValid = false;
-                addStatusVm.StatusMessage="ایدی استاد به درستی وارد نشده است";
-                return addStatusVm;
+                var course = _mapper.Map<Courses>(courseDto);
+                await _repository.AddCourse(course);
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "Course added successfully."
+                };
             }
-            if (courseDto.ImageId.HasValue)
+            catch (Exception ex)
             {
-            var existImage= _imageService.GetImageById(courseDto.ImageId.Value);
-                if (existImage == null) {
-                    addStatusVm.IsValid = false;
-                    addStatusVm.StatusMessage="ایدی عکس به درستی وارد نشده است";
-                    return addStatusVm;
-                }
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"Error while adding course: {ex.Message}"
+                };
             }
-            var result = await _coursesRepository.AddCourse(courses);
-            return result;
         }
 
-        public async Task UpdateCourse(CourseDto courseDto)
+        // Update an existing course
+        public async Task<AddStatusVm> UpdateCourse(CourseDto courseDto)
         {
-            var course = _mapper.Map<Courses>(courseDto);
-            await _coursesRepository.UpdateCourse(course);
+            try
+            {
+                var course = _mapper.Map<Courses>(courseDto);
+                await _repository.UpdateCourse(course);
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "Course updated successfully."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"Error while updating course: {ex.Message}"
+                };
+            }
         }
 
-        public async Task DeleteCourse(Guid id)
+        // Delete a course
+        public async Task<AddStatusVm> DeleteCourse(Guid id)
         {
-            await _coursesRepository.DeleteCourse(id);
+            try
+            {
+                await _repository.DeleteCourse(id);
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "Course deleted successfully."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"Error while deleting course: {ex.Message}"
+                };
+            }
         }
     }
 }

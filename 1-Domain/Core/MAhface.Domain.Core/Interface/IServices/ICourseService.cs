@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core.Interface.IServices
 {
-    public interface ICoursesService
+    public interface ICourseService
     {
         Task<CourseDto> GetCourseById(Guid id);
-        Task<IEnumerable<CourseDto>> GetAllCourses();
+        Task<List<CourseDto>> GetAllCourses();
         Task<AddStatusVm> AddCourse(CourseDto courseDto);
-        Task UpdateCourse(CourseDto courseDto);
-        Task DeleteCourse(Guid id);
+        Task<AddStatusVm> UpdateCourse(CourseDto courseDto);
+        Task<AddStatusVm> DeleteCourse(Guid id);
     }
 }
+

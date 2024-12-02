@@ -21,24 +21,23 @@ namespace Mahface.Services.AppServices.AutoMapper
         {
             CreateMap<Seasons, SeasonsDto>();
             CreateMap<SeasonsDto, Seasons>();
-
-           
-            CreateMap<CourseDto, Courses>()
-            .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageDto));
-            CreateMap<Image, ImageDto>();
-
-            CreateMap<Courses, CourseDto>()
-             .ForMember(dest => dest.ImageDto, opt => opt.MapFrom(src => src.Image));
-            CreateMap<Image, ImageDto>();
-
+            CreateMap<Image, ImageDto>().ReverseMap();
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
-
-
             CreateMap<View, ViewDTO>();
-            CreateMap<ViewDTO ,View >();
-
+            CreateMap<ViewDTO, View>();
             CreateMap<Sections, SectionDto>().ReverseMap();
+            CreateMap<Courses, CourseDto>().ReverseMap();
+            CreateMap<CourseDto, CourseVm>().ReverseMap();
+            CreateMap<Courses, CourseVm>().ReverseMap();
+            CreateMap<EditUserVm, User>().ReverseMap();
+            CreateMap<UserDto, EditUserVm>()
+                .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.Firstname))
+                .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+                .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
+                .ForMember(dest => dest.NationalCode, opt => opt.MapFrom(src => src.NationalCode))
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
+                .ForMember(dest => dest.Base64Profile, opt => opt.MapFrom(src => src.Base64Profile));
 
 
         }

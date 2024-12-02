@@ -28,5 +28,9 @@ namespace MAhface.Domain.Core1.Dto
         public ImageDto? Image { get; set; }
         public Guid? ImageId { get; set; }
 
+        public string NationalCode { get; set; }
+
+        public string Base64Profile { get; set; }
+
     }
 }

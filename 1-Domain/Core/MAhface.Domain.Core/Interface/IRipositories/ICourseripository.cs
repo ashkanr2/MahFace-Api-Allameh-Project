@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core.Interface.IRipositories
 {
-    public interface ICourseripository
+    public interface ICourseRipository
     {
-       public Task<Courses> GetCourseById(Guid id);
-       public Task<IEnumerable<Courses>> GetAllCourses();
-       public Task<AddStatusVm> AddCourse(Courses course);
-       public Task UpdateCourse(Courses course);
-       public Task DeleteCourse(Guid id);
-
+        Task<List<Courses>> GetAllCourses();
+        Task<Courses> GetCourseById(Guid id);
+        Task AddCourse(Courses course);
+        Task UpdateCourse(Courses course);
+        Task DeleteCourse(Guid id);
     }
+
 }

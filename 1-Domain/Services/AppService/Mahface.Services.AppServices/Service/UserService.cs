@@ -19,12 +19,14 @@ namespace Mahface.Services.AppServices.Service
         private readonly UserManager<User> _userManager;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IImageService _imageService;
 
-        public UserService(UserManager<User> userManager, IMapper mapper, IUserRepository userRepository)
+        public UserService(UserManager<User> userManager, IMapper mapper, IUserRepository userRepository, IImageService imageService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _userRepository = userRepository;
+            _imageService=imageService;
         }
 
         public async Task<string> AddUser(UserDto userDto)
@@ -77,12 +79,20 @@ namespace Mahface.Services.AppServices.Service
             return UserDto;
         }
 
+
         public async Task<UserDto> GetUserById(Guid id)
         {
-            var User = _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
-            var UserDto = _mapper.Map<UserDto>(User);
-            return UserDto;
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user == null)
+            {
+                return null;
+            }
+
+            // Map User entity to UserDto using AutoMapper
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
         }
+
 
 
         public async Task<AddStatusVm> Register(AddUser addUser)
@@ -143,7 +153,6 @@ namespace Mahface.Services.AppServices.Service
 
         public async Task<UpdateStatus> EditProfile(EditUserVm editUserVm)
         {
-
             UpdateStatus updateStatus = new UpdateStatus();
             try
             {
@@ -151,21 +160,23 @@ namespace Mahface.Services.AppServices.Service
                 if (model == null)
                 {
                     updateStatus.IsValid = false;
-                    updateStatus.StatusMessage=".کاربری با این ایدی  پیدا نشد ";
+                    updateStatus.StatusMessage = ".کاربری با این ایدی پیدا نشد";
+                    return updateStatus; // Early return to avoid further processing
                 }
-                User user = new User();
+                    _mapper.Map(editUserVm, model);
+                
+                if (editUserVm.Base64Profile != null)
+                {
+                    ImageDto imageDto = new ImageDto();
+                    imageDto.Base64File = editUserVm.Base64Profile;
+                    imageDto.Url=editUserVm.Firstname+"_"+editUserVm.LastName+"Profile"+DateTime.Now.ToString();
+                    var imageResult = await _imageService.AddImage(imageDto);
+                    model.ProfileImageId=imageResult.AddedId;
+                }
 
-                user.Firstname = editUserVm.Firstname;
-                user.LastName = editUserVm.LastName;
-                user.PhoneNumber = editUserVm.PhoneNumber;
-                user.BirthDate = editUserVm.BirthDate;
-                user.NationalCode = editUserVm.NationalCode;
-                user.PhoneNumber = editUserVm.PhoneNumber;
-
-                var result = await _userRepository.UpdateUserAsync(user);
-
+                var result = await _userRepository.UpdateUserAsync(model);
                 updateStatus.IsValid = true;
-                updateStatus.StatusMessage= result; 
+                updateStatus.StatusMessage = result;
 
                 return updateStatus;
             }
@@ -174,9 +185,63 @@ namespace Mahface.Services.AppServices.Service
                 throw new AppException("خطایی در فرآیند ویرایش رخ داده است.", ex);
             }
         }
+
         public Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm)
         {
             throw new NotImplementedException();
         }
+
+        public async Task<LoginResponseVm> Login(string email, string password)
+        {
+            LoginResponseVm loginResponse = new LoginResponseVm();
+
+            try
+            {
+                // Find user by email
+                var user = await _userManager.Users.Include(u => u.Image).FirstOrDefaultAsync(u => u.Email == email || u.UserName==email || u.PhoneNumber==email);
+                if (user == null)
+                {
+                    loginResponse.IsValid = false;
+                    loginResponse.StatusMessage = "کاربری با این مشخصات یافت نشد.";
+                    return loginResponse;
+                }
+
+                // Verify password
+                var isPasswordValid = await _userManager.CheckPasswordAsync(user, password);
+                if (!isPasswordValid)
+                {
+                    loginResponse.IsValid = false;
+                    loginResponse.StatusMessage = "رمز عبور اشتباه است.";
+                    return loginResponse;
+                }
+
+                // Map user details to LoginResponseVm
+                loginResponse.IsValid = true;
+                loginResponse.UserId = user.Id;
+                loginResponse.IsTeacher = user.IsTeacher;
+                loginResponse.Firstname = user.Firstname;
+                loginResponse.LastName = user.LastName;
+                loginResponse.Email = user.Email;
+                loginResponse.StatusMessage = "ورود موفقیت‌آمیز بود.";
+                loginResponse.IsAdmin= (user.IsSystemAccount || user.IsSystemAdmin) ? true : false;
+
+                // Retrieve profile image in Base64 format
+                if (user.ProfileImageId != null)
+                {
+                    var image = await _imageService.GetImageById(user.ProfileImageId.Value);
+                    loginResponse.ProfileImageBase64 = image.Base64File;
+                }
+
+                return loginResponse;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions and provide an error message
+                throw new AppException("خطایی در فرآیند ورود رخ داده است.", ex);
+            }
+        }
+
+
+
     }
 }

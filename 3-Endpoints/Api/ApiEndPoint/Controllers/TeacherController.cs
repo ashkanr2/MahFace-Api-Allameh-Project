@@ -1,6 +1,5 @@
 ﻿using ApiEndPoint.ViewModel;
 using MAhface.Domain.Core.Dto;
-using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Interface.IServices;
 using MAhface.Domain.Core1.Dto;
 using Microsoft.AspNetCore.Mvc;
@@ -63,58 +62,40 @@ namespace ApiEndPoint.Controllers
 
         // POST: api/teacher/Create
         [HttpPost("Create")]
-        public async Task<AddStatusVm> CreateTeacher( Guid userId)
+        public async Task<AddStatusVm> CreateTeacher([FromBody] Guid userId)
         {
-            AddStatusVm vm = new AddStatusVm();
+            if (userId == Guid.Empty)
+            {
+                UpdateStatus update =new UpdateStatus();
+                update.IsValid = true;
+                update.StatusMessage="آیدی  کاربر خالی نباید باشد ";
+            }
+
             
-            try
-            {
-                var existTeacher = await _teacherService.GetTeacherByUSerId(userId);
-                if (existTeacher != null)
-                {
-                    vm.IsValid = false;
-                    vm.StatusMessage="استادی با این ایدی وجود دارد";
-                    return vm;
-                }
-
-                var teacher = await _teacherService.CreateTeacher(userId);
-                return teacher;
-
-            }
-            catch (Exception ex)
-            {
-                vm.IsValid=false;
-                vm.StatusMessage = ex.Message;
-                return vm;
-            }
+                var result = await _teacherService.CreateTeacher(userId);
+                return result;
+            
         }
 
         // PUT: api/teacher/Update/{id}
-        [HttpPut("ChangeActivation")]
-        public async Task<UpdateStatus> UpdateTeacher(Guid id, bool teacherActivation)
-        {
-           
-            UpdateStatus updateStatus = new UpdateStatus(); 
-            try
-            {
-                var techerDto = await _teacherService.GetTeacherById(id);
-                if (techerDto == null) 
-                {
-                    updateStatus.IsValid = false;
-                    updateStatus.StatusMessage="دیتایی پیدا نشد ";
-                    return updateStatus;
-                }
-                techerDto.IsActive=teacherActivation;
-                await _teacherService.UpdateTeacher(techerDto);
-                updateStatus.IsValid = true;
-                updateStatus.StatusMessage="با موفقیت انجام شد ";
-                return updateStatus;
-            }
-            catch (Exception ex)
-            {
-                return updateStatus;
-            }
-        }
+        //[HttpPut("Update/{id}")]
+        //public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherDto teacherDto)
+        //{
+        //    if (id != teacherDto.Id)
+        //    {
+        //        return BadRequest("Teacher ID mismatch.");
+        //    }
+
+        //    try
+        //    {
+        //        await _teacherService.UpdateTeacher(teacherDto);
+        //        return NoContent(); // Successful update, no content needed
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex.Message}");
+        //    }
+        //}
 
         // DELETE: api/teacher/Delete/{id}
         [HttpDelete("Delete/{id}")]

@@ -82,6 +82,9 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         {
             try
             {
+                var lastIsteacherStatus =await GetUserByIdAsync(user.Id);
+                user.IsTeacher = lastIsteacherStatus.IsTeacher;
+                
                 _context.Set<User>().Update(user);
                 await _context.SaveChangesAsync();
                 return "با موفقیت تغییر کرد";

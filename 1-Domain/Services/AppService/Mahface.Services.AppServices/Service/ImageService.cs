@@ -35,25 +35,35 @@ namespace Mahface.Services.AppServices.Service
             return _mapper.Map<IEnumerable<ImageDto>>(images);
         }
 
-        public async Task<ImageDto> AddImage(ImageDto imageDto)
+        public async Task<AddStatusVm> AddImage(ImageDto imageDto)
         {
-            Image image = new Image();
-            image.Base64File = imageDto.Base64File;
-            image.Url = imageDto.Url;
-            var imageResult = await _imageRepository.AddImage(image);
-            return _mapper.Map<ImageDto>(imageResult);
-            //try
-            //{
-            //    var image = _mapper.Map<Image>(imageDto);
-            //    var imageResult = await _imageRepository.AddImage(image);
-            //    return _mapper.Map<ImageDto>(imageResult);
-            //}
-            //catch (Exception ex) {
-            //    return null;
-            //}
+            AddStatusVm addStatus = new AddStatusVm();
+            try
+            {
+                // Map ImageDto to Image entity
+                Image image = new Image
+                {
+                    Base64File = imageDto.Base64File,
+                    Url = imageDto.Url
+                };
 
+                // Call the repository to add the image
+                var addedImage = await _imageRepository.AddImage(image);
 
+                addStatus.IsValid = true;
+                addStatus.StatusMessage = "تصویر با موفقیت اضافه شد.";
+                addStatus.AddedId = addedImage.AddedId; 
+
+                return addStatus;
+            }
+            catch (Exception ex)
+            {
+                addStatus.IsValid = false;
+                addStatus.StatusMessage = $"خطایی در فرآیند افزودن تصویر رخ داده است: {ex.Message}";
+                return addStatus;
+            }
         }
+
 
         public async Task UpdateImage(ImageDto imageDto)
         {

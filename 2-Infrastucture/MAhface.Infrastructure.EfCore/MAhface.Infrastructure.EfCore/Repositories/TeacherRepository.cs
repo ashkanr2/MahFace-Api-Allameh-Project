@@ -40,7 +40,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 {
                     UserId = userId,
                     User = user,
-                    ISActive = true, // Default active
+                    ISActive = false, // Admin should active it 
                     IsDeleted = false, // Default not deleted
                     CreatedUserID = userId, // Assuming the teacher created himself/herself
                     CreatedDate = DateTime.Now
@@ -51,7 +51,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 await _context.SaveChangesAsync();
                 vm.IsValid=true;
                 vm.StatusMessage="با موفقیت اضافه شد";
-
+                vm.AddedId = teacher.Id;
                 return vm;
             }
             catch (Exception ex)

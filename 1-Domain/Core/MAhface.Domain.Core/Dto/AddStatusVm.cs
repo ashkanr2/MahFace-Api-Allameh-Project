@@ -11,5 +11,7 @@ namespace MAhface.Domain.Core1.Dto
         public bool IsValid { get; set; }
 
         public string StatusMessage { get; set; }
+
+        public Guid? AddedId { get; set; }
     }
 }
