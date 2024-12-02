@@ -1,5 +1,6 @@
 ﻿using ApiEndPoint.ViewModel;
 using AutoMapper;
+using Mahface.Services.AppServices.Service;
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
@@ -16,10 +17,13 @@ namespace ApiEndPoint.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        public AccountController(IUserService userService , IMapper mapper)
+        private readonly IOtpService _otpService;
+
+        public AccountController(IUserService userService , IMapper mapper, IOtpService otpService)
         {
             _userService = userService;
             _mapper = mapper;
+            _otpService = otpService;
         }
 
         [HttpPost("Register")]
@@ -38,7 +42,7 @@ namespace ApiEndPoint.Controllers
             UpdateStatus updateStatus = new UpdateStatus();
             var result = await _userService.EditProfile(editUserVm);
 
-            return updateStatus;
+            return result;
         }
         [HttpGet("EditProfile")]
         public async Task<ActionResult<EditUserVm>> EditProfile(Guid userId)
@@ -79,6 +83,39 @@ namespace ApiEndPoint.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "خطایی در فرآیند ورود رخ داده است.", details = ex.Message });
             }
+        }
+
+       
+
+        [HttpPost("GenerateOtp")]
+        public async Task<IActionResult> GenerateOtp([FromBody] GenerateOtpRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("اطلاعات وارد شده نامعتبر است.");
+            }
+
+            var otpCode = await _otpService.GenerateOtp(request.UserId, request.Email, request.PhoneNumber);
+
+            return Ok(new { OtpCode = otpCode, Message = "رمز یکبار مصرف تولید شد." });
+        }
+
+        [HttpPost("ValidateOtp")]
+        public async Task<IActionResult> ValidateOtp([FromBody] ValidateOtpRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("اطلاعات وارد شده نامعتبر است.");
+            }
+
+            var isValid = await _otpService.ValidateOtp(request.OtpCode);
+
+            if (!isValid)
+            {
+                return Unauthorized("رمز یکبار مصرف نامعتبر یا منقضی شده است.");
+            }
+
+            return Ok("رمز یکبار مصرف معتبر است.");
         }
 
     }

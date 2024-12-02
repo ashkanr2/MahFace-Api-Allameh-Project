@@ -61,7 +61,9 @@ builder.Services.AddScoped<IUserService ,  UserService>();
 builder.Services.AddScoped<IViewRepository, ViewRepository>();
 builder.Services.AddScoped<IViewService , ViewService>();
 builder.Services.AddScoped<ISectionService, SectionService>();
-builder.Services.AddScoped<ISectionRepository, SectionRepository>();    
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+builder.Services.AddScoped<IOtpRepository, OtpRepository>();
+builder.Services.AddScoped<IOtpService, OtpService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(MappingProfile));

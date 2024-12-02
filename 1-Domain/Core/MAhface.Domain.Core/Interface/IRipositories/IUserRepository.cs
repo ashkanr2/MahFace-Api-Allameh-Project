@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UpdateStatus = MAhface.Domain.Core1.Dto.UpdateStatus;
 
 namespace MAhface.Domain.Core1.Interface.IRipositories
 {
@@ -16,7 +17,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
         Task<Guid> GetAdminUserId();
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task AddUserAsync(User user);
-        Task<string> UpdateUserAsync(User user);
+        Task<UpdateStatus> UpdateUserAsync(User user);
         Task DeleteUserAsync(Guid id);
         Task<AddStatusVm> Register(User user, string password);
         Task<IQueryable<User>> GetallUsers();

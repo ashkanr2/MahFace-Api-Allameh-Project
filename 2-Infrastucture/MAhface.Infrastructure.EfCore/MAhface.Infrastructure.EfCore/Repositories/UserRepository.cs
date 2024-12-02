@@ -78,7 +78,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-        public async Task<string> UpdateUserAsync(User user)
+        public async Task<UpdateStatus> UpdateUserAsync(User user)
         {
             try
             {
@@ -87,7 +87,10 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 
                 _context.Set<User>().Update(user);
                 await _context.SaveChangesAsync();
-                return "با موفقیت تغییر کرد";
+                UpdateStatus updateStatus = new UpdateStatus();
+                updateStatus.IsValid=true;
+                updateStatus.StatusMessage= "با موفقیت تغییر کرد";
+                return updateStatus;
             }
             catch (Exception ex)
             {

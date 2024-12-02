@@ -175,10 +175,8 @@ namespace Mahface.Services.AppServices.Service
                 }
 
                 var result = await _userRepository.UpdateUserAsync(model);
-                updateStatus.IsValid = true;
-                updateStatus.StatusMessage = result;
 
-                return updateStatus;
+                return result;
             }
             catch (Exception ex)
             {
