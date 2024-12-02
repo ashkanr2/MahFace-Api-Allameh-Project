@@ -62,7 +62,7 @@ namespace ApiEndPoint.Controllers
 
         // POST: api/teacher/Create
         [HttpPost("Create")]
-        public async Task<AddStatusVm> CreateTeacher([FromBody] Guid userId)
+        public async Task<AddStatusVm> CreateTeacher( Guid userId)
         {
             if (userId == Guid.Empty)
             {
