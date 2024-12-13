@@ -28,7 +28,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 .Include(c => c.Teacher)
                 .Include(c => c.category)
                 .Include(c => c.Seasons)
-                    .ThenInclude(s => s.Sections)
+                .ThenInclude(s => s.Sections)
                 .Include(c => c.Image)
                 .ToListAsync();
         }

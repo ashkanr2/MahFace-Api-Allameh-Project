@@ -1,5 +1,6 @@
 ﻿using ApiEndPoint.ViewModel;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Interface.IServices;
 using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,24 +13,28 @@ namespace ApiEndPoint.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly AllamehPrroject _context;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesController(AllamehPrroject context)
+        public CategoriesController(AllamehPrroject context , ICategoryService categoryService)
         {
             _context = context;
+            _categoryService = categoryService;
         }
 
         // GET: api/Categories
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+           var result = await _categoryService.GetAllCategoriesAsync();
+            return Ok(result);
+
         }
 
         // GET: api/Categories/5
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{id}")]
         public async Task<ActionResult<Category>> GetById(Guid id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _categoryService.GetCategoryByIdAsync(id);
 
             if (category == null)
             {
@@ -98,7 +103,7 @@ namespace ApiEndPoint.Controllers
         }
 
         //DELETE: api/Categories/5
-        [HttpDelete("IsDeleted")]
+        [HttpDelete("DeleteCategory/{id}")]
         public async Task<IActionResult> DeleteCategory(Guid id)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -112,9 +117,19 @@ namespace ApiEndPoint.Controllers
             return NoContent();
         }
 
-        private bool CategoryExists(Guid id)
+
+        [HttpGet("Search/{input}")]
+        public async Task<ActionResult<IEnumerable<Category>>> Search(string input)
         {
-            return _context.Categories.Any(e => e.Id == id);
+            var categories = await _categoryService.SearchCategories(input);
+
+            if (categories == null || !categories.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(categories);
         }
+
     }
 }

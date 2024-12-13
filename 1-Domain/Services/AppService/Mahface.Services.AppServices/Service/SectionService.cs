@@ -74,6 +74,12 @@ namespace Mahface.Services.AppServices.Service
             var sections = await _sectionRepository.GetAll();
             return _mapper.Map<IEnumerable<SectionDto>>(sections); // تبدیل لیست Entity ها به Dto ها
         }
-    }
 
+        public async Task<IEnumerable<SectionDto>> GetAllSectionsForCourse(Guid id)
+        {
+            var allData = await _sectionRepository.GetAll();
+            var sections = allData.Where(x => x.CourseId == id).ToList();
+            return _mapper.Map<IEnumerable<SectionDto>>(sections);
+        }
+    }
 }

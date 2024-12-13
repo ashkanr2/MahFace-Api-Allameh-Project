@@ -42,5 +42,12 @@ namespace Mahface.Services.AppServices.Service
         {
             await _categoryRepository.DeleteCategoryAsync(id);
         }
+
+        public async Task<IEnumerable<Category>> SearchCategories(string input)
+        {
+            var allData = await _categoryRepository.GetAllCategoriesAsync();
+            var result = allData.Where(x=>x.Title.Contains(input));
+            return result;
+        }
     }
 }

@@ -17,6 +17,9 @@ namespace MAhface.Domain.Core1.Interface.IServices
         Task<bool> DeleteSectionAsync(Guid id);
         Task<SectionDto> GetSectionByIdAsync(Guid id);
         Task<IEnumerable<SectionDto>> GetAllSectionsAsync();
+        Task<IEnumerable<SectionDto>> GetAllSectionsForCourse(Guid id);
+      
+
     }
 
 

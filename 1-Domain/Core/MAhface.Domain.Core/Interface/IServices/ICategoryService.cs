@@ -11,6 +11,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
     {
         Task<Category> GetCategoryByIdAsync(Guid id);
         Task<IEnumerable<Category>> GetAllCategoriesAsync();
+        Task<IEnumerable<Category>> SearchCategories(string input);
         Task AddCategoryAsync(Category category);
         Task UpdateCategoryAsync(Category category);
         Task DeleteCategoryAsync(Guid id);

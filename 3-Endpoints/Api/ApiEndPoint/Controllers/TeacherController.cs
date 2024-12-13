@@ -77,25 +77,7 @@ namespace ApiEndPoint.Controllers
             
         }
 
-        // PUT: api/teacher/Update/{id}
-        //[HttpPut("Update/{id}")]
-        //public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] TeacherDto teacherDto)
-        //{
-        //    if (id != teacherDto.Id)
-        //    {
-        //        return BadRequest("Teacher ID mismatch.");
-        //    }
-
-        //    try
-        //    {
-        //        await _teacherService.UpdateTeacher(teacherDto);
-        //        return NoContent(); // Successful update, no content needed
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex.Message}");
-        //    }
-        //}
+        
 
         // DELETE: api/teacher/Delete/{id}
         [HttpDelete("Delete/{id}")]

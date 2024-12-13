@@ -126,6 +126,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 
                 var result = await _userManager.CreateAsync(user ,password );
                 vm.IsValid = result.Succeeded;
+                vm.AddedId=user.Id;
                 vm.StatusMessage = result.Errors.FirstOrDefault()?.Description ?? "با موقیت اضافه شد ";
                 await _context.SaveChangesAsync();
                 return vm;

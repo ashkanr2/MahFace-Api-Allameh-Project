@@ -120,6 +120,25 @@ namespace ApiEndPoint.Controllers
 
             return Ok(resultVm);
         }
+
+        [HttpGet("GetAllSectionForCourse/{id}")]
+        public async Task<IActionResult> GetAllSectionForCourse(Guid id)
+        {
+            var sectionsDto = await _sectionService.GetAllSectionsForCourse(id);
+            var resultVm = sectionsDto.Select(section => new SectionVm
+            {
+                Id = section.Id,
+                CourseId = section.CourseId,
+                SeasionId = section.SeasionId,
+                CategoryId = section.CategoryId,
+                CourseLevel = section.CourseLevel,
+                StatusMessage = "Section found successfully"
+            });
+
+            return Ok(resultVm);
+        }
+
+
     }
 
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Interface.IServices;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
@@ -20,18 +21,31 @@ namespace ApiEndPoint.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetById")]
-        public async Task<ActionResult<CourseVm>> GetCourse(Guid id)
+        //[HttpGet("GetById/{id}")]
+        //public async Task<ActionResult<CourseVm>> GetById(Guid id)
+        //{
+        //    var courseDto = await _coursesService.GetCourseById(id);
+        //    if (courseDto == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var courseVm = _mapper.Map<CourseVm>(courseDto);
+        //    return Ok(courseVm);
+        //}
+
+        [HttpGet("GetById/{id}")]
+        public async Task<ActionResult<Courses>> GetById(Guid id)
         {
-            var courseDto = await _coursesService.GetCourseById(id);
-            if (courseDto == null)
+            var course = await _coursesService.GetCourseById(id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            var courseVm = _mapper.Map<CourseVm>(courseDto);
-            return Ok(courseVm);
+            return Ok(course);
         }
+
 
 
         [HttpGet("GetAllCourses")]
@@ -51,7 +65,7 @@ namespace ApiEndPoint.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateCourse/{id}")]
         public async Task<IActionResult> UpdateCourse(CourseVm courseVm)
         {
             var courseDto = _mapper.Map<CourseDto>(courseVm);
@@ -63,7 +77,7 @@ namespace ApiEndPoint.Controllers
                 return BadRequest(result.StatusMessage);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteCourse/{id}")]
         public async Task<IActionResult> DeleteCourse(Guid id)
         {
             var result = await _coursesService.DeleteCourse(id);

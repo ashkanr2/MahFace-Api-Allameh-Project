@@ -12,7 +12,7 @@ namespace MAhface.Domain.Core.Interface.IServices
 {
     public interface ICourseService
     {
-        Task<CourseDto> GetCourseById(Guid id);
+        Task<Courses> GetCourseById(Guid id);
         Task<List<CourseDto>> GetAllCourses();
         Task<AddStatusVm> AddCourse(CourseDto courseDto);
         Task<AddStatusVm> UpdateCourse(CourseDto courseDto);
