@@ -14,6 +14,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
     public interface IUserRepository
     {
         Task<User> GetUserByIdAsync(Guid id);
+        Task<User> GetUserByTeacherIdAsync(Guid teacherId);
         Task<Guid> GetAdminUserId();
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task AddUserAsync(User user);

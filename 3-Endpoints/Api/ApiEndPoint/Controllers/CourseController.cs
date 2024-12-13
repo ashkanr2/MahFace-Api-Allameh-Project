@@ -21,30 +21,19 @@ namespace ApiEndPoint.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet("GetById/{id}")]
-        //public async Task<ActionResult<CourseVm>> GetById(Guid id)
-        //{
-        //    var courseDto = await _coursesService.GetCourseById(id);
-        //    if (courseDto == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var courseVm = _mapper.Map<CourseVm>(courseDto);
-        //    return Ok(courseVm);
-        //}
-
         [HttpGet("GetById/{id}")]
-        public async Task<ActionResult<Courses>> GetById(Guid id)
+        public async Task<ActionResult<CourseDetail>> GetById(Guid id)
         {
-            var course = await _coursesService.GetCourseById(id);
-            if (course == null)
+            var courseDetail = await _coursesService.GetCourseById(id);
+            if (courseDetail == null)
             {
                 return NotFound();
             }
-
-            return Ok(course);
+          
+            return Ok(courseDetail);
         }
+
+
 
 
 

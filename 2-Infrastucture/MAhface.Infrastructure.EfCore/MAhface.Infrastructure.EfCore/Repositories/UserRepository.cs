@@ -51,6 +51,22 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
+
+        public async Task<User> GetUserByTeacherIdAsync(Guid teacherId)
+        {
+            try
+            {
+                var teacher =  _context.Teachers.FirstOrDefault(x=>x.Id == teacherId);
+                return await _context.Set<User>().FindAsync(teacher.UserId);
+
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (log it, rethrow it, etc.)
+                throw new AppException("Error fetching user by id.", ex);
+            }
+        }
+
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
             try

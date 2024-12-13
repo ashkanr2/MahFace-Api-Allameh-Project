@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MAhface.Domain.Core.Entities.Study.Season;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core1.Dto
 {
-    public class CourseVm
+    public class CourseDetail
     {
+
         public Guid Id { get; set; }
         public string Title { get; set; }
         public int? CourseLevelId { get; set; }
@@ -22,8 +24,29 @@ namespace MAhface.Domain.Core1.Dto
         public int TotalSeasons { get; set; }
         public int TotalSections { get; set; }
         public int TotalDuration { get; set; }
-        public int StarsNumber { get; set; }  
+        public int StarsNumber { get; set; }
 
+        public List<SeasonSVM> Seasons  { get; set; }
+
+        
+
+}
+
+
+    
+    public class SeasonSVM
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+        public string SeasonsDescription { get; set; }
+        public List<SectionsVm> Sections { get; set; }
+
+    }
+
+    public class SectionsVm
+    {
+        public Guid Id { get; set; }
+        public string URL { get; set; }
     }
 
 

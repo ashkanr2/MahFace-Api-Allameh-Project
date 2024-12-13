@@ -17,14 +17,18 @@ namespace Mahface.Services.AppServices.Service
         private readonly ICourseRipository _repository;
         private readonly ISeasonService _seasonService;
         private readonly ISectionService _sectionService;
+        private readonly IUserService _userService;
+        private readonly ICategoryService  _categoryService;
         private readonly IMapper _mapper;
 
-        public CoursesService(ICourseRipository repository, IMapper mapper,ISeasonService seasonService , ISectionService sectionService)
+        public CoursesService(ICourseRipository repository, IMapper mapper,ISeasonService seasonService , ISectionService sectionService ,IUserService userService , ICategoryService categoryService)
         {
             _repository = repository;
             _mapper = mapper;
             _seasonService = seasonService;
             _sectionService = sectionService;
+            _userService = userService; 
+            _categoryService = categoryService;
         }
 
         // Get all courses
@@ -36,27 +40,58 @@ namespace Mahface.Services.AppServices.Service
             {
                 var sumSeasons =  _seasonService.GetAllCourseSeasons(course.Id).Count;
                 var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);  
+                var userTeacher = await _userService.GetUserByTeacherId(course.TeacherId);
+                var category = await _categoryService.GetCategoryByIdAsync(course.CategoryId);
                 course.TotalSeasons = sumSeasons;
                 course.TotalSections = sumSection.Count();
                 course.TotalDuration = 100;
+                course.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
+                course.CategoryName=category.Title;
+            
             }
 
             return result;
         }
 
-        // Get a single course by ID
-        public async Task<Courses> GetCourseById(Guid id)
+        public async Task<CourseDetail> GetCourseById(Guid id)
         {
+            // Fetch the course data from the repository
             var course = await _repository.GetCourseById(id);
-            //var sumSeasons = _seasonService.GetAllCourseSeasons(course.Id).Count;
-            //var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);
-            //var result =  _mapper.Map<CourseDto>(course);
-            //result.TotalSeasons = sumSeasons;
-            //result.TotalSections = sumSection.Count();
-            //result.TotalDuration = 100;
-            //return result;
-            return course;
+
+            if (course == null)
+            {
+                return null; // Or handle not found error appropriately
+            }
+
+            // Get the total number of seasons and sections for the course
+            var sumSeasons =  _seasonService.GetAllCourseSeasons(course.Id);
+            var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);
+
+            // Map the course entity to the CourseDto
+            var result = _mapper.Map<CourseDto>(course);
+
+            // Set total values
+            result.TotalSeasons = sumSeasons.Count();
+            result.TotalSections = sumSection.Count();
+            result.TotalDuration = 100;////sumSection.Sum(s => s.Duration); // Assuming each section has a Duration field
+
+            // Map the CourseDto to CourseDetail
+            var courseDetail = _mapper.Map<CourseDetail>(result);
+
+            // Set the seasons and their respective sections
+            courseDetail.Seasons = sumSeasons.Select(season => new SeasonSVM
+            {
+                Id = season.Id.Value,
+                Title = season.Title,
+                SeasonsDescription = season.SeasonsDescription,
+                Sections = sumSection.Where(s => s.Id == season.Id)
+                                     .Select(section => new SectionsVm { Id = section.Id ,  URL = section.Id.ToString() })
+                                     .ToList()
+            }).ToList();
+
+            return courseDetail;
         }
+
 
         // Add a new course
         public async Task<AddStatusVm> AddCourse(CourseDto courseDto)

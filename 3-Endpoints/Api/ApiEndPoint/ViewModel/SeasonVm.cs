@@ -5,7 +5,7 @@
         public Guid Id { get; set; }
         public Guid CourseId { get; set; }
         public string Title { get; set; }
-        public TimeOnly? SumSections { get; set; }
+
         public string SeasonsDescription { get; set; }
     }
 }

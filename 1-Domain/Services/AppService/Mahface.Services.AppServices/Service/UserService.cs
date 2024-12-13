@@ -239,7 +239,18 @@ namespace Mahface.Services.AppServices.Service
             }
         }
 
+        public async Task<UserDto> GetUserByTeacherId(Guid teacherId)
+        {
+         var user = await _userRepository.GetUserByTeacherIdAsync(teacherId);   
+            if (user == null)
+            {
+                return null;
+            }
 
-
+            // Map User entity to UserDto using AutoMapper
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
+        }
+    
     }
 }

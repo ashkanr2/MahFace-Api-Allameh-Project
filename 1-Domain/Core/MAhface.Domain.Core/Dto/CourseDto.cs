@@ -29,6 +29,7 @@ namespace MAhface.Domain.Core.Dto
         public int TotalDuration { get; set; }
 
         public string TeacherName { get; set; }
+        public string CategoryName { get; set; }
     }
 
 }

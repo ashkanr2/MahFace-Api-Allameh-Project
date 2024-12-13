@@ -44,6 +44,24 @@ namespace Mahface.Services.AppServices.AutoMapper
                 .ReverseMap();
 
 
+
+            CreateMap<CourseDto, CourseDetail>()
+                .ForMember(dest => dest.TeacherName, opt => opt.MapFrom(src => src.TeacherName))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName))
+                .ForMember(dest => dest.ImageBase64, opt => opt.MapFrom(src => src.ImageDto != null ?  src.ImageDto.Base64File : null))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Url : null))
+                   .ForMember(dest => dest.Seasons, opt => opt.Ignore());
+
+            CreateMap<SeasonsDto, SeasonSVM>()
+                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+                 .ForMember(dest => dest.SeasonsDescription, opt => opt.MapFrom(src => src.SeasonsDescription))
+                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                 .ForMember(dest => dest.Sections, opt => opt.Ignore());
+            // Map SectionDto to SectionsVm
+            //CreateMap<SectionDto, SectionsVm>()
+            //    .ForMember(dest => dest.URL, opt => opt.MapFrom(src => src.Url));
+
+
             CreateMap<Courses, CourseVm>().ReverseMap();
             CreateMap<EditUserVm, User>().ReverseMap();
             CreateMap<UserDto, EditUserVm>()
