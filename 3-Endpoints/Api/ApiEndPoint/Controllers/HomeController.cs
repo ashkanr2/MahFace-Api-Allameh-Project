@@ -14,11 +14,13 @@ namespace ApiEndPoint.Controllers
     {
         private readonly IUserService _UserService;
         private readonly IOtpService _otpService;
+        private readonly IEmailService _emailService;
       
-        public HomeController(IUserService Userservice , IOtpService otpService )
+        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService)
         {
             _UserService  = Userservice;            
             _otpService = otpService;
+            _emailService = emailService;
            
         }
 
@@ -56,6 +58,14 @@ namespace ApiEndPoint.Controllers
 
         }
 
+
+        [HttpGet("Email")]
+        public async Task<bool> SendEmail(string DeliverAddress , string text )
+        {
+          var x = await _emailService.SendEmailAsync(DeliverAddress, "Test Email", text);
+
+            return x;
+        }
     }
 
 }
