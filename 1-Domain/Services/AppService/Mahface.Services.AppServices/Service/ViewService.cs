@@ -80,7 +80,7 @@ namespace Mahface.Services.AppServices.Service
                     };
                 }
 
-                var section = await _sectionService.GetSectionByIdAsync(sectionId);    
+                var section = await _sectionService.GetSectionDetails(sectionId);    
 
                 var newView = new View
                 {

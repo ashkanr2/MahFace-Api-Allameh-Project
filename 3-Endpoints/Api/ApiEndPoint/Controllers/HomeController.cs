@@ -59,7 +59,7 @@ namespace ApiEndPoint.Controllers
         }
 
 
-        [HttpGet("Email")]
+        [HttpPost("SendEmail")]
         public async Task<bool> SendEmail(string DeliverAddress , string text )
         {
           var x = await _emailService.SendEmailAsync(DeliverAddress, "Test Email", text);

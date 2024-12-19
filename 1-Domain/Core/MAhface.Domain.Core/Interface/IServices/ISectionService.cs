@@ -12,15 +12,17 @@ namespace MAhface.Domain.Core1.Interface.IServices
 {
     public interface ISectionService
     {
-        Task<SectionDto> AddSectionAsync(SectionDto sectionDto);
-        Task<SectionDto> UpdateSectionAsync(SectionDto sectionDto);
-        Task<bool> DeleteSectionAsync(Guid id);
-        Task<SectionDto> GetSectionByIdAsync(Guid id);
-        Task<IEnumerable<SectionDto>> GetAllSectionsAsync();
+        // Method for creating a new section
+        Task<AddStatusVm> CreateSection(CreateSectionRequest request);
         Task<IEnumerable<SectionDto>> GetAllSectionsForCourse(Guid id);
-      
 
+        // Method for updating an existing section
+        Task<UpdateStatus> UpdateSection(Guid sectionId, UpdateSectionRequest request);
+
+        // Method for getting the details of a section
+        Task<SectionDto> GetSectionDetails(Guid sectionId);
     }
+
 
 
 }

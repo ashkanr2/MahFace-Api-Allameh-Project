@@ -73,6 +73,12 @@ namespace Mahface.Services.AppServices.AutoMapper
                 .ForMember(dest => dest.Base64Profile, opt => opt.MapFrom(src => src.Base64Profile));
 
 
+            CreateMap<Sections, SectionDto>()
+           .ForMember(dest => dest.SeasonName, opt => opt.MapFrom(src => src.Season.Title)); // Assuming the Season entity has a 'Name' property
+
+            // Map CreateSectionRequest to Sections entity
+            CreateMap<CreateSectionRequest, Sections>();
+
         }
     }
 }

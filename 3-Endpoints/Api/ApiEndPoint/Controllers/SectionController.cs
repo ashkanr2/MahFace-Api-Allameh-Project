@@ -19,126 +19,35 @@ namespace ApiEndPoint.Controllers
             _sectionService = sectionService;
         }
 
-        /// <summary>
-        /// این متد یک قسمت جدید اضافه می‌کند.
-        /// </summary>
-        /// <param name="sectionDto">اطلاعات قسمت جدید</param>
-        /// <returns>پیام موفقیت یا خطا</returns>
-        [HttpPost]
-        public async Task<IActionResult> AddSection([FromBody] SectionDto sectionDto)
+        // Create new section
+        [HttpPost("CreateSection")]
+        public async Task<ActionResult<AddStatusVm>> CreateSection([FromBody] CreateSectionRequest request)
         {
-            var result = await _sectionService.AddSectionAsync(sectionDto);
-            var resultVm = new SectionVm
+            var result = await _sectionService.CreateSection(request);
+            return Ok(result);
+        }
+
+        // Update an existing section
+        [HttpPut("UpdateSection/{sectionId}")]
+        public async Task<ActionResult<UpdateStatus>> UpdateSection(Guid sectionId, [FromBody] UpdateSectionRequest request)
+        {
+            var result = await _sectionService.UpdateSection(sectionId, request);
+            return Ok(result);
+        }
+
+        // Get section details
+        [HttpGet("GetSectionDetails/{sectionId}")]
+        public async Task<ActionResult<SectionDto>> GetSectionDetails(Guid sectionId)
+        {
+            var sectionDto = await _sectionService.GetSectionDetails(sectionId);
+            if (sectionDto == null)
             {
-                Id = Guid.NewGuid(), // به‌عنوان مثال
-                CourseId = result.CourseId,
-                SeasionId = result.SeasionId,
-                CategoryId = result.CategoryId,
-                CourseLevel = result.CourseLevel,
-                StatusMessage = "Section added successfully"
-            };
-
-            return Ok(resultVm);
+                return NotFound("Section not found");
+            }
+            return Ok(sectionDto);
         }
-
-        /// <summary>
-        /// این متد یک قسمت را به‌روزرسانی می‌کند.
-        /// </summary>
-        /// <param name="sectionDto">اطلاعات قسمت جدید</param>
-        /// <returns>پیام موفقیت یا خطا</returns>
-        [HttpPut]
-        public async Task<IActionResult> UpdateSection([FromBody] SectionDto sectionDto)
-        {
-            var result = await _sectionService.UpdateSectionAsync(sectionDto);
-            var resultVm = new SectionVm
-            {
-                Id = Guid.NewGuid(), // به‌عنوان مثال
-                CourseId = result.CourseId,
-                SeasionId = result.SeasionId,
-                CategoryId = result.CategoryId,
-                CourseLevel = result.CourseLevel,
-                StatusMessage = "Section updated successfully"
-            };
-
-            return Ok(resultVm);
-        }
-
-        /// <summary>
-        /// این متد یک قسمت را حذف می‌کند.
-        /// </summary>
-        /// <param name="id">شناسه بخش</param>
-        /// <returns>پیام موفقیت یا خطا</returns>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSection(Guid id)
-        {
-            var isDeleted = await _sectionService.DeleteSectionAsync(id);
-            if (isDeleted)
-                return Ok(new { message = "Section deleted successfully" });
-
-            return BadRequest(new { message = "Failed to delete section" });
-        }
-
-        /// <summary>
-        /// این متد یک قسمت را با شناسه مشخص برمی‌گرداند.
-        /// </summary>
-        /// <param name="id">شناسه بخش</param>
-        /// <returns>اطلاعات بخش</returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSectionById(Guid id)
-        {
-            var sectionDto = await _sectionService.GetSectionByIdAsync(id);
-            var resultVm = new SectionVm
-            {
-                Id = sectionDto.Id,
-                CourseId = sectionDto.CourseId,
-                SeasionId = sectionDto.SeasionId,
-                CategoryId = sectionDto.CategoryId,
-                CourseLevel = sectionDto.CourseLevel,
-                StatusMessage = "Section found successfully"
-            };
-
-            return Ok(resultVm);
-        }
-
-        /// <summary>
-        /// این متد همه بخش‌ها را برمی‌گرداند.
-        /// </summary>
-        /// <returns>لیست بخش‌ها</returns>
-        [HttpGet]
-        public async Task<IActionResult> GetAllSections()
-        {
-            var sectionsDto = await _sectionService.GetAllSectionsAsync();
-            var resultVm = sectionsDto.Select(section => new SectionVm
-            {
-                Id = section.Id,
-                CourseId = section.CourseId,
-                SeasionId = section.SeasionId,
-                CategoryId = section.CategoryId,
-                CourseLevel = section.CourseLevel,
-                StatusMessage = "Section found successfully"
-            });
-
-            return Ok(resultVm);
-        }
-
-        [HttpGet("GetAllSectionForCourse/{id}")]
-        public async Task<IActionResult> GetAllSectionForCourse(Guid id)
-        {
-            var sectionsDto = await _sectionService.GetAllSectionsForCourse(id);
-            var resultVm = sectionsDto.Select(section => new SectionVm
-            {
-                Id = section.Id,
-                CourseId = section.CourseId,
-                SeasionId = section.SeasionId,
-                CategoryId = section.CategoryId,
-                CourseLevel = section.CourseLevel,
-                StatusMessage = "Section found successfully"
-            });
-
-            return Ok(resultVm);
-        }
-
-
+    
+    
     }
 
 
