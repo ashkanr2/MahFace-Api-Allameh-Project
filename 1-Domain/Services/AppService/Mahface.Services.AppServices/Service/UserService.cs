@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Identity;
@@ -20,13 +21,17 @@ namespace Mahface.Services.AppServices.Service
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IImageService _imageService;
+        private readonly IEmailService _emailService;
+        private readonly IOtpService _otpService;
+        public UserService(UserManager<User> userManager, IMapper mapper, IUserRepository userRepository, IImageService imageService, IEmailService emailService, IOtpService otpService)
 
-        public UserService(UserManager<User> userManager, IMapper mapper, IUserRepository userRepository, IImageService imageService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _userRepository = userRepository;
             _imageService=imageService;
+            _emailService=emailService;
+            _otpService=otpService;
         }
 
         public async Task<string> AddUser(UserDto userDto)
@@ -140,9 +145,28 @@ namespace Mahface.Services.AppServices.Service
                 };
 
                 var result = await _userRepository.Register(user, addUser.Password);
+                if (user.Email!=null && user.Email.Contains("@")) 
+                {
+                    
+                    // ایجاد کد تایید 4 رقمی
+                    var otpCode = new Random().Next(1000, 9999).ToString();
+                    var otp =   await _otpService.GenerateOtp(result.AddedId.Value, user.Email);
+
+                    var emailMessage = $"\n\nسلام، به سایت MahfaceAllameh خوش آمدید! " +
+                                $"\n\nما خوشحالیم که شما را در جمع خود داریم. برای تکمیل ثبت‌نام یا تایید درخواست خود، لطفاً از کد تایید زیر استفاده کنید:" +
+                                $"\n\nکد تایید: {otpCode}" +   
+                                $"\n\nلطفاً این کد را در سایت وارد کنید تا مراحل را ادامه دهید." +
+                                $"\n\nاگر شما درخواست این ایمیل را نداده‌اید، لطفاً این پیام را نادیده بگیرید." +
+                                $"\n\nبا احترام،" +
+                                $"\n\nتیم MahfaceAllameh";
+
+
+
+                    var emailResult = await _emailService.SendEmailAsync(user.Email , "Register" , emailMessage);
+                }
 
                 return result;
-                
+
             }
             catch (Exception ex)
             {
@@ -163,8 +187,8 @@ namespace Mahface.Services.AppServices.Service
                     updateStatus.StatusMessage = ".کاربری با این ایدی پیدا نشد";
                     return updateStatus; // Early return to avoid further processing
                 }
-                    _mapper.Map(editUserVm, model);
-                
+                _mapper.Map(editUserVm, model);
+
                 if (editUserVm.Base64Profile != null)
                 {
                     ImageDto imageDto = new ImageDto();
@@ -241,7 +265,7 @@ namespace Mahface.Services.AppServices.Service
 
         public async Task<UserDto> GetUserByTeacherId(Guid teacherId)
         {
-         var user = await _userRepository.GetUserByTeacherIdAsync(teacherId);   
+            var user = await _userRepository.GetUserByTeacherIdAsync(teacherId);
             if (user == null)
             {
                 return null;
@@ -251,6 +275,6 @@ namespace Mahface.Services.AppServices.Service
             var userDto = _mapper.Map<UserDto>(user);
             return userDto;
         }
-    
+
     }
 }

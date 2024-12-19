@@ -19,6 +19,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             _context = context;
         }
 
+        // متد برای ذخیره OTP در پایگاه داده
         public async Task<Otp> CreateOtpAsync(Otp otp)
         {
             _context.Otps.Add(otp);
@@ -26,21 +27,25 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             return otp;
         }
 
-        public async Task<Otp> GetOtpAsync(string otpCode)
+        public async Task<List<Otp>> GetAllOTP()
         {
-            return await _context.Otps.FirstOrDefaultAsync(o => o.OtpCode == otpCode);
+          return  _context.Otps.ToList();
         }
 
-        public async Task<bool> VerifyOtpAsync(string otpCode)
+        // متد برای تایید OTP (بررسی صحت کد OTP)
+        public async Task<bool> VerifyOtpAsync(Guid userId, int otpCode)
         {
-            var otp = await _context.Otps.FirstOrDefaultAsync(o => o.OtpCode == otpCode);
+            var otp = await _context.Otps
+                .FirstOrDefaultAsync(o => o.UserId == userId &&
+                                          (o.OtpCode == otpCode) );
 
-            if (otp == null || otp.ExpireTime < DateTime.UtcNow)
+            if (otp == null || otp.ExpireTime < DateTime.Now)
             {
+               
                 return false;
             }
 
-            return true;
+            return true; 
         }
     }
 

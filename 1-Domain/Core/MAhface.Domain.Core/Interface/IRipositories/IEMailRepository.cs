@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace MAhface.Domain.Core1.Interface.IRipositories
 {
-    public interface IOtpRepository
+    public interface IEMailRepository
     {
-        Task<Otp> CreateOtpAsync(Otp otp);
-        Task<List<Otp>> GetAllOTP();
-        Task<bool> VerifyOtpAsync(Guid userId, int otpCode);
-
+        Task<EmailSetting> GetSetting();
+        Task LogEmailAsync(EmailLog emailLog);
     }
-
 }

@@ -57,7 +57,7 @@ namespace Mahface.Services.AppServices.Service
         {
             // Fetch the course data from the repository
             var course = await _repository.GetCourseById(id);
-
+            var userTeacher = await _userService.GetUserByTeacherId(course.TeacherId.Value);
             if (course == null)
             {
                 return null; // Or handle not found error appropriately
@@ -77,7 +77,7 @@ namespace Mahface.Services.AppServices.Service
 
             // Map the CourseDto to CourseDetail
             var courseDetail = _mapper.Map<CourseDetail>(result);
-
+            courseDetail.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
             // Set the seasons and their respective sections
             courseDetail.Seasons = sumSeasons.Select(season => new SeasonSVM
             {

@@ -31,6 +31,10 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<Image> Images { get; set; }
         public DbSet<View> Views { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }
+        public DbSet<EmailSetting> EmailSetting { get; set; }
+
+        public DbSet<EmailLog> EmailLog { get; set; }
+
 
         public DbSet<Otp> Otps { get; set; }
 
@@ -55,6 +59,15 @@ namespace MAhface.Infrastructure.EfCore.DBContext
                     modelBuilder.Entity(entityType.Name).Property<int>("Code").ValueGeneratedOnAdd();
                 }
             }
+            modelBuilder.Entity<EmailSetting>().HasData(new EmailSetting
+            {
+                Id = Guid.Parse("D4819E1B-3DAB-4D13-9EE5-DFB6C2AEE0FF"), // یک GUID ثابت وارد کنید
+                EmailAddress = "Register@mahface-allameh.ir",
+                Password = "MahfaceAllamEh",
+                SMTPHost = "mail.mahface-allameh.ir",
+                SMTPPort = 587
+            });
+
         }
     }
 }

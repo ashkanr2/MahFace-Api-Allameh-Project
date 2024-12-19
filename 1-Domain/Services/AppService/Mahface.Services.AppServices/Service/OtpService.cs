@@ -18,31 +18,35 @@ namespace Mahface.Services.AppServices.Service
             _otpRepository = otpRepository;
         }
 
-        public async Task<string> GenerateOtp(Guid userId, string email, string phoneNumber)
+        // متد ایجاد OTP
+        public async Task<string> GenerateOtp(Guid userId, string emailOrPhoneNumber)
         {
-            var otpCode = new Random().Next(100000, 999999).ToString(); // Generate a 6-digit OTP
+            var otpCode = new Random().Next(1000, 9999);
             var otp = new Otp
             {
                 Id = Guid.NewGuid(),
                 UserId = userId,
                 OtpCode = otpCode,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                CreatedTime = DateTime.UtcNow,
-                ExpireTime = DateTime.UtcNow.AddMinutes(5) // OTP valid for 5 minutes
+                EmailOrPhoneNumber = emailOrPhoneNumber,
+                CreatedTime = DateTime.Now,
+                ExpireTime = DateTime.Now.AddMinutes(5)  
             };
 
+            // ذخیره OTP در پایگاه داده
             await _otpRepository.CreateOtpAsync(otp);
-
-            //// Send email with OTP here
-            //// Do not write email-sending logic per instructions
-
-            return otpCode;
+            return otp.ToString();  
         }
 
-        public async Task<bool> ValidateOtp(string otpCode)
+        public async Task<List<Otp>> GetAllOTP()
         {
-            return await _otpRepository.VerifyOtpAsync(otpCode);
+           return await _otpRepository.GetAllOTP();
+        }
+
+        // متد تایید OTP
+        public async Task<bool> ValidateOtp(Guid userId, int otpCode)
+        {
+            // بررسی OTP و تطابق آن با ایمیل یا شماره موبایل
+            return await _otpRepository.VerifyOtpAsync(userId, otpCode);
         }
     }
 

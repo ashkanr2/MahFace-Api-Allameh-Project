@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20241219175642_EmailSettingData")]
+    partial class EmailSettingData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -512,48 +515,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.ToTable("Sections");
                 });
 
-            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.EmailLog", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ErrorDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsSuccess")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("SentByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("SentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ToEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SentByUserId");
-
-                    b.ToTable("EmailLogs");
-                });
-
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.EmailSetting", b =>
                 {
                     b.Property<Guid>("Id")
@@ -599,15 +560,20 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EmailOrPhoneNumber")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ExpireTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OtpCode")
-                        .HasColumnType("int");
+                    b.Property<string>("OtpCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -932,15 +898,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Season");
-                });
-
-            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.EmailLog", b =>
-                {
-                    b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "SentByUser")
-                        .WithMany()
-                        .HasForeignKey("SentByUserId");
-
-                    b.Navigation("SentByUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

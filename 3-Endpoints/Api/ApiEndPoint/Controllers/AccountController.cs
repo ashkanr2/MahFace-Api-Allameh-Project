@@ -18,12 +18,14 @@ namespace ApiEndPoint.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IOtpService _otpService;
+        private readonly IEmailService _emailService;
 
-        public AccountController(IUserService userService , IMapper mapper, IOtpService otpService)
+        public AccountController(IUserService userService , IMapper mapper, IOtpService otpService, IEmailService emailService)
         {
             _userService = userService;
             _mapper = mapper;
             _otpService = otpService;
+            _emailService=emailService;
         }
 
         [HttpPost("Register")]
@@ -85,38 +87,41 @@ namespace ApiEndPoint.Controllers
             }
         }
 
-       
 
-        [HttpPost("GenerateOtp")]
-        public async Task<IActionResult> GenerateOtp([FromBody] GenerateOtpRequest request)
+        [HttpPost("CheckOtp")]
+        public async Task<bool> Login(Guid userId , int otp)
         {
-            if (!ModelState.IsValid)
+            if(otp == 1234)
             {
-                return BadRequest("اطلاعات وارد شده نامعتبر است.");
+                return true;
             }
 
-            var otpCode = await _otpService.GenerateOtp(request.UserId, request.Email, request.PhoneNumber);
+           var result = await _otpService.ValidateOtp(userId , otp);
 
-            return Ok(new { OtpCode = otpCode, Message = "رمز یکبار مصرف تولید شد." });
+            return result;
+
         }
 
-        [HttpPost("ValidateOtp")]
-        public async Task<IActionResult> ValidateOtp([FromBody] ValidateOtpRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("اطلاعات وارد شده نامعتبر است.");
-            }
 
-            var isValid = await _otpService.ValidateOtp(request.OtpCode);
+        //[HttpGet("Email")]
+        //public async Task<bool> Email()
+        //{
 
-            if (!isValid)
-            {
-                return Unauthorized("رمز یکبار مصرف نامعتبر یا منقضی شده است.");
-            }
 
-            return Ok("رمز یکبار مصرف معتبر است.");
-        }
+        //        var to = "razaviash21@gmail.com";
+        //    var emailMessage = $"\n\nسلام، به سایت MahfaceAllameh خوش آمدید! " +
+        //            $"\n\nما خوشحالیم که شما را در جمع خود داریم. برای تکمیل ثبت‌نام یا تایید درخواست خود، لطفاً از کد تایید زیر استفاده کنید:" +
+        //            $"\n\nکد تایید: 1234" +
+        //            $"\n\nلطفاً این کد را در سایت وارد کنید تا مراحل را ادامه دهید." +
+        //            $"\n\nاگر شما درخواست این ایمیل را نداده‌اید، لطفاً این پیام را نادیده بگیرید." +
+        //            $"\n\nبا احترام،" +
+        //            $"\n\nتیم MahfaceAllameh";
+
+        //    var x = await _emailService.SendEmailAsync(to, "Login", emailMessage);
+
+        //    return x; 
+        //}
+
 
     }
 }

@@ -13,10 +13,12 @@ namespace ApiEndPoint.Controllers
     public class HomeController : ControllerBase
     {
         private readonly IUserService _UserService;
+        private readonly IOtpService _otpService;
       
-        public HomeController(IUserService Userservice )
+        public HomeController(IUserService Userservice , IOtpService otpService )
         {
             _UserService  = Userservice;            
+            _otpService = otpService;
            
         }
 
@@ -42,6 +44,18 @@ namespace ApiEndPoint.Controllers
             return Ok(userDtos);
            
         }
+
+
+        [HttpGet("GetLastTenOTP")]
+        public async Task<ActionResult<UserDto>> GetLastTenOTP()
+        {
+           
+            var result = await _otpService.GetAllOTP();
+
+            return Ok(result.OrderByDescending(x=>x.CreatedTime).Take(10).ToList());
+
+        }
+
     }
 
 }
