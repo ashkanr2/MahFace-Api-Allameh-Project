@@ -3,11 +3,16 @@ using MAhface.Domain.Core.Entities.Study.Section;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+
+
 
 namespace Mahface.Services.AppServices.Service
 {
@@ -15,11 +20,13 @@ namespace Mahface.Services.AppServices.Service
     {
         private readonly ISectionRepository _sectionRepository;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SectionService(ISectionRepository sectionRepository, IMapper mapper)
+        public SectionService(ISectionRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment)
         {
             _sectionRepository = sectionRepository;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // Create a new section
@@ -125,6 +132,66 @@ namespace Mahface.Services.AppServices.Service
             return await Task.FromResult(_mapper.Map<IEnumerable<SectionDto>>(sections));
         }
 
+        // متد آپلود ویدیو
+        public async Task<AddStatusVm> UploadVideo(Guid sectionId, IFormFile videoFile)
+        {
+            var vm = new AddStatusVm();
+
+            try
+            {
+                // بررسی اینکه ویدیو وجود دارد
+                if (videoFile == null || videoFile.Length == 0)
+                {
+                    vm.IsValid = false;
+                    vm.StatusMessage = "No video file provided.";
+                    return vm;
+                }
+
+                // گرفتن مسیر پروژه برای ذخیره ویدیو
+                var videoFolderPath = Path.Combine(_webHostEnvironment.WebRootPath, "videos"); // پوشه 'videos' در پروژه
+                if (!Directory.Exists(videoFolderPath))
+                {
+                    Directory.CreateDirectory(videoFolderPath); // اگر پوشه وجود ندارد، آن را ایجاد می‌کنیم
+                }
+
+                // ایجاد نام یکتا برای فایل
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(videoFile.FileName)}";
+                var filePath = Path.Combine(videoFolderPath, fileName);
+
+                // ذخیره فایل ویدیو
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await videoFile.CopyToAsync(fileStream);
+                }
+
+                // به‌روزرسانی مدل سکشن با مسیر ویدیو
+                var section = await _sectionRepository.GetByIdAsync(sectionId);
+                if (section == null)
+                {
+                    vm.IsValid = false;
+                    vm.StatusMessage = "Section not found!";
+                    return vm;
+                }
+
+                // ایجاد HashUrl از فایل ویدیو
+                section.HashUrl = $"videos/{fileName}"; // مسیر ذخیره ویدیو
+
+                // بروزرسانی سکشن با HashUrl جدید
+                await _sectionRepository.UpdateAsync(section);
+
+                // برگرداندن پاسخ
+                vm.IsValid = true;
+                vm.StatusMessage = "Video uploaded and section updated successfully!";
+                vm.AddedId = section.Id;
+            }
+            catch (Exception ex)
+            {
+                vm.IsValid = false;
+                vm.StatusMessage = $"Error: {ex.Message}";
+            }
+
+            return vm;
+        }
     }
 
 

@@ -46,9 +46,82 @@ namespace ApiEndPoint.Controllers
             }
             return Ok(sectionDto);
         }
-    
-    
+
+        [HttpPost("UploadVideo/{sectionId}")]
+        public async Task<IActionResult> UploadVideo(Guid sectionId, IFormFile videoFile)
+        {
+            var result = await _sectionService.UploadVideo(sectionId, videoFile);
+
+            if (result.IsValid)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        [HttpPost("uploadByChoosingFile")]
+        public async Task<IActionResult> UploadByChoosingFile(
+     [FromForm] IFormFile file,
+     [FromForm] Guid courseId,
+     [FromForm] Guid seasonId,
+     [FromForm] Guid createdUserId,
+     [FromForm] string? title = null)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("File is required and should not be empty.");
+            }
+
+            try
+            {
+                // Check if the file is a valid video (you can adjust the validation based on allowed file types)
+                var allowedFileTypes = new[] { "video/mp4", "video/avi", "video/mkv" }; // Example video formats
+                if (!allowedFileTypes.Contains(file.ContentType))
+                {
+                    return BadRequest("Invalid file type. Only video files are allowed.");
+                }
+
+                // Create a CreateSectionRequest
+                var request = new CreateSectionRequest
+                {
+                    CourseId = courseId,
+                    SeasionId = seasonId,
+                    CreatedUserId = createdUserId,
+                    Title = title
+                };
+
+                // Call your service logic to create a section
+                var createResult = await _sectionService.CreateSection(request);
+
+                if (!createResult.IsValid)
+                {
+                    return BadRequest(createResult.StatusMessage);
+                }
+
+                // Upload file logic for video
+                var uploadResult = await _sectionService.UploadVideo(createResult.AddedId.Value, file);
+
+                if (!uploadResult.IsValid)
+                {
+                    return BadRequest(uploadResult.StatusMessage);
+                }
+
+                return Ok(new
+                {
+                    SectionId = createResult.AddedId,
+                    Message = "Section created and video uploaded successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+
+
     }
-
-
 }

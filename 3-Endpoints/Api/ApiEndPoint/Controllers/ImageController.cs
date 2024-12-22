@@ -58,7 +58,7 @@ namespace ApiEndPoint.Controllers
             return NoContent();
         }
 
- 
+
         [HttpPost("uploadByChosingFile")]
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
@@ -76,7 +76,7 @@ namespace ApiEndPoint.Controllers
             {
                 Url = file.FileName, // Storing the file name as URL for simplicity
                 Base64File = base64String,
- 
+
             };
 
             var createdImage = await _imageService.AddImage(imageDto);

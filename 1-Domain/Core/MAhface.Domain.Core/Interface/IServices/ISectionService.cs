@@ -1,5 +1,6 @@
 ﻿using MAhface.Domain.Core.Entities.Study.Section;
 using MAhface.Domain.Core1.Dto;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +22,8 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         // Method for getting the details of a section
         Task<SectionDto> GetSectionDetails(Guid sectionId);
+        Task<AddStatusVm> UploadVideo(Guid sectionId, IFormFile videoFile);
     }
 
-
-
+    
 }

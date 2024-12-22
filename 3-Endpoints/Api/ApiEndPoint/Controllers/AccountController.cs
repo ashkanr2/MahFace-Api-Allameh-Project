@@ -87,9 +87,14 @@ namespace ApiEndPoint.Controllers
             }
         }
 
-
+        /// <summary>
+        /// مقدار 1234 پیشفرض کد طلایی ست شده
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="otp"></param>
+        /// <returns></returns>
         [HttpPost("CheckOtp")]
-        public async Task<bool> Login(Guid userId , int otp)
+        public async Task<bool> CheckOtp(Guid userId , int otp)
         {
             if(otp == 1234)
             {
