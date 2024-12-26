@@ -30,20 +30,22 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public async Task<List<TeacherRequests>> GetAllRequests()
         {
-            return await _context.TeacherRequests.ToListAsync();
+            return await _context.TeacherRequests.Where(x=>!x.IsDeleted).ToListAsync();
         }
 
         public async Task<TeacherRequests> GetRequestById(Guid requestId)
         {
             return await _context.TeacherRequests
-                                 .AsNoTracking() 
+                                 .AsNoTracking()
+                                 .Where(x => !x.IsDeleted)
                                  .FirstOrDefaultAsync(x => x.Id == requestId);
         }
 
         public async Task<TeacherRequests> GetRequestByUserId(Guid userId)
         {
             return await _context.TeacherRequests
-                                 .AsNoTracking() 
+                                 .AsNoTracking()
+                                 .Where(x => !x.IsDeleted)
                                  .FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
