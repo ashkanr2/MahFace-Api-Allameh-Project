@@ -40,7 +40,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 {
                     UserId = userId,
                     User = user,
-                    ISActive = false, // Admin should active it 
+                    ISActive = true, // Admin should active it 
                     IsDeleted = false, // Default not deleted
                     CreatedUserID = userId, // Assuming the teacher created himself/herself
                     CreatedDate = DateTime.Now

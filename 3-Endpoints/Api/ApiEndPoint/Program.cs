@@ -66,7 +66,8 @@ builder.Services.AddScoped<IOtpRepository, OtpRepository>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IEMailRepository, EmailRepository>();
-
+builder.Services.AddScoped<ITeacherRequestRepository , TeacherRequestRepository>();
+builder.Services.AddScoped<ITeacherRequestService , TeacherRequestService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(MappingProfile));

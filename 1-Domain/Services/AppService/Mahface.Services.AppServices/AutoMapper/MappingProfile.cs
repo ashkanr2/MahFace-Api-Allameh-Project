@@ -6,7 +6,9 @@ using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core.Entities.Study.Section;
 using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +81,12 @@ namespace Mahface.Services.AppServices.AutoMapper
             // Map CreateSectionRequest to Sections entity
             CreateMap<CreateSectionRequest, Sections>();
 
-        }
+
+     
+            CreateMap<TeacherRequests, TeacherRequestVm>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => ((TeacherRequestStatusEnum)src.StatusCode).GetDisplayName()));
+       
+
+    }
     }
 }
