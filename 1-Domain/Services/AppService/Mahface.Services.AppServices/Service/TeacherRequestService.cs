@@ -16,22 +16,42 @@ namespace Mahface.Services.AppServices.Service
     {
         private readonly ITeacherRequestRepository _teacherRequestRepository;
         private readonly ITeacherRepository _teacherRepository; // Assuming this exists
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public TeacherRequestService(ITeacherRequestRepository repository, ITeacherRepository teacherRepository, IMapper mapper)
+        public TeacherRequestService(ITeacherRequestRepository repository, ITeacherRepository teacherRepository, IMapper mapper, IUserService userService)
         {
             _teacherRequestRepository = repository;
             _teacherRepository = teacherRepository;
+            _userService = userService;
             _mapper = mapper;
         }
 
         public async Task<AddStatusVm> CreateTeacherRequest(Guid userId, string userDescription)
         {
+            var user = await _userService.GetUserById(userId);
+            if (user == null)
+            {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = "کاربری با این آیدی یافت نشد ",
+                    AddedId = userId
+                };
 
+            }
+            if (user.IsTeacher) {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = "این کاربر استاد می باشد",
+                    AddedId = userId
+                };
+            }
             var existRequest = await _teacherRequestRepository.GetRequestByUserId(userId);
-           
 
-            if (existRequest != null && !existRequest.IsDeleted )
+
+            if (existRequest != null && !existRequest.IsDeleted)
             {
                 var status = (TeacherRequestStatusEnum)existRequest.StatusCode;
 
@@ -74,7 +94,7 @@ namespace Mahface.Services.AppServices.Service
             {
                 return new UpdateStatus { IsValid = false, StatusMessage = "چنین درخواستی پیدا نشد " };
             }
-           //// request.StatusCode = (int)TeacherRequestStatusEnum.Approved;
+            request.StatusCode = (int)TeacherRequestStatusEnum.Approved;
             request.AdminResponseDate = DateTime.Now;
             await _teacherRequestRepository.UpdateRequest(request);
             var AddTEacherResult = await _teacherRepository.CreateTeacher(request.UserId);

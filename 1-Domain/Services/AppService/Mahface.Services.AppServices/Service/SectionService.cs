@@ -56,7 +56,7 @@ namespace Mahface.Services.AppServices.Service
                 };
 
                 // Save section in database
-                var createdSection = await _sectionRepository.Crea teAsync(section);
+                var createdSection = await _sectionRepository.CreateAsync(section);
 
                 // Return status and section ID
                 vm.IsValid = true;

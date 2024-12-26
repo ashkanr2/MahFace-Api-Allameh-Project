@@ -50,7 +50,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 _context.Teachers.Add(teacher);
                 await _context.SaveChangesAsync();
                 vm.IsValid=true;
-                vm.StatusMessage="با موفقیت اضافه شد";
+                vm.StatusMessage="با موفقیت انجام شد";
                 vm.AddedId = teacher.Id;
                 return vm;
             }

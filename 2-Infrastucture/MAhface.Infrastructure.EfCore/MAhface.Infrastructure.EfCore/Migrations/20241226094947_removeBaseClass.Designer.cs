@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20241226094947_removeBaseClass")]
+    partial class removeBaseClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -652,8 +655,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("TeacherRequests");
                 });
 
@@ -981,17 +982,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .HasForeignKey("SentByUserId");
 
                     b.Navigation("SentByUser");
-                });
-
-            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.TeacherRequests", b =>
-                {
-                    b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
