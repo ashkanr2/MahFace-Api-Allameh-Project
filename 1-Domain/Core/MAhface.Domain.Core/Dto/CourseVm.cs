@@ -20,6 +20,7 @@ namespace MAhface.Domain.Core1.Dto
         public int TotalSections { get; set; }
         public int TotalDuration { get; set; }
         public int StarsNumber { get; set; }
+        public int TotalView { get; set; }
         public DateTime CreatedDate { get; set; }
         public string CourseDescription { get; set; }
         public string Description { get; set; }
