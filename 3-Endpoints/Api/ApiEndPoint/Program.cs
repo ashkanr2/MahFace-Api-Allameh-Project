@@ -71,6 +71,7 @@ builder.Services.AddScoped<ITeacherRequestService , TeacherRequestService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddHttpClient();
 
 
 builder.Services.AddIdentityApiEndpoints<User>(options =>

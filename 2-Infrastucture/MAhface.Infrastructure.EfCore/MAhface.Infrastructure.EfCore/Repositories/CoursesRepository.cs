@@ -24,13 +24,22 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public async Task<List<Courses>> GetAllCourses()
         {
-            return await _context.Courses
-                .Include(c => c.Teacher)
-                .Include(c => c.category)
-                .Include(c => c.Seasons)
-                .ThenInclude(s => s.Sections)
-                .Include(c => c.Image)
-                .ToListAsync();
+            try
+            {
+
+
+                return await _context.Courses
+                    .Include(c => c.Teacher)
+                    .Include(c => c.category)
+                    .Include(c => c.Seasons)
+                    .ThenInclude(s => s.Sections)
+                    .Include(c => c.Image)
+                    .ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<Courses> GetCourseById(Guid id)

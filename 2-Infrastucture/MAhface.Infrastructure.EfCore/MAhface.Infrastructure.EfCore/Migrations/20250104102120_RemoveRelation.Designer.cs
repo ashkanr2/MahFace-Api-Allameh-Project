@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20250104102120_RemoveRelation")]
+    partial class RemoveRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -499,7 +502,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Property<Guid>("SeasionnId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SeasonId")
+                    b.Property<Guid>("SeasonnId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -512,7 +515,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SeasonId");
+                    b.HasIndex("SeasonnId");
 
                     b.ToTable("Sections");
                 });
@@ -965,13 +968,13 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.Study.Section.Sections", b =>
                 {
-                    b.HasOne("MAhface.Domain.Core.Entities.Study.Season.Seasons", "Season")
-                        .WithMany("Sections")
-                        .HasForeignKey("SeasonId")
+                    b.HasOne("MAhface.Domain.Core.Entities.Study.Season.Seasons", "Seasonn")
+                        .WithMany("Sectionss")
+                        .HasForeignKey("SeasonnId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Season");
+                    b.Navigation("Seasonn");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.EmailLog", b =>
@@ -1057,7 +1060,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.Study.Season.Seasons", b =>
                 {
-                    b.Navigation("Sections");
+                    b.Navigation("Sectionss");
                 });
 #pragma warning restore 612, 618
         }

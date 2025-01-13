@@ -23,6 +23,9 @@ namespace MAhface.Domain.Core1.Interface.IServices
         // Method for getting the details of a section
         Task<SectionDto> GetSectionDetails(Guid sectionId);
         Task<AddStatusVm> UploadVideo(Guid sectionId, IFormFile videoFile);
+
+        Task<bool> ValidateVideoUrlAsync(string url);
+       
     }
 
     

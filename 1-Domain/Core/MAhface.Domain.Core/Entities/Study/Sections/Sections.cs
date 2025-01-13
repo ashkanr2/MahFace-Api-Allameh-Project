@@ -18,15 +18,14 @@ namespace MAhface.Domain.Core.Entities.Study.Section
 
         public string Title { get; set; }
 
-        public string HashUrl { get; set; }
+        public string? HashUrl { get; set; }
 
-        [Required]
-        public Guid SeasionId { get; set; }
+       [Required]
+       public Guid SeasionnId { get; set; }
 
-        [Required]
-        public int CourseLevel { get; set; }
+        public Seasons Season{ get; set; }
 
-        public Seasons Season { get; set; }
+        public string URL { get; set; }
     }
 
 }

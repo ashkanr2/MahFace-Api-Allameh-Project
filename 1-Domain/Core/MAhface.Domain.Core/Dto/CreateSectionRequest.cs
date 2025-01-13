@@ -19,6 +19,8 @@ namespace MAhface.Domain.Core1.Dto
         public Guid SeasionId { get; set; }
 
         public string Title { get; set; } // Nullable title
+
+        public string URL { get; set; }
     }
 
 }

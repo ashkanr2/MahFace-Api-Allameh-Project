@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using System.Net.Http;
+using Microsoft.VisualBasic;
+using Microsoft.IdentityModel.Tokens;
 
 
 
@@ -21,12 +24,14 @@ namespace Mahface.Services.AppServices.Service
         private readonly ISectionRepository _sectionRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly HttpClient _httpClient;
 
-        public SectionService(ISectionRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment)
+        public SectionService(ISectionRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, HttpClient httpClient)
         {
             _sectionRepository = sectionRepository;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
+            _httpClient=httpClient;
         }
 
         // Create a new section
@@ -36,6 +41,13 @@ namespace Mahface.Services.AppServices.Service
 
             try
             {
+                var validURL = await ValidateVideoUrlAsync(request.URL);
+                if (!validURL)
+                {
+                    vm.IsValid = false;
+                    vm.StatusMessage = "آدرس ویدئو معتبر نمی باشد ";
+                    return vm;
+                }
                 // Get the count of videos (sections) for this course and season
                 var videoCount = await _sectionRepository.GetVideoCountForCourse(request.CourseId, request.SeasionId);
 
@@ -46,13 +58,15 @@ namespace Mahface.Services.AppServices.Service
                 {
                     Id = Guid.NewGuid(),
                     CourseId = request.CourseId,
-                    SeasionId = request.SeasionId,
+                    SeasionnId = request.SeasionId,
                     Title = title,
                     CreatedUserID = request.CreatedUserId,
                     CreatedDate = DateTime.UtcNow,
                     ISActive = true,
                     IsDeleted = false,
-                    Code = videoCount + 1, // This will give the video order
+                    URL=request.URL,
+                    Description="",
+                    HashUrl=request.URL, // This will give the video order
                 };
 
                 // Save section in database
@@ -61,7 +75,7 @@ namespace Mahface.Services.AppServices.Service
                 // Return status and section ID
                 vm.IsValid = true;
                 vm.AddedId = createdSection.Id;
-                vm.StatusMessage = "Section created successfully!";
+                vm.StatusMessage = "با موفقیت اضافه شد ";
             }
             catch (Exception ex)
             {
@@ -85,20 +99,19 @@ namespace Mahface.Services.AppServices.Service
                 if (section == null)
                 {
                     vm.IsValid = false;
-                    vm.StatusMessage = "Section not found!";
+                    vm.StatusMessage = "این قسمت پیدا نشد ";
                     return vm;
                 }
 
                 // Update the properties
-                section.SeasionId = request.SeasionId.Value;
-                section.CourseLevel = request.CourseLevel.Value;
+                section.SeasionnId = request.SeasionId.Value;
                 section.Title = request.Title ?? section.Title;
 
                 // Save the updated section
                 await _sectionRepository.UpdateAsync(section);
 
                 vm.IsValid = true;
-                vm.StatusMessage = "Section updated successfully!";
+                vm.StatusMessage = "با موفققیت اپدیت شد";
             }
             catch (Exception ex)
             {
@@ -191,6 +204,51 @@ namespace Mahface.Services.AppServices.Service
             }
 
             return vm;
+        }
+
+        public async Task<bool> ValidateVideoUrlAsync(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+                return false;
+            try
+            {
+                // بررسی اینکه URL معتبر و کامل باشد
+                if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
+                    return false;
+
+                using var httpClient = new HttpClient();
+
+                // ارسال درخواست HEAD برای بررسی محتوا
+                var request = new HttpRequestMessage(HttpMethod.Head, url);
+                var response = await httpClient.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                    return false;
+
+                // بررسی Content-Type
+                var contentType = response.Content.Headers.ContentType?.MediaType;
+                if (!string.IsNullOrEmpty(contentType) && contentType.StartsWith("videos/", StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if (!contentType.IsNullOrEmpty() && contentType.Contains("binary/octet-stream")) 
+                return true;
+
+
+                return false;
+            }
+            catch
+            {
+                return false; // در صورت بروز خطا، URL نامعتبر تلقی می‌شود
+            }
+        }
+
+        private string NormalizeUrl(string url)
+        {
+            if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
+                !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                url = "https://" + url; // Default to https
+            }
+            return url;
         }
     }
 

@@ -23,9 +23,18 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         // Create a section
         public async Task<Sections> CreateAsync(Sections section)
         {
-            _context.Sections.Add(section);
-            await _context.SaveChangesAsync();
-            return section;
+            try{
+
+
+                _context.Sections.Add(section);
+                await _context.SaveChangesAsync();
+                return section;
+            }
+            catch (Exception ex)
+            {
+                // Log exception if needed
+                throw new Exception($"An error occurred while fetching all sections: {ex.Message}", ex);
+            }
         }
 
         // Get section by ID
@@ -37,7 +46,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         // Get the count of videos (sections) for a specific course and season
         public async Task<int> GetVideoCountForCourse(Guid courseId, Guid seasonId)
         {
-            return await _context.Sections.CountAsync(s => s.CourseId == courseId && s.SeasionId == seasonId && !s.IsDeleted);
+            return await _context.Sections.CountAsync(s => s.CourseId == courseId && s.SeasionnId == seasonId && !s.IsDeleted);
         }
 
         // Update a section
