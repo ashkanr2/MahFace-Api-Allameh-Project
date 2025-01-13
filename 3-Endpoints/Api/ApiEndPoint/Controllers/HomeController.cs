@@ -59,12 +59,26 @@ namespace ApiEndPoint.Controllers
         }
 
 
-        [HttpPost("SendEmail")]
-        public async Task<bool> SendEmail(string DeliverAddress , string text )
+        [HttpPost("SendPrivateEmail")]
+        public async Task<ActionResult> SendPrivateEmail(string email, string message)
         {
-          var x = await _emailService.SendEmailAsync(DeliverAddress, "Test Email", text);
 
-            return x;
+
+            UpdateStatus result = new();
+            try
+            {
+                
+                result.IsValid = await _emailService.SendEmailAsync(email, "ایمیل ", message);
+                result.StatusMessage=result.IsValid ? "با موفقیت ارسال شد" : "خطا در سرویس ارسال پیام ";
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                result.IsValid=false;
+                result.StatusMessage="با خطا مواجه شد ";
+                return BadRequest(result);
+            }
+
         }
     }
 

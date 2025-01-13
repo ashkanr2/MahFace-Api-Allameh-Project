@@ -162,7 +162,47 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             return Task.FromResult(_context.Set<User>().AsQueryable());
         }
 
+        public async Task<UpdateStatus> EmailConfirm(Guid userId )
+        {
+            UpdateStatus vm = new UpdateStatus();
+            try
+            {
+                var user = await GetUserByIdAsync(userId);
+                user.EmailConfirmed = true;
+                var updateResult = await UpdateUserAsync(user); 
+                vm.IsValid = updateResult.IsValid;
+                vm.StatusMessage = updateResult.IsValid ? "با موفقیت تأیید شد" :  updateResult.StatusMessage;
+                return vm;
+            }
 
+            catch (Exception)
+            {
 
+                throw;
+
+            }
+        }
+
+       
+        public async Task<UpdateStatus> EmailConfirmWithToken(Guid userId, string emailToken)
+        {
+            UpdateStatus vm = new UpdateStatus();
+            try
+            {
+                var user = await GetUserByIdAsync(userId);
+                var confirmResult = _userManager.ConfirmEmailAsync(user, emailToken);
+                vm.IsValid = confirmResult.IsCompleted;
+                vm.StatusMessage = confirmResult.Result.Succeeded ? "با موفقیت تأیید شد" : string.Join(" ، ", confirmResult.Result.Errors.Select(e => e.Description));
+                await _context.SaveChangesAsync();
+                return vm;
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+        }
     }
 }

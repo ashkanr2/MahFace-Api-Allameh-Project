@@ -130,6 +130,11 @@ namespace Mahface.Services.AppServices.Service
                 throw new Exception("An error occurred while counting course views for the user.", ex);
             }
         }
+
+        public Task<int> CountOfCourseView(Guid courseId)
+        {
+          return  _viewRepository.CountOfCourseView(courseId);
+        }
     }
 
 }

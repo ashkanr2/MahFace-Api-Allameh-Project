@@ -141,28 +141,34 @@ namespace Mahface.Services.AppServices.Service
                     IsTeacher=false,
                     IsSystemAccount=false,
                     IsSystemAdmin=false,
-
+                    
                 };
 
                 var result = await _userRepository.Register(user, addUser.Password);
-                if (user.Email!=null && user.Email.Contains("@")) 
+                if (user.Email!=null && user.Email.Contains("@"))
                 {
-                    
+
                     // ایجاد کد تایید 4 رقمی
                     var otpCode = new Random().Next(1000, 9999).ToString();
-                    var otp =   await _otpService.GenerateOtp(result.AddedId.Value, user.Email);
+                    var otp = await _otpService.GenerateOtp(result.AddedId.Value, user.Email);
+                    var emailToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var baseUrl = "https://mahface-allameh.ir/api/Account/CheckOtpWithToken";
+                    var userId = result.AddedId.Value.ToString(); 
+                    var confirmationLink = $"{baseUrl}?userId={userId}&emailToken={Uri.EscapeDataString(emailToken)}";
 
-                    var emailMessage = $"\n\nسلام، به سایت MahfaceAllameh خوش آمدید! " +
-                                $"\n\nما خوشحالیم که شما را در جمع خود داریم. برای تکمیل ثبت‌نام یا تایید درخواست خود، لطفاً از کد تایید زیر استفاده کنید:" +
-                                $"\n\nکد تایید: {otpCode}" +   
-                                $"\n\nلطفاً این کد را در سایت وارد کنید تا مراحل را ادامه دهید." +
-                                $"\n\nاگر شما درخواست این ایمیل را نداده‌اید، لطفاً این پیام را نادیده بگیرید." +
-                                $"\n\nبا احترام،" +
-                                $"\n\nتیم MahfaceAllameh";
+                    // ساخت پیام ایمیل
+                    var emailMessage = $@"
+                                            <p>ما خوشحالیم که شما را در جمع خود داریم. برای تکمیل ثبت‌نام یا تایید درخواست خود، لطفاً از کد تایید زیر استفاده کنید:</p>
+                                            <h3>کد تایید: {otpCode}</h3>
+                                            <p>لطفاً این کد را در سایت وارد کنید تا مراحل را ادامه دهید.</p>
+                                            <p>یا روی لینک زیر کلیک کنید:</p>
+                                            <a href=""{confirmationLink}"">تایید ایمیل</a>
+                                            <p>اگر شما درخواست این ایمیل را نداده‌اید، لطفاً این پیام را نادیده بگیرید.</p>
+                                            <p>با احترام،</p>
+                                            <p>تیم MahfaceAllameh</p>";
+                                            
 
-
-
-                    var emailResult = await _emailService.SendEmailAsync(user.Email , "Register" , emailMessage);
+                    var emailResult = await _emailService.SendEmailAsync(user.Email, "Register", emailMessage);
                 }
 
                 return result;
@@ -276,5 +282,17 @@ namespace Mahface.Services.AppServices.Service
             return userDto;
         }
 
+        public Task<UpdateStatus> EmailConfirm(Guid userId, string emailToken)
+        {
+            if (emailToken == null)
+            {
+
+                return _userRepository.EmailConfirm(userId);
+            }
+            else
+            {
+                return _userRepository.EmailConfirmWithToken(userId, emailToken);
+            }
+        }
     }
 }

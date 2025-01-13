@@ -10,15 +10,15 @@ namespace MAhface.Domain.Core1.Interface.IServices
 {
     public interface IUserService
     {
-        public Task<UserDto> GetUserById(Guid id);
-        public Task<IEnumerable<UserDto>> GetAllUsers();
-        public Task<string> AddUser(UserDto userDto);
-        public Task<UpdateStatus> EditProfile(EditUserVm editUserVm);
-        public Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm);
-        public Task<string> DeleteUser(Guid id);
-        public Task<AddStatusVm> Register(AddUser addUser);
-        Task<LoginResponseVm> Login(string email, string password);
-
-        public Task<UserDto> GetUserByTeacherId(Guid teacherId);
+         Task<UserDto> GetUserById(Guid id);
+         Task<IEnumerable<UserDto>> GetAllUsers();
+         Task<string> AddUser(UserDto userDto);
+         Task<UpdateStatus> EditProfile(EditUserVm editUserVm);
+         Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm);
+         Task<string> DeleteUser(Guid id);
+         Task<AddStatusVm> Register(AddUser addUser);
+         Task<LoginResponseVm> Login(string email, string password);
+         Task<UserDto> GetUserByTeacherId(Guid teacherId);
+         Task<UpdateStatus>EmailConfirm(Guid userId ,string emailToken );
     }
 }

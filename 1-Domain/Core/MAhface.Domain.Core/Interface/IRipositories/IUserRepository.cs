@@ -22,7 +22,8 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
         Task DeleteUserAsync(Guid id);
         Task<AddStatusVm> Register(User user, string password);
         Task<IQueryable<User>> GetallUsers();
-         
+        Task<UpdateStatus> EmailConfirm(Guid userId);
+        Task<UpdateStatus> EmailConfirmWithToken(Guid userId, string emailToken);
 
     }
 }

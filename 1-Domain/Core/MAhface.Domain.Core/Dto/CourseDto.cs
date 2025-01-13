@@ -23,13 +23,15 @@ namespace MAhface.Domain.Core.Dto
         public decimal Cost { get; set; }
         public int StarsNumber { get; set; }
         public ImageDto? ImageDto { get; set; }
-
         public int TotalSeasons { get; set; }
         public int TotalSections { get; set; }
         public int TotalDuration { get; set; }
-
+        public int TotalView { get; set; }
         public string TeacherName { get; set; }
         public string CategoryName { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Description { get; set; }
+
     }
 
 }

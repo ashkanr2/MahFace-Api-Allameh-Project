@@ -15,14 +15,16 @@ namespace MAhface.Domain.Core1.Dto
         public string TeacherName { get; set; }
         public Guid CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public string CourseDescription { get; set; }
         public decimal Cost { get; set; }
-        public string? ImageBase64 { get; set; }
-        public string? ImageUrl { get; set; }
         public int TotalSeasons { get; set; }
         public int TotalSections { get; set; }
         public int TotalDuration { get; set; }
-        public int StarsNumber { get; set; }  
+        public int StarsNumber { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CourseDescription { get; set; }
+        public string Description { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? ImageBase64 { get; set; }
 
     }
 

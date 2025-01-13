@@ -20,7 +20,7 @@ namespace ApiEndPoint.Controllers
         private readonly IOtpService _otpService;
         private readonly IEmailService _emailService;
 
-        public AccountController(IUserService userService , IMapper mapper, IOtpService otpService, IEmailService emailService)
+        public AccountController(IUserService userService, IMapper mapper, IOtpService otpService, IEmailService emailService)
         {
             _userService = userService;
             _mapper = mapper;
@@ -94,19 +94,30 @@ namespace ApiEndPoint.Controllers
         /// <param name="otp"></param>
         /// <returns></returns>
         [HttpPost("CheckOtp")]
-        public async Task<bool> CheckOtp(Guid userId , int otp)
+        public async Task<UpdateStatus> CheckOtp(Guid userId, int otp)
         {
-            if(otp == 1234)
+
+            UpdateStatus result = new();
+            result.IsValid = await _otpService.ValidateOtp(userId, otp);
+            if (result.IsValid || otp == 1234)
             {
-                return true;
+                var EmailConfirm = await _userService.EmailConfirm(userId, null);
+                return EmailConfirm;
             }
-
-           var result = await _otpService.ValidateOtp(userId , otp);
-
+            result.StatusMessage="کد وارد شده معتبر  نمی باشد";
             return result;
 
         }
 
+        [HttpPost("CheckOtpWithToken")]
+        public async Task<UpdateStatus> CheckOtpWithToken(Guid userId, string emailToken)
+        {
+
+
+            var result = await _userService.EmailConfirm(userId, emailToken);
+            return result;
+
+        }
 
         //[HttpGet("Email")]
         //public async Task<bool> Email()

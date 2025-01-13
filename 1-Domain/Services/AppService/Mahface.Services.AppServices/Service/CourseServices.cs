@@ -20,8 +20,9 @@ namespace Mahface.Services.AppServices.Service
         private readonly IUserService _userService;
         private readonly ICategoryService  _categoryService;
         private readonly IMapper _mapper;
-
-        public CoursesService(ICourseRipository repository, IMapper mapper,ISeasonService seasonService , ISectionService sectionService ,IUserService userService , ICategoryService categoryService)
+        private readonly IViewService _viewService;
+        public CoursesService(ICourseRipository repository, IMapper mapper,ISeasonService seasonService , ISectionService sectionService ,
+            IUserService userService , ICategoryService categoryService,IViewService viewService)
         {
             _repository = repository;
             _mapper = mapper;
@@ -29,6 +30,7 @@ namespace Mahface.Services.AppServices.Service
             _sectionService = sectionService;
             _userService = userService; 
             _categoryService = categoryService;
+            _viewService = viewService;
         }
 
         // Get all courses
@@ -41,13 +43,15 @@ namespace Mahface.Services.AppServices.Service
                 var sumSeasons =  _seasonService.GetAllCourseSeasons(course.Id).Count;
                 var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);  
                 var userTeacher = await _userService.GetUserByTeacherId(course.TeacherId);
+                var sumView = await _viewService.CountOfCourseView(course.Id);
                 var category = await _categoryService.GetCategoryByIdAsync(course.CategoryId);
                 course.TotalSeasons = sumSeasons;
                 course.TotalSections = sumSection.Count();
                 course.TotalDuration = 100;
                 course.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
                 course.CategoryName=category.Title;
-            
+                course.TotalView= sumView == 0 ?  new Random().Next(100,10000) : sumView;
+                
             }
 
             return result;
@@ -58,6 +62,7 @@ namespace Mahface.Services.AppServices.Service
             // Fetch the course data from the repository
             var course = await _repository.GetCourseById(id);
             var userTeacher = await _userService.GetUserByTeacherId(course.TeacherId.Value);
+            var category = await _categoryService.GetCategoryByIdAsync(course.CategoryId);
             if (course == null)
             {
                 return null; // Or handle not found error appropriately
@@ -74,8 +79,8 @@ namespace Mahface.Services.AppServices.Service
             result.TotalSeasons = sumSeasons.Count();
             result.TotalSections = sumSection.Count();
             result.TotalDuration = 100;////sumSection.Sum(s => s.Duration); // Assuming each section has a Duration field
-
-            // Map the CourseDto to CourseDetail
+            result.TotalView =new Random().Next(100, 10000);
+            result.CategoryName=category.Title;
             var courseDetail = _mapper.Map<CourseDetail>(result);
             courseDetail.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
             // Set the seasons and their respective sections

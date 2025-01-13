@@ -39,9 +39,17 @@ namespace Mahface.Services.AppServices.Service
 
             try
             {
+                string emailBody = " ";
                 var setting = await _mailRepository.GetSetting();
+                var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "EmailView", "EmailTemplate.html");
+                if (templatePath!=null)
+                {
+                     var emailTemplate = await File.ReadAllTextAsync(templatePath);
+                     emailBody = emailTemplate
+                                     .Replace("{Title}", subject)
+                                     .Replace("{Message}", message);
+                }
 
-                // Create email client
                 var client = new SmtpClient(setting.SMTPHost, setting.SMTPPort)
                 {
                     EnableSsl = false,
@@ -54,7 +62,7 @@ namespace Mahface.Services.AppServices.Service
                 {
                     From = new MailAddress(setting.EmailAddress, "Mahface Support"),
                     Subject = subject,
-                    Body = message,
+                    Body = templatePath==null ? message : emailBody,
                     IsBodyHtml = true
                 };
 

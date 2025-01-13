@@ -38,11 +38,14 @@ namespace Mahface.Services.AppServices.AutoMapper
                Url = src.Image.Url
            }
            : null))
+           .ForMember(dest => dest.Description , opt => opt.MapFrom(src=> src.Description))
            .ReverseMap();
 
             CreateMap<CourseDto, CourseVm>()
                 .ForMember(dest => dest.ImageBase64, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Base64File : null))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Url : null))
+                .ForMember(dest => dest.CategoryName , opt=>opt.MapFrom(src=>src.CategoryName!=null ? src.CategoryName : null))
+                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ReverseMap();
 
 
@@ -52,7 +55,10 @@ namespace Mahface.Services.AppServices.AutoMapper
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName))
                 .ForMember(dest => dest.ImageBase64, opt => opt.MapFrom(src => src.ImageDto != null ?  src.ImageDto.Base64File : null))
                 .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Url : null))
-                   .ForMember(dest => dest.Seasons, opt => opt.Ignore());
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName!=null ? src.CategoryName : null))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName!=null ? src.CategoryName : null))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Seasons, opt => opt.Ignore());
 
             CreateMap<SeasonsDto, SeasonSVM>()
                  .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
@@ -64,7 +70,11 @@ namespace Mahface.Services.AppServices.AutoMapper
             //    .ForMember(dest => dest.URL, opt => opt.MapFrom(src => src.Url));
 
 
-            CreateMap<Courses, CourseVm>().ReverseMap();
+            CreateMap<Courses, CourseVm>()
+                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.category!=null ? src.category.Title : null))
+                  .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ReverseMap();
+            
             CreateMap<EditUserVm, User>().ReverseMap();
             CreateMap<UserDto, EditUserVm>()
                 .ForMember(dest => dest.Firstname, opt => opt.MapFrom(src => src.Firstname))
