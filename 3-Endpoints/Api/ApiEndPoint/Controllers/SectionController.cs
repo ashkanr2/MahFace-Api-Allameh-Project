@@ -35,6 +35,20 @@ namespace ApiEndPoint.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetAllSectionCourse/{courseId}")]
+        public async Task<IActionResult> GetAllSectionCourse(Guid courseId)
+        {
+            var sectionDto = await _sectionService.GetAllSectionsForCourse(courseId);
+            if (sectionDto == null)
+            {
+                return NotFound("Section not found");
+            }
+            return Ok(sectionDto);
+        }
+
+
+
+
         // Get section details
         [HttpGet("GetSectionDetails/{sectionId}")]
         public async Task<ActionResult<SectionDto>> GetSectionDetails(Guid sectionId)
