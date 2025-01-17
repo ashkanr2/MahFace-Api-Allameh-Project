@@ -661,7 +661,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
              {
                  Id = Guid.Parse("89e4b1db-9b95-4fa8-a261-08dd37ab6f07"),
                  Code = 207,
-                 Title = "طراحی و مدل‌سازی سه‌بعدی با Blender",
+                 Title = "طراحی و مدل‌سازی  با Blender",
                  CourseLevelId = 2,
                  StarsNumber = 4,
                  TeacherId = Guid.Parse("486c341e-03d9-4616-242e-08dd2592d1dd"),
@@ -823,12 +823,12 @@ namespace MAhface.Infrastructure.EfCore.SeedData
              {
                  Id = Guid.Parse("39a2b245-8188-4b47-b508-08dd37ab7f09"),
                  Code = 216,
-                 Title = "توسعه وب با ASP.NET Core",
+                 Title = "توسعه وب ASP.NET Core",
                  CourseLevelId = 2,
                  StarsNumber = 5,
                  TeacherId = Guid.Parse("486c341e-03d9-4616-242e-08dd2592d1dd"),
                  CategoryId = Guid.Parse("c758ad65-5f5d-43cf-b676-8dac2d2cf948"), // توسعه وب
-                 CourseDescription = "آموزش ساخت برنامه‌های تحت وب با استفاده از ASP.NET Core.",
+                 CourseDescription = "آموزش ساخت برنامه‌های تحت وب بااستفاده از ASP.NETCore.",
                  Cost = 2500000,
                  CreatedUserID = Guid.Parse("05c5b88d-af8c-407e-d068-08dd15005342"),
                  CreatedDate = DateTime.Now,
@@ -1310,198 +1310,198 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     ISActive = true,
                     IsDeleted = false
                 },
-                new Seasons
-                {
-                    Id = Guid.NewGuid(),
-                    Code = 20,
-                    CourseId = Guid.Parse("2f4d9c5d-96ad-42ac-b32f-08dd13e8d79e"),
-                    Title = "فصل دوم: مدیریت زمان در پروژه‌ها",
-                    SeasonsDescription = "در این فصل به مدیریت زمان و منابع پروژه‌ها پرداخته می‌شود.",
-                    CreatedUserID = Guid.Parse("17be1a62-7b57-4c39-a92a-08dd1c226f90"),
-                    CreatedDate = DateTime.Now,
-                    ISActive = true,
-                    IsDeleted = false
-                },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 21,
-                     CourseId = Guid.Parse("678f8db5-b7d9-447f-8f88-08dd134e9b5a"),
-                     Title = "فصل اول: اصول مدیریت زمان",
-                     SeasonsDescription = "در این فصل به اصول و تکنیک‌های مدیریت زمان پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("17be1a62-7b57-4c39-a92a-08dd1c226f90"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 22,
-                     CourseId = Guid.Parse("678f8db5-b7d9-447f-8f88-08dd134e9b5a"),
-                     Title = "فصل دوم: تکنیک‌های برنامه‌ریزی و زمان‌بندی",
-                     SeasonsDescription = "در این فصل به تکنیک‌های مختلف برنامه‌ریزی و زمان‌بندی پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("17be1a62-7b57-4c39-a92a-08dd1c226f90"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
+                //new Seasons
+                //{
+                //    Id = Guid.NewGuid(),
+                //    Code = 20,
+                //    CourseId = Guid.Parse("2f4d9c5d-96ad-42ac-b32f-08dd13e8d79e"),
+                //    Title = "فصل دوم: مدیریت زمان در پروژه‌ها",
+                //    SeasonsDescription = "در این فصل به مدیریت زمان و منابع پروژه‌ها پرداخته می‌شود.",
+                //    CreatedUserID = Guid.Parse("17be1a62-7b57-4c39-a92a-08dd1c226f90"),
+                //    CreatedDate = DateTime.Now,
+                //    ISActive = true,
+                //    IsDeleted = false
+                //},
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 21,
+                //     CourseId = Guid.Parse("678f8db5-b7d9-447f-8f88-08dd134e9b5a"),
+                //     Title = "فصل اول: اصول مدیریت زمان",
+                //     SeasonsDescription = "در این فصل به اصول و تکنیک‌های مدیریت زمان پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("17be1a62-7b57-4c39-a92a-08dd1c226f90"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 22,
+                //     CourseId = Guid.Parse("678f8db5-b7d9-447f-8f88-08dd134e9b5a"),
+                //     Title = "فصل دوم: تکنیک‌های برنامه‌ریزی و زمان‌بندی",
+                //     SeasonsDescription = "در این فصل به تکنیک‌های مختلف برنامه‌ریزی و زمان‌بندی پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("17be1a62-7b57-4c39-a92a-08dd1c226f90"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
 
-                 // دوره تحلیل داده‌ها با R
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 23,
-                     CourseId = Guid.Parse("73db149e-65d7-44db-80ac-08dd134e98d4"),
-                     Title = "فصل اول: مقدمه‌ای بر تحلیل داده‌ها با R",
-                     SeasonsDescription = "در این فصل با مفاهیم پایه تحلیل داده‌ها با استفاده از زبان R آشنا می‌شوید.",
-                     CreatedUserID = Guid.Parse("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 24,
-                     CourseId = Guid.Parse("73db149e-65d7-44db-80ac-08dd134e98d4"),
-                     Title = "فصل دوم: پردازش داده‌ها و مدل‌سازی",
-                     SeasonsDescription = "در این فصل به پردازش داده‌ها و الگوریتم‌های مدل‌سازی در R پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
+                // // دوره تحلیل داده‌ها با R
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 23,
+                //     CourseId = Guid.Parse("73db149e-65d7-44db-80ac-08dd134e98d4"),
+                //     Title = "فصل اول: مقدمه‌ای بر تحلیل داده‌ها با R",
+                //     SeasonsDescription = "در این فصل با مفاهیم پایه تحلیل داده‌ها با استفاده از زبان R آشنا می‌شوید.",
+                //     CreatedUserID = Guid.Parse("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 24,
+                //     CourseId = Guid.Parse("73db149e-65d7-44db-80ac-08dd134e98d4"),
+                //     Title = "فصل دوم: پردازش داده‌ها و مدل‌سازی",
+                //     SeasonsDescription = "در این فصل به پردازش داده‌ها و الگوریتم‌های مدل‌سازی در R پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
 
-                 // دوره توسعه اپلیکیشن با React
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 25,
-                     CourseId = Guid.Parse("df8c75f5-b659-4845-bf5d-08dd1353b370"),
-                     Title = "فصل اول: آشنایی با React و مفاهیم پایه",
-                     SeasonsDescription = "در این فصل با اصول پایه‌ای React و نحوه ساخت کامپوننت‌ها آشنا می‌شوید.",
-                     CreatedUserID = Guid.Parse("b60bb559-b839-4329-bb83-08dd12d674ba"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 26,
-                     CourseId = Guid.Parse("df8c75f5-b659-4845-bf5d-08dd1353b370"),
-                     Title = "فصل دوم: مدیریت وضعیت و داده‌ها در React",
-                     SeasonsDescription = "در این فصل به روش‌های مدیریت وضعیت در React و استفاده از Hooks پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("b60bb559-b839-4329-bb83-08dd12d674ba"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
+                // // دوره توسعه اپلیکیشن با React
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 25,
+                //     CourseId = Guid.Parse("df8c75f5-b659-4845-bf5d-08dd1353b370"),
+                //     Title = "فصل اول: آشنایی با React و مفاهیم پایه",
+                //     SeasonsDescription = "در این فصل با اصول پایه‌ای React و نحوه ساخت کامپوننت‌ها آشنا می‌شوید.",
+                //     CreatedUserID = Guid.Parse("b60bb559-b839-4329-bb83-08dd12d674ba"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 26,
+                //     CourseId = Guid.Parse("df8c75f5-b659-4845-bf5d-08dd1353b370"),
+                //     Title = "فصل دوم: مدیریت وضعیت و داده‌ها در React",
+                //     SeasonsDescription = "در این فصل به روش‌های مدیریت وضعیت در React و استفاده از Hooks پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("b60bb559-b839-4329-bb83-08dd12d674ba"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
 
-                 // دوره توسعه اپلیکیشن با Flutter
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 27,
-                     CourseId = Guid.Parse("db6c3347-b11d-44c9-a0d3-08dd1353b882"),
-                     Title = "فصل اول: شروع با Flutter و Dart",
-                     SeasonsDescription = "در این فصل به معرفی زبان Dart و چارچوب Flutter پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("f12c9152-3d51-49de-b273-08dd1b6ab4e9"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 28,
-                     CourseId = Guid.Parse("db6c3347-b11d-44c9-a0d3-08dd1353b882"),
-                     Title = "فصل دوم: ساخت اپلیکیشن‌های چندمنظوره با Flutter",
-                     SeasonsDescription = "این فصل به ایجاد اپلیکیشن‌های چندمنظوره با Flutter اختصاص دارد.",
-                     CreatedUserID = Guid.Parse("f12c9152-3d51-49de-b273-08dd1b6ab4e9"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
+                // // دوره توسعه اپلیکیشن با Flutter
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 27,
+                //     CourseId = Guid.Parse("db6c3347-b11d-44c9-a0d3-08dd1353b882"),
+                //     Title = "فصل اول: شروع با Flutter و Dart",
+                //     SeasonsDescription = "در این فصل به معرفی زبان Dart و چارچوب Flutter پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("f12c9152-3d51-49de-b273-08dd1b6ab4e9"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 28,
+                //     CourseId = Guid.Parse("db6c3347-b11d-44c9-a0d3-08dd1353b882"),
+                //     Title = "فصل دوم: ساخت اپلیکیشن‌های چندمنظوره با Flutter",
+                //     SeasonsDescription = "این فصل به ایجاد اپلیکیشن‌های چندمنظوره با Flutter اختصاص دارد.",
+                //     CreatedUserID = Guid.Parse("f12c9152-3d51-49de-b273-08dd1b6ab4e9"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
 
-                 // دوره طراحی رابط کاربری (UI/UX)
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 29,
-                     CourseId = Guid.Parse("5f62e0f1-6a0d-4d92-b73d-08dd1b3dce3b"),
-                     Title = "فصل اول: اصول طراحی UI/UX",
-                     SeasonsDescription = "در این فصل با اصول اولیه طراحی رابط کاربری (UI) و تجربه کاربری (UX) آشنا می‌شوید.",
-                     CreatedUserID = Guid.Parse("01b7a545-1a56-4a1e-b3b3-08dd0da7202d"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 30,
-                     CourseId = Guid.Parse("5f62e0f1-6a0d-4d92-b73d-08dd1b3dce3b"),
-                     Title = "فصل دوم: طراحی پیشرفته UI/UX",
-                     SeasonsDescription = "این فصل به تکنیک‌های پیشرفته طراحی UI/UX و استفاده از ابزارهای مختلف طراحی پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("01b7a545-1a56-4a1e-b3b3-08dd0da7202d"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
+                // // دوره طراحی رابط کاربری (UI/UX)
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 29,
+                //     CourseId = Guid.Parse("5f62e0f1-6a0d-4d92-b73d-08dd1b3dce3b"),
+                //     Title = "فصل اول: اصول طراحی UI/UX",
+                //     SeasonsDescription = "در این فصل با اصول اولیه طراحی رابط کاربری (UI) و تجربه کاربری (UX) آشنا می‌شوید.",
+                //     CreatedUserID = Guid.Parse("01b7a545-1a56-4a1e-b3b3-08dd0da7202d"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 30,
+                //     CourseId = Guid.Parse("5f62e0f1-6a0d-4d92-b73d-08dd1b3dce3b"),
+                //     Title = "فصل دوم: طراحی پیشرفته UI/UX",
+                //     SeasonsDescription = "این فصل به تکنیک‌های پیشرفته طراحی UI/UX و استفاده از ابزارهای مختلف طراحی پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("01b7a545-1a56-4a1e-b3b3-08dd0da7202d"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
 
-                 // دوره مباحث پیشرفته امنیت شبکه
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 31,
-                     CourseId = Guid.Parse("32e7bc14-c8a5-4204-8d94-08dd0cc49a94"),
-                     Title = "فصل اول: مقدمه‌ای بر امنیت شبکه",
-                     SeasonsDescription = "این فصل به مفاهیم پایه‌ای امنیت شبکه و تهدیدات رایج می‌پردازد.",
-                     CreatedUserID = Guid.Parse("926928e9-f83c-41f4-a621-08dd0d64b81a"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 32,
-                     CourseId = Guid.Parse("32e7bc14-c8a5-4204-8d94-08dd0cc49a94"),
-                     Title = "فصل دوم: تکنیک‌های پیشرفته امنیت شبکه",
-                     SeasonsDescription = "این فصل به روش‌های پیشرفته برای حفاظت از شبکه‌ها و داده‌ها پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("926928e9-f83c-41f4-a621-08dd0d64b81a"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
+                // // دوره مباحث پیشرفته امنیت شبکه
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 31,
+                //     CourseId = Guid.Parse("32e7bc14-c8a5-4204-8d94-08dd0cc49a94"),
+                //     Title = "فصل اول: مقدمه‌ای بر امنیت شبکه",
+                //     SeasonsDescription = "این فصل به مفاهیم پایه‌ای امنیت شبکه و تهدیدات رایج می‌پردازد.",
+                //     CreatedUserID = Guid.Parse("926928e9-f83c-41f4-a621-08dd0d64b81a"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 32,
+                //     CourseId = Guid.Parse("32e7bc14-c8a5-4204-8d94-08dd0cc49a94"),
+                //     Title = "فصل دوم: تکنیک‌های پیشرفته امنیت شبکه",
+                //     SeasonsDescription = "این فصل به روش‌های پیشرفته برای حفاظت از شبکه‌ها و داده‌ها پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("926928e9-f83c-41f4-a621-08dd0d64b81a"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
 
-                 // دوره تست نرم‌افزار
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 33,
-                     CourseId = Guid.Parse("ae50f64f-d0d1-453a-9a82-08dd135b16a6"),
-                     Title = "فصل اول: مبانی تست نرم‌افزار",
-                     SeasonsDescription = "در این فصل با اصول تست نرم‌افزار و انواع تست‌های موجود آشنا می‌شوید.",
-                     CreatedUserID = Guid.Parse("e8a0d5b2-c064-430b-b3ca-08dd134e6e22"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 },
-                 new Seasons
-                 {
-                     Id = Guid.NewGuid(),
-                     Code = 34,
-                     CourseId = Guid.Parse("ae50f64f-d0d1-453a-9a82-08dd135b16a6"),
-                     Title = "فصل دوم: تست خودکار نرم‌افزار",
-                     SeasonsDescription = "این فصل به معرفی ابزارهای تست خودکار و نحوه پیاده‌سازی آن‌ها در نرم‌افزارها پرداخته می‌شود.",
-                     CreatedUserID = Guid.Parse("e8a0d5b2-c064-430b-b3ca-08dd134e6e22"),
-                     CreatedDate = DateTime.Now,
-                     ISActive = true,
-                     IsDeleted = false
-                 }
+                // // دوره تست نرم‌افزار
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 33,
+                //     CourseId = Guid.Parse("ae50f64f-d0d1-453a-9a82-08dd135b16a6"),
+                //     Title = "فصل اول: مبانی تست نرم‌افزار",
+                //     SeasonsDescription = "در این فصل با اصول تست نرم‌افزار و انواع تست‌های موجود آشنا می‌شوید.",
+                //     CreatedUserID = Guid.Parse("e8a0d5b2-c064-430b-b3ca-08dd134e6e22"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // },
+                // new Seasons
+                // {
+                //     Id = Guid.NewGuid(),
+                //     Code = 34,
+                //     CourseId = Guid.Parse("ae50f64f-d0d1-453a-9a82-08dd135b16a6"),
+                //     Title = "فصل دوم: تست خودکار نرم‌افزار",
+                //     SeasonsDescription = "این فصل به معرفی ابزارهای تست خودکار و نحوه پیاده‌سازی آن‌ها در نرم‌افزارها پرداخته می‌شود.",
+                //     CreatedUserID = Guid.Parse("e8a0d5b2-c064-430b-b3ca-08dd134e6e22"),
+                //     CreatedDate = DateTime.Now,
+                //     ISActive = true,
+                //     IsDeleted = false
+                // }
              };
         }
         #endregion

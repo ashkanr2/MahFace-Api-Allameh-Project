@@ -20,7 +20,7 @@ namespace MAhface.Domain.Core.Entities.Study.Course
     public class Courses : BaseEntity
     {
 
-        [MaxLength(30)]
+        [MaxLength(40)]
         [DefaultValue(null)]
         [Required]
         public string Title { get; set; }
