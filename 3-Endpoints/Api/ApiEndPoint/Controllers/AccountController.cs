@@ -64,26 +64,33 @@ namespace ApiEndPoint.Controllers
 
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
+        public async Task<LoginResponseVm> Login([FromBody] LoginRequest loginRequest)
         {
+            LoginResponseVm vm = new LoginResponseVm();
+            vm.IsValid = false;
+            vm.StatusMessage="خطایی رخ داده است .";
+            vm.EmailConFirm=false;
+
             if (!ModelState.IsValid)
             {
-                return BadRequest("اطلاعات وارد شده نامعتبر است.");
+                vm.IsValid = false;
+                vm.StatusMessage="اطلاعات وارد شده نامعتبر است.";
+                vm.EmailConFirm=false;
+                return vm;  
             }
 
             try
             {
                 var result = await _userService.Login(loginRequest.UserNameOrEmailORPhoneNumber, loginRequest.Password);
-                if (!result.IsValid)
-                {
-                    return Unauthorized(new { result.StatusMessage });
-                }
+                
+                return result;
+               
 
-                return Ok(result);
+                
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "خطایی در فرآیند ورود رخ داده است.", details = ex.Message });
+                return vm;
             }
         }
 

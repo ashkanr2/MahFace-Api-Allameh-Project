@@ -1,5 +1,6 @@
 ﻿using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core1.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         public TimeOnly CalculateSumSections(Guid SeasonId);
 
-       
+        Task<AddStatusVm> SeedData();
+
+
     }
 }

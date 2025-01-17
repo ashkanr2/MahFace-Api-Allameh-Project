@@ -2,6 +2,9 @@
 using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core.Interface.IRipositories;
+using MAhface.Domain.Core.Interface.IServices;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Http;
@@ -16,14 +19,17 @@ namespace Mahface.Services.AppServices.Service
     public class SeasonService : ISeasonService
     {
         private readonly ISeasonRipository _seasonRepository;
+        private readonly ICourseRipository _courseRipository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor)
+        // در اینجا، ICourseService به صورت Lazy تزریق می‌شود
+        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor, ICourseRipository courseRipository)
         {
             _seasonRepository = seasonRepository;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
+            _courseRipository=courseRipository;
         }
 
         public TimeOnly CalculateSumSections(Guid SeasonId)
@@ -71,6 +77,67 @@ namespace Mahface.Services.AppServices.Service
             return _mapper.Map<SeasonsDto>(seasons);
         }
 
+
+
+        public async Task<AddStatusVm> SeedData()
+        {
+            var courses = await _courseRipository.GetAllCourses();   
+            var seasons = new List<Seasons>();
+            var adminUserId = Guid.Parse("85f9967b-1011-40c0-a32e-87370b013966");
+            foreach (var course in courses)
+            {
+                seasons.Add(new Seasons()
+                {
+                    Id = Guid.NewGuid(),
+                    CourseId = course.Id,
+                    Title = "فصل اول",  // "First Season"
+                    SeasonsDescription = " توضیحات  فصل یک : " + course.Title,  // "Description of first season"
+                    CreatedUserID = adminUserId,
+                    CreatedDate = course.CreatedDate,
+                    IsDeleted = false,
+                    ISActive = true,
+                });
+
+                seasons.Add(new Seasons()
+                {
+                    Id = Guid.NewGuid(),
+                    CourseId = course.Id,
+                    Title = "فصل دوم",  // "Second Season"
+                    SeasonsDescription = " توضیحات  فصل دوم : " + course.Title,  // "Description of second season"
+                    CreatedUserID = adminUserId,
+                    CreatedDate = course.CreatedDate,
+                    IsDeleted = false,
+                    ISActive = true,
+                });
+
+                seasons.Add(new Seasons()
+                {
+                    Id = Guid.NewGuid(),
+                    CourseId = course.Id,
+                    Title = "فصل سوم",  // "Third Season"
+                    SeasonsDescription = " توضیحات  فصل سوم : " + course.Title,  // "Description of third season"
+                    CreatedUserID =adminUserId,
+                    CreatedDate = course.CreatedDate,
+                    IsDeleted = false,
+                    ISActive = true,
+                });
+
+                seasons.Add(new Seasons()
+                {
+                    Id = Guid.NewGuid(),
+                    CourseId = course.Id,
+                    Title = "فصل چهارم",  // "Fourth Season"
+                    SeasonsDescription = " توضیحات  فصل چهارم : " + course.Title,  // "Description of fourth season"
+                    CreatedUserID = adminUserId,
+                    CreatedDate = course.CreatedDate,
+                    IsDeleted = false,
+                    ISActive = true,
+                });
+            }
+            var result = _seasonRepository.SeedData(seasons);
+            return result;
+        }
+
         public string Update(SeasonsDto seasonDto)
         {
             var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
@@ -78,6 +145,8 @@ namespace Mahface.Services.AppServices.Service
             season.Description="**Updated By Ip = "+ ip +"date : "+DateTime.Now.ToString();
             return _seasonRepository.Update(season);
         }
+
+         
     }
 
 }

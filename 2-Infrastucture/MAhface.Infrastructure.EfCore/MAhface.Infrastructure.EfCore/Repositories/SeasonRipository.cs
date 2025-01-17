@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Infrastructure.EfCore.DBContext;
@@ -100,6 +101,44 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 // Log exception
                 return $"Error: {ex.Message}";
             }
+        }
+
+
+
+        public AddStatusVm SeedData(List<Seasons> seasons)
+        {
+            var status = new AddStatusVm
+            {
+                IsValid = false,
+                StatusMessage = "An error occurred while adding seasons.",
+                AddedId = null
+            };
+
+            try
+            {
+                // Add the seasons to the DbSet
+                _context.Seasons.AddRange(seasons);
+
+                // Save changes to the database
+                _context.SaveChanges();
+
+                // Set the status to indicate success
+                status.IsValid = true;
+                status.StatusMessage = "Seasons added successfully.";
+                status.AddedId = seasons.FirstOrDefault()?.Id; // Assuming all seasons have the same Id
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (consider using a logging framework)
+                Console.WriteLine($"An error occurred: {ex.Message}");
+
+                // Set the status to indicate failure
+                status.IsValid = false;
+                status.StatusMessage = $"An error occurred: {ex.Message}";
+                status.AddedId = null;
+            }
+
+            return status;
         }
     }
 

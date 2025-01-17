@@ -247,7 +247,7 @@ namespace Mahface.Services.AppServices.Service
                     loginResponse.IsValid = false;
                     loginResponse.StatusMessage = "ایمیل کاربر تایید نشده است";
                     
-                    return loginResponse;
+                    
                 }
                 // Map user details to LoginResponseVm
                 loginResponse.IsValid = true;

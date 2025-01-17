@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\..\1-Domain\Services\AppService\Mahface.Services.AppServices\Mahface.Services.AppServices.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SeedData\NewFolder\" />
-  </ItemGroup>
-
 </Project>

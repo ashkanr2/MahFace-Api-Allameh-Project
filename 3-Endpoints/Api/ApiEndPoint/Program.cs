@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
+var sss = builder.Configuration.GetConnectionString("DefaultValue");
 builder.Services.AddDbContext<AllamehPrroject>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
 
@@ -45,29 +45,38 @@ builder.Services.AddSwaggerGen(options =>
 //// Register repositories and services
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IUserManagerService, UserManagerService>();
-builder.Services.AddScoped<IUserService, UserService>();
+
+# region repository
+
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ISeasonRipository, SeasonRepository>();
-builder.Services.AddScoped<ISeasonService, SeasonService>();
 builder.Services.AddScoped<ICourseRipository, CoursesRepository>();
-builder.Services.AddScoped<ICourseService, CoursesService>();
+builder.Services.AddScoped<IEMailRepository, EmailRepository>();
+builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
 builder.Services.AddScoped<IImageRepository,ImageRepository>();
-builder.Services.AddScoped<IImageService,ImageService>();
+builder.Services.AddScoped<IOtpRepository, OtpRepository>();
+builder.Services.AddScoped<ISeasonRipository, SeasonRepository>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-builder.Services.AddScoped<ITeacherService, TeacherService>();  
+builder.Services.AddScoped<ITeacherRequestRepository , TeacherRequestRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService ,  UserService>();  
 builder.Services.AddScoped<IViewRepository, ViewRepository>();
+
+#endregion
+
+#region Service
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ISeasonService, SeasonService>();
+builder.Services.AddScoped<ICourseService, CoursesService>();
+builder.Services.AddScoped<IImageService,ImageService>();
+builder.Services.AddScoped<ITeacherService, TeacherService>();    
 builder.Services.AddScoped<IViewService , ViewService>();
 builder.Services.AddScoped<IEpisodeService, EpisodeService>();
-builder.Services.AddScoped<IEpisodeRepository, EpisodeRepository>();
-builder.Services.AddScoped<IOtpRepository, OtpRepository>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IEMailRepository, EmailRepository>();
-builder.Services.AddScoped<ITeacherRequestRepository , TeacherRequestRepository>();
 builder.Services.AddScoped<ITeacherRequestService , TeacherRequestService>();
+builder.Services.AddScoped<IUserManagerService , UserManagerService>();
+
+#endregion
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(MappingProfile));

@@ -6,7 +6,7 @@ using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
- 
+
 using MAhface.Domain.Core.Entities;
 using MAhface.Infrastructure.EfCore.Configurations;
 using MAhface.Domain.Core1.Entities;
@@ -42,9 +42,10 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<TeacherRequests> TeacherRequests { get; set; }
 
 
-        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        //       => optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahface2_AllamehProject2; User Id=mahface2_mahface2; password=wX8eP84hFw@%8W; TrustServerCertificate=True;Integrated Security=false;");
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        //=> optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahface2_AllamehProject2; User Id=mahface2_mahface2; password=wX8eP84hFw@%8W; TrustServerCertificate=True;Integrated Security=false;");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-NSLM4VO\\ASHKANPC;Initial Catalog=mahface2_AllamehProject2;TrustServerCertificate=True;Integrated Security=True;");
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -59,7 +60,7 @@ namespace MAhface.Infrastructure.EfCore.DBContext
             modelBuilder.Entity<User>().HasData(SeedData.SeedData.GetUsers().ToArray());
             modelBuilder.Entity<Teacher>().HasData(SeedData.SeedData.GetTeachers().ToArray());
             modelBuilder.Entity<Courses>().HasData(SeedData.SeedData.GetCourses().ToArray());
-            modelBuilder.Entity<Seasons>().HasData(SeedData.SeedData.GetSeasons().ToArray());
+            //modelBuilder.Entity<Seasons>().HasData(SeedData.SeedData.GetSeasons().ToArray());
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

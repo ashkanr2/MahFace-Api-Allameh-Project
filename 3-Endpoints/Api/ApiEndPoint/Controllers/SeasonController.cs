@@ -1,5 +1,6 @@
 ﻿using ApiEndPoint.ViewModel;
 using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -71,4 +72,22 @@ public class SeasonController : ControllerBase
         var result = _seasonService.Update(seasonDto);
         return Ok(result);
     }
+
+    [HttpGet("SeedData")]
+    public async Task<ActionResult<AddStatusVm>> SeedData(string adminEmail)
+    {
+        if (adminEmail=="razaviash21@gmail.com")
+        {
+            var result = await _seasonService.SeedData();
+            return result;
+
+        }
+
+        AddStatusVm addStatusVm = new AddStatusVm();
+        addStatusVm.IsValid=false;
+        addStatusVm.StatusMessage="Email is not correct";
+        return addStatusVm;
+    }
+
+
 }

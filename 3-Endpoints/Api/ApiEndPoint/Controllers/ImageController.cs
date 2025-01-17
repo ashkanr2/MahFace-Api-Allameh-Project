@@ -60,11 +60,14 @@ namespace ApiEndPoint.Controllers
 
 
         [HttpPost("uploadByChosingFile")]
-        public async Task<IActionResult> UploadImage(IFormFile file)
+        public async Task<AddStatusVm> UploadImage(IFormFile file)
         {
+            AddStatusVm addStatusVm = new();
             if (file == null || file.Length == 0)
             {
-                return BadRequest("No file uploaded.");
+                addStatusVm.IsValid=false;
+                addStatusVm.StatusMessage="";
+                return addStatusVm;
             }
 
             using var memoryStream = new MemoryStream();
@@ -80,7 +83,7 @@ namespace ApiEndPoint.Controllers
             };
 
             var createdImage = await _imageService.AddImage(imageDto);
-            return CreatedAtAction(nameof(GetImage), new { id = createdImage.AddedId }, createdImage);
+            return createdImage;
         }
 
         // GET: api/Image/download/{id}
