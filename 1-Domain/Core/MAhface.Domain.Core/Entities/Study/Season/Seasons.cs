@@ -1,7 +1,8 @@
 ﻿using MAhface.Domain.Core.Entities.Study.Course;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MAhface.Domain.Core.Entities.Study.Section;
+ 
+using MAhface.Domain.Core1.Entities.Study.Episode;
 
 namespace MAhface.Domain.Core.Entities.Study.Season
 {
@@ -20,7 +21,7 @@ namespace MAhface.Domain.Core.Entities.Study.Season
         public string SeasonsDescription {  get; set; }
 
 
-        public List<Sections> Sections { get; set; }
+        public List<Episode> Episodes { get; set; }
 
     }
 }

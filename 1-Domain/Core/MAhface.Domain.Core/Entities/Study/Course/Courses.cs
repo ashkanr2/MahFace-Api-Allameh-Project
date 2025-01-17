@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Entities.Study.Episode;
 
 namespace MAhface.Domain.Core.Entities.Study.Course
 {
@@ -56,7 +57,7 @@ namespace MAhface.Domain.Core.Entities.Study.Course
 
         public List<Seasons> Seasons { get; set; }
 
-
+        //public List<Episode> Episodes  { get; set; }
         public Guid? ImageId { get; set; }
         public Image  Image { get; set; }
 

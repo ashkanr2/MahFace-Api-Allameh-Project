@@ -46,16 +46,16 @@ namespace ApiEndPoint.Controllers
         }
 
         [HttpPost("AddCourse")]
-        public async Task<AddStatusVm> AddCourse(CourseVm courseVm)
+        public async Task<AddStatusVm> AddCourse([FromBody] AddCourseVm courseVm)
         {
-            var courseDto = _mapper.Map<CourseDto>(courseVm);
-            var result = await _coursesService.AddCourse(courseDto);
+           
+            var result = await _coursesService.AddCourse(courseVm);
             return result;
         }
 
 
         [HttpPut("UpdateCourse/{id}")]
-        public async Task<IActionResult> UpdateCourse(CourseVm courseVm)
+        public async Task<IActionResult> UpdateCourse([FromBody] CourseVm courseVm)
         {
             var courseDto = _mapper.Map<CourseDto>(courseVm);
             var result = await _coursesService.UpdateCourse(courseDto);

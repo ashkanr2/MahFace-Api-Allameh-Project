@@ -37,7 +37,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             try
             {
                 return await _context.Set<View>()
-                    .FirstOrDefaultAsync(v => v.UserId == userId && v.SectionId == sectionId);
+                    .FirstOrDefaultAsync(v => v.UserId == userId);
             }
             catch (Exception ex)
             {

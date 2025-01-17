@@ -27,9 +27,13 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
-            var sss = await _context.Categories.Where(x=>!x.IsDeleted).ToListAsync();
-            return await _context.Categories.ToListAsync();
 
+            try
+            {
+                var sss = await _context.Categories.Where(x => !x.IsDeleted).ToListAsync();
+                return await _context.Categories.ToListAsync();
+            }
+            catch (Exception ex) { throw ex; }
         }
 
         public async Task AddCategoryAsync(Category category)

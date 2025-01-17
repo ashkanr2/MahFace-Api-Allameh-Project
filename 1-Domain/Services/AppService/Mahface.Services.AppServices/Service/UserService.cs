@@ -242,7 +242,13 @@ namespace Mahface.Services.AppServices.Service
                     loginResponse.StatusMessage = "رمز عبور اشتباه است.";
                     return loginResponse;
                 }
-
+                if (!user.EmailConfirmed)
+                {
+                    loginResponse.IsValid = false;
+                    loginResponse.StatusMessage = "ایمیل کاربر تایید نشده است";
+                    
+                    return loginResponse;
+                }
                 // Map user details to LoginResponseVm
                 loginResponse.IsValid = true;
                 loginResponse.UserId = user.Id;

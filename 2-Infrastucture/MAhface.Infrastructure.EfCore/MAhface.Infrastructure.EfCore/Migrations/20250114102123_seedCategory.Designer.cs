@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20250114102123_seedCategory")]
+    partial class seedCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,78 +124,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Teacher", "BasicInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Code = 1,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(921),
-                            CreatedUserID = new Guid("031d1542-f9c8-47e6-b57e-ee69919725bb"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44")
-                        },
-                        new
-                        {
-                            Id = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Code = 2,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(928),
-                            CreatedUserID = new Guid("650f1d2c-b980-4033-b794-b60eafe7029f"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd")
-                        },
-                        new
-                        {
-                            Id = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
-                            Code = 3,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(936),
-                            CreatedUserID = new Guid("2653973f-3e72-4a44-83bf-6d1cce1cbafc"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("0c7938f9-e881-42fa-242b-08dd2592d1dd"),
-                            Code = 4,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(940),
-                            CreatedUserID = new Guid("e55b13d5-0af7-4056-89d0-f7e2216dcf6a"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("3a4086aa-1278-4325-242c-08dd2592d1dd"),
-                            Code = 5,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(944),
-                            CreatedUserID = new Guid("88728a2e-a276-4a9f-b21c-22217eb0b56c"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("ecf68ade-4b48-4307-242d-08dd2592d1dd"),
-                            Code = 6,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(949),
-                            CreatedUserID = new Guid("4cb117b2-faff-411c-a188-edbf7195946f"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Code = 7,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(953),
-                            CreatedUserID = new Guid("19e78b23-7042-46a7-8bbb-791554a17b0a"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        });
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", b =>
@@ -301,250 +232,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "6c345f7a-9586-438c-8752-6a0e6bed9675",
-                            Email = "AshkanTeacher@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "Ashkan",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = false,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = true,
-                            LastName = "Teacher",
-                            LockoutEnabled = false,
-                            NationalCode = "1234567890",
-                            PhoneNumber = "09123655654",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2024, 11, 25, 19, 32, 45, 25, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d7d37749-e003-489b-a2d7-5c9a2210900e",
-                            Email = "jadi@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "جادی",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = false,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = true,
-                            LastName = "میر میرانی",
-                            LockoutEnabled = false,
-                            NationalCode = "1234567891",
-                            PhoneNumber = "09121236547",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2002, 11, 2, 17, 41, 12, 121, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "c9e822f2-e254-4a1f-9ede-2f7b15772d02",
-                            Email = "vahidJF@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "وحید",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = false,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = true,
-                            LastName = "2جعفری",
-                            LockoutEnabled = false,
-                            NationalCode = "",
-                            PhoneNumber = "09129129120",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2024, 12, 5, 7, 42, 7, 242, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "76b0637b-8b16-4777-bed5-7efc0223e0a3",
-                            Email = "string",
-                            EmailConfirmed = false,
-                            Firstname = "string",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = false,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = true,
-                            LastName = "string",
-                            LockoutEnabled = false,
-                            NationalCode = "string",
-                            PhoneNumber = "string",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("e2caf058-47c5-4c10-3fc6-08dd1604c009"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2024, 12, 6, 14, 45, 29, 103, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0d19e10b-4d3d-4cbb-84bb-a9429d9add08",
-                            Email = "sobhandanger81@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "sopo",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = true,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = false,
-                            LastName = "saffari",
-                            LockoutEnabled = false,
-                            NationalCode = "002510174",
-                            PhoneNumber = "09917358742",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("81e27342-10ef-4faf-74ca-08dd1ad120c3"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2004, 12, 12, 17, 22, 1, 253, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0736d6b5-00cd-48e2-80f8-8babd9c9df38",
-                            Email = "u@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "sobhan",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = false,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = true,
-                            LastName = "saffari",
-                            LockoutEnabled = false,
-                            NationalCode = "0005654789",
-                            PhoneNumber = "09121940087",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("282a7f03-1dca-4d15-b706-08dd20626fc4"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2024, 12, 19, 19, 21, 28, 118, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a8674cde-11fd-4cc7-8908-5276f28b3389",
-                            Email = "razaviash21@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "test email",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = true,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = false,
-                            LastName = "ashkan",
-                            LockoutEnabled = false,
-                            NationalCode = "1215",
-                            PhoneNumber = "0915215",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("9f5dac63-d870-4424-7166-08dd2064841e"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2024, 12, 19, 19, 36, 36, 471, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0dc1d380-dceb-4253-8e1e-86990db80523",
-                            Email = "string@",
-                            EmailConfirmed = false,
-                            Firstname = "5651",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = true,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = false,
-                            LastName = "hfyhb55",
-                            LockoutEnabled = false,
-                            NationalCode = "366551",
-                            PhoneNumber = "21521",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("b373c277-e096-465f-a7e2-08dd33ff4451"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2000, 1, 18, 18, 21, 33, 105, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a1ccd59b-eae5-4497-898a-1d97e2143a4f",
-                            Email = "abolfazlVafaDost@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "ابوالفضل",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = true,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = false,
-                            LastName = " وفادوست",
-                            LockoutEnabled = false,
-                            NationalCode = "1234567891",
-                            PhoneNumber = "09121234123",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("c13acae2-6d50-47cf-f711-08dd347f841d"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2025, 1, 14, 9, 39, 55, 273, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "5c9b4099-558c-400b-898f-b5415b16474e",
-                            Email = "s",
-                            EmailConfirmed = false,
-                            Firstname = "s",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = true,
-                            IsSystemAccount = false,
-                            IsSystemAdmin = false,
-                            IsTeacher = false,
-                            LastName = "2",
-                            LockoutEnabled = false,
-                            NationalCode = "b",
-                            PhoneNumber = "f",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "7c6fb654-f015-42a7-82c5-6e6fe5a80527",
-                            Email = "AshkanTeacher@gmail.com",
-                            EmailConfirmed = false,
-                            Firstname = "Admin",
-                            IsActived = false,
-                            IsDeleted = false,
-                            IsStudent = false,
-                            IsSystemAccount = true,
-                            IsSystemAdmin = true,
-                            IsTeacher = false,
-                            LastName = "Admini",
-                            LockoutEnabled = false,
-                            NationalCode = "1234567890",
-                            PhoneNumber = "09123655654",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        });
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.BasicInfo.Business.Category", b =>
@@ -600,7 +287,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("4a6ef880-e352-49dc-0976-08dd0d886873"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(490),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 6, 7, 541, DateTimeKind.Unspecified).AddTicks(9737),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "string",
                             ISActive = true,
@@ -612,7 +299,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("13dc2597-a7a3-482e-b54a-23e83d2ab18b"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(507),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 50, 46, 123, DateTimeKind.Unspecified).AddTicks(3333),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -624,7 +311,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(511),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 49, 22, 566, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -636,7 +323,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(515),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 51, 16, 403, DateTimeKind.Unspecified).AddTicks(3333),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -648,7 +335,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(518),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 48, 45, 830, DateTimeKind.Unspecified),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -660,7 +347,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("35f3bf57-7f05-41a7-8ecb-9b48bcd52fa7"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(525),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 50, 24, 423, DateTimeKind.Unspecified).AddTicks(3333),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -672,7 +359,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(528),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 49, 8, 46, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -684,7 +371,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(530),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 50, 4, 16, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -696,7 +383,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("75f6493f-813e-4d97-a0ea-e4203b90f436"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(533),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 51, 6, 316, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -708,7 +395,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("a2a57c78-7043-42e3-a156-ea5ad99fc083"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(537),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 49, 40, 350, DateTimeKind.Unspecified),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,

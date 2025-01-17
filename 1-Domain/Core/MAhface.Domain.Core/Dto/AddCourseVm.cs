@@ -16,9 +16,12 @@ namespace MAhface.Domain.Core1.Dto
         public int? CourseLevelId { get; set; }
         public Guid TeacherId { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid CreatedUserID { get; set; }
+
         public string CourseDescription { get; set; }
         public decimal Cost { get; set; }
         public string? ImageBase64 { get; set; }
+
     }
 
 }

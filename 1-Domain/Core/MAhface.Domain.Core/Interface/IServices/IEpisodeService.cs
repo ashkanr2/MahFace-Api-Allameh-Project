@@ -1,4 +1,4 @@
-﻿using MAhface.Domain.Core.Entities.Study.Section;
+﻿ 
 using MAhface.Domain.Core1.Dto;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -11,7 +11,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace MAhface.Domain.Core1.Interface.IServices
 {
-    public interface ISectionService
+    public interface IEpisodeService
     {
         // Method for creating a new section
         Task<AddStatusVm> CreateSection(CreateSectionRequest request);
@@ -25,7 +25,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
         Task<AddStatusVm> UploadVideo(Guid sectionId, IFormFile videoFile);
 
         Task<bool> ValidateVideoUrlAsync(string url);
-       
+
     }
 
     

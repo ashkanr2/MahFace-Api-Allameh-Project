@@ -15,9 +15,8 @@ namespace ApiEndPoint.Controllers
         private readonly AllamehPrroject _context;
         private readonly ICategoryService _categoryService;
 
-        public CategoriesController(AllamehPrroject context , ICategoryService categoryService)
+        public CategoriesController( ICategoryService categoryService)
         {
-            _context = context;
             _categoryService = categoryService;
         }
 
@@ -25,8 +24,16 @@ namespace ApiEndPoint.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-           var result = await _categoryService.GetAllCategoriesAsync();
-            return Ok(result);
+            try
+            {
+                var result = await _categoryService.GetAllCategoriesAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+          
 
         }
 

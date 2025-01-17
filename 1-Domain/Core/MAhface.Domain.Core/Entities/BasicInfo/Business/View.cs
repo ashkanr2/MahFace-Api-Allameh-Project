@@ -1,5 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
-using MAhface.Domain.Core.Entities.Study.Section;
+ 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MAhface.Domain.Core1.Entities.Study.Episode;
 
 namespace MAhface.Domain.Core.Entities.BasicInfo.Business
 {
@@ -15,8 +16,6 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Business
     {
         public Guid CourseId { get; set; }
 
-        public Guid SectionId { get; set; }
-
         public Guid UserId { get; set; }
 
         [DefaultValue("00:00:00")]
@@ -24,7 +23,7 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Business
 
 
         public User user { get; set; }
-        public Sections section { get; set; }
+
 
     }
 }

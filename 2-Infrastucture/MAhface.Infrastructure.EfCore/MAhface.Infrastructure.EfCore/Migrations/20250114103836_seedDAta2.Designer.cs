@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20250114103836_seedDAta2")]
+    partial class seedDAta2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,78 +124,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Teacher", "BasicInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Code = 1,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(921),
-                            CreatedUserID = new Guid("031d1542-f9c8-47e6-b57e-ee69919725bb"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44")
-                        },
-                        new
-                        {
-                            Id = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Code = 2,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(928),
-                            CreatedUserID = new Guid("650f1d2c-b980-4033-b794-b60eafe7029f"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd")
-                        },
-                        new
-                        {
-                            Id = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
-                            Code = 3,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(936),
-                            CreatedUserID = new Guid("2653973f-3e72-4a44-83bf-6d1cce1cbafc"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("0c7938f9-e881-42fa-242b-08dd2592d1dd"),
-                            Code = 4,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(940),
-                            CreatedUserID = new Guid("e55b13d5-0af7-4056-89d0-f7e2216dcf6a"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("3a4086aa-1278-4325-242c-08dd2592d1dd"),
-                            Code = 5,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(944),
-                            CreatedUserID = new Guid("88728a2e-a276-4a9f-b21c-22217eb0b56c"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("ecf68ade-4b48-4307-242d-08dd2592d1dd"),
-                            Code = 6,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(949),
-                            CreatedUserID = new Guid("4cb117b2-faff-411c-a188-edbf7195946f"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Code = 7,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(953),
-                            CreatedUserID = new Guid("19e78b23-7042-46a7-8bbb-791554a17b0a"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        });
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", b =>
@@ -308,7 +239,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "6c345f7a-9586-438c-8752-6a0e6bed9675",
+                            ConcurrencyStamp = "fca38817-e7b2-4008-b7b5-4997c17c5640",
                             Email = "AshkanTeacher@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "Ashkan",
@@ -330,7 +261,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 11, 25, 19, 32, 45, 25, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d7d37749-e003-489b-a2d7-5c9a2210900e",
+                            ConcurrencyStamp = "7cfe16d4-57c6-4776-9825-9b2d4ce2a268",
                             Email = "jadi@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "جادی",
@@ -352,7 +283,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2002, 11, 2, 17, 41, 12, 121, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "c9e822f2-e254-4a1f-9ede-2f7b15772d02",
+                            ConcurrencyStamp = "a0980366-5d48-424b-acde-84b50c54d110",
                             Email = "vahidJF@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "وحید",
@@ -374,7 +305,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 5, 7, 42, 7, 242, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "76b0637b-8b16-4777-bed5-7efc0223e0a3",
+                            ConcurrencyStamp = "d13c75ae-0918-4dbf-80c7-204c376b6f8a",
                             Email = "string",
                             EmailConfirmed = false,
                             Firstname = "string",
@@ -396,7 +327,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("e2caf058-47c5-4c10-3fc6-08dd1604c009"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 6, 14, 45, 29, 103, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0d19e10b-4d3d-4cbb-84bb-a9429d9add08",
+                            ConcurrencyStamp = "bfacce47-239f-49a9-9a61-683d747acfbd",
                             Email = "sobhandanger81@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "sopo",
@@ -418,7 +349,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("81e27342-10ef-4faf-74ca-08dd1ad120c3"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2004, 12, 12, 17, 22, 1, 253, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0736d6b5-00cd-48e2-80f8-8babd9c9df38",
+                            ConcurrencyStamp = "a04988c7-6754-45d1-9167-13bdcbf48e5d",
                             Email = "u@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "sobhan",
@@ -440,7 +371,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("282a7f03-1dca-4d15-b706-08dd20626fc4"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 19, 19, 21, 28, 118, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a8674cde-11fd-4cc7-8908-5276f28b3389",
+                            ConcurrencyStamp = "bc6ef5cc-bc96-4f7c-b860-adfe26329956",
                             Email = "razaviash21@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "test email",
@@ -462,7 +393,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("9f5dac63-d870-4424-7166-08dd2064841e"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 19, 19, 36, 36, 471, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0dc1d380-dceb-4253-8e1e-86990db80523",
+                            ConcurrencyStamp = "82c7102d-c3ec-4bde-a5e7-c6b10e778bb0",
                             Email = "string@",
                             EmailConfirmed = false,
                             Firstname = "5651",
@@ -484,7 +415,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("b373c277-e096-465f-a7e2-08dd33ff4451"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2000, 1, 18, 18, 21, 33, 105, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a1ccd59b-eae5-4497-898a-1d97e2143a4f",
+                            ConcurrencyStamp = "288403dd-5f74-43f0-9a77-9dfecbef406a",
                             Email = "abolfazlVafaDost@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "ابوالفضل",
@@ -506,7 +437,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("c13acae2-6d50-47cf-f711-08dd347f841d"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2025, 1, 14, 9, 39, 55, 273, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "5c9b4099-558c-400b-898f-b5415b16474e",
+                            ConcurrencyStamp = "115bae18-ff53-4cd7-a36d-6b7fbaf9f3fb",
                             Email = "s",
                             EmailConfirmed = false,
                             Firstname = "s",
@@ -528,7 +459,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "7c6fb654-f015-42a7-82c5-6e6fe5a80527",
+                            ConcurrencyStamp = "efedf69e-1e5b-4c3d-a082-f85931e1cf54",
                             Email = "AshkanTeacher@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "Admin",
@@ -600,7 +531,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("4a6ef880-e352-49dc-0976-08dd0d886873"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(490),
+                            CreatedDate = new DateTime(2024, 11, 25, 23, 6, 7, 541, DateTimeKind.Unspecified).AddTicks(9737),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "string",
                             ISActive = true,
@@ -612,7 +543,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("13dc2597-a7a3-482e-b54a-23e83d2ab18b"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(507),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 50, 46, 123, DateTimeKind.Unspecified).AddTicks(3333),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -624,7 +555,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(511),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 49, 22, 566, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -636,7 +567,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(515),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 51, 16, 403, DateTimeKind.Unspecified).AddTicks(3333),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -648,7 +579,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(518),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 48, 45, 830, DateTimeKind.Unspecified),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -660,7 +591,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("35f3bf57-7f05-41a7-8ecb-9b48bcd52fa7"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(525),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 50, 24, 423, DateTimeKind.Unspecified).AddTicks(3333),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -672,7 +603,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(528),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 49, 8, 46, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -684,7 +615,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(530),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 50, 4, 16, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -696,7 +627,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("75f6493f-813e-4d97-a0ea-e4203b90f436"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(533),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 51, 6, 316, DateTimeKind.Unspecified).AddTicks(6667),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -708,7 +639,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("a2a57c78-7043-42e3-a156-ea5ad99fc083"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 14, 14, 33, 36, 906, DateTimeKind.Local).AddTicks(537),
+                            CreatedDate = new DateTime(2024, 11, 25, 22, 49, 40, 350, DateTimeKind.Unspecified),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,

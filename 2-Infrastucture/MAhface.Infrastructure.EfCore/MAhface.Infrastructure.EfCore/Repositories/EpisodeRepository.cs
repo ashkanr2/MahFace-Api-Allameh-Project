@@ -1,5 +1,6 @@
-﻿using MAhface.Domain.Core.Entities.Study.Section;
+﻿ 
 using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Entities.Study.Episode;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
@@ -11,22 +12,23 @@ using System.Threading.Tasks;
 
 namespace MAhface.Infrastructure.EfCore.Repositories
 {
-    public class SectionRepository : ISectionRepository
+    public class EpisodeRepository : IEpisodeRepository
     {
         private readonly AllamehPrroject _context;
 
-        public SectionRepository(AllamehPrroject context)
+        public EpisodeRepository(AllamehPrroject context)
         {
             _context = context;
         }
 
         // Create a section
-        public async Task<Sections> CreateAsync(Sections section)
+        public async Task<Episode> CreateAsync(Episode section)
         {
-            try{
+            try
+            {
 
 
-                _context.Sections.Add(section);
+                _context.Episodes.Add(section);
                 await _context.SaveChangesAsync();
                 return section;
             }
@@ -38,30 +40,30 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         }
 
         // Get section by ID
-        public async Task<Sections> GetByIdAsync(Guid sectionId)
+        public async Task<Episode> GetByIdAsync(Guid sectionId)
         {
-            return await _context.Sections.FirstOrDefaultAsync(s => s.Id == sectionId && !s.IsDeleted);
+            return await _context.Episodes.FirstOrDefaultAsync(s => s.Id == sectionId );
         }
 
         // Get the count of videos (sections) for a specific course and season
         public async Task<int> GetVideoCountForCourse(Guid courseId, Guid seasonId)
         {
-            return await _context.Sections.CountAsync(s => s.CourseId == courseId && s.SeasionnId == seasonId && !s.IsDeleted);
+            return await _context.Episodes.CountAsync(s => s.CourseId == courseId && s.SeasionnId == seasonId );
         }
 
         // Update a section
-        public async Task<Sections> UpdateAsync(Sections section)
+        public async Task<Episode> UpdateAsync(Episode section)
         {
-            _context.Sections.Update(section);
+            _context.Episodes.Update(section);
             await _context.SaveChangesAsync();
             return section;
         }
 
-        public async Task<IQueryable<Sections>> GetAll()
+        public async Task<IQueryable<Episode>> GetAll()
         {
             try
             {
-                return _context.Sections.AsQueryable();
+                return _context.Episodes.AsQueryable();
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ namespace MAhface.Domain.Core.Interface.IRipositories
     {
         Task<List<Courses>> GetAllCourses();
         Task<Courses> GetCourseById(Guid id);
-        Task AddCourse(Courses course);
+        Task <AddStatusVm>AddCourse(Courses course);
         Task UpdateCourse(Courses course);
         Task DeleteCourse(Guid id);
     }

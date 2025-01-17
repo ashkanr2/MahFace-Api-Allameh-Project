@@ -16,21 +16,23 @@ namespace Mahface.Services.AppServices.Service
     {
         private readonly ICourseRipository _repository;
         private readonly ISeasonService _seasonService;
-        private readonly ISectionService _sectionService;
+        private readonly IEpisodeService _sectionService;
         private readonly IUserService _userService;
-        private readonly ICategoryService  _categoryService;
+        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
         private readonly IViewService _viewService;
-        public CoursesService(ICourseRipository repository, IMapper mapper,ISeasonService seasonService , ISectionService sectionService ,
-            IUserService userService , ICategoryService categoryService,IViewService viewService)
+        private readonly IImageService _imageService;
+        public CoursesService(ICourseRipository repository, IMapper mapper, ISeasonService seasonService, IEpisodeService sectionService,
+            IUserService userService, ICategoryService categoryService, IViewService viewService , IImageService imageService)
         {
             _repository = repository;
             _mapper = mapper;
             _seasonService = seasonService;
             _sectionService = sectionService;
-            _userService = userService; 
+            _userService = userService;
             _categoryService = categoryService;
             _viewService = viewService;
+            _imageService = imageService;
         }
 
         // Get all courses
@@ -40,8 +42,8 @@ namespace Mahface.Services.AppServices.Service
             var result = _mapper.Map<List<CourseDto>>(courses);
             foreach (var course in result)
             {
-                var sumSeasons =  _seasonService.GetAllCourseSeasons(course.Id).Count;
-                var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);  
+                var sumSeasons = _seasonService.GetAllCourseSeasons(course.Id).Count;
+                var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);
                 var userTeacher = await _userService.GetUserByTeacherId(course.TeacherId);
                 var sumView = await _viewService.CountOfCourseView(course.Id);
                 var category = await _categoryService.GetCategoryByIdAsync(course.CategoryId);
@@ -50,8 +52,8 @@ namespace Mahface.Services.AppServices.Service
                 course.TotalDuration = 100;
                 course.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
                 course.CategoryName=category.Title;
-                course.TotalView= sumView == 0 ?  new Random().Next(100,10000) : sumView;
-                
+                course.TotalView= sumView == 0 ? new Random().Next(100, 10000) : sumView;
+
             }
 
             return result;
@@ -69,7 +71,7 @@ namespace Mahface.Services.AppServices.Service
             }
 
             // Get the total number of seasons and sections for the course
-            var sumSeasons =  _seasonService.GetAllCourseSeasons(course.Id);
+            var sumSeasons = _seasonService.GetAllCourseSeasons(course.Id);
             var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);
 
             // Map the course entity to the CourseDto
@@ -77,7 +79,7 @@ namespace Mahface.Services.AppServices.Service
 
             // Set total values
             result.TotalSeasons = sumSeasons.Count();
-            result.TotalSections = sumSection.Count();
+            result.TotalSections =sumSection.Count();
             result.TotalDuration = 100;////sumSection.Sum(s => s.Duration); // Assuming each section has a Duration field
             result.TotalView =new Random().Next(100, 10000);
             result.CategoryName=category.Title;
@@ -89,9 +91,9 @@ namespace Mahface.Services.AppServices.Service
                 Id = season.Id.Value,
                 Title = season.Title,
                 SeasonsDescription = season.SeasonsDescription,
-                Sections = sumSection.Where(s => s.Id == season.Id)
-                                     .Select(section => new SectionsVm { Id = section.Id ,  URL = section.Id.ToString() })
-                                     .ToList()
+                //Sections = sumSection.Where(s => s.Id == season.Id)
+                //                     .Select(section => new SectionsVm { Id = section.Id ,  URL = section.Id.ToString() })
+                //                     .ToList()
             }).ToList();
 
             return courseDetail;
@@ -99,26 +101,34 @@ namespace Mahface.Services.AppServices.Service
 
 
         // Add a new course
-        public async Task<AddStatusVm> AddCourse(CourseDto courseDto)
+        public async Task<AddStatusVm> AddCourse(AddCourseVm addCourse)
         {
-            try
+            Courses courses = new();
+             AddStatusVm addImageResult =new AddStatusVm() { IsValid= false };
+            if (addCourse.ImageBase64 != null)
             {
-                var course = _mapper.Map<Courses>(courseDto);
-                await _repository.AddCourse(course);
-                return new AddStatusVm
-                {
-                    IsValid = true,
-                    StatusMessage = "Course added successfully."
-                };
+                ImageDto image = new ImageDto();    
+                image.Url =addCourse.Title;
+                image.Base64File= addCourse.ImageBase64;
+                 addImageResult = await _imageService.AddImage(image);
             }
-            catch (Exception ex)
-            {
-                return new AddStatusVm
-                {
-                    IsValid = false,
-                    StatusMessage = $"Error while adding course: {ex.Message}"
-                };
-            }
+            courses.Id = addCourse.Id;
+            courses.Title = addCourse.Title;
+            courses.CourseLevelId = addCourse.CourseLevelId;
+            courses.TeacherId = addCourse.TeacherId;
+            courses.CategoryId = addCourse.CategoryId;
+            courses.CourseDescription = addCourse.CourseDescription;
+            courses.Cost = addCourse.Cost; courses.ISActive = true;
+            courses.ImageId = addImageResult.IsValid? addImageResult.AddedId : null;    
+            courses.IsDeleted=false;
+            courses.ISActive=true;  
+            courses.CreatedUserID=addCourse.CreatedUserID;
+            courses.CreatedDate=DateTime.Now;
+
+
+            var addResult = await _repository.AddCourse(courses);
+            return addResult;
+
         }
 
         // Update an existing course

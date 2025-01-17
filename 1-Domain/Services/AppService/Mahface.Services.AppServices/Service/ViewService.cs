@@ -14,10 +14,10 @@ namespace Mahface.Services.AppServices.Service
     public class ViewService : IViewService
     {
         private readonly IViewRepository _viewRepository;
-        private readonly ISectionService _sectionService;
+        private readonly IEpisodeService _sectionService;
         private readonly IMapper _mapper;
 
-        public ViewService(ISectionService sectionService , IViewRepository viewRepository, IMapper mapper)
+        public ViewService(IEpisodeService sectionService , IViewRepository viewRepository, IMapper mapper)
         {
             _viewRepository = viewRepository;
             _mapper = mapper;
@@ -85,8 +85,8 @@ namespace Mahface.Services.AppServices.Service
                 var newView = new View
                 {
                     Id = Guid.NewGuid(),
-                   CourseId= section.CourseId,
-                    SectionId = sectionId,
+                   //CourseId= section.CourseId,
+                   // SectionId = sectionId,
                     UserId = userId,
                     LastVideoTime = lastVideoTime
                 };

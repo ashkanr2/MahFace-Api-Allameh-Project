@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MAhface.Domain.Core.Entities.Study.Section;
+
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
@@ -14,19 +14,20 @@ using Microsoft.AspNetCore.Hosting;
 using System.Net.Http;
 using Microsoft.VisualBasic;
 using Microsoft.IdentityModel.Tokens;
+using MAhface.Domain.Core1.Entities.Study.Episode;
 
 
 
 namespace Mahface.Services.AppServices.Service
 {
-    public class SectionService : ISectionService
+    public class EpisodeService : IEpisodeService
     {
-        private readonly ISectionRepository _sectionRepository;
+        private readonly IEpisodeRepository _sectionRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly HttpClient _httpClient;
 
-        public SectionService(ISectionRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, HttpClient httpClient)
+        public EpisodeService(IEpisodeRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, HttpClient httpClient)
         {
             _sectionRepository = sectionRepository;
             _mapper = mapper;
@@ -54,20 +55,14 @@ namespace Mahface.Services.AppServices.Service
                 // If title is null, generate it based on the video count
                 var title = request.Title ?? $"قسمت {videoCount + 1}"; // Set title like 'قسمت اول', 'قسمت دوم', etc.
 
-                var section = new Sections
+                var section = new Episode
                 {
                     Id = Guid.NewGuid(),
                     CourseId = request.CourseId,
                     SeasionnId = request.SeasionId,
                     Title = title,
-                    CreatedUserID = request.CreatedUserId,
-                    CreatedDate = DateTime.UtcNow,
-                    ISActive = true,
-                    IsDeleted = false,
                     URL=request.URL,
-                    Description="",
-                    HashUrl=request.URL, // This will give the video order
-                };
+                   };
 
                 // Save section in database
                 var createdSection = await _sectionRepository.CreateAsync(section);
@@ -187,7 +182,7 @@ namespace Mahface.Services.AppServices.Service
                 }
 
                 // ایجاد HashUrl از فایل ویدیو
-                section.HashUrl = $"videos/{fileName}"; // مسیر ذخیره ویدیو
+                section.URL = $"videos/{fileName}"; // مسیر ذخیره ویدیو
 
                 // بروزرسانی سکشن با HashUrl جدید
                 await _sectionRepository.UpdateAsync(section);
@@ -229,8 +224,8 @@ namespace Mahface.Services.AppServices.Service
                 var contentType = response.Content.Headers.ContentType?.MediaType;
                 if (!string.IsNullOrEmpty(contentType) && contentType.StartsWith("videos/", StringComparison.OrdinalIgnoreCase))
                     return true;
-                if (!contentType.IsNullOrEmpty() && contentType.Contains("binary/octet-stream")) 
-                return true;
+                if (!contentType.IsNullOrEmpty() && contentType.Contains("binary/octet-stream"))
+                    return true;
 
 
                 return false;

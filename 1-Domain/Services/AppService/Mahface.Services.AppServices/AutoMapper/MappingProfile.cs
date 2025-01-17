@@ -4,7 +4,7 @@ using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
-using MAhface.Domain.Core.Entities.Study.Section;
+ 
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
@@ -28,7 +28,7 @@ namespace Mahface.Services.AppServices.AutoMapper
             CreateMap<UserDto, User>();
             CreateMap<View, ViewDTO>();
             CreateMap<ViewDTO, View>();
-            CreateMap<Sections, SectionDto>().ReverseMap();
+            //CreateMap<Sections, SectionDto>().ReverseMap();
          
             CreateMap<Courses, CourseDto>()
            .ForMember(dest => dest.ImageDto, opt => opt.MapFrom(src => src.Image != null
@@ -85,11 +85,11 @@ namespace Mahface.Services.AppServices.AutoMapper
                 .ForMember(dest => dest.Base64Profile, opt => opt.MapFrom(src => src.Base64Profile));
 
 
-            CreateMap<Sections, SectionDto>()
-           .ForMember(dest => dest.SeasonName, opt => opt.MapFrom(src => src.Season.Title)); // Assuming the Season entity has a 'Name' property
+           // CreateMap<Sections, SectionDto>()
+           //.ForMember(dest => dest.SeasonName, opt => opt.MapFrom(src => src.Season.Title)); // Assuming the Season entity has a 'Name' property
 
-            // Map CreateSectionRequest to Sections entity
-            CreateMap<CreateSectionRequest, Sections>();
+           // // Map CreateSectionRequest to Sections entity
+           // CreateMap<CreateSectionRequest, Sections>();
 
 
      

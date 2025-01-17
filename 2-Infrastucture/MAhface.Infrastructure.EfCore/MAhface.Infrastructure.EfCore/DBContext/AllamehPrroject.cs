@@ -6,12 +6,13 @@ using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core.Entities.Study.Season;
-using MAhface.Domain.Core.Entities.Study.Section;
+ 
 using MAhface.Domain.Core.Entities;
 using MAhface.Infrastructure.EfCore.Configurations;
 using MAhface.Domain.Core1.Entities;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core1.Entities.Study.Episode;
 
 namespace MAhface.Infrastructure.EfCore.DBContext
 {
@@ -26,7 +27,7 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<Student> Students { get; set; }
         public DbSet<Courses> Courses { get; set; }
         public DbSet<Seasons> Seasons { get; set; }
-        public DbSet<Sections> Sections { get; set; }
+        public DbSet<Episode> Episodes { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<View> Views { get; set; }
@@ -53,6 +54,10 @@ namespace MAhface.Infrastructure.EfCore.DBContext
             //modelBuilder.ApplyConfiguration(new SectionConfiguration());
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
             modelBuilder.ApplyConfiguration(new ErrorLogConfiguration());
+
+            modelBuilder.Entity<Category>().HasData(SeedData.SeedData.GetCategories().ToArray());
+            modelBuilder.Entity<User>().HasData(SeedData.SeedData.GetUsers().ToArray());
+            modelBuilder.Entity<Teacher>().HasData(SeedData.SeedData.GetTeachers().ToArray());
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
