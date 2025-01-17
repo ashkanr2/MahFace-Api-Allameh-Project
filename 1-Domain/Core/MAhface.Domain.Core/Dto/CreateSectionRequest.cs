@@ -9,8 +9,7 @@ namespace MAhface.Domain.Core1.Dto
 {
     public class CreateSectionRequest
     {
-        [Required]
-        public Guid CourseId { get; set; }
+   
 
         [Required]
         public Guid CreatedUserId { get; set; }

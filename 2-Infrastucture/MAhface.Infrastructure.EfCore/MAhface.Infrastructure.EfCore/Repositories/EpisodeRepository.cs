@@ -48,7 +48,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         // Get the count of videos (sections) for a specific course and season
         public async Task<int> GetVideoCountForCourse(Guid courseId, Guid seasonId)
         {
-            return await _context.Episodes.CountAsync(s => s.CourseId == courseId && s.SeasionnId == seasonId );
+            return await _context.Episodes.CountAsync(s => s.CourseId == courseId && s.SeasonId == seasonId );
         }
 
         // Update a section

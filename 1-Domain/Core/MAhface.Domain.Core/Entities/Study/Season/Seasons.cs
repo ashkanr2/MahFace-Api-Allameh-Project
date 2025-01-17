@@ -9,6 +9,8 @@ namespace MAhface.Domain.Core.Entities.Study.Season
     [Table("Season", Schema = "Study")]
     public class Seasons : BaseEntity
     {
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public Guid CourseId { get; set; }
 

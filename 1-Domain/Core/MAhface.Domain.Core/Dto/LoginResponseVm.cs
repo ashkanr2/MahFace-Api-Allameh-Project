@@ -17,5 +17,6 @@ namespace MAhface.Domain.Core1.Dto
         public string LastName { get; set; }
         public string Email { get; set; }
         public string ProfileImageBase64 { get; set; }
+        public bool EmailConFirm { get; set; }
     }
 }

@@ -49,7 +49,7 @@ public class SeasonController : ControllerBase
     //}
 
     [HttpPost("AddSeason")]
-    public ActionResult<string> Create(SeasonVm seasonVm)
+    public ActionResult<string> Create(AddSeasonVM seasonVm)
     {
         SeasonsDto seasonDto = new SeasonsDto();
         seasonDto.Title = seasonVm.Title;

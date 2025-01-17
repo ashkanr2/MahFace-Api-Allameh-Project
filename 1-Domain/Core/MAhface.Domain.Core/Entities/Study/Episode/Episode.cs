@@ -15,7 +15,7 @@ namespace MAhface.Domain.Core1.Entities.Study.Episode
         public Guid Id { get; set; }
         public string Title { get; set; }
 
-        public Guid SeasionnId { get; set; }
+        public Guid SeasonId { get; set; }
 
         public Seasons Season { get; set; }
 

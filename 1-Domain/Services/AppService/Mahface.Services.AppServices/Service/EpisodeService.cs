@@ -15,6 +15,7 @@ using System.Net.Http;
 using Microsoft.VisualBasic;
 using Microsoft.IdentityModel.Tokens;
 using MAhface.Domain.Core1.Entities.Study.Episode;
+using MAhface.Domain.Core.Entities.Study.Season;
 
 
 
@@ -26,13 +27,15 @@ namespace Mahface.Services.AppServices.Service
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly HttpClient _httpClient;
+        private readonly ISeasonService _seasonService;
 
-        public EpisodeService(IEpisodeRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, HttpClient httpClient)
+        public EpisodeService(IEpisodeRepository sectionRepository, IMapper mapper, IWebHostEnvironment webHostEnvironment, HttpClient httpClient , ISeasonService seasonService)
         {
             _sectionRepository = sectionRepository;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
             _httpClient=httpClient;
+            _seasonService = seasonService;
         }
 
         // Create a new section
@@ -42,15 +45,23 @@ namespace Mahface.Services.AppServices.Service
 
             try
             {
-                var validURL = await ValidateVideoUrlAsync(request.URL);
-                if (!validURL)
+                //var validURL = await ValidateVideoUrlAsync(request.URL);
+                //if (!validURL)
+                //{
+                //    vm.IsValid = false;
+                //    vm.StatusMessage = "آدرس ویدئو معتبر نمی باشد ";
+                //    return vm;
+                //}
+                // Get the count of videos (sections) for this course and season
+
+               var season = _seasonService.GetById(request.SeasionId);
+                if (season == null)
                 {
                     vm.IsValid = false;
-                    vm.StatusMessage = "آدرس ویدئو معتبر نمی باشد ";
+                    vm.StatusMessage = "SeasonId  به درستی  پر نشده است  ";
                     return vm;
                 }
-                // Get the count of videos (sections) for this course and season
-                var videoCount = await _sectionRepository.GetVideoCountForCourse(request.CourseId, request.SeasionId);
+                var videoCount = await _sectionRepository.GetVideoCountForCourse(season.CourseId, request.SeasionId);
 
                 // If title is null, generate it based on the video count
                 var title = request.Title ?? $"قسمت {videoCount + 1}"; // Set title like 'قسمت اول', 'قسمت دوم', etc.
@@ -58,8 +69,8 @@ namespace Mahface.Services.AppServices.Service
                 var section = new Episode
                 {
                     Id = Guid.NewGuid(),
-                    CourseId = request.CourseId,
-                    SeasionnId = request.SeasionId,
+                    CourseId = season.CourseId,
+                    SeasonId = request.SeasionId,
                     Title = title,
                     URL=request.URL,
                    };
@@ -99,7 +110,7 @@ namespace Mahface.Services.AppServices.Service
                 }
 
                 // Update the properties
-                section.SeasionnId = request.SeasionId.Value;
+                section.SeasonId = request.SeasionId.Value;
                 section.Title = request.Title ?? section.Title;
 
                 // Save the updated section

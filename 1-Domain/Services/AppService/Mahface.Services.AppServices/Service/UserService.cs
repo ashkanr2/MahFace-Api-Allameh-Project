@@ -258,6 +258,7 @@ namespace Mahface.Services.AppServices.Service
                 loginResponse.Email = user.Email;
                 loginResponse.StatusMessage = "ورود موفقیت‌آمیز بود.";
                 loginResponse.IsAdmin= (user.IsSystemAccount || user.IsSystemAdmin) ? true : false;
+                loginResponse.EmailConFirm= user.EmailConfirmed;
 
                 // Retrieve profile image in Base64 format
                 if (user.ProfileImageId != null)

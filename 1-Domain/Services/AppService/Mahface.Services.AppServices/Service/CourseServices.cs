@@ -112,7 +112,7 @@ namespace Mahface.Services.AppServices.Service
                 image.Base64File= addCourse.ImageBase64;
                  addImageResult = await _imageService.AddImage(image);
             }
-            courses.Id = addCourse.Id;
+            courses.Id = new Guid();
             courses.Title = addCourse.Title;
             courses.CourseLevelId = addCourse.CourseLevelId;
             courses.TeacherId = addCourse.TeacherId;

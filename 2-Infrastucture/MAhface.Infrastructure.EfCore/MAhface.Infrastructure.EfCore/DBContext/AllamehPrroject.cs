@@ -58,6 +58,8 @@ namespace MAhface.Infrastructure.EfCore.DBContext
             modelBuilder.Entity<Category>().HasData(SeedData.SeedData.GetCategories().ToArray());
             modelBuilder.Entity<User>().HasData(SeedData.SeedData.GetUsers().ToArray());
             modelBuilder.Entity<Teacher>().HasData(SeedData.SeedData.GetTeachers().ToArray());
+            modelBuilder.Entity<Courses>().HasData(SeedData.SeedData.GetCourses().ToArray());
+            //modelBuilder.Entity<Seasons>().HasData(SeedData.SeedData.GetSeasons().ToArray());
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

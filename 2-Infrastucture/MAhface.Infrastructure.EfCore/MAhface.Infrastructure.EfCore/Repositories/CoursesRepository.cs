@@ -63,6 +63,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 await _context.SaveChangesAsync();
 
                 vm.IsValid = true;
+                vm.AddedId=course.Id;
                 vm.StatusMessage = "با موفقیت اضافه شد";
             }
             catch (Exception ex)
