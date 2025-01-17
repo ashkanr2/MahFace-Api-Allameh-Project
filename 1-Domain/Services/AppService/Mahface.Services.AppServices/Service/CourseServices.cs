@@ -45,14 +45,14 @@ namespace Mahface.Services.AppServices.Service
                 var sumSeasons = _seasonService.GetAllCourseSeasons(course.Id).Count;
                 var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);
                 var userTeacher = await _userService.GetUserByTeacherId(course.TeacherId);
-                var sumView = await _viewService.CountOfCourseView(course.Id);
+                var sumView = await _viewService.GetTotalViewsForCourse(course.Id);
                 var category = await _categoryService.GetCategoryByIdAsync(course.CategoryId);
                 course.TotalSeasons = sumSeasons;
                 course.TotalSections = sumSection.Count();
                 course.TotalDuration = 100;
                 course.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
                 course.CategoryName=category.Title;
-                course.TotalView= sumView == 0 ? new Random().Next(100, 10000) : sumView;
+                course.TotalView= sumView == 0 ? 0 : sumView;
 
             }
 
@@ -73,7 +73,7 @@ namespace Mahface.Services.AppServices.Service
             // Get the total number of seasons and sections for the course
             var sumSeasons = _seasonService.GetAllCourseSeasons(course.Id);
             var sumSection = await _sectionService.GetAllSectionsForCourse(course.Id);
-
+            var sumView = await _viewService.GetTotalViewsForCourse(course.Id);
             // Map the course entity to the CourseDto
             var result = _mapper.Map<CourseDto>(course);
 
@@ -81,7 +81,7 @@ namespace Mahface.Services.AppServices.Service
             result.TotalSeasons = sumSeasons.Count();
             result.TotalSections =sumSection.Count();
             result.TotalDuration = 100;////sumSection.Sum(s => s.Duration); // Assuming each section has a Duration field
-            result.TotalView =new Random().Next(100, 10000);
+            result.TotalView =sumView;
             result.CategoryName=category.Title;
             var courseDetail = _mapper.Map<CourseDetail>(result);
             courseDetail.TeacherName = userTeacher.Firstname + " " + userTeacher.LastName;
@@ -91,9 +91,7 @@ namespace Mahface.Services.AppServices.Service
                 Id = season.Id.Value,
                 Title = season.Title,
                 SeasonsDescription = season.SeasonsDescription,
-                //Sections = sumSection.Where(s => s.Id == season.Id)
-                //                     .Select(section => new SectionsVm { Id = section.Id ,  URL = section.Id.ToString() })
-                //                     .ToList()
+                CreatedAt=season.CreatedDate
             }).ToList();
 
             return courseDetail;

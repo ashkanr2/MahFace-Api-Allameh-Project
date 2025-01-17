@@ -49,10 +49,7 @@ namespace Mahface.Services.AppServices.Service
         {
             var seasons = _seasonRepository.GetAll();
            var seasonsDto = _mapper.Map<List<SeasonsDto>>(seasons);
-            foreach (var season in seasonsDto)
-            {
-                //season.SumSections=
-            }
+            
             return seasonsDto;
         }
 

@@ -129,7 +129,7 @@ namespace Mahface.Services.AppServices.Service
         }
 
         // Get section details
-        public async Task<SectionDto> GetSectionDetails(Guid sectionId)
+        public async Task<EpisodeDto> GetSectionDetails(Guid sectionId)
         {
             var section = await _sectionRepository.GetByIdAsync(sectionId);
 
@@ -139,16 +139,16 @@ namespace Mahface.Services.AppServices.Service
             }
 
             // Map to SectionDto to return to the client
-            return _mapper.Map<SectionDto>(section);
+            return _mapper.Map<EpisodeDto>(section);
         }
 
-        public async Task<IEnumerable<SectionDto>> GetAllSectionsForCourse(Guid id)
+        public async Task<IEnumerable<EpisodeDto>> GetAllSectionsForCourse(Guid id)
         {
             var allData = await _sectionRepository.GetAll(); // Get all sections
             var sections = allData.Where(x => x.CourseId == id).ToList(); // Filter sections by CourseId
 
             // Map sections to SectionDto and return as Task
-            return await Task.FromResult(_mapper.Map<IEnumerable<SectionDto>>(sections));
+            return await Task.FromResult(_mapper.Map<IEnumerable<EpisodeDto>>(sections));
         }
 
         // متد آپلود ویدیو

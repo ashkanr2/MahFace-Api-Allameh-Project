@@ -27,7 +27,9 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             
                 try
                 {
-                    return _context.Seasons.Include(s => s.Course).OrderBy(x=>x.CreatedDate).ToList();
+                    return _context.Seasons.Include(s => s.Course)
+                    .Include(e => e.Episodes)
+                    .OrderBy(x=>x.CreatedDate).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -69,7 +71,10 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public Seasons GetById(Guid id)
         {
-            return _context.Seasons.Include(s => s.Course).FirstOrDefault(s => s.Id == id);
+            return _context.Seasons.
+                Include(s => s.Course)
+                .Include(e=>e.Episodes)
+                .FirstOrDefault(s => s.Id == id);
         }
 
         public string Update(Seasons season)

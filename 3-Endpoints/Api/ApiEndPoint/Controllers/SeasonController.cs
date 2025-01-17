@@ -5,6 +5,8 @@ using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -18,11 +20,22 @@ public class SeasonController : ControllerBase
     }
 
     [HttpGet("GetAllSeasons")]
-    public ActionResult<List<SeasonsDto>> GetAll()
+    public  ActionResult<List<SeasonsDto>> GetAllSeasons()
     {
-        var seasons = _seasonService.GetAll();
-        return Ok(seasons);
+        try
+        {
+            var seasons = _seasonService.GetAll();
+
+            return seasons;
+        }
+        catch (Exception ex)
+        {
+
+            return StatusCode(500, "An error occurred while processing your request.");
+        }
     }
+
+
 
     [HttpGet("GetById")]
     public ActionResult<SeasonsDto> GetById(Guid id)
@@ -42,12 +55,7 @@ public class SeasonController : ControllerBase
         return Ok(seasons);
     }
 
-    //[HttpGet("GetBySectionId")]
-    //public ActionResult<SeasonsDto> GetBySectionId(Guid sectionId)
-    //{
-    //    var seasons = _seasonService.GetBySectionId(sectionId);
-    //    return Ok(seasons);
-    //}
+    
 
     [HttpPost("AddSeason")]
     public ActionResult<string> Create(AddSeasonVM seasonVm)
@@ -73,21 +81,7 @@ public class SeasonController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("SeedData")]
-    public async Task<ActionResult<AddStatusVm>> SeedData(string adminEmail)
-    {
-        if (adminEmail=="razaviash21@gmail.com")
-        {
-            var result = await _seasonService.SeedData();
-            return result;
-
-        }
-
-        AddStatusVm addStatusVm = new AddStatusVm();
-        addStatusVm.IsValid=false;
-        addStatusVm.StatusMessage="Email is not correct";
-        return addStatusVm;
-    }
+   
 
 
 }

@@ -40,6 +40,7 @@ namespace MAhface.Domain.Core1.Dto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string SeasonsDescription { get; set; }
         public List<SectionsVm> Sections { get; set; }
 

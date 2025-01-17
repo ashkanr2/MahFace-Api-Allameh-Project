@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using MAhface.Domain.Core.Entities.Study.Season;
+using MAhface.Domain.Core.Interface.IRipositories;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
@@ -8,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Mahface.Services.AppServices.Service
 {
@@ -15,13 +18,15 @@ namespace Mahface.Services.AppServices.Service
     {
         private readonly IViewRepository _viewRepository;
         private readonly IEpisodeService _sectionService;
+        private readonly ICourseRipository _courseRipository;
         private readonly IMapper _mapper;
 
-        public ViewService(IEpisodeService sectionService , IViewRepository viewRepository, IMapper mapper)
+        public ViewService(IEpisodeService sectionService , IViewRepository viewRepository, IMapper mapper ,ICourseRipository courseRipository)
         {
             _viewRepository = viewRepository;
             _mapper = mapper;
             _sectionService = sectionService;
+            _courseRipository = courseRipository;
         }
 
         public async Task<ViewDTO> GetViewDetailsById(Guid id)
@@ -134,6 +139,32 @@ namespace Mahface.Services.AppServices.Service
         public Task<int> CountOfCourseView(Guid courseId)
         {
           return  _viewRepository.CountOfCourseView(courseId);
+        }
+
+        public async Task<AddStatusVm> SeedData()
+        {
+           var courses = await _courseRipository.GetAllCourses();
+            var views = new List<View>();
+            var adminUserId = Guid.Parse("85f9967b-1011-40c0-a32e-87370b013966");
+            Random rng = new Random();
+            foreach (var course in courses)
+            {
+                views.Add(new View()
+                {
+                    Id = Guid.NewGuid(),
+                    CourseId = course.Id,
+                    Number = rng.Next(1000),
+                    UserId=adminUserId,
+                    CreatedUserID = adminUserId,
+                    CreatedDate = course.CreatedDate,
+                    IsDeleted = false,
+                    ISActive = true,
+                });
+
+                
+            }
+            var result =await _viewRepository.SeedData(views);
+            return result;
         }
     }
 

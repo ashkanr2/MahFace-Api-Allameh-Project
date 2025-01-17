@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
         Task<int> CountOfCourseViewForUser(Guid userId);
         Task AddView(View view);
         Task UpdateView(View view);
+        Task<AddStatusVm> SeedData(List<View> views);
 
 
     }

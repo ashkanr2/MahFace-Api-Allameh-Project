@@ -24,6 +24,7 @@ var sss = builder.Configuration.GetConnectionString("DefaultValue");
 builder.Services.AddDbContext<AllamehPrroject>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
 
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

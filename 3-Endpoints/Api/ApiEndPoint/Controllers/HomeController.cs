@@ -1,4 +1,5 @@
 ﻿using ApiEndPoint.ViewModel;
+using Mahface.Services.AppServices.Service;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
@@ -15,13 +16,16 @@ namespace ApiEndPoint.Controllers
         private readonly IUserService _UserService;
         private readonly IOtpService _otpService;
         private readonly IEmailService _emailService;
+        private readonly ISeasonService _seasonService;
+        private readonly IViewService _viewService;
       
-        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService)
+        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService , IViewService viewService)
         {
             _UserService  = Userservice;            
             _otpService = otpService;
             _emailService = emailService;
-           
+           _seasonService = seasonService;
+            _viewService =viewService;
         }
 
         [HttpGet("GetUrls")]
@@ -79,6 +83,40 @@ namespace ApiEndPoint.Controllers
                 return BadRequest(result);
             }
 
+        }
+
+        [HttpGet("SeedSeasonsData")]
+        public async Task<ActionResult<AddStatusVm>> SeedSeasonsData(string adminEmail)
+        {
+            if (adminEmail=="razaviash21@gmail.com")
+            {
+                var result = await _seasonService.SeedData();
+                return result;
+
+            }
+
+            AddStatusVm addStatusVm = new AddStatusVm();
+            addStatusVm.IsValid=false;
+            addStatusVm.StatusMessage="Email is not correct";
+            return addStatusVm;
+        }
+
+
+
+        [HttpGet("SeedViewData")]
+        public async Task<ActionResult<AddStatusVm>> SeedViewData(string adminEmail)
+        {
+            if (adminEmail=="razaviash21@gmail.com")
+            {
+                var result = await _viewService.SeedData();
+                return result;
+
+            }
+
+            AddStatusVm addStatusVm = new AddStatusVm();
+            addStatusVm.IsValid=false;
+            addStatusVm.StatusMessage="Email is not correct";
+            return addStatusVm;
         }
     }
 

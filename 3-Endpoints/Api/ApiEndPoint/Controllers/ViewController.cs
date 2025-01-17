@@ -77,6 +77,31 @@ namespace ApiEndPoint.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+
+        [HttpGet("course/{courseId}")]
+        public async Task<int> GetCourseView(Guid courseId)
+        {
+            try
+            {
+                // دریافت تعداد بازدیدها برای دوره مشخص
+                var result = await _viewService.GetTotalViewsForCourse(courseId);
+                if (result == null) result=0;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // مدیریت خطا: ثبت یا گزارش خطا
+                // اینجا می‌توانید خطا را لاگ کنید یا پیغام خطا را ارسال کنید
+                // به عنوان مثال:
+                Console.WriteLine($"Error occurred while getting views for course {courseId}: {ex.Message}");
+
+                // اگر خطایی رخ دهد، می‌توانید 0 یا عدد دیگری را بازگشت دهید
+                return 0;
+            }
+        }
+
+
         /// <summary>
         /// یک View جدید برای یک کاربر و دوره خاص اضافه می‌کند یا اگر View قبلاً وجود داشته باشد، آن را به‌روزرسانی می‌کند.
         /// اگر کاربر قبلاً دوره را مشاهده کرده باشد، زمان آخرین ویدیو به‌روزرسانی می‌شود.

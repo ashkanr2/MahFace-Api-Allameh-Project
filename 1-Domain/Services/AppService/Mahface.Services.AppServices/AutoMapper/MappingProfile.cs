@@ -8,6 +8,7 @@ using MAhface.Domain.Core.Entities.Study.Season;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Entities.Study.Episode;
 using MAhface.Domain.Core1.Enums;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,9 @@ namespace Mahface.Services.AppServices.AutoMapper
             CreateMap<UserDto, User>();
             CreateMap<View, ViewDTO>();
             CreateMap<ViewDTO, View>();
+            CreateMap<EpisodeDto, Episode>().ReverseMap();
             //CreateMap<Sections, SectionDto>().ReverseMap();
-         
+
             CreateMap<Courses, CourseDto>()
            .ForMember(dest => dest.ImageDto, opt => opt.MapFrom(src => src.Image != null
            ? new ImageDto

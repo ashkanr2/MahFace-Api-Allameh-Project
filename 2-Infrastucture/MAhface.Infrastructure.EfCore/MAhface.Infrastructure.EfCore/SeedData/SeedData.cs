@@ -170,6 +170,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "AshkanTeacher@gmail.com",
                     PhoneNumber = "09123655654",
+                    ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -188,6 +189,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "jadi@gmail.com",
                     PhoneNumber = "09121236547",
+                    ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -206,6 +208,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "vahidJF@gmail.com",
                     PhoneNumber = "09129129120",
+                    ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -224,6 +227,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "string",
                     PhoneNumber = "string",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -242,6 +246,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "sobhandanger81@gmail.com",
                     PhoneNumber = "09917358742",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -260,6 +265,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "u@gmail.com",
                     PhoneNumber = "09121940087",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -278,6 +284,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "razaviash21@gmail.com",
                     PhoneNumber = "0915215",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -296,6 +303,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "string@",
                     PhoneNumber = "21521",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -314,6 +322,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "abolfazlVafaDost@gmail.com",
                     PhoneNumber = "09121234123",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -332,6 +341,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "s",
                     PhoneNumber = "f",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 },
@@ -350,6 +360,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsActived = false,
                     Email = "AshkanTeacher@gmail.com",
                     PhoneNumber = "09123655654",
+                     ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
                 }

@@ -51,7 +51,7 @@ namespace ApiEndPoint.Controllers
 
         // Get section details
         [HttpGet("GetSectionDetails/{sectionId}")]
-        public async Task<ActionResult<SectionDto>> GetSectionDetails(Guid sectionId)
+        public async Task<ActionResult<EpisodeDto>> GetSectionDetails(Guid sectionId)
         {
             var sectionDto = await _episodeService.GetSectionDetails(sectionId);
             if (sectionDto == null)

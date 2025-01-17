@@ -17,6 +17,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
         Task<int> GetTotalViewsForCourse(Guid courseId);
         Task<int> GetTotalViewsForCourseByUser(Guid userId, Guid courseId);
         Task<int> CountOfCourseView(Guid courseId);
+        Task<AddStatusVm> SeedData();
     }
 
 

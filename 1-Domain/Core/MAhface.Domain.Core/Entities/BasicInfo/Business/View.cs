@@ -18,6 +18,11 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Business
 
         public Guid UserId { get; set; }
 
+        /// <summary>
+        /// /// در اینده این فیلد حذف می شود 
+        /// </summary>
+        public int Number { get; set; }
+
         [DefaultValue("00:00:00")]
         public TimeOnly LastVideoTime { get; set; }
 
