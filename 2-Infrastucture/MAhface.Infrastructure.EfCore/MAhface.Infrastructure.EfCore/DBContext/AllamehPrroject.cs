@@ -42,10 +42,10 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<TeacherRequests> TeacherRequests { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        //=> optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahface2_AllamehProject2; User Id=mahface2_mahface2; password=wX8eP84hFw@%8W; TrustServerCertificate=True;Integrated Security=false;");
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-NSLM4VO\\ASHKANPC;Initial Catalog=mahface2_AllamehProject2;TrustServerCertificate=True;Integrated Security=True;");
+//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//        //=> optionsBuilder.UseSqlServer(" Data Source=win1.hadaf.host\\MSSQLSERVER2019;Initial Catalog=mahface2_AllamehProject2; User Id=mahface2_mahface2; password=wX8eP84hFw@%8W; TrustServerCertificate=True;Integrated Security=false;");
+//        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-NSLM4VO\\ASHKANPC;Initial Catalog=mahface2_AllamehProject2;TrustServerCertificate=True;Integrated Security=True;");
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
