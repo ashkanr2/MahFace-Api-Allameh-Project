@@ -62,14 +62,25 @@ namespace Mahface.Services.AppServices.Service
             }
         }
 
-        public async Task<string> DeleteUser(Guid id)
+        public async Task<UpdateStatus> DeleteUser(Guid id)
         {
-            var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+            UpdateStatus updateStatus = new UpdateStatus();
             try
             {
-                user.IsDeleted=true;
-                await _userManager.UpdateAsync(user);
-                return "User Deleted successfully";
+                var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+                if (user == null)
+                {
+                     
+                   updateStatus.StatusMessage=  "کاربر  یافت نشد";
+                    updateStatus.IsValid= false;
+                }
+                //user.IsDeleted=true;
+                ////await _userManager.UpdateAsync(user);
+                //var result = await _userRepository.UpdateUserAsync(user);
+               var result =   _userRepository.DeleteUserAsync(id);
+                updateStatus.IsValid = true;
+                updateStatus.StatusMessage="";
+                return updateStatus ;
             }
             catch (Exception ex)
             {
@@ -107,6 +118,7 @@ namespace Mahface.Services.AppServices.Service
             {
                 var usersQuery = await _userRepository.GetallUsers();
                 var existEmail = usersQuery.Any(user => user.Email == addUser.Email);
+                
                 if (existEmail)
                 {
                     vm.IsValid=false;

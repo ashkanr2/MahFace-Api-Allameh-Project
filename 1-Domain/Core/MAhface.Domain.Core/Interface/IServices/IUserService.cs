@@ -15,7 +15,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
          Task<string> AddUser(UserDto userDto);
          Task<UpdateStatus> EditProfile(EditUserVm editUserVm);
          Task<UpdateStatus> UpdateUserByAdmin(EditUserVm editUserVm);
-         Task<string> DeleteUser(Guid id);
+        Task<UpdateStatus> DeleteUser(Guid id);
          Task<AddStatusVm> Register(AddUser addUser);
          Task<LoginResponseVm> Login(string email, string password);
          Task<UserDto> GetUserByTeacherId(Guid teacherId);
