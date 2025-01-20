@@ -145,6 +145,24 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
             return status;
         }
+
+        public int GetCount(Guid courseId)
+        {
+            try
+            {
+                // Count the number of seasons for the specified course
+                int seasonCount = _context.Seasons
+                                          .Count(s => s.CourseId == courseId);
+
+                return seasonCount;
+            }
+            catch (Exception ex)
+            {
+                // Log and handle the error
+                throw new Exception($"Error fetching season count for course ID: {courseId}", ex);
+            }
+        }
+
     }
 
 }

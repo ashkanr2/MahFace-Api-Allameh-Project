@@ -256,6 +256,11 @@ namespace Mahface.Services.AppServices.Service
             }
             return url;
         }
+
+        public int GetEpisodeCountOfCourse(Guid courseId)
+        {
+          return _sectionRepository.GetEpisodeCountOfCourse(courseId);
+        }
     }
 
 

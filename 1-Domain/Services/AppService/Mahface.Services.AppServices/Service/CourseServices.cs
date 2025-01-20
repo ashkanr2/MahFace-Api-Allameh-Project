@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using MAhface.Domain.Core.Interface.IRipositories;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core.Interface.IServices;
+using Microsoft.EntityFrameworkCore;
+using MAhface.Domain.Core.Entities.BasicInfo.Business;
 
 namespace Mahface.Services.AppServices.Service
 {
@@ -23,7 +25,7 @@ namespace Mahface.Services.AppServices.Service
         private readonly IViewService _viewService;
         private readonly IImageService _imageService;
         public CoursesService(ICourseRipository repository, IMapper mapper, ISeasonService seasonService, IEpisodeService sectionService,
-            IUserService userService, ICategoryService categoryService, IViewService viewService , IImageService imageService)
+            IUserService userService, ICategoryService categoryService, IViewService viewService, IImageService imageService)
         {
             _repository = repository;
             _mapper = mapper;
@@ -58,6 +60,91 @@ namespace Mahface.Services.AppServices.Service
 
             return result;
         }
+
+
+
+        public async Task<List<CourseVm>> GetCoursesListAsync()
+        {
+            try
+            {
+
+                var courses = await _repository.NewGetAllCourses().ToListAsync();
+                foreach (var course in courses)
+                {
+                    var sumSeasons = _seasonService.GetCourseSeasonsCount(course.Id);
+                    var sumSection = _sectionService.GetEpisodeCountOfCourse(course.Id);
+                    var sumView = await _viewService.GetTotalViewsForCourse(course.Id);
+                    course.TotalSeasons = sumSeasons;
+                    course.TotalSections = sumSection;
+                    course.TotalDuration = 100;
+                    course.TotalView= sumView == 0 ? 0 : sumView;
+
+                }
+                return courses; // به‌طور مستقیم نتیجه را برمی‌گردانیم
+            }
+            catch (Exception ex)
+            {
+                // لاگ و هندل کردن خطا
+                throw new Exception("Error executing query for courses list.", ex);
+            }
+        }
+
+
+
+        public async Task<List<CourseVm>> GetAllCoursesWithFilterCategoryId(Guid categoryId)
+        {
+            try
+            {
+
+                var courses = await _repository.NewGetAllCourses().Where(c => c.CategoryId == categoryId).ToListAsync();
+                foreach (var course in courses)
+                {
+                    var sumSeasons = _seasonService.GetCourseSeasonsCount(course.Id);
+                    var sumSection = _sectionService.GetEpisodeCountOfCourse(course.Id);
+                    var sumView = await _viewService.GetTotalViewsForCourse(course.Id);
+                    course.TotalSeasons = sumSeasons;
+                    course.TotalSections = sumSection;
+                    course.TotalDuration = 100;
+                    course.TotalView= sumView == 0 ? 0 : sumView;
+
+                }
+                return courses; // به‌طور مستقیم نتیجه را برمی‌گردانیم
+            }
+            catch (Exception ex)
+            {
+                // لاگ و هندل کردن خطا
+                throw new Exception("Error executing query for courses list.", ex);
+            }
+
+        }
+
+        public async Task<List<CourseVm>> GetAllCoursesWithFilter(string Input)
+        {
+            try
+            {
+                 
+                                       
+                var courses = await _repository.NewGetAllCourses().Where(c => EF.Functions.Like(c.Title, $"%{Input}%")).ToListAsync();
+                foreach (var course in courses)
+                {
+                    var sumSeasons = _seasonService.GetCourseSeasonsCount(course.Id);
+                    var sumSection = _sectionService.GetEpisodeCountOfCourse(course.Id);
+                    var sumView = await _viewService.GetTotalViewsForCourse(course.Id);
+                    course.TotalSeasons = sumSeasons;
+                    course.TotalSections = sumSection;
+                    course.TotalDuration = 100;
+                    course.TotalView= sumView == 0 ? 0 : sumView;
+
+                }
+                return courses; // به‌طور مستقیم نتیجه را برمی‌گردانیم
+            }
+            catch (Exception ex)
+            {
+                // لاگ و هندل کردن خطا
+                throw new Exception("Error executing query for courses list.", ex);
+            }
+        }
+
 
         public async Task<CourseDetail> GetCourseById(Guid id)
         {
@@ -102,13 +189,13 @@ namespace Mahface.Services.AppServices.Service
         public async Task<AddStatusVm> AddCourse(AddCourseVm addCourse)
         {
             Courses courses = new();
-             AddStatusVm addImageResult =new AddStatusVm() { IsValid= false };
+            AddStatusVm addImageResult = new AddStatusVm() { IsValid= false };
             if (addCourse.ImageBase64 != null)
             {
-                ImageDto image = new ImageDto();    
+                ImageDto image = new ImageDto();
                 image.Url =addCourse.Title;
                 image.Base64File= addCourse.ImageBase64;
-                 addImageResult = await _imageService.AddImage(image);
+                addImageResult = await _imageService.AddImage(image);
             }
             courses.Id = new Guid();
             courses.Title = addCourse.Title;
@@ -117,9 +204,9 @@ namespace Mahface.Services.AppServices.Service
             courses.CategoryId = addCourse.CategoryId;
             courses.CourseDescription = addCourse.CourseDescription;
             courses.Cost = addCourse.Cost; courses.ISActive = true;
-            courses.ImageId = addImageResult.IsValid? addImageResult.AddedId : null;    
+            courses.ImageId = addImageResult.IsValid ? addImageResult.AddedId : null;
             courses.IsDeleted=false;
-            courses.ISActive=true;  
+            courses.ISActive=true;
             courses.CreatedUserID=addCourse.CreatedUserID;
             courses.CreatedDate=DateTime.Now;
 
@@ -173,5 +260,7 @@ namespace Mahface.Services.AppServices.Service
                 };
             }
         }
+
+
     }
 }

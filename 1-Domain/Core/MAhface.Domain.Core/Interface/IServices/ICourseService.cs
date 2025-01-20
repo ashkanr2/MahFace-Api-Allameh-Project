@@ -14,6 +14,9 @@ namespace MAhface.Domain.Core.Interface.IServices
     {
         Task<CourseDetail> GetCourseById(Guid id);
         Task<List<CourseDto>> GetAllCourses();
+        Task<List<CourseVm>> GetCoursesListAsync();
+        Task<List<CourseVm>> GetAllCoursesWithFilterCategoryId(Guid categoryId);
+        Task<List<CourseVm>> GetAllCoursesWithFilter(string Input);
         Task<AddStatusVm> AddCourse(AddCourseVm addCourse);
         Task<AddStatusVm> UpdateCourse(CourseDto courseDto);
         Task<AddStatusVm> DeleteCourse(Guid id);

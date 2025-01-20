@@ -71,6 +71,25 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 throw new Exception($"An error occurred while fetching all sections: {ex.Message}", ex);
             }
         }
+
+        public int GetEpisodeCountOfCourse(Guid courseId)
+        {
+            try
+            {
+                // Direct count using relationships in EF Core
+                int episodeCount = _context.Episodes
+                                           .Where(e => e.Season.CourseId == courseId) // Filter directly by CourseId through navigation property
+                                           .Count();
+
+                return episodeCount;
+            }
+            catch (Exception ex)
+            {
+                // Log and handle the error
+                throw new Exception($"Error fetching episode count for course ID: {courseId}", ex);
+            }
+        }
+
     }
 }
 

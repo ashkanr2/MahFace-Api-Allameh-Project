@@ -13,6 +13,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
     {
         public List<Seasons> GetAll();
 
+        public int GetCount(Guid CourseId);
         public Seasons GetById(Guid Id);
 
         public string Update(Seasons season);

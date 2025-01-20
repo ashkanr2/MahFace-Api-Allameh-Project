@@ -1,4 +1,5 @@
-﻿using MAhface.Domain.Core.Entities.Study.Course;
+﻿using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core1.Dto;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace MAhface.Domain.Core.Interface.IRipositories
     public interface ICourseRipository
     {
         Task<List<Courses>> GetAllCourses();
+        IQueryable<CourseVm> NewGetAllCourses();
+        Task<List<Courses>> GetAllCourseWithFilters(string searchInput);
         Task<Courses> GetCourseById(Guid id);
         Task <AddStatusVm>AddCourse(Courses course);
         Task UpdateCourse(Courses course);

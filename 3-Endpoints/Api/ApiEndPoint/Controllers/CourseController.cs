@@ -40,10 +40,35 @@ namespace ApiEndPoint.Controllers
         [HttpGet("GetAllCourses")]
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCourses()
         {
-            var courseDtos = await _coursesService.GetAllCourses();
+            var courseDtos = await _coursesService.GetCoursesListAsync();
             var courseVms = _mapper.Map<List<CourseVm>>(courseDtos);
             return Ok(courseVms);
         }
+
+
+
+
+        [HttpGet("GetAllCoursesWithCategoryId/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCoursesWithCategoryId(Guid categoryId)
+        {
+            var courseDtos = await _coursesService.GetAllCoursesWithFilterCategoryId(categoryId);
+            var courseVms = _mapper.Map<List<CourseVm>>(courseDtos);
+            return Ok(courseVms);
+        }
+
+
+
+
+        [HttpGet("GetAllCoursesWithSearch/{searchInput}")]
+        public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCoursesWithSearch(string SearchInput)
+        {
+            var courseDtos = await _coursesService.GetAllCoursesWithFilter(SearchInput);
+            var courseVms = _mapper.Map<List<CourseVm>>(courseDtos);
+            return Ok(courseVms);
+        }
+
+
+
 
         [HttpPost("AddCourse")]
         public async Task<AddStatusVm> AddCourse([FromBody] AddCourseVm courseVm)

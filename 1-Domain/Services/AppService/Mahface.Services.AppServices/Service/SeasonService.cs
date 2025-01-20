@@ -74,7 +74,10 @@ namespace Mahface.Services.AppServices.Service
             return _mapper.Map<SeasonsDto>(seasons);
         }
 
-
+        public int GetCourseSeasonsCount(Guid courseId)
+        {
+            return _seasonRepository.GetCount(courseId);
+        }
 
         public async Task<AddStatusVm> SeedData()
         {

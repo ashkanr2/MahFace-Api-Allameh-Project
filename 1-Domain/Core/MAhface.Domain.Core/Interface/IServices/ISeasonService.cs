@@ -13,6 +13,8 @@ namespace MAhface.Domain.Core1.Interface.IServices
     {
         public List<SeasonsDto> GetAll();
 
+        public int GetCourseSeasonsCount(Guid courseId);
+
         public List<SeasonsDto> GetAllCourseSeasons(Guid CourseId);
 
         public SeasonsDto GetBySectionId(Guid SectionId);
