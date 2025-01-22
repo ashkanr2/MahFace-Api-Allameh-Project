@@ -44,8 +44,8 @@ namespace Mahface.Services.AppServices.AutoMapper
            .ReverseMap();
 
             CreateMap<CourseDto, CourseVm>()
-                .ForMember(dest => dest.ImageBase64, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Base64File : null))
-                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Url : null))
+                //.ForMember(dest => dest.ImageBase64, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Base64File : null))
+                //.ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageDto != null ? src.ImageDto.Url : null))
                 .ForMember(dest => dest.CategoryName , opt=>opt.MapFrom(src=>src.CategoryName!=null ? src.CategoryName : null))
                  .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ReverseMap();

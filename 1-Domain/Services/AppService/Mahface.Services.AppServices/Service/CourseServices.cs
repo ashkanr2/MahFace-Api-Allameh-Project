@@ -11,6 +11,7 @@ using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core.Interface.IServices;
 using Microsoft.EntityFrameworkCore;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using System.Data;
 
 namespace Mahface.Services.AppServices.Service
 {
@@ -109,6 +110,23 @@ namespace Mahface.Services.AppServices.Service
 
                 }
                 return courses; // به‌طور مستقیم نتیجه را برمی‌گردانیم
+            }
+            catch (Exception ex)
+            {
+                // لاگ و هندل کردن خطا
+                throw new Exception("Error executing query for courses list.", ex);
+            }
+
+        }
+
+
+        public async Task<List<NavVM>> GetAllCoursesTitleWithCategoryId(Guid categoryId)
+        {
+            try
+            {
+
+                var courses = await _repository.NewGetAllCourses().Where(c => c.CategoryId == categoryId).Select(x => new NavVM(){ Id= x.Id,Title= x.Title }).ToListAsync();
+                 return courses;
             }
             catch (Exception ex)
             {

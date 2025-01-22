@@ -18,14 +18,15 @@ namespace ApiEndPoint.Controllers
         private readonly IEmailService _emailService;
         private readonly ISeasonService _seasonService;
         private readonly IViewService _viewService;
-      
-        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService , IViewService viewService)
+        private readonly ICommentService _commentService;
+        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService , IViewService viewService,ICommentService commentService)
         {
             _UserService  = Userservice;            
             _otpService = otpService;
             _emailService = emailService;
            _seasonService = seasonService;
             _viewService =viewService;
+            _commentService = commentService;
         }
 
         [HttpGet("GetUrls")]
@@ -62,29 +63,7 @@ namespace ApiEndPoint.Controllers
 
         }
 
-
-        [HttpPost("SendPrivateEmail")]
-        public async Task<ActionResult> SendPrivateEmail(string email, string message)
-        {
-
-
-            UpdateStatus result = new();
-            try
-            {
-                
-                result.IsValid = await _emailService.SendEmailAsync(email, "ایمیل ", message);
-                result.StatusMessage=result.IsValid ? "با موفقیت ارسال شد" : "خطا در سرویس ارسال پیام ";
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                result.IsValid=false;
-                result.StatusMessage="با خطا مواجه شد ";
-                return BadRequest(result);
-            }
-
-        }
-
+         
         [HttpGet("SeedSeasonsData")]
         public async Task<ActionResult<AddStatusVm>> SeedSeasonsData(string adminEmail)
         {
@@ -118,6 +97,53 @@ namespace ApiEndPoint.Controllers
             addStatusVm.StatusMessage="Email is not correct";
             return addStatusVm;
         }
+
+        [HttpGet("seed-comments")]
+        public async Task<ActionResult<AddStatusVm>> SeedComments(string adminEmail)
+        {
+            try
+            {
+
+                if (adminEmail=="razaviash21@gmail.com")
+                {
+                    var result = await _commentService.SeedComments();
+                    return result;
+
+                }
+                AddStatusVm addStatusVm = new AddStatusVm();
+                addStatusVm.IsValid=false;
+                addStatusVm.StatusMessage="Email is not correct";
+                return addStatusVm;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "خطایی در تولید نظرات رخ داده است.", Error = ex.Message });
+            }
+        }
+
+        [HttpPost("SendPrivateEmail")]
+        public async Task<ActionResult> SendPrivateEmail(string email, string message)
+        {
+
+
+            UpdateStatus result = new();
+            try
+            {
+
+                result.IsValid = await _emailService.SendEmailAsync(email, "ایمیل ", message);
+                result.StatusMessage=result.IsValid ? "با موفقیت ارسال شد" : "خطا در سرویس ارسال پیام ";
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                result.IsValid=false;
+                result.StatusMessage="با خطا مواجه شد ";
+                return BadRequest(result);
+            }
+
+        }
+
+
     }
 
 }

@@ -28,6 +28,25 @@ namespace ApiEndPoint.Controllers
             _emailService=emailService;
         }
 
+
+        [HttpGet("EditProfile")]
+        public async Task<ActionResult<EditUserVm>> EditProfile(Guid userId)
+        {
+            // Retrieve user information
+            var userDto = await _userService.GetUserById(userId);
+            if (userDto == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Map to EditUserVm using AutoMapper
+            var editUserVm = _mapper.Map<EditUserVm>(userDto);
+
+            return Ok(editUserVm);
+        }
+
+
+
         [HttpPost("Register")]
         public async Task<AddStatusVm> Register(AddUser addUser)
         {
@@ -46,22 +65,7 @@ namespace ApiEndPoint.Controllers
 
             return result;
         }
-        [HttpGet("EditProfile")]
-        public async Task<ActionResult<EditUserVm>> EditProfile(Guid userId)
-        {
-            // Retrieve user information
-            var userDto = await _userService.GetUserById(userId);
-            if (userDto == null)
-            {
-                return NotFound("User not found");
-            }
-
-            // Map to EditUserVm using AutoMapper
-            var editUserVm = _mapper.Map<EditUserVm>(userDto);
-
-            return Ok(editUserVm);
-        }
-
+       
 
         [HttpPost("Login")]
         public async Task<LoginResponseVm> Login([FromBody] LoginRequest loginRequest)

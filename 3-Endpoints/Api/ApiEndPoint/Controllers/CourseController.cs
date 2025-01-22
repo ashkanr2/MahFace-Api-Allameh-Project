@@ -40,9 +40,9 @@ namespace ApiEndPoint.Controllers
         [HttpGet("GetAllCourses")]
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCourses()
         {
-            var courseDtos = await _coursesService.GetCoursesListAsync();
-            var courseVms = _mapper.Map<List<CourseVm>>(courseDtos);
-            return Ok(courseVms);
+            var courses = await _coursesService.GetCoursesListAsync();
+            
+            return Ok(courses);
         }
 
 
@@ -51,9 +51,16 @@ namespace ApiEndPoint.Controllers
         [HttpGet("GetAllCoursesWithCategoryId/{categoryId}")]
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCoursesWithCategoryId(Guid categoryId)
         {
-            var courseDtos = await _coursesService.GetAllCoursesWithFilterCategoryId(categoryId);
-            var courseVms = _mapper.Map<List<CourseVm>>(courseDtos);
-            return Ok(courseVms);
+            var courses = await _coursesService.GetAllCoursesWithFilterCategoryId(categoryId);
+            
+            return Ok(courses);
+        }
+
+        [HttpGet("GetAllCoursesTitleWithCategoryId/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<NavVM>>> GetAllCoursesTitleWithCategoryId(Guid categoryId)
+        {
+            var courses = await _coursesService.GetAllCoursesTitleWithCategoryId(categoryId);
+            return Ok(courses);
         }
 
 
@@ -62,9 +69,9 @@ namespace ApiEndPoint.Controllers
         [HttpGet("GetAllCoursesWithSearch/{searchInput}")]
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCoursesWithSearch(string SearchInput)
         {
-            var courseDtos = await _coursesService.GetAllCoursesWithFilter(SearchInput);
-            var courseVms = _mapper.Map<List<CourseVm>>(courseDtos);
-            return Ok(courseVms);
+            var courses = await _coursesService.GetAllCoursesWithFilter(SearchInput);
+            
+            return Ok(courses);
         }
 
 

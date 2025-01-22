@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
 using System;
@@ -28,6 +29,12 @@ namespace Mahface.Services.AppServices.Service
             return await _categoryRepository.GetAllCategoriesAsync();
         }
 
+
+        public async Task<IEnumerable<NavVM>> GetAllTitleCategoriesAsync()
+        {
+            return await _categoryRepository.GetAllTitleCategoriesAsync();
+        }
+
         public async Task AddCategoryAsync(Category category)
         {
             await _categoryRepository.AddCategoryAsync(category);
@@ -46,7 +53,7 @@ namespace Mahface.Services.AppServices.Service
         public async Task<IEnumerable<Category>> SearchCategories(string input)
         {
             var allData = await _categoryRepository.GetAllCategoriesAsync();
-            var result = allData.Where(x=>x.Title.Contains(input));
+            var result = allData.Where(x => x.Title.Contains(input));
             return result;
         }
     }

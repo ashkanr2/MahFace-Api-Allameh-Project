@@ -51,13 +51,7 @@ namespace ApiEndPoint.Controllers
         }
 
  
-        [HttpDelete("DeleteImage")]
-        public async Task<IActionResult> DeleteImage(Guid id)
-        {
-            await _imageService.DeleteImage(id);
-            return NoContent();
-        }
-
+        
 
         [HttpPost("uploadByChosingFile")]
         public async Task<AddStatusVm> UploadImage(IFormFile file)
@@ -121,5 +115,12 @@ namespace ApiEndPoint.Controllers
 
             return File(imageBytes, mimeType, fileName);
         }
+        [HttpDelete("DeleteImage")]
+        public async Task<IActionResult> DeleteImage(Guid id)
+        {
+            await _imageService.DeleteImage(id);
+            return NoContent();
+        }
+
     }
 }

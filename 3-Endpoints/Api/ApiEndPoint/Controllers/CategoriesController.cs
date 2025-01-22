@@ -37,6 +37,24 @@ namespace ApiEndPoint.Controllers
 
         }
 
+
+        [HttpGet("GetAllTitleCategoriesAsync")]
+        public async Task<ActionResult<IEnumerable<Category>>> GetAllTitleCategoriesAsync()
+        {
+            try
+            {
+                var result = await _categoryService.GetAllTitleCategoriesAsync();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+        }
+
+
         // GET: api/Categories/5
         [HttpGet("GetById/{id}")]
         public async Task<ActionResult<Category>> GetById(Guid id)
@@ -49,6 +67,19 @@ namespace ApiEndPoint.Controllers
             }
 
             return category;
+        }
+
+        [HttpGet("Search/{input}")]
+        public async Task<ActionResult<IEnumerable<Category>>> Search(string input)
+        {
+            var categories = await _categoryService.SearchCategories(input);
+
+            if (categories == null || !categories.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(categories);
         }
 
         // PUT: api/Categories/5
@@ -125,18 +156,6 @@ namespace ApiEndPoint.Controllers
         }
 
 
-        [HttpGet("Search/{input}")]
-        public async Task<ActionResult<IEnumerable<Category>>> Search(string input)
-        {
-            var categories = await _categoryService.SearchCategories(input);
-
-            if (categories == null || !categories.Any())
-            {
-                return NotFound();
-            }
-
-            return Ok(categories);
-        }
-
+       
     }
 }

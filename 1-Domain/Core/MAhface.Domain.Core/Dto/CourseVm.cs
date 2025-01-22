@@ -41,10 +41,11 @@ namespace MAhface.Domain.Core1.Dto
         public string CourseDescription { get; set; }
         [DataMember]
         public string Description { get; set; }
-        [DataMember]
-        public string? ImageUrl { get; set; }
-        [DataMember]
-        public string? ImageBase64 { get; set; }
+        public Guid? ImageId { get; set; }
+        //[DataMember]
+        //public string? ImageUrl { get; set; }
+        //[DataMember]
+        //public string? ImageBase64 { get; set; }
 
 
     }

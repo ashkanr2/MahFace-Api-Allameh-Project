@@ -13,6 +13,7 @@ using MAhface.Domain.Core1.Entities;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Entities.Study.Episode;
+using MAhface.Domain.Core1.Entities.Study.Course;
 
 namespace MAhface.Infrastructure.EfCore.DBContext
 {
@@ -33,10 +34,10 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<View> Views { get; set; }
         public DbSet<ErrorLog> ErrorLogs { get; set; }
         public DbSet<EmailSetting> EmailSetting { get; set; }
-
+        public DbSet<Comment>Comments { get; set; }
         public DbSet<EmailLog> EmailLog { get; set; }
 
-
+        public DbSet<StudentCourses>StudentCourses { get; set; }
         public DbSet<Otp> Otps { get; set; }
 
         public DbSet<TeacherRequests> TeacherRequests { get; set; }

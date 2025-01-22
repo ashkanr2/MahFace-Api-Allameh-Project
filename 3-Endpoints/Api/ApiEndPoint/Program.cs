@@ -60,7 +60,7 @@ builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<ITeacherRequestRepository , TeacherRequestRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IViewRepository, ViewRepository>();
-
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 #endregion
 
 #region Service
@@ -76,6 +76,7 @@ builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ITeacherRequestService , TeacherRequestService>();
 builder.Services.AddScoped<IUserManagerService , UserManagerService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 #endregion
 

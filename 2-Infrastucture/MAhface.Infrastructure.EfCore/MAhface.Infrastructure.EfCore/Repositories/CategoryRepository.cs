@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
 using MAhface.Infrastructure.EfCore.DBContext;
@@ -32,6 +33,17 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             {
                 var sss = await _context.Categories.Where(x => !x.IsDeleted).ToListAsync();
                 return await _context.Categories.ToListAsync();
+            }
+            catch (Exception ex) { throw ex; }
+        }
+
+        public async Task<IEnumerable<NavVM>> GetAllTitleCategoriesAsync()
+        {
+
+            try
+            {
+                var categories = await _context.Categories.Where(x => !x.IsDeleted).Select(x => new NavVM() { Id= x.Id, Title= x.Title }).ToListAsync();
+                return categories;
             }
             catch (Exception ex) { throw ex; }
         }
