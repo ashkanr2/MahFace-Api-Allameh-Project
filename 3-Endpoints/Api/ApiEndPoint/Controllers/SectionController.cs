@@ -19,32 +19,7 @@ namespace ApiEndPoint.Controllers
             _episodeService = episodeService;
         }
 
-        // Create new section
-        [HttpPost("CreateSection")]
-        public async Task<ActionResult<AddStatusVm>> CreateSection([FromBody] CreateSectionRequest request)
-        {
-            var result = await _episodeService.CreateSection(request);
-            return Ok(result);
-        }
-
-        // Update an existing section
-        [HttpPut("UpdateSection/{sectionId}")]
-        public async Task<ActionResult<UpdateStatus>> UpdateSection(Guid sectionId, [FromBody] UpdateSectionRequest request)
-        {
-            var result = await _episodeService.UpdateSection(sectionId, request);
-            return Ok(result);
-        }
-
-        [HttpGet("GetAllSectionCourse/{courseId}")]
-        public async Task<IActionResult> GetAllSectionCourse(Guid courseId)
-        {
-            var sectionDto = await _episodeService.GetAllSectionsForCourse(courseId);
-            if (sectionDto == null)
-            {
-                return NotFound("Section not found");
-            }
-            return Ok(sectionDto);
-        }
+       
 
 
 
@@ -60,6 +35,45 @@ namespace ApiEndPoint.Controllers
             }
             return Ok(sectionDto);
         }
+
+
+        [HttpGet("GetAllSeasonSection/{seasonId}")]
+        public async Task<IActionResult> GetAllSeasonSection(Guid seasonId)
+        {
+            var sectionDto = await _episodeService.GetAllSectionsForSeason(seasonId);
+            if (sectionDto == null)
+            {
+                return NotFound("Section not found");
+            }
+            return Ok(sectionDto);
+        }
+
+
+        [HttpGet("GetAllCourseSection/{courseId}")]
+        public async Task<IActionResult> GetAllSectionCourse(Guid courseId)
+        {
+            var sectionDto = await _episodeService.GetAllSectionsForCourse(courseId);
+            if (sectionDto == null)
+            {
+                return NotFound("Section not found");
+            }
+            return Ok(sectionDto);
+        }
+
+        [HttpPut("UpdateSection/{sectionId}")]
+        public async Task<ActionResult<UpdateStatus>> UpdateSection(Guid sectionId, [FromBody] UpdateSectionRequest request)
+        {
+            var result = await _episodeService.UpdateSection(sectionId, request);
+            return Ok(result);
+        }
+
+        [HttpPost("CreateSection")]
+        public async Task<ActionResult<AddStatusVm>> CreateSection([FromBody] CreateSectionRequest request)
+        {
+            var result = await _episodeService.CreateSection(request);
+            return Ok(result);
+        }
+
 
         //[HttpPost("UploadVideo/{sectionId}")]
         //public async Task<IActionResult> UploadVideo(Guid sectionId, IFormFile videoFile)

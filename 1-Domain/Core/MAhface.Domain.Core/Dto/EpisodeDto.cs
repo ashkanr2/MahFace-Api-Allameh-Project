@@ -9,12 +9,14 @@ namespace MAhface.Domain.Core1.Dto
     public class EpisodeDto
     {
         public Guid Id { get; set; }
-        public string Title { get; set; }
+
+        public string SeasonTitle { get; set; } // This will hold the title of the season
+        public string EpisodeTitle { get; set; } // This will hold the title of the episode
+
         public string URL { get; set; }
         public Guid SeasionId { get; set; }
         public Guid CourseId { get; set; }
-        public int CourseLevel { get; set; }
-        public string SeasonName { get; set; } // You might want to include the season name as well
+        public string SeasonName { get; set; } // Name of the season
 
 
 

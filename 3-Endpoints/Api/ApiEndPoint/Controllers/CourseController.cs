@@ -13,12 +13,15 @@ namespace ApiEndPoint.Controllers
     public class CourseController : ControllerBase
     {
         private readonly ICourseService _coursesService;
+        private readonly IStudentCourseService _studentCourseService;
+
         private readonly IMapper _mapper;
 
-        public CourseController(ICourseService coursesService, IMapper mapper)
+        public CourseController(ICourseService coursesService, IMapper mapper, IStudentCourseService studentCourseService)
         {
             _coursesService = coursesService;
             _mapper = mapper;
+            _studentCourseService=studentCourseService;
         }
 
         [HttpGet("GetById/{id}")]
@@ -74,7 +77,20 @@ namespace ApiEndPoint.Controllers
             return Ok(courses);
         }
 
-
+        [HttpGet("GetAllStudentCourses/{userId}")]
+        public async Task<IActionResult> GetUserCourses(Guid userId)
+        {
+            try
+            {
+                var courses = await _studentCourseService.GetUserCourses(userId);
+                return Ok(courses);
+            }
+            catch (Exception ex)
+            {
+                // ثبت خطا (اختیاری)
+                return BadRequest($"خطا در دریافت دوره‌های کاربر: {ex.Message}");
+            }
+        }
 
 
         [HttpPost("AddCourse")]

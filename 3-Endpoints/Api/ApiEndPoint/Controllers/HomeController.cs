@@ -19,7 +19,8 @@ namespace ApiEndPoint.Controllers
         private readonly ISeasonService _seasonService;
         private readonly IViewService _viewService;
         private readonly ICommentService _commentService;
-        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService , IViewService viewService,ICommentService commentService)
+        private readonly IStudentCourseService _studentCourseService;
+        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService , IViewService viewService,ICommentService commentService ,IStudentCourseService studentCourseService)
         {
             _UserService  = Userservice;            
             _otpService = otpService;
@@ -27,6 +28,7 @@ namespace ApiEndPoint.Controllers
            _seasonService = seasonService;
             _viewService =viewService;
             _commentService = commentService;
+            _studentCourseService=studentCourseService;
         }
 
         [HttpGet("GetUrls")]
@@ -121,6 +123,33 @@ namespace ApiEndPoint.Controllers
             }
         }
 
+
+        [HttpGet("Seed-StudentCourse")]
+        public async Task<ActionResult<AddStatusVm>> SeedStudentCourse(string adminEmail)
+        {
+            try
+            {
+                if (adminEmail=="razaviash21@gmail.com")
+                {
+                   
+                var result = await _studentCourseService.SeedData();
+
+                    return result;
+                   
+
+                }
+                AddStatusVm addStatusVm = new AddStatusVm();
+                addStatusVm.IsValid=false;
+                addStatusVm.StatusMessage="Email is not correct";
+                return addStatusVm;
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "خطایی در تولید  رخ داده است.", Error = ex.Message });
+            }
+        }
+
         [HttpPost("SendPrivateEmail")]
         public async Task<ActionResult> SendPrivateEmail(string email, string message)
         {
@@ -142,6 +171,8 @@ namespace ApiEndPoint.Controllers
             }
 
         }
+
+
 
 
     }

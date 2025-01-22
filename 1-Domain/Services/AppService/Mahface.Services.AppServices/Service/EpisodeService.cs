@@ -144,12 +144,71 @@ namespace Mahface.Services.AppServices.Service
 
         public async Task<IEnumerable<EpisodeDto>> GetAllSectionsForCourse(Guid id)
         {
-            var allData = await _sectionRepository.GetAll(); // Get all sections
-            var sections = allData.Where(x => x.CourseId == id).ToList(); // Filter sections by CourseId
+            try
+            {
+                // Fetch all sections for the course
+                var sections = await _sectionRepository.GetAll();  // Assuming GetAll is async and returns all sections
 
-            // Map sections to SectionDto and return as Task
-            return await Task.FromResult(_mapper.Map<IEnumerable<EpisodeDto>>(sections));
+                // Filter sections by CourseId
+                var filteredSections = sections.Where(x => x.CourseId == id).ToList();
+
+                // Prepare the DTOs, mapping both SeasonTitle and EpisodeTitle
+                var episodeDtos = filteredSections.Select(section => new EpisodeDto
+                {
+                    Id = section.Id,
+                    CourseId = section.CourseId.Value,
+                    SeasionId = section.SeasonId,
+                    URL = section.URL, // Assuming section has the URL for the episode
+                    SeasonTitle = section.Season.Title, // Assuming Season is related to Section
+                    EpisodeTitle = section.Title, // Assuming Title is the Episode Title
+                    SeasonName = section.Season.Title // Assuming Season has a Name
+                }).ToList();
+
+                return episodeDtos;
+            }
+            catch (Exception ex)
+            {
+                // Handle potential errors
+                throw new Exception($"Error fetching sections for course: {ex.Message}", ex);
+            }
         }
+
+
+
+
+
+        public async Task<IEnumerable<EpisodeDto>> GetAllSectionsForSeason(Guid id)
+        {
+            try
+            {
+                // Fetch all sections for the season
+                var sections = await _sectionRepository.GetAll();  // Assuming GetAll is async and returns all sections
+
+                // Filter sections by SeasonId
+                var filteredSections = sections.Where(x => x.SeasonId == id).ToList();
+
+                // Prepare the DTOs, mapping both SeasonTitle and EpisodeTitle
+                var episodeDtos = filteredSections.Select(section => new EpisodeDto
+                {
+                    Id = section.Id,
+                    CourseId = section.CourseId.Value,
+                    SeasionId = section.SeasonId,
+                    URL = section.URL, // Assuming section has the URL for the episode
+                    SeasonTitle = section.Season.Title, // Assuming Season is related to Section
+                    EpisodeTitle = section.Title, // Assuming Title is the Episode Title
+                    SeasonName = section.Season.Title // Assuming Season has a Name
+                }).ToList();
+
+                return episodeDtos;
+            }
+            catch (Exception ex)
+            {
+                // Handle potential errors
+                throw new Exception($"Error fetching sections for season: {ex.Message}", ex);
+            }
+        }
+
+
 
         // متد آپلود ویدیو
         public async Task<AddStatusVm> UploadVideo(Guid sectionId, IFormFile videoFile)

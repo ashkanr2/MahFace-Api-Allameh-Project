@@ -13,9 +13,9 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 {
     public class StudentCourseRepository : IStudentCourseRipository
     {
-        private readonly DbContext _context;
+        private readonly AllamehPrroject _context;
 
-        public StudentCourseRepository(DbContext context)
+        public StudentCourseRepository(AllamehPrroject context)
         {
             _context = context;
         }
@@ -24,15 +24,17 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         {
             try
             {
-                studentCourses.Id = Guid.NewGuid(); // مقداردهی شناسه جدید
+                // Generate a new ID for each StudentCourse assignment
+                studentCourses.Id = Guid.NewGuid();
 
+                // Add the new student-course association to the database
                 _context.Set<StudentCourses>().Add(studentCourses);
                 await _context.SaveChangesAsync();
 
                 return new AddStatusVm
                 {
                     IsValid = true,
-                    StatusMessage = "Successfully added.",
+                    StatusMessage = "با موفقیت اضافه شد.",
                     AddedId = studentCourses.Id
                 };
             }
@@ -41,7 +43,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 return new AddStatusVm
                 {
                     IsValid = false,
-                    StatusMessage = $"Error: {ex.Message}",
+                    StatusMessage = $"خطا: {ex.Message}",
                     AddedId = null
                 };
             }
@@ -59,7 +61,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                     return new UpdateStatus
                     {
                         IsValid = false,
-                        StatusMessage = "Record not found."
+                        StatusMessage = "رکورد مورد نظر یافت نشد."
                     };
                 }
 
@@ -73,7 +75,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 return new UpdateStatus
                 {
                     IsValid = true,
-                    StatusMessage = "Successfully updated."
+                    StatusMessage = "با موفقیت به روزرسانی شد."
                 };
             }
             catch (Exception ex)
@@ -81,17 +83,18 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 return new UpdateStatus
                 {
                     IsValid = false,
-                    StatusMessage = $"Error: {ex.Message}"
+                    StatusMessage = $"خطا: {ex.Message}"
                 };
             }
         }
 
         public async Task<List<Guid>> GetUserCoursesId(Guid userId)
         {
-            return await _context.Set<StudentCourses>()
+            var result =  await _context.Set<StudentCourses>()
                 .Where(sc => sc.UserId == userId)
                 .Select(sc => sc.CourseId)
                 .ToListAsync();
+            return result;
         }
 
         public async Task<List<Guid>> GetCourseUsersId(Guid courseId)
@@ -114,7 +117,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                     return new UpdateStatus
                     {
                         IsValid = false,
-                        StatusMessage = "Record not found."
+                        StatusMessage = "رکورد مورد نظر یافت نشد."
                     };
                 }
 
@@ -124,7 +127,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 return new UpdateStatus
                 {
                     IsValid = true,
-                    StatusMessage = "Successfully deleted."
+                    StatusMessage = "با موفقیت حذف شد."
                 };
             }
             catch (Exception ex)
@@ -132,10 +135,9 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 return new UpdateStatus
                 {
                     IsValid = false,
-                    StatusMessage = $"Error: {ex.Message}"
+                    StatusMessage = $"خطا: {ex.Message}"
                 };
             }
         }
     }
-
 }

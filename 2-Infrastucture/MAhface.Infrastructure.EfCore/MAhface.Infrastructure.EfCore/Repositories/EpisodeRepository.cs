@@ -63,7 +63,12 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         {
             try
             {
-                return _context.Episodes.AsQueryable();
+                // Include related entities like Season and Course
+                var episodes = _context.Episodes
+                    .Include(e => e.Season)  // Include the related Season entity
+                    .AsQueryable();
+
+                return episodes;
             }
             catch (Exception ex)
             {

@@ -16,6 +16,8 @@ namespace MAhface.Domain.Core1.Interface.IServices
         // Method for creating a new section
         Task<AddStatusVm> CreateSection(CreateSectionRequest request);
         Task<IEnumerable<EpisodeDto>> GetAllSectionsForCourse(Guid id);
+        Task<IEnumerable<EpisodeDto>> GetAllSectionsForSeason(Guid id);
+
 
         int GetEpisodeCountOfCourse(Guid courseId);
 
