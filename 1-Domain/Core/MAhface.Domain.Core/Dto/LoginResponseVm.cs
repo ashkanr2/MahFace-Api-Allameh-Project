@@ -10,6 +10,7 @@ namespace MAhface.Domain.Core1.Dto
     {
         public bool IsValid { get; set; }
         public string StatusMessage { get; set; }
+        public string UserName { get; set; }
         public Guid UserId { get; set; }
         public bool IsTeacher { get; set; }
         public bool IsAdmin { get; set; }
@@ -18,5 +19,10 @@ namespace MAhface.Domain.Core1.Dto
         public string Email { get; set; }
         public string ProfileImageBase64 { get; set; }
         public bool EmailConFirm { get; set; }
+        public string GenderTypeString { get; set; }
+        public string PhoneNumber { get; set; }
+
     }
+
+
 }

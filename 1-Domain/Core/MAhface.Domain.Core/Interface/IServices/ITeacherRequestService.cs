@@ -16,5 +16,6 @@ namespace MAhface.Domain.Core1.Interface.IServices
         Task<UpdateStatus> RejectRequest(Guid requestId, string adminDescription, Guid adminId);
         Task<UpdateStatus> ApproveMultipleRequests(List<Guid> requestIds, Guid adminId);
         Task<UpdateStatus> RejectMultipleRequests(List<Guid> requestIds, string adminDescription, Guid adminId);
+        Task<RequestStatus>GetUserTeacherRequestStatus(Guid userId);    
     }
 }

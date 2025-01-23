@@ -21,8 +21,9 @@ namespace MAhface.Domain.Core1.Dto
         public string? NationalCode { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Base64Profile { get; set; }
-        public bool IsTeacher { get; set; }
-    
+        public bool IsTeacher { get; set; }  
+
+
 
     }
 }

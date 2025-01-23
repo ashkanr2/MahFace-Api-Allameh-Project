@@ -69,7 +69,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             try
             {
                 var result =  _context.Views.FirstOrDefault(x=> x.CourseId == courseId);
-                return result.Number;
+                return result?.Number??0;
 
             }
             catch (Exception ex)
@@ -82,8 +82,9 @@ namespace MAhface.Infrastructure.EfCore.Repositories
         {
             try
             {
-                return await _context.Set<View>()
+               var result=  await _context.Set<View>()
                     .CountAsync(v => v.UserId == userId);
+                return result;
             }
             catch (Exception ex)
             {

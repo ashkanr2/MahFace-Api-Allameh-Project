@@ -161,6 +161,70 @@ namespace Mahface.Services.AppServices.Service
             return status;
         }
 
+        public async Task<RequestStatus> GetUserTeacherRequestStatus(Guid userId)
+        {
+            RequestStatus requestStatus = new RequestStatus();
+            
+            try
+            {
+                // Fetch the teacher request by userId
+                var request = await _teacherRequestRepository.GetRequestByUserId(userId);
+
+                // If no request exists
+                if (request == null)
+                {
+                    requestStatus.StatusDescripton = "برای این کاربر درخواستی در سیستم وجود ندارد";
+                    requestStatus.Status = 0;
+                    requestStatus.HasActiveRequest = false;
+                    return requestStatus;
+                }
+                requestStatus.Id = request.Id;
+                requestStatus.UserDescription=request.UserDescription;
+                requestStatus.UserRequestDate=request.UserRequestDate;
+                requestStatus.AdminResponseDate=request.AdminResponseDate;
+                requestStatus.AdminDescription=request.AdminDescription;
+                // If the request is pending (Admin has not responded yet)
+                if (request.AdminResponseDate == null)
+                {
+                    requestStatus.StatusDescripton = "درخواست شما در حال بررسی است";
+                    requestStatus.Status = (int)TeacherRequestStatusEnum.Pending;
+                    requestStatus.HasActiveRequest = true;
+                    return requestStatus;
+                }
+
+                // If the request has been approved
+                if (request.StatusCode == (int)TeacherRequestStatusEnum.Approved)
+                {
+                    requestStatus.StatusDescripton = "درخواست شما تایید شده است";
+                    requestStatus.Status = (int)TeacherRequestStatusEnum.Approved;
+                    requestStatus.HasActiveRequest = false; // No active request since it's approved
+                    return requestStatus;
+                }
+
+                // If the request has been rejected
+                if (request.StatusCode == (int)TeacherRequestStatusEnum.Rejected)
+                {
+                    requestStatus.StatusDescripton = "درخواست شما رد شده است";
+                    requestStatus.Status = (int)TeacherRequestStatusEnum.Rejected;
+                    requestStatus.HasActiveRequest = false; // No active request since it's rejected
+                    return requestStatus;
+                }
+
+                // If none of the above conditions are met, return a default status
+                requestStatus.StatusDescripton = "وضعیت درخواست مشخص نیست";
+                requestStatus.Status = -1; // Undefined status
+                requestStatus.HasActiveRequest = false;
+                return requestStatus;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception and return a failure status
+                requestStatus.StatusDescripton = "خطایی در پردازش درخواست رخ داده است";
+                requestStatus.Status = -1; // Indicating an error
+                requestStatus.HasActiveRequest = false;
+                return requestStatus;
+            }
+        }
 
     }
 }

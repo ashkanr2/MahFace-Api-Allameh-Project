@@ -2,6 +2,7 @@
 using MAhface.Domain.Core.Entities.BasicInfo.Accounting;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities.BasicInfo.Accounting;
+using MAhface.Domain.Core1.Enums;
 using MAhface.Domain.Core1.Interface.IRipositories;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Identity;
@@ -153,7 +154,7 @@ namespace Mahface.Services.AppServices.Service
                     IsTeacher=false,
                     IsSystemAccount=false,
                     IsSystemAdmin=false,
-                    
+                    GenderType=addUser.GenderEnum
                 };
 
                 var result = await _userRepository.Register(user, addUser.Password);
@@ -264,6 +265,7 @@ namespace Mahface.Services.AppServices.Service
                 // Map user details to LoginResponseVm
                 loginResponse.IsValid = true;
                 loginResponse.UserId = user.Id;
+                loginResponse.UserName=user.UserName;
                 loginResponse.IsTeacher = user.IsTeacher;
                 loginResponse.Firstname = user.Firstname;
                 loginResponse.LastName = user.LastName;
@@ -271,6 +273,10 @@ namespace Mahface.Services.AppServices.Service
                 loginResponse.StatusMessage = "ورود موفقیت‌آمیز بود.";
                 loginResponse.IsAdmin= (user.IsSystemAccount || user.IsSystemAdmin) ? true : false;
                 loginResponse.EmailConFirm= user.EmailConfirmed;
+                var gender = (GenderEnum)user.GenderType;
+                loginResponse.GenderTypeString=gender.GetDisplayName();
+                loginResponse.PhoneNumber=user.PhoneNumber;
+
 
                 // Retrieve profile image in Base64 format
                 if (user.ProfileImageId != null)

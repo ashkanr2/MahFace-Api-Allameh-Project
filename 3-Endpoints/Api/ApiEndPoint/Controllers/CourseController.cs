@@ -32,19 +32,29 @@ namespace ApiEndPoint.Controllers
             {
                 return NotFound();
             }
-          
+
             return Ok(courseDetail);
         }
 
 
+        [HttpGet("GetByIdForUpdate/{id}")]
+        public async Task<ActionResult<CourseDetail>> GetByIdForUpdate(Guid id)
+        {
+            var courseDetail = await _coursesService.GetCourseById(id);
+            if (courseDetail == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(courseDetail);
+        }
 
 
         [HttpGet("GetAllCourses")]
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCourses()
         {
             var courses = await _coursesService.GetCoursesListAsync();
-            
+
             return Ok(courses);
         }
 
@@ -55,7 +65,7 @@ namespace ApiEndPoint.Controllers
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCoursesWithCategoryId(Guid categoryId)
         {
             var courses = await _coursesService.GetAllCoursesWithFilterCategoryId(categoryId);
-            
+
             return Ok(courses);
         }
 
@@ -69,11 +79,11 @@ namespace ApiEndPoint.Controllers
 
 
 
-        [HttpGet("GetAllCoursesWithSearch/{searchInput}")]
+        [HttpGet("GetAllCoursesWithSearch/")]
         public async Task<ActionResult<IEnumerable<CourseVm>>> GetAllCoursesWithSearch(string SearchInput)
         {
             var courses = await _coursesService.GetAllCoursesWithFilter(SearchInput);
-            
+
             return Ok(courses);
         }
 
@@ -98,7 +108,7 @@ namespace ApiEndPoint.Controllers
         //{
         //    try
         //    {
-              
+
         //      return Ok(courses);
         //    }
         //    catch (Exception ex)
@@ -114,7 +124,7 @@ namespace ApiEndPoint.Controllers
         {
             try
             {
-               var courses = await _coursesService.GetAllTeacherCourses(userId);
+                var courses = await _coursesService.GetAllTeacherCourses(userId);
                 return Ok(courses);
             }
             catch (Exception ex)
@@ -130,32 +140,46 @@ namespace ApiEndPoint.Controllers
         [HttpPost("AddCourse")]
         public async Task<AddStatusVm> AddCourse([FromBody] AddCourseVm courseVm)
         {
-           
-            var result = await _coursesService.AddCourse(courseVm);
-            return result;
+            
+            try
+            {
+                var result = await _coursesService.AddCourse(courseVm);
+                return result;
+
+            }
+            catch (Exception ex) {
+
+                AddStatusVm addStatusVm = new AddStatusVm();
+                addStatusVm.IsValid=false;
+                addStatusVm.StatusMessage="با خطا مواجه شد مجدد تلاش کنید";
+                return addStatusVm; 
+            }
         }
 
 
         [HttpPut("UpdateCourse/{id}")]
-        public async Task<IActionResult> UpdateCourse([FromBody] CourseVm courseVm)
+        public async Task<UpdateStatus> UpdateCourse(Guid id , [FromBody] AddCourseVm courseVm)
         {
-            var courseDto = _mapper.Map<CourseDto>(courseVm);
-            var result = await _coursesService.UpdateCourse(courseDto);
+            try
+            {
+                var result = await _coursesService.UpdateCourse(id ,courseVm);
+                return result;
 
-            if (result.IsValid)
-                return NoContent();
-            else
-                return BadRequest(result.StatusMessage);
+            }
+            catch (Exception ex)
+            {
+                UpdateStatus result = new UpdateStatus();
+                result.IsValid=false;
+                result.StatusMessage="با خطا مواجه شد مجدد تلاش کنید";
+                return result;
+            }
         }
 
         [HttpDelete("DeleteCourse/{id}")]
-        public async Task<IActionResult> DeleteCourse(Guid id)
+        public async Task<UpdateStatus> DeleteCourse(Guid id)
         {
             var result = await _coursesService.DeleteCourse(id);
-            if (result.IsValid)
-                return NoContent();
-            else
-                return BadRequest(result.StatusMessage);
+            return result;
         }
 
 

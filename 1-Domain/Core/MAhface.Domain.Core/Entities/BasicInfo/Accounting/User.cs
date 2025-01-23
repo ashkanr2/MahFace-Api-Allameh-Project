@@ -43,7 +43,7 @@ namespace MAhface.Domain.Core.Entities.BasicInfo.Accounting
 
         public Image? Image { get; set; }
         public Guid? ProfileImageId { get; set; }
-
-
+        [DefaultValue(0)]
+        public int GenderType { get; set; }
     }
 }

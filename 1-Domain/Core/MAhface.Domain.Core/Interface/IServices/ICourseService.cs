@@ -21,8 +21,8 @@ namespace MAhface.Domain.Core.Interface.IServices
         
         Task<List<CourseVm>> GetAllCoursesWithFilter(string Input);
         Task<AddStatusVm> AddCourse(AddCourseVm addCourse);
-        Task<AddStatusVm> UpdateCourse(CourseDto courseDto);
-        Task<AddStatusVm> DeleteCourse(Guid id);
+        Task<UpdateStatus> UpdateCourse(Guid id, AddCourseVm course);
+        Task<UpdateStatus> DeleteCourse(Guid id);
     }
 }
 

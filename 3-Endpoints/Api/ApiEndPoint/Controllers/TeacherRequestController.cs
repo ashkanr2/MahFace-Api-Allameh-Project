@@ -31,6 +31,14 @@ namespace ApiEndPoint.Controllers
             return Ok(requests);
         }
 
+        [HttpGet("GetLastStatusForUser/{userId}")]
+        public async Task<RequestStatus> GetAllRequests(Guid userId)
+        {
+             var result = await _teacherRequestService.GetUserTeacherRequestStatus(userId);
+             return result;
+        }
+
+
         [HttpPost("ApproveRequest/{requestId}")]
         public async Task<UpdateStatus> ApproveRequest(Guid requestId, Guid adminId)
         {

@@ -48,7 +48,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                                     .Include(c => c.Teacher)
                                     .Include(c => c.category)
                                     .Include(c => c.Seasons)
-                                    .ThenInclude(s => s.Episodes)
+                                    .ThenInclude(s => s.Episodes).Where(c=>!c.IsDeleted)
                                    /// .Include(c => c.Image)
                                     .Select(c => new CourseVm
                                     {
@@ -139,7 +139,14 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public async Task UpdateCourse(Courses course)
         {
-            _context.Courses.Update(course);
+           var entity =  _context.Courses.FirstOrDefault(c=>c.Id == course.Id);
+            entity.Title=course.Title;
+            entity.Description=course.Description;
+            entity.TeacherId=course.TeacherId;
+            entity.Cost = course.Cost;
+            entity.CategoryId=course.CategoryId;
+            entity.CreatedUserID=course.CreatedUserID;  
+           
             await _context.SaveChangesAsync();
         }
 
@@ -148,7 +155,8 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             var course = await GetCourseById(id);
             if (course != null)
             {
-                _context.Courses.Remove(course);
+                course.IsDeleted=true;
+                course.DeletedDate=DateTime.Now;
                 await _context.SaveChangesAsync();
             }
         }

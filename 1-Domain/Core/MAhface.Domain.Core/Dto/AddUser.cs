@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,8 @@ namespace MAhface.Domain.Core1.Dto
         public string? PhoneNumber { get; set; }
         [MaxLength(10)]
         public string? NationalCode { get; set; }
+        [DefaultValue(0)]
+        public int GenderEnum { get; set; }
 
     }
 }

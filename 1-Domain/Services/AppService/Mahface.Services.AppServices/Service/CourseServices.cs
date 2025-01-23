@@ -3,15 +3,11 @@ using MAhface.Domain.Core.Dto;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core1.Interface.IServices;
 using MAhface.Domain.Core1.Interface.IRipositories;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using MAhface.Domain.Core.Interface.IRipositories;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core.Interface.IServices;
 using Microsoft.EntityFrameworkCore;
-using MAhface.Domain.Core.Entities.BasicInfo.Business;
-using System.Data;
+
 
 namespace Mahface.Services.AppServices.Service
 {
@@ -27,7 +23,7 @@ namespace Mahface.Services.AppServices.Service
         private readonly IImageService _imageService;
         private readonly ITeacherService _teacherService;
         public CoursesService(ICourseRipository repository, IMapper mapper, ISeasonService seasonService, IEpisodeService sectionService,
-            IUserService userService, ICategoryService categoryService, IViewService viewService, IImageService imageService,ITeacherService teacherService)
+            IUserService userService, ICategoryService categoryService, IViewService viewService, IImageService imageService, ITeacherService teacherService)
         {
             _repository = repository;
             _mapper = mapper;
@@ -127,8 +123,8 @@ namespace Mahface.Services.AppServices.Service
             try
             {
 
-                var courses = await _repository.NewGetAllCourses().Where(c => c.CategoryId == categoryId).Select(x => new NavVM(){ Id= x.Id,Title= x.Title }).ToListAsync();
-                 return courses;
+                var courses = await _repository.NewGetAllCourses().Where(c => c.CategoryId == categoryId).Select(x => new NavVM() { Id= x.Id, Title= x.Title }).ToListAsync();
+                return courses;
             }
             catch (Exception ex)
             {
@@ -141,7 +137,11 @@ namespace Mahface.Services.AppServices.Service
         {
             try
             {
-                var teacherId = (await _teacherService.GetTeacherByUSerId(userId)).Id;
+                var teacherId = (await _teacherService.GetTeacherByUSerId(userId))?.Id?? null;
+                if (teacherId == null)
+                {
+                    return new List<CourseVm>();
+                }
                 var courses = await _repository.NewGetAllCourses().Where(c => c.TeacherId == teacherId).ToListAsync();
                 foreach (var course in courses)
                 {
@@ -167,8 +167,8 @@ namespace Mahface.Services.AppServices.Service
         {
             try
             {
-                 
-                                       
+
+
                 var courses = await _repository.NewGetAllCourses().Where(c => EF.Functions.Like(c.Title, $"%{Input}%")).ToListAsync();
                 foreach (var course in courses)
                 {
@@ -235,7 +235,7 @@ namespace Mahface.Services.AppServices.Service
         {
             Courses courses = new();
             AddStatusVm addImageResult = new AddStatusVm() { IsValid= false };
-            if (addCourse.ImageBase64 != null)
+            if (addCourse.ImageBase64 != null && addCourse.ImageBase64!="string" && addCourse.ImageBase64!="")
             {
                 ImageDto image = new ImageDto();
                 image.Url =addCourse.Title;
@@ -262,50 +262,87 @@ namespace Mahface.Services.AppServices.Service
         }
 
         // Update an existing course
-        public async Task<AddStatusVm> UpdateCourse(CourseDto courseDto)
+        public async Task<UpdateStatus> UpdateCourse(Guid id, AddCourseVm course)
         {
             try
             {
-                var course = _mapper.Map<Courses>(courseDto);
-                await _repository.UpdateCourse(course);
-                return new AddStatusVm
+                var model = await _repository.GetCourseById(id);///// await GetCourseById(id);
+                if (model==null) {
+
+                    return new UpdateStatus
+                    {
+                        IsValid = false,
+                        StatusMessage = "این دوره در سیستم پیدا نشد"
+                    };
+                }
+                model.Title = course.Title; 
+                model.TeacherId=course.TeacherId;   
+                model.CategoryId=course.CategoryId;
+                model.Description=course.CourseDescription;
+                model.CategoryId= course.CategoryId;  
+                model.Cost=course.Cost;
+                var x = model.Code;
+
+                await _repository.UpdateCourse(model);
+                return new UpdateStatus
                 {
                     IsValid = true,
-                    StatusMessage = "Course updated successfully."
+                    StatusMessage = "با موفقیت اپدیت شد"
                 };
             }
             catch (Exception ex)
             {
-                return new AddStatusVm
+                return new UpdateStatus
                 {
                     IsValid = false,
-                    StatusMessage = $"Error while updating course: {ex.Message}"
+                    StatusMessage = $"با مشکل مواجه شد : {ex.Message}"
                 };
             }
         }
 
         // Delete a course
-        public async Task<AddStatusVm> DeleteCourse(Guid id)
+        public async Task<UpdateStatus> DeleteCourse(Guid id)
         {
             try
             {
+                var model = await _repository.GetCourseById(id);///// await GetCourseById(id);
+                if (model==null)
+                {
+
+                    return new UpdateStatus
+                    {
+                        IsValid = false,
+                        StatusMessage = "این دوره در سیستم پیدا نشد"
+                    };
+                }
+
+                var sections = (await _sectionService.GetAllSectionsForCourse(id));
+                if ( sections.Count() > 0 )
+                {
+                    return new UpdateStatus
+                    {
+                        IsValid = false,
+                        StatusMessage = "برای این دوره ویدئو بارگذاری شده است امکان حذف  وجود ندارد"
+                    };
+                }
+
                 await _repository.DeleteCourse(id);
-                return new AddStatusVm
+                return new UpdateStatus
                 {
                     IsValid = true,
-                    StatusMessage = "Course deleted successfully."
+                    StatusMessage = "با موفقیت حذف شد "
                 };
             }
             catch (Exception ex)
             {
-                return new AddStatusVm
+                return new UpdateStatus
                 {
                     IsValid = false,
-                    StatusMessage = $"Error while deleting course: {ex.Message}"
+                    StatusMessage = $"با مشکل مواجه شد: {ex.Message}"
                 };
             }
         }
 
-       
+
     }
 }
