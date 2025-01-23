@@ -4,6 +4,7 @@ using MAhface.Infrastructure.EfCore.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    partial class AllamehPrrojectModelSnapshot : ModelSnapshot
+    [Migration("20250123150405_addBaseEntity")]
+    partial class addBaseEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,8 +130,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
                             Code = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6561),
-                            CreatedUserID = new Guid("98438e02-92bd-444c-8fff-dde61665ae96"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(470),
+                            CreatedUserID = new Guid("18f2f82d-9012-4862-b3a6-30dd9bf61636"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44")
@@ -137,8 +140,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
                             Code = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6568),
-                            CreatedUserID = new Guid("82f80bf3-1c2a-4491-b980-9e49e433d57a"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(477),
+                            CreatedUserID = new Guid("06b8f4a5-cebc-4344-90e1-5e18284f0084"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd")
@@ -147,8 +150,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
                             Code = 3,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6572),
-                            CreatedUserID = new Guid("79364c79-0621-4497-b81d-71427069055a"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(482),
+                            CreatedUserID = new Guid("952b30dd-a6cf-4450-9771-6061d5a443ee"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
@@ -157,8 +160,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("0c7938f9-e881-42fa-242b-08dd2592d1dd"),
                             Code = 4,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6576),
-                            CreatedUserID = new Guid("42d8b18d-cecc-49db-9b6d-fd64cc5ba465"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(490),
+                            CreatedUserID = new Guid("04ced44a-f92c-4025-9ed7-68181251f7f4"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
@@ -167,8 +170,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("3a4086aa-1278-4325-242c-08dd2592d1dd"),
                             Code = 5,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6585),
-                            CreatedUserID = new Guid("8ebd124e-8cf2-43f9-9db2-62d25e5a31f0"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(494),
+                            CreatedUserID = new Guid("596c8278-e9cf-4e4f-a165-9c47a02085e3"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
@@ -177,8 +180,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("ecf68ade-4b48-4307-242d-08dd2592d1dd"),
                             Code = 6,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6590),
-                            CreatedUserID = new Guid("674f044e-8b5b-4d2f-ad5a-1bd9de2d40cd"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(499),
+                            CreatedUserID = new Guid("f0731b19-d64b-4ad7-8598-3dfcd52bc88f"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
@@ -187,8 +190,8 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
                             Code = 7,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6594),
-                            CreatedUserID = new Guid("a0fa8e5e-9ea2-4f14-b056-b22c452d44e3"),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(504),
+                            CreatedUserID = new Guid("137b4a09-29a7-4c3c-bffc-a3546b4fc62a"),
                             ISActive = true,
                             IsDeleted = false,
                             UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
@@ -600,7 +603,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("4a6ef880-e352-49dc-0976-08dd0d886873"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(5962),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9949),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "string",
                             ISActive = true,
@@ -612,7 +615,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("13dc2597-a7a3-482e-b54a-23e83d2ab18b"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6053),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9969),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -624,7 +627,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6058),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9974),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -636,7 +639,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6062),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9978),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -648,7 +651,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6065),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9981),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -660,7 +663,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("35f3bf57-7f05-41a7-8ecb-9b48bcd52fa7"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6070),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9986),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -672,7 +675,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6073),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9990),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -684,7 +687,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6083),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9994),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -696,7 +699,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("75f6493f-813e-4d97-a0ea-e4203b90f436"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6091),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 235, DateTimeKind.Local).AddTicks(9997),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -708,7 +711,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         {
                             Id = new Guid("a2a57c78-7043-42e3-a156-ea5ad99fc083"),
                             Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6096),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(1),
                             CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             Description = "",
                             ISActive = true,
@@ -850,7 +853,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1200000m,
                             CourseDescription = "دوره جامع و پروژه محور سی‌شارپ مناسب برای مبتدی تا پیشرفته.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6712),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(557),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -866,7 +869,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1500000m,
                             CourseDescription = "آشنایی با اصول مدیریت مالی و تکنیک‌های سرمایه‌گذاری در بازار.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6721),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(564),
                             CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             ISActive = true,
                             IsDeleted = false,
@@ -882,7 +885,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 800000m,
                             CourseDescription = "دوره ویژه یادگیری زبان انگلیسی از سطح پایه با استفاده از روش‌های کاربردی.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6726),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(570),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -898,7 +901,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 900000m,
                             CourseDescription = "آشنایی با اصول طراحی و نقاشی برای هنرجویان مبتدی.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6733),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(576),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -914,7 +917,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 2000000m,
                             CourseDescription = "دوره تخصصی برای یادگیری اصول هوش مصنوعی و پیاده‌سازی الگوریتم‌های یادگیری ماشین.",
                             CourseLevelId = 3,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6739),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(581),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -930,7 +933,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 500000m,
                             CourseDescription = "دوره‌ای مناسب برای آشنایی با اصول اولیه ریاضیات پایه و کاربردهای آن.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6746),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(588),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -946,7 +949,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 800000m,
                             CourseDescription = "آشنایی با مفاهیم پایه‌ای فیزیک و حل مسائل کاربردی.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6753),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(593),
                             CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             ISActive = true,
                             IsDeleted = false,
@@ -962,7 +965,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1000000m,
                             CourseDescription = "یادگیری مفاهیم آمار و احتمالات برای حل مسائل مهندسی.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6758),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(600),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -978,7 +981,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1500000m,
                             CourseDescription = "آشنایی با اصول بازاریابی در دنیای دیجیتال و راه‌های جذب مشتری.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6763),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(605),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -994,7 +997,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1200000m,
                             CourseDescription = "دوره‌ای جامع برای یادگیری طراحی صفحات وب با HTML و CSS.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6770),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(660),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1010,7 +1013,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 2000000m,
                             CourseDescription = "آموزش پیشرفته پایتون برای تحلیل داده، هوش مصنوعی و طراحی سیستم.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6776),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(667),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1026,7 +1029,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1800000m,
                             CourseDescription = "آشنایی با ابزارها و تکنیک‌های طراحی سه‌بعدی در نرم‌افزار Blender.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6781),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(673),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1042,7 +1045,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 900000m,
                             CourseDescription = "آموزش مفاهیم اولیه برنامه‌نویسی با زبان جاوا برای مبتدیان.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6787),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(680),
                             CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1058,7 +1061,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1100000m,
                             CourseDescription = "آشنایی با اصول پایه شبکه‌های کامپیوتری و پروتکل‌های ارتباطی.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6793),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(685),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1074,7 +1077,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1500000m,
                             CourseDescription = "آموزش تحلیل داده‌های سازمانی با استفاده از زبان SQL.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6798),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(691),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1090,7 +1093,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 2500000m,
                             CourseDescription = "آموزش مفاهیم پایه‌ای یادگیری ماشین و الگوریتم‌های آن.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6804),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(697),
                             CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1106,7 +1109,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 800000m,
                             CourseDescription = "یادگیری اصول پایه‌ای مدارهای الکترونیکی و کاربردهای آن‌ها.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6809),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(703),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1122,7 +1125,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 2200000m,
                             CourseDescription = "آموزش ساخت اپلیکیشن‌های موبایل برای اندروید و iOS با Flutter.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6816),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(711),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1138,7 +1141,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1700000m,
                             CourseDescription = "آشنایی با تکنیک‌ها و ابزارهای مدیریت پروژه‌های نرم‌افزاری.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6821),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(717),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1154,7 +1157,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1200000m,
                             CourseDescription = "آموزش طراحی رابط کاربری زیبا و کاربردی با ابزارهای مدرن.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6828),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(722),
                             CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1170,7 +1173,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 2500000m,
                             CourseDescription = "آموزش ساخت برنامه‌های تحت وب بااستفاده از ASP.NETCore.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6833),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(729),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1186,7 +1189,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 1800000m,
                             CourseDescription = "یادگیری اصول و تکنیک‌های پایه‌ای هوش مصنوعی.",
                             CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6839),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(735),
                             CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1202,7 +1205,7 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Cost = 2000000m,
                             CourseDescription = "آموزش مفاهیم شیءگرایی و پیاده‌سازی آن با زبان C#.",
                             CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 23, 18, 43, 27, 64, DateTimeKind.Local).AddTicks(6844),
+                            CreatedDate = new DateTime(2025, 1, 23, 18, 34, 4, 236, DateTimeKind.Local).AddTicks(740),
                             CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             ISActive = true,
                             IsDeleted = false,
@@ -1366,54 +1369,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Otps");
-                });
-
-            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.StudentFavoriteCourses", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Code")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Code"));
-
-                    b.Property<Guid>("CourseId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedUserID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeletedUserID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("ISActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("StudentFavoriteCourses", "Study");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.TeacherRequests", b =>
@@ -1883,25 +1838,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .HasForeignKey("SentByUserId");
 
                     b.Navigation("SentByUser");
-                });
-
-            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.StudentFavoriteCourses", b =>
-                {
-                    b.HasOne("MAhface.Domain.Core.Entities.Study.Course.Courses", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.TeacherRequests", b =>

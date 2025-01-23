@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MAhface.Domain.Core1.Entities.BasicInfo.Business
+namespace MAhface.Domain.Core1.Entities.BasicInfo.Accounting
 {
-    [Table("StudentCourseRegistrations", Schema = "Study")]
-    public class StudentCourses:BaseEntity
+    [Table("StudentFavoriteCourses", Schema = "Study")]
+    public class StudentFavoriteCourses:BaseEntity
     {
         public Guid Id { get; set; }
 

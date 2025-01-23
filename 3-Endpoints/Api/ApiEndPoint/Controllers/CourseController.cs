@@ -78,7 +78,7 @@ namespace ApiEndPoint.Controllers
         }
 
         [HttpGet("GetAllStudentCourses/{userId}")]
-        public async Task<IActionResult> GetUserCourses(Guid userId)
+        public async Task<IActionResult> GetAllStudentCourses(Guid userId)
         {
             try
             {
@@ -91,6 +91,40 @@ namespace ApiEndPoint.Controllers
                 return BadRequest($"خطا در دریافت دوره‌های کاربر: {ex.Message}");
             }
         }
+
+
+        //[HttpGet("GetAllStudentFavoritsCourses/{userId}")]
+        //public async Task<IActionResult> GetAllStudentFavoritsCourses(Guid userId)
+        //{
+        //    try
+        //    {
+              
+        //      return Ok(courses);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // ثبت خطا (اختیاری)
+        //        return BadRequest($"خطا در دریافت دوره‌های کاربر: {ex.Message}");
+        //    }
+        //}
+
+
+        [HttpGet("GetAllTeacherCourses/{userId}")]
+        public async Task<IActionResult> GetAllTeacherCourses(Guid userId)
+        {
+            try
+            {
+               var courses = await _coursesService.GetAllTeacherCourses(userId);
+                return Ok(courses);
+            }
+            catch (Exception ex)
+            {
+                // ثبت خطا (اختیاری)
+                return BadRequest($"خطا در دریافت دوره‌های کاربر: {ex.Message}");
+            }
+        }
+
+
 
 
         [HttpPost("AddCourse")]

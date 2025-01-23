@@ -90,7 +90,13 @@ namespace MAhface.Domain.Core1.Interface.IServices
                         studentCoursesList.Add(new StudentCourses
                         {
                             UserId = user.Id,
-                            CourseId = courseId
+                            CourseId = courseId,
+                            CreatedUserID=user.Id,
+                            CreatedDate= DateTime.Now,  
+                            IsDeleted=false,
+                            ISActive=true,
+                            
+
                         });
                     }
                 }

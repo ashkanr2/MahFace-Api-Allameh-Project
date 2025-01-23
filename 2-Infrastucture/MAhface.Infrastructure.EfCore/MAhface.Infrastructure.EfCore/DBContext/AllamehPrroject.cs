@@ -36,6 +36,7 @@ namespace MAhface.Infrastructure.EfCore.DBContext
         public DbSet<EmailSetting> EmailSetting { get; set; }
         public DbSet<Comment>Comments { get; set; }
         public DbSet<EmailLog> EmailLog { get; set; }
+        public DbSet<StudentFavoriteCourses> StudentFavoriteCourses { get; set; }
 
         public DbSet<StudentCourses>StudentCourses { get; set; }
         public DbSet<Otp> Otps { get; set; }
@@ -57,11 +58,11 @@ namespace MAhface.Infrastructure.EfCore.DBContext
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
             modelBuilder.ApplyConfiguration(new ErrorLogConfiguration());
 
-            modelBuilder.Entity<Category>().HasData(SeedData.SeedData.GetCategories().ToArray());
-            modelBuilder.Entity<User>().HasData(SeedData.SeedData.GetUsers().ToArray());
-            modelBuilder.Entity<Teacher>().HasData(SeedData.SeedData.GetTeachers().ToArray());
-            modelBuilder.Entity<Courses>().HasData(SeedData.SeedData.GetCourses().ToArray());
-            //modelBuilder.Entity<Seasons>().HasData(SeedData.SeedData.GetSeasons().ToArray());
+          modelBuilder.Entity<Category>().HasData(SeedData.SeedData.GetCategories().ToArray());
+          modelBuilder.Entity<User>().HasData(SeedData.SeedData.GetUsers().ToArray());
+          modelBuilder.Entity<Teacher>().HasData(SeedData.SeedData.GetTeachers().ToArray());
+          modelBuilder.Entity<Courses>().HasData(SeedData.SeedData.GetCourses().ToArray());
+           
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

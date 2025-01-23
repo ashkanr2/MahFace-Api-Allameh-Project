@@ -25,8 +25,9 @@ namespace Mahface.Services.AppServices.Service
         private readonly IMapper _mapper;
         private readonly IViewService _viewService;
         private readonly IImageService _imageService;
+        private readonly ITeacherService _teacherService;
         public CoursesService(ICourseRipository repository, IMapper mapper, ISeasonService seasonService, IEpisodeService sectionService,
-            IUserService userService, ICategoryService categoryService, IViewService viewService, IImageService imageService)
+            IUserService userService, ICategoryService categoryService, IViewService viewService, IImageService imageService,ITeacherService teacherService)
         {
             _repository = repository;
             _mapper = mapper;
@@ -36,6 +37,7 @@ namespace Mahface.Services.AppServices.Service
             _categoryService = categoryService;
             _viewService = viewService;
             _imageService = imageService;
+            _teacherService = teacherService;
         }
 
         // Get all courses
@@ -135,7 +137,32 @@ namespace Mahface.Services.AppServices.Service
             }
 
         }
+        public async Task<List<CourseVm>> GetAllTeacherCourses(Guid userId)
+        {
+            try
+            {
+                var teacherId = (await _teacherService.GetTeacherByUSerId(userId)).Id;
+                var courses = await _repository.NewGetAllCourses().Where(c => c.TeacherId == teacherId).ToListAsync();
+                foreach (var course in courses)
+                {
+                    var sumSeasons = _seasonService.GetCourseSeasonsCount(course.Id);
+                    var sumSection = _sectionService.GetEpisodeCountOfCourse(course.Id);
+                    var sumView = await _viewService.GetTotalViewsForCourse(course.Id);
+                    course.TotalSeasons = sumSeasons;
+                    course.TotalSections = sumSection;
+                    course.TotalDuration = 100;
+                    course.TotalView= sumView == 0 ? 0 : sumView;
 
+                }
+                return courses; // به‌طور مستقیم نتیجه را برمی‌گردانیم
+            }
+            catch (Exception ex)
+            {
+                // لاگ و هندل کردن خطا
+                throw new Exception("Error executing query for courses list.", ex);
+            }
+
+        }
         public async Task<List<CourseVm>> GetAllCoursesWithFilter(string Input)
         {
             try
@@ -279,6 +306,6 @@ namespace Mahface.Services.AppServices.Service
             }
         }
 
-
+       
     }
 }

@@ -26,6 +26,10 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             {
                 // Generate a new ID for each StudentCourse assignment
                 studentCourses.Id = Guid.NewGuid();
+                studentCourses.CreatedUserID = studentCourses.UserId;
+                studentCourses.CreatedDate= DateTime.Now;
+                studentCourses.IsDeleted=false;
+                studentCourses.ISActive=true;
 
                 // Add the new student-course association to the database
                 _context.Set<StudentCourses>().Add(studentCourses);
