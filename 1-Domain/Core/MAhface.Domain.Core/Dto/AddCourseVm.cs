@@ -13,7 +13,7 @@ namespace MAhface.Domain.Core1.Dto
     {
         public string Title { get; set; }
         public int? CourseLevelId { get; set; }
-        public Guid TeacherId { get; set; }
+        //public Guid TeacherId { get; set; }
         public Guid CategoryId { get; set; }
         public Guid CreatedUserID { get; set; }
         public string CourseDescription { get; set; }

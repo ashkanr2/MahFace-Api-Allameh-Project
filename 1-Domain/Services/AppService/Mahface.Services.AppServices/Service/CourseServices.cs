@@ -242,10 +242,20 @@ namespace Mahface.Services.AppServices.Service
                 image.Base64File= addCourse.ImageBase64;
                 addImageResult = await _imageService.AddImage(image);
             }
+            var teacher = await _teacherService.GetTeacherByUSerId(addCourse.CreatedUserID);
+            if (teacher == null)
+            {
+                return new AddStatusVm
+                {
+                    IsValid =false,
+                    StatusMessage="شما نقش استاد را  ندارید "
+                };
+
+            }
             courses.Id = new Guid();
             courses.Title = addCourse.Title;
             courses.CourseLevelId = addCourse.CourseLevelId;
-            courses.TeacherId = addCourse.TeacherId;
+            courses.TeacherId = teacher.Id;
             courses.CategoryId = addCourse.CategoryId;
             courses.CourseDescription = addCourse.CourseDescription;
             courses.Cost = addCourse.Cost; courses.ISActive = true;
@@ -267,7 +277,8 @@ namespace Mahface.Services.AppServices.Service
             try
             {
                 var model = await _repository.GetCourseById(id);///// await GetCourseById(id);
-                if (model==null) {
+                if (model==null)
+                {
 
                     return new UpdateStatus
                     {
@@ -275,11 +286,21 @@ namespace Mahface.Services.AppServices.Service
                         StatusMessage = "این دوره در سیستم پیدا نشد"
                     };
                 }
-                model.Title = course.Title; 
-                model.TeacherId=course.TeacherId;   
+                var teacher = await _teacherService.GetTeacherByUSerId(course.CreatedUserID);
+                if (teacher != null)
+                {
+                    return new UpdateStatus
+                    {
+                        IsValid =false,
+                        StatusMessage="شما نقش استاد را  ندارید "
+                    };
+
+                }
+                model.Title = course.Title;
+                model.TeacherId=teacher.Id;
                 model.CategoryId=course.CategoryId;
                 model.Description=course.CourseDescription;
-                model.CategoryId= course.CategoryId;  
+                model.CategoryId= course.CategoryId;
                 model.Cost=course.Cost;
                 var x = model.Code;
 
@@ -317,7 +338,7 @@ namespace Mahface.Services.AppServices.Service
                 }
 
                 var sections = (await _sectionService.GetAllSectionsForCourse(id));
-                if ( sections.Count() > 0 )
+                if (sections.Count() > 0)
                 {
                     return new UpdateStatus
                     {
