@@ -25,7 +25,11 @@ namespace ApiEndPoint.Controllers
                        
         }
 
-        // GET: api/Users
+        /// <summary>
+        /// دریافت لیست تمامی کاربران
+        /// این متد لیستی از تمام کاربران سیستم را برمی‌گرداند.
+        /// </summary>
+
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
@@ -38,7 +42,11 @@ namespace ApiEndPoint.Controllers
             return Ok(Users);
         }
 
-        // GET: api/Users/5
+        /// <summary>
+        /// دریافت اطلاعات یک کاربر بر اساس شناسه
+        /// این متد اطلاعات یک کاربر خاص را با استفاده از شناسه آن بازیابی می‌کند.
+        /// </summary>
+
         [HttpGet("GetById")]
         public async Task<ActionResult<UserDto>> GetUser(Guid id)
         {
@@ -52,9 +60,13 @@ namespace ApiEndPoint.Controllers
             return Ok(user);
         }
 
-       
- 
-      
+
+
+        /// <summary>
+        /// حذف یک کاربر
+        /// این متد یک کاربر مشخص را با استفاده از شناسه آن از سیستم حذف می‌کند.
+        /// </summary>
+
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteUser(Guid id)
         {

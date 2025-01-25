@@ -18,6 +18,10 @@ public class SeasonController : ControllerBase
     {
         _seasonService = seasonService;
     }
+    /// <summary>
+    /// دریافت تمامی فصول
+    /// این متد لیستی از تمام فصول موجود را برمی‌گرداند.
+    /// </summary>
 
     [HttpGet("GetAllSeasons")]
     public  ActionResult<List<SeasonsDto>> GetAllSeasons()
@@ -36,6 +40,10 @@ public class SeasonController : ControllerBase
     }
 
 
+    /// <summary>
+    /// دریافت فصل بر اساس شناسه
+    /// این متد اطلاعات یک فصل خاص را با استفاده از شناسه آن بازیابی می‌کند.
+    /// </summary>
 
     [HttpGet("GetById")]
     public ActionResult<SeasonsDto> GetById(Guid id)
@@ -47,6 +55,10 @@ public class SeasonController : ControllerBase
         }
         return Ok(season);
     }
+    /// <summary>
+    /// دریافت تمامی فصول مرتبط با یک دوره خاص
+    /// این متد لیستی از فصول مربوط به یک دوره خاص را برمی‌گرداند.
+    /// </summary>
 
     [HttpGet("GetAllByCourseId")]
     public ActionResult<List<SeasonsDto>> GetAllCourseSeasons(Guid courseId)
@@ -55,7 +67,11 @@ public class SeasonController : ControllerBase
         return Ok(seasons);
     }
 
-    
+
+    /// <summary>
+    /// افزودن فصل جدید
+    /// این متد یک فصل جدید را با استفاده از اطلاعات ورودی ایجاد می‌کند.
+    /// </summary>
 
     [HttpPost("AddSeason")]
     public ActionResult<string> Create(AddSeasonVM seasonVm)
@@ -68,6 +84,10 @@ public class SeasonController : ControllerBase
         var result = _seasonService.Create(seasonDto);
         return Ok(result);
     }
+    /// <summary>
+    /// به‌روزرسانی فصل
+    /// این متد اطلاعات یک فصل موجود را بر اساس شناسه آن و داده‌های ورودی به‌روزرسانی می‌کند.
+    /// </summary>
 
     [HttpPut("Update")]
     public ActionResult<string> Update( SeasonVm seasonVm)

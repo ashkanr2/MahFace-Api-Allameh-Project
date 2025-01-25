@@ -19,10 +19,14 @@ namespace ApiEndPoint.Controllers
             _episodeService = episodeService;
         }
 
-       
 
 
 
+
+        /// <summary>
+        /// دریافت جزئیات یک بخش بر اساس شناسه
+        /// این متد اطلاعات یک بخش را با استفاده از شناسه آن بازیابی می‌کند.
+        /// </summary>
 
         // Get section details
         [HttpGet("GetSectionDetails/{sectionId}")]
@@ -36,6 +40,10 @@ namespace ApiEndPoint.Controllers
             return Ok(sectionDto);
         }
 
+        /// <summary>
+        /// دریافت تمامی بخش‌های مربوط به یک فصل
+        /// این متد لیستی از بخش‌های مربوط به یک فصل خاص را برمی‌گرداند.
+        /// </summary>
 
         [HttpGet("GetAllSeasonSection/{seasonId}")]
         public async Task<IActionResult> GetAllSeasonSection(Guid seasonId)
@@ -48,6 +56,10 @@ namespace ApiEndPoint.Controllers
             return Ok(sectionDto);
         }
 
+        /// <summary>
+        /// دریافت تمامی بخش‌های مربوط به یک دوره خاص
+        /// این متد لیستی از بخش‌های مربوط به یک دوره خاص را برمی‌گرداند.
+        /// </summary>
 
         [HttpGet("GetAllCourseSection/{courseId}")]
         public async Task<IActionResult> GetAllSectionCourse(Guid courseId)
@@ -60,96 +72,26 @@ namespace ApiEndPoint.Controllers
             return Ok(sectionDto);
         }
 
+        /// <summary>
+        /// به‌روزرسانی بخش
+        /// این متد اطلاعات یک بخش موجود را با استفاده از شناسه آن و داده‌های ورودی به‌روزرسانی می‌کند.
+        /// </summary>
         [HttpPut("UpdateSection/{sectionId}")]
         public async Task<ActionResult<UpdateStatus>> UpdateSection(Guid sectionId, [FromBody] UpdateSectionRequest request)
         {
             var result = await _episodeService.UpdateSection(sectionId, request);
             return Ok(result);
         }
-
+        /// <summary>
+        /// ایجاد بخش جدید
+        /// این متد یک بخش جدید را با استفاده از داده‌های ورودی ایجاد می‌کند.
+        /// </summary>
         [HttpPost("CreateSection")]
         public async Task<ActionResult<AddStatusVm>> CreateSection([FromBody] CreateSectionRequest request)
         {
             var result = await _episodeService.CreateSection(request);
             return Ok(result);
         }
-
-
-        //[HttpPost("UploadVideo/{sectionId}")]
-        //public async Task<IActionResult> UploadVideo(Guid sectionId, IFormFile videoFile)
-        //{
-        //    var result = await _episodeService.UploadVideo(sectionId, videoFile);
-
-        //    if (result.IsValid)
-        //    {
-        //        return Ok(result);
-        //    }
-        //    else
-        //    {
-        //        return BadRequest(result);
-        //    }
-        //}
-
-        //[HttpPost("uploadByChoosingFile")]
-        //public async Task<IActionResult> UploadByChoosingFile(
-        //     [FromForm] IFormFile file,
-        //     [FromForm] Guid courseId,
-        //     [FromForm] Guid seasonId,
-        //     [FromForm] Guid createdUserId,
-        //     [FromForm] string? title = null)
-        //{
-        //    if (file == null || file.Length == 0)
-        //    {
-        //        return BadRequest("File is required and should not be empty.");
-        //    }
-
-        //    try
-        //    {
-        //        // Check if the file is a valid video (you can adjust the validation based on allowed file types)
-        //        var allowedFileTypes = new[] { "video/mp4", "video/avi", "video/mkv" }; // Example video formats
-        //        if (!allowedFileTypes.Contains(file.ContentType))
-        //        {
-        //            return BadRequest("Invalid file type. Only video files are allowed.");
-        //        }
-
-        //        // Create a CreateSectionRequest
-        //        var request = new CreateSectionRequest
-        //        {
-        //            CourseId = courseId,
-        //            SeasionId = seasonId,
-        //            CreatedUserId = createdUserId,
-        //            Title = title
-        //        };
-
-        //        // Call your service logic to create a section
-        //        var createResult = await _episodeService.CreateSection(request);
-
-        //        if (!createResult.IsValid)
-        //        {
-        //            return BadRequest(createResult.StatusMessage);
-        //        }
-
-        //        // Upload file logic for video
-        //        var uploadResult = await _episodeService.UploadVideo(createResult.AddedId.Value, file);
-
-        //        if (!uploadResult.IsValid)
-        //        {
-        //            return BadRequest(uploadResult.StatusMessage);
-        //        }
-
-        //        return Ok(new
-        //        {
-        //            SectionId = createResult.AddedId,
-        //            Message = "Section created and video uploaded successfully."
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"An error occurred: {ex.Message}");
-        //    }
-        //}
-
-
 
     }
 }

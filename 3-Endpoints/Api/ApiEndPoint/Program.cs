@@ -31,6 +31,13 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.DocInclusionPredicate((docName, apiDesc) =>
     {
+
+        if (apiDesc.ActionDescriptor.DisplayName.Contains("HomeController"))
+        {
+            // ??? ??? ?????? "HomeController" ???? ?? ?? ?? ??????????? ??? ???????
+            return false;
+        }
+
         apiDesc.RelativePath = apiDesc.RelativePath.Replace("v1", "v1/SpecificController");
         return true;
     });

@@ -207,7 +207,8 @@ namespace Mahface.Services.AppServices.Service
                     return updateStatus; // Early return to avoid further processing
                 }
                 _mapper.Map(editUserVm, model);
-
+                model.PhoneNumber= editUserVm.PhoneNumber;
+                model.NationalCode=editUserVm.NationalCode;
                 if (editUserVm.Base64Profile != null)
                 {
                     ImageDto imageDto = new ImageDto();
@@ -216,7 +217,7 @@ namespace Mahface.Services.AppServices.Service
                     var imageResult = await _imageService.AddImage(imageDto);
                     model.ProfileImageId=imageResult.AddedId;
                 }
-
+                
                 var result = await _userRepository.UpdateUserAsync(model);
 
                 return result;

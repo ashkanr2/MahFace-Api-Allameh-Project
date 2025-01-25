@@ -28,7 +28,10 @@ namespace ApiEndPoint.Controllers
             _emailService=emailService;
         }
 
-
+        /// <summary>
+        /// دریافت اطلاعات کاربر جهت نمایش در فرم ویرایش
+        /// این متد اطلاعات کاربر را با استفاده از شناسه کاربری از دیتابیس بازیابی کرده و به مدل مورد نظر نگاشت می‌کند.
+        /// </summary>
         [HttpGet("EditProfile")]
         public async Task<ActionResult<EditUserVm>> EditProfile(Guid userId)
         {
@@ -45,16 +48,23 @@ namespace ApiEndPoint.Controllers
             return Ok(editUserVm);
         }
 
-
+        /// <summary>
+        /// ثبت‌نام کاربر جدید
+        /// اطلاعات کاربر جدید را دریافت کرده و فرآیند ثبت‌نام را انجام می‌دهد.
+        /// </summary>
 
         [HttpPost("Register")]
         public async Task<AddStatusVm> Register(AddUser addUser)
         {
-            addUser.Password="12345678";
+
             var result = await _userService.Register(addUser);
             return result;
         }
 
+        /// <summary>
+        /// اعمال تغییرات انجام شده در فرم ویرایش اطلاعات کاربر
+        /// این متد تغییرات ارسال شده توسط کاربر را در دیتابیس ذخیره می‌کند.
+        /// </summary>
 
         [HttpPost("EditProfile")]
         public async Task<UpdateStatus> EditProfile(EditUserVm editUserVm)
@@ -65,7 +75,11 @@ namespace ApiEndPoint.Controllers
 
             return result;
         }
-       
+
+        /// <summary>
+        /// ورود کاربر به سیستم
+        /// اطلاعات ورود شامل نام کاربری، ایمیل یا شماره تلفن و رمز عبور را بررسی کرده و وضعیت ورود را برمی‌گرداند.
+        /// </summary>
 
         [HttpPost("Login")]
         public async Task<LoginResponseVm> Login([FromBody] LoginRequest loginRequest)
@@ -80,17 +94,17 @@ namespace ApiEndPoint.Controllers
                 vm.IsValid = false;
                 vm.StatusMessage="اطلاعات وارد شده نامعتبر است.";
                 vm.EmailConFirm=false;
-                return vm;  
+                return vm;
             }
 
             try
             {
                 var result = await _userService.Login(loginRequest.UserNameOrEmailORPhoneNumber, loginRequest.Password);
-                
-                return result;
-               
 
-                
+                return result;
+
+
+
             }
             catch (Exception ex)
             {
@@ -99,11 +113,10 @@ namespace ApiEndPoint.Controllers
         }
 
         /// <summary>
-        /// مقدار 1234 پیشفرض کد طلایی ست شده
+        /// بررسی کد تایید ارسالی برای کاربر
+        /// این متد کد تایید ارسال شده توسط کاربر را بررسی می‌کند و در صورت معتبر بودن، تایید ایمیل کاربر انجام می‌شود.
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="otp"></param>
-        /// <returns></returns>
+
         [HttpPost("CheckOtp")]
         public async Task<UpdateStatus> CheckOtp(Guid userId, int otp)
         {
@@ -119,6 +132,10 @@ namespace ApiEndPoint.Controllers
             return result;
 
         }
+        /// <summary>
+        /// بررسی توکن تایید ایمیل
+        /// این متد توکن ارسال شده برای تایید ایمیل کاربر را بررسی کرده و وضعیت تایید را برمی‌گرداند.
+        /// </summary>
 
         [HttpPost("CheckOtpWithToken")]
         public async Task<UpdateStatus> CheckOtpWithToken(Guid userId, string emailToken)
@@ -129,25 +146,6 @@ namespace ApiEndPoint.Controllers
             return result;
 
         }
-
-        //[HttpGet("Email")]
-        //public async Task<bool> Email()
-        //{
-
-
-        //        var to = "razaviash21@gmail.com";
-        //    var emailMessage = $"\n\nسلام، به سایت MahfaceAllameh خوش آمدید! " +
-        //            $"\n\nما خوشحالیم که شما را در جمع خود داریم. برای تکمیل ثبت‌نام یا تایید درخواست خود، لطفاً از کد تایید زیر استفاده کنید:" +
-        //            $"\n\nکد تایید: 1234" +
-        //            $"\n\nلطفاً این کد را در سایت وارد کنید تا مراحل را ادامه دهید." +
-        //            $"\n\nاگر شما درخواست این ایمیل را نداده‌اید، لطفاً این پیام را نادیده بگیرید." +
-        //            $"\n\nبا احترام،" +
-        //            $"\n\nتیم MahfaceAllameh";
-
-        //    var x = await _emailService.SendEmailAsync(to, "Login", emailMessage);
-
-        //    return x; 
-        //}
 
 
     }

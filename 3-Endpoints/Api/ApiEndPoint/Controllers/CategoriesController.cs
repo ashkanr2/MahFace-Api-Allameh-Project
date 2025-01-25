@@ -20,9 +20,13 @@ namespace ApiEndPoint.Controllers
             _categoryService = categoryService;
         }
 
-        // GET: api/Categories
+        /// <summary>
+        /// دریافت تمامی دسته‌بندی‌ها
+        /// این متد لیستی از تمام دسته‌بندی‌های موجود در سیستم را برمی‌گرداند.
+        /// </summary>
+
         [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Category>>> GetAll()
         {
             try
             {
@@ -37,6 +41,10 @@ namespace ApiEndPoint.Controllers
 
         }
 
+        /// <summary>
+        /// دریافت عناوین دسته‌بندی‌ها
+        /// این متد لیستی از عناوین دسته‌بندی‌ها را برمی‌گرداند.
+        /// </summary>
 
         [HttpGet("GetAllTitleCategoriesAsync")]
         public async Task<ActionResult<IEnumerable<Category>>> GetAllTitleCategoriesAsync()
@@ -55,7 +63,11 @@ namespace ApiEndPoint.Controllers
         }
 
 
-        // GET: api/Categories/5
+        /// <summary>
+        /// دریافت اطلاعات دسته‌بندی بر اساس شناسه
+        /// این متد اطلاعات یک دسته‌بندی مشخص را با استفاده از شناسه آن بازیابی می‌کند.
+        /// </summary>
+
         [HttpGet("GetById/{id}")]
         public async Task<ActionResult<Category>> GetById(Guid id)
         {
@@ -68,6 +80,11 @@ namespace ApiEndPoint.Controllers
 
             return category;
         }
+
+        /// <summary>
+        /// جستجو در دسته‌بندی‌ها
+        /// این متد دسته‌بندی‌هایی را که با ورودی جستجو مطابقت دارند، برمی‌گرداند.
+        /// </summary>
 
         [HttpGet("Search/{input}")]
         public async Task<ActionResult<IEnumerable<Category>>> Search(string input)
@@ -82,39 +99,13 @@ namespace ApiEndPoint.Controllers
             return Ok(categories);
         }
 
-        // PUT: api/Categories/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCategory(Guid id, Category category)
-        //{
-        //    if (id != category.Id)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(category).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!CategoryExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        /// <summary>
+        /// افزودن دسته‌بندی جدید
+        /// این متد یک دسته‌بندی جدید را بر اساس اطلاعات ورودی ایجاد کرده و در سیستم ذخیره می‌کند.
+        /// </summary>
 
-        //    return NoContent();
-        //}
-
-        // POST: api/Categories
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("AddCategory")]
         public async Task<ActionResult<Category>> AddCategory(CategoryVm categoryVm)
         {
@@ -140,7 +131,11 @@ namespace ApiEndPoint.Controllers
             return CreatedAtAction("GetById", new { id = category.Id }, category);
         }
 
-        //DELETE: api/Categories/5
+        /// <summary>
+        /// حذف نرم دسته‌بندی
+        /// این متد وضعیت حذف نرم (soft delete) را برای یک دسته‌بندی مشخص تنظیم می‌کند.
+        /// </summary>
+
         [HttpDelete("DeleteCategory/{id}")]
         public async Task<IActionResult> DeleteCategory(Guid id)
         {

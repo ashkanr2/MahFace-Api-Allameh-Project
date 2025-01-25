@@ -16,8 +16,12 @@ namespace ApiEndPoint.Controllers
             _studentCourseService = studentCourseService;
         }
 
-       
-       
+
+        /// <summary>
+        /// دریافت تمامی کاربرانی که یک دوره خاص را خریداری کرده‌اند
+        /// این متد لیستی از کاربران را که دوره خاصی را خریداری کرده‌اند، برمی‌گرداند.
+        /// </summary>
+
         [HttpGet("Course/{courseId}/Users")]
         public async Task<IActionResult> GetUsersInCourse(Guid courseId)
         {
@@ -32,6 +36,10 @@ namespace ApiEndPoint.Controllers
                 return BadRequest($"خطا در دریافت کاربران در دوره: {ex.Message}");
             }
         }
+        /// <summary>
+        /// بررسی خریداری دوره توسط یک کاربر خاص
+        /// این متد بررسی می‌کند که آیا کاربر خاصی دوره مشخصی را خریداری کرده است یا خیر.
+        /// </summary>
 
         [HttpGet("HasExistForUser")]
         public async Task<IActionResult> HasExistForUser(Guid courseId, Guid userId)
@@ -52,6 +60,10 @@ namespace ApiEndPoint.Controllers
         }
 
 
+        /// <summary>
+        /// افزودن یک دانش‌آموز به دوره خریداری شده
+        /// این متد یک دانش‌آموز را به دوره‌ای که خریداری کرده است، اضافه می‌کند.
+        /// </summary>
 
         [HttpPost("Add")]
         public async Task<IActionResult> AddStudentToCourse(StudentCoursesVm studentCoursesVm)
@@ -74,6 +86,10 @@ namespace ApiEndPoint.Controllers
                 return BadRequest($"خطا در افزودن دانش‌آموز به دوره: {ex.Message}");
             }
         }
+        /// <summary>
+        /// مدل داده برای افزودن یک دانش‌آموز به چند دوره مختلف
+        /// این کلاس اطلاعات مربوط به یک دانش‌آموز (شناسه کاربر) و لیستی از شناسه‌های دوره‌ها را برای افزودن به سیستم ذخیره می‌کند.
+        /// </summary>
         [HttpPost("AddMultiple")]
         public async Task<ActionResult<AddStatusVm>> AddMultipleStudentCourse(StudentMultipleCoursesVm studentCoursesVm)
         {
@@ -90,6 +106,10 @@ namespace ApiEndPoint.Controllers
             }
         }
 
+        /// <summary>
+        /// حذف دانش‌آموز از دوره خریداری شده
+        /// این متد یک دوره را از دوره‌ای که خریداری شده ی دانش اموز حذف می‌کند.
+        /// </summary>
 
         [HttpDelete("Delete/{courseId}/{userId}")]
         public async Task<IActionResult> DeleteStudentFromCourse(Guid courseId, Guid userId)

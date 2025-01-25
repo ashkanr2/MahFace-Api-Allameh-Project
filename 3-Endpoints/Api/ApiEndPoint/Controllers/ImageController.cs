@@ -18,6 +18,10 @@ namespace ApiEndPoint.Controllers
             _imageService = imageService;
         }
 
+        /// <summary>
+        /// افزودن تصویر جدید
+        /// این متد تصویر جدید را با استفاده از اطلاعات ورودی اضافه می‌کند.
+        /// </summary>
 
         [HttpPost("AddImage")]
         public async Task<IActionResult> AddImage([FromBody] ImageDto imageDto)
@@ -37,6 +41,10 @@ namespace ApiEndPoint.Controllers
         }
 
 
+        /// <summary>
+        /// دریافت تصویر بر اساس شناسه
+        /// این متد تصویر مشخصی را با استفاده از شناسه آن بازیابی می‌کند.
+        /// </summary>
 
         [HttpGet("GetByImageId")]
         public async Task<ActionResult<ImageDto>> GetImage(Guid id)
@@ -50,8 +58,12 @@ namespace ApiEndPoint.Controllers
             return image;
         }
 
- 
-        
+
+
+        /// <summary>
+        /// بارگذاری تصویر از طریق فایل انتخاب شده
+        /// این متد تصویر را از یک فایل بارگذاری شده دریافت کرده و آن را ذخیره می‌کند.
+        /// </summary>
 
         [HttpPost("uploadByChosingFile")]
         public async Task<AddStatusVm> UploadImage(IFormFile file)
@@ -80,7 +92,11 @@ namespace ApiEndPoint.Controllers
             return createdImage;
         }
 
-        // GET: api/Image/download/{id}
+        /// <summary>
+        /// دانلود تصویر به صورت فایل
+        /// این متد تصویر را بر اساس شناسه آن دریافت کرده و به صورت فایل برای کاربر ارسال می‌کند.
+        /// </summary>
+
         [HttpGet("DownloadImageAsFile")]
         public async Task<IActionResult> DownloadImage(Guid id)
         {
@@ -95,7 +111,11 @@ namespace ApiEndPoint.Controllers
 
             return File(imageBytes, mimeType, fileName);
         }
- 
+        /// <summary>
+        /// دانلود تصویر از طریق رشته base64
+        /// این متد تصویر را از رشته base64 دریافت کرده و آن را به صورت فایل برای کاربر ارسال می‌کند.
+        /// </summary>
+
         [HttpPost("DownloadFromBase64")]
         public IActionResult DownloadImageFromBase64([FromBody] string base64String)
         {
@@ -115,6 +135,10 @@ namespace ApiEndPoint.Controllers
 
             return File(imageBytes, mimeType, fileName);
         }
+        /// <summary>
+        /// حذف تصویر
+        /// این متد تصویر مشخصی را با استفاده از شناسه آن از سیستم حذف می‌کند.
+        /// </summary>
         [HttpDelete("DeleteImage")]
         public async Task<IActionResult> DeleteImage(Guid id)
         {

@@ -78,6 +78,10 @@ namespace ApiEndPoint.Controllers
             }
         }
 
+        /// <summary>
+        /// دریافت تعداد بازدیدهای یک دوره
+        /// این متد تعداد بازدیدهای یک دوره خاص را برمی‌گرداند.
+        /// </summary>
 
         [HttpGet("course/{courseId}")]
         public async Task<int> GetCourseView(Guid courseId)
