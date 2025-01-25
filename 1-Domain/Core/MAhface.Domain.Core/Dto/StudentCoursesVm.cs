@@ -12,4 +12,15 @@ namespace MAhface.Domain.Core1.Dto
 
         public Guid CourseId { get; set; }
     }
+    
+    
+    public class StudentMultipleCoursesVm
+    {
+        public Guid UserId { get; set; }
+
+        public List<Guid> RequestIds { get; set; }
+    }
+
+
+
 }

@@ -21,6 +21,7 @@ namespace MAhface.Domain.Core1.Dto
         public bool EmailConFirm { get; set; }
         public string GenderTypeString { get; set; }
         public string PhoneNumber { get; set; }
+        public string NationalCode { get; set; }
 
     }
 

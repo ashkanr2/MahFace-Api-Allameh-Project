@@ -276,6 +276,7 @@ namespace Mahface.Services.AppServices.Service
                 var gender = (GenderEnum)user.GenderType;
                 loginResponse.GenderTypeString=gender.GetDisplayName();
                 loginResponse.PhoneNumber=user.PhoneNumber;
+                loginResponse.NationalCode=user.NationalCode;
 
 
                 // Retrieve profile image in Base64 format

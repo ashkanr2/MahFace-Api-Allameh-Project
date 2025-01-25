@@ -51,6 +51,72 @@ namespace MAhface.Domain.Core1.Interface.IServices
             return await _studentCourseRipository.Add(studentCourses);
         }
 
+        public async Task<AddStatusVm> AddStudentMultipleCourse(StudentMultipleCoursesVm model)
+        {
+            try
+            {
+                // گرفتن لیست همه آی‌دی‌های دوره‌ها از مخزن
+                var coursesIds = _courseRipository.NewGetAllCourses().Select(c => c.Id).ToList();
+
+                // گرفتن لیست آی‌دی‌های دوره‌هایی که کاربر قبلاً ثبت‌نام کرده است
+                var studentCoursesIds = await _studentCourseRipository.GetUserCoursesId(model.UserId);
+
+                // چک کردن صحت آی‌دی‌های درخواست‌شده
+                var invalidCourseIds = model.RequestIds.Except(coursesIds).ToList();
+                if (invalidCourseIds.Any())
+                {
+                    return new AddStatusVm
+                    {
+                        IsValid = false,
+                        StatusMessage = $"برخی از آی‌دی‌های دوره نامعتبر هستند: {string.Join(", ", invalidCourseIds)}"
+                    };
+                }
+
+                // حذف دوره‌هایی که کاربر قبلاً در آنها ثبت‌نام کرده است
+                var newCourseIds = model.RequestIds.Except(studentCoursesIds).ToList();
+
+                if (!newCourseIds.Any())
+                {
+                    return new AddStatusVm
+                    {
+                        IsValid = false,
+                        StatusMessage = "همه دوره‌های درخواست‌شده قبلاً برای این کاربر ثبت شده‌اند."
+                    };
+                }
+
+                // ایجاد لیستی از ثبت‌نام‌های جدید
+                var newStudentCourses = newCourseIds.Select(courseId => new StudentCourses
+                {
+                    UserId = model.UserId,
+                    CourseId = courseId
+                }).ToList();
+
+                // ثبت داده‌های جدید در پایگاه داده
+                foreach (var studentCourse in newStudentCourses)
+                {
+                    await _studentCourseRipository.Add(studentCourse);
+                }
+
+                // بازگشت پیام موفقیت
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "دوره‌ها با موفقیت برای کاربر ثبت شدند."
+                };
+            }
+            catch (Exception ex)
+            {
+                // مدیریت خطا و بازگشت پیام خطا
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"خطایی در هنگام ثبت دوره‌ها رخ داد: {ex.Message}"
+                };
+            }
+        }
+
+
+
         // Updates student-course relation
         public async Task<UpdateStatus> UpdateStudentCourse(StudentCourses studentCourses)
         {

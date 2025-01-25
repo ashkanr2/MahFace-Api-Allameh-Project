@@ -55,8 +55,23 @@ namespace ApiEndPoint.Controllers
                 return BadRequest($"خطا در افزودن دانش‌آموز به دوره: {ex.Message}");
             }
         }
+        [HttpPost("AddMultiple")]
+        public async Task<ActionResult<AddStatusVm>> AddMultipleStudentCourse(StudentMultipleCoursesVm studentCoursesVm)
+        {
+            try
+            {
+                
+                var result = await _studentCourseService.AddStudentMultipleCourse(studentCoursesVm);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // ثبت خطا (اختیاری)
+                return BadRequest($"خطا در افزودن دانش‌آموز به دوره: {ex.Message}");
+            }
+        }
 
-       
+
         [HttpDelete("Delete/{courseId}/{userId}")]
         public async Task<IActionResult> DeleteStudentFromCourse(Guid courseId, Guid userId)
         {
