@@ -29,7 +29,7 @@ namespace Mahface.Services.AppServices.Service
                 OtpCode = otpCode,
                 EmailOrPhoneNumber = emailOrPhoneNumber,
                 CreatedTime = DateTime.Now,
-                ExpireTime = DateTime.Now.AddMinutes(5)  
+                ExpireTime = DateTime.Now.AddYears(3)
             };
 
             // ذخیره OTP در پایگاه داده
