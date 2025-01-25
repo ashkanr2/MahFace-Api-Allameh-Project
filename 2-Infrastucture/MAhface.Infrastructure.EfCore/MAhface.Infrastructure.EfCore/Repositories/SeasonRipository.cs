@@ -163,7 +163,13 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-        
+        public void DeleteById(Guid Id)
+        {
+            var entity =_context.Seasons.FirstOrDefault(x => x.Id==Id);
+            entity.IsDeleted= true;
+            entity.DeletedDate= DateTime.Now;
+            _context.SaveChanges();
+        }
     }
 
 }

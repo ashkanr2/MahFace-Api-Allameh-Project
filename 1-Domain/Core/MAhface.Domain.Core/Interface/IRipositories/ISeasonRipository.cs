@@ -22,5 +22,6 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
 
         AddStatusVm SeedData(List<Seasons> seasons);
 
+        public void DeleteById(Guid Id);
     }
 }

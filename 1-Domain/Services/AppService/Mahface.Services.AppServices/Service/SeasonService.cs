@@ -21,15 +21,18 @@ namespace Mahface.Services.AppServices.Service
         private readonly ISeasonRipository _seasonRepository;
         private readonly ICourseRipository _courseRipository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEpisodeRepository _episodeRepository;
         private readonly IMapper _mapper;
 
         // در اینجا، ICourseService به صورت Lazy تزریق می‌شود
-        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor, ICourseRipository courseRipository)
+        public SeasonService(ISeasonRipository seasonRepository, IMapper mapper, IHttpContextAccessor httpContextAccessor, 
+            ICourseRipository courseRipository , IEpisodeRepository episodeRepository)
         {
             _seasonRepository = seasonRepository;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _courseRipository=courseRipository;
+            _episodeRepository = episodeRepository;
         }
 
         public TimeOnly CalculateSumSections(Guid SeasonId)
@@ -45,16 +48,43 @@ namespace Mahface.Services.AppServices.Service
             return _seasonRepository.Create(season);
         }
 
-        public Task<UpdateStatus> DeleteCourse(Guid id)
+        public async Task<UpdateStatus> DeleteSeason(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var model = _seasonRepository.GetById(id);
+                if (model == null)
+                {
+                    return new UpdateStatus
+                    {
+                        IsValid = false,
+                        StatusMessage="این فصل یافت نشد "
+                    };
+                }
+                _seasonRepository.DeleteById(id);
+                
+                return new UpdateStatus
+                {
+                    IsValid = true,
+                    StatusMessage="با موفقیت حذف شد"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new UpdateStatus
+                {
+                    IsValid = false,
+                    StatusMessage="خطا در  حذف فصل لطفا مجدد تلاش کنید  "
+                };
+            }
         }
 
         public List<SeasonsDto> GetAll()
         {
             var seasons = _seasonRepository.GetAll();
-           var seasonsDto = _mapper.Map<List<SeasonsDto>>(seasons);
-            
+            var seasonsDto = _mapper.Map<List<SeasonsDto>>(seasons);
+
             return seasonsDto;
         }
 
@@ -86,7 +116,7 @@ namespace Mahface.Services.AppServices.Service
 
         public async Task<AddStatusVm> SeedData()
         {
-            var courses = await _courseRipository.GetAllCourses();   
+            var courses = await _courseRipository.GetAllCourses();
             var seasons = new List<Seasons>();
             var adminUserId = Guid.Parse("85f9967b-1011-40c0-a32e-87370b013966");
             foreach (var course in courses)
@@ -151,7 +181,7 @@ namespace Mahface.Services.AppServices.Service
             return _seasonRepository.Update(season);
         }
 
-         
+
     }
 
 }

@@ -25,6 +25,7 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
         Task<Episode> UpdateAsync(Episode section);
 
         Task<Episode> GetByIdAsync(Guid sectionId);
+        Task<bool>DeleteById(Guid sectionId);
     }
 
 }

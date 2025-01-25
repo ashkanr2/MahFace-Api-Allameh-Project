@@ -101,7 +101,17 @@ public class SeasonController : ControllerBase
         return Ok(result);
     }
 
-   
+    /// <summary>
+    /// حذف یک فصل
+    /// این متد یک فصل خاص را با استفاده از شناسه آن از سیستم حذف می‌کند.
+    /// </summary>
+
+    [HttpDelete("DeleteSeason/{id}")]
+    public async Task<UpdateStatus> DeleteSeason(Guid id)
+    {
+        var result = await _seasonService.DeleteSeason(id);
+        return result;
+    }
 
 
 }

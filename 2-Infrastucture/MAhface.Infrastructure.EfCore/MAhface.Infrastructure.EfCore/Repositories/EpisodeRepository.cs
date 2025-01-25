@@ -95,6 +95,21 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
+        public Task<bool> DeleteById(Guid sectionId)
+        {
+            var entity = _context.Episodes.FirstOrDefault(x => x.Id == sectionId);
+
+            if (entity == null)
+            {
+                return Task.FromResult(false); 
+            }
+
+            _context.Episodes.Remove(entity); 
+            _context.SaveChanges(); 
+
+            return Task.FromResult(true); 
+        }
+
     }
 }
 

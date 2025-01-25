@@ -14,14 +14,15 @@ namespace ApiEndPoint.Controllers
     {
         private readonly ICourseService _coursesService;
         private readonly IStudentCourseService _studentCourseService;
-
+        private readonly IStudentFavoritsCourseService _favoritsCourseService;
         private readonly IMapper _mapper;
 
-        public CourseController(ICourseService coursesService, IMapper mapper, IStudentCourseService studentCourseService)
+        public CourseController(ICourseService coursesService, IMapper mapper, IStudentCourseService studentCourseService, IStudentFavoritsCourseService favoritsCourseService)
         {
             _coursesService = coursesService;
             _mapper = mapper;
             _studentCourseService=studentCourseService;
+            _favoritsCourseService=favoritsCourseService;
         }
         /// <summary>
         /// دریافت جزئیات یک دوره بر اساس شناسه
@@ -128,21 +129,25 @@ namespace ApiEndPoint.Controllers
             }
         }
 
+        /// <summary>
+        /// دریافت لیست دوره‌های دانشجو
+        /// این متد لیستی از دوره‌های مورد علاقه را که یک دانشجو  آن ها را منتخب کرده است، برمی‌گرداند.
+        /// </summary>
 
-        //[HttpGet("GetAllStudentFavoritsCourses/{userId}")]
-        //public async Task<IActionResult> GetAllStudentFavoritsCourses(Guid userId)
-        //{
-        //    try
-        //    {
-
-        //      return Ok(courses);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // ثبت خطا (اختیاری)
-        //        return BadRequest($"خطا در دریافت دوره‌های کاربر: {ex.Message}");
-        //    }
-        //}
+        [HttpGet("GetAllStudentFavoritsCourses/{userId}")]
+        public async Task<IActionResult> GetAllStudentFavoritsCourses(Guid userId)
+        {
+            try
+            {
+                var courses = await _favoritsCourseService.GetUserFavoritsCourses(userId);
+                return Ok(courses);
+            }
+            catch (Exception ex)
+            {
+                // ثبت خطا (اختیاری)
+                return BadRequest($"خطا در دریافت دوره‌های کاربر: {ex.Message}");
+            }
+        }
 
         /// <summary>
         /// دریافت لیست دوره‌های مدرس

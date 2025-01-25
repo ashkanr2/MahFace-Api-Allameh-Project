@@ -320,6 +320,39 @@ namespace Mahface.Services.AppServices.Service
         {
           return _sectionRepository.GetEpisodeCountOfCourse(courseId);
         }
+
+        public async Task<UpdateStatus> DeleteSection(Guid sectionId)
+        {
+            try
+            {
+                var model =await _sectionRepository.GetByIdAsync(sectionId);
+                if (model == null)
+                {
+                    return new UpdateStatus
+                    {
+                        IsValid = false,
+                        StatusMessage="این قسمت یافت نشد "
+                    };
+                }
+               
+              var result = await _sectionRepository.DeleteById(sectionId);
+               
+                return new UpdateStatus
+                {
+                    IsValid = result,
+                    StatusMessage= result  ? "با موفقیت حذف شد" : "خطا در  حذف این قسمت لطفا مجدد تلاش کنید  "
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new UpdateStatus
+                {
+                    IsValid = false,
+                    StatusMessage="خطا در  سمت سرور رخ داده است لطفا مجدد تلاش کنید  "
+                };
+            }
+        }
     }
 
 

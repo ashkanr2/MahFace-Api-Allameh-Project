@@ -29,7 +29,8 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         Task<AddStatusVm> SeedData();
 
-        Task<UpdateStatus> DeleteCourse(Guid id);
+        Task<UpdateStatus> DeleteSeason(Guid id);
+
 
     }
 }

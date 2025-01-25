@@ -1,4 +1,5 @@
 ﻿using ApiEndPoint.ViewModel;
+using Mahface.Services.AppServices.Service;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Http;
@@ -93,5 +94,16 @@ namespace ApiEndPoint.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// حذف یک قسمت
+        /// این متد یک قسمت خاص را با استفاده از شناسه آن از سیستم حذف می‌کند.
+        /// </summary>
+        [HttpDelete("DeleteSection/{id}")]
+        public async Task<UpdateStatus> DeleteSection(Guid id)
+        {
+            var result = await _episodeService.DeleteSection(id);
+            return result;
+        }
     }
 }

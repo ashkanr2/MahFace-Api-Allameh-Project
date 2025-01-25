@@ -29,6 +29,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
         Task<AddStatusVm> UploadVideo(Guid sectionId, IFormFile videoFile);
 
         Task<bool> ValidateVideoUrlAsync(string url);
+        Task<UpdateStatus> DeleteSection(Guid sectionId);
 
     }
 
