@@ -161,7 +161,31 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             }
         }
 
-      
+        public async Task<AddStatusVm> SeedData(List<Courses> courses)
+        {
+            try
+            {
+                // Add comments to the database
+                await _context.Courses.AddRangeAsync(courses);
+                await _context.SaveChangesAsync();
+
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "دوره ها با موفقیت اضافه شدند.",
+                    AddedId = null
+                };
+            }
+            catch (Exception ex)
+            {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"خطا در افزودن دوره ها: {ex.Message}",
+                    AddedId = null
+                };
+            }
+        }
     }
 
 }

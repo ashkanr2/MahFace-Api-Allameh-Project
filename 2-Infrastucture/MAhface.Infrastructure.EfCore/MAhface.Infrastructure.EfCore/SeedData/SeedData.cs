@@ -158,8 +158,8 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                 new User
                 {
                     Id = Guid.Parse("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                    Firstname = "Ashkan",
-                    LastName = "Teacher",
+                    Firstname = "استاد",
+                    LastName = "اشکان",
                     BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494),
                     NationalCode = "1234567890",
                     IsSystemAccount = false,
@@ -197,7 +197,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                 {
                     Id = Guid.Parse("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
                     Firstname = "وحید",
-                    LastName = "2جعفری",
+                    LastName = "جعفری",
                     BirthDate = new DateTime(2002, 11, 2, 17, 41, 12, 121),
                     NationalCode = "",
                     IsSystemAccount = false,
@@ -215,18 +215,18 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                 new User
                 {
                     Id = Guid.Parse("05c5b88d-af8c-407e-d068-08dd15005342"),
-                    Firstname = "string",
-                    LastName = "string",
+                    Firstname = "عباس",
+                    LastName = "محمودی",
                     BirthDate = new DateTime(2024, 12, 5, 7, 42, 7, 242),
-                    NationalCode = "string",
+                    NationalCode = "123324526",
                     IsSystemAccount = false,
                     IsSystemAdmin = false,
                     IsStudent = false,
                     IsTeacher = true,
                     IsDeleted = false,
                     IsActived = false,
-                    Email = "string",
-                    PhoneNumber = "string",
+                    Email = "stringMahmood@Gmail.com",
+                    PhoneNumber = "09121234569",
                      ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null
@@ -272,8 +272,8 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                 new User
                 {
                     Id = Guid.Parse("282a7f03-1dca-4d15-b706-08dd20626fc4"),
-                    Firstname = "test email",
-                    LastName = "ashkan",
+                    Firstname = "مجتبی ",
+                    LastName = "محمدی",
                     BirthDate = new DateTime(2024, 12, 19, 19, 21, 28, 118),
                     NationalCode = "1215",
                     IsSystemAccount = false,
@@ -291,8 +291,8 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                 new User
                 {
                     Id = Guid.Parse("9f5dac63-d870-4424-7166-08dd2064841e"),
-                    Firstname = "5651",
-                    LastName = "hfyhb55",
+                    Firstname = "احسان",
+                    LastName = "علیخانی",
                     BirthDate = new DateTime(2024, 12, 19, 19, 36, 36, 471),
                     NationalCode = "366551",
                     IsSystemAccount = false,
@@ -301,7 +301,7 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                     IsTeacher = false,
                     IsDeleted = false,
                     IsActived = false,
-                    Email = "string@",
+                    Email = "strg@gmail.com",
                     PhoneNumber = "21521",
                      ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
@@ -329,18 +329,18 @@ namespace MAhface.Infrastructure.EfCore.SeedData
                 new User
                 {
                     Id = Guid.Parse("c13acae2-6d50-47cf-f711-08dd347f841d"),
-                    Firstname = "s",
-                    LastName = "2",
+                    Firstname = "رضا",
+                    LastName = "مرتضوی",
                     BirthDate = new DateTime(2025, 1, 14, 9, 39, 55, 273),
-                    NationalCode = "b",
+                    NationalCode = "12313",
                     IsSystemAccount = false,
                     IsSystemAdmin = false,
                     IsStudent = true,
                     IsTeacher = false,
                     IsDeleted = false,
                     IsActived = false,
-                    Email = "s",
-                    PhoneNumber = "f",
+                    Email = "s@gmail.com",
+                    PhoneNumber = "09152585",
                      ConcurrencyStamp="76b1da8d-1986-4020-840f-bbba1a97a295",
                     Image = null,
                     ProfileImageId = null

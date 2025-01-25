@@ -25,25 +25,40 @@ builder.Services.AddDbContext<AllamehPrroject>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultValue")));
 
 
+//builder.Services.AddControllers();
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen(options =>
+//{
+//    options.DocInclusionPredicate((docName, apiDesc) =>
+//    {
+
+//        if (apiDesc.ActionDescriptor.DisplayName.Contains("HomeController"))
+//        {
+//            // ??? ??? ?????? "HomeController" ???? ?? ?? ?? ??????????? ??? ???????
+//            return false;
+//        }
+
+//        apiDesc.RelativePath = apiDesc.RelativePath.Replace("v1", "v1/SpecificController");
+//        return true;
+//    });
+
+//    var xmlFile = Path.Combine(AppContext.BaseDirectory, "YourProjectName.xml"); 
+//    options.IncludeXmlComments(xmlFile); 
+//});
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.DocInclusionPredicate((docName, apiDesc) =>
     {
-
-        if (apiDesc.ActionDescriptor.DisplayName.Contains("HomeController"))
-        {
-            // ??? ??? ?????? "HomeController" ???? ?? ?? ?? ??????????? ??? ???????
-            return false;
-        }
-
         apiDesc.RelativePath = apiDesc.RelativePath.Replace("v1", "v1/SpecificController");
         return true;
     });
 
-    var xmlFile = Path.Combine(AppContext.BaseDirectory, "YourProjectName.xml"); 
-    options.IncludeXmlComments(xmlFile); 
+    var xmlFile = Path.Combine(AppContext.BaseDirectory, "YourProjectName.xml");
+    options.IncludeXmlComments(xmlFile);
 });
 
 //// Register DbContext
@@ -69,6 +84,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IViewRepository, ViewRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IStudentCourseRipository,StudentCourseRepository>();
+builder.Services.AddScoped<IStudentFavoritsCourseRipository, StudentFavoritsCourseRipository>();
 #endregion
 
 #region Service
@@ -86,6 +102,7 @@ builder.Services.AddScoped<ITeacherRequestService , TeacherRequestService>();
 builder.Services.AddScoped<IUserManagerService , UserManagerService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IStudentCourseService,StudentCourseService>();   
+builder.Services.AddScoped<IStudentFavoritsCourseService , StudentFavoritsCourseService>();
 #endregion
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

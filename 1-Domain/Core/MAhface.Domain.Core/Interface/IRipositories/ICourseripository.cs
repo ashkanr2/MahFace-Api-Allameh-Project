@@ -1,4 +1,5 @@
 ﻿using MAhface.Domain.Core.Dto;
+using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core.Entities.Study.Course;
 using MAhface.Domain.Core1.Dto;
 using System;
@@ -18,6 +19,7 @@ namespace MAhface.Domain.Core.Interface.IRipositories
         Task <AddStatusVm>AddCourse(Courses course);
         Task UpdateCourse(Courses course);
         Task DeleteCourse(Guid id);
+        Task<AddStatusVm> SeedData(List<Courses> courses);
     }
 
 }

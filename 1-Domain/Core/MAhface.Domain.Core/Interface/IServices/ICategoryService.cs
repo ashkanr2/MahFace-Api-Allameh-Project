@@ -17,5 +17,6 @@ namespace MAhface.Domain.Core1.Interface.IServices
         Task AddCategoryAsync(Category category);
         Task UpdateCategoryAsync(Category category);
         Task DeleteCategoryAsync(Guid id);
+        Task<AddStatusVm> SeedCategories();
     }
 }

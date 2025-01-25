@@ -1,9 +1,8 @@
-﻿using MAhface.Domain.Core.Entities.Study.Course;
-using MAhface.Domain.Core.Interface.IRipositories;
-using MAhface.Domain.Core.Interface.IServices;
+﻿using MAhface.Domain.Core.Interface.IRipositories;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Interface.IRipositories;
+using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,26 +10,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MAhface.Domain.Core1.Interface.IServices
+namespace Mahface.Services.AppServices.Service
 {
+
     public class StudentCourseService : IStudentCourseService
     {
         private readonly IStudentCourseRipository _studentCourseRipository;
         private readonly ICourseRipository _courseRipository;
         private readonly IUserService _userService;
-        
-        public StudentCourseService(IStudentCourseRipository studentCourseRipository, ICourseRipository courseRipository ,IUserService userService)
+
+        public StudentCourseService(IStudentCourseRipository studentCourseRipository, ICourseRipository courseRipository, IUserService userService)
         {
             _studentCourseRipository = studentCourseRipository;
-            _courseRipository= courseRipository;    
+            _courseRipository= courseRipository;
             _userService = userService;
         }
         public async Task<List<CourseVm>> GetUserCourses(Guid userId)
-        { 
-            
+        {
+
             var courseIds = await _studentCourseRipository.GetUserCoursesId(userId);
 
-            
+
             var coursesQuery = _courseRipository.NewGetAllCourses();
 
             var userCourses = coursesQuery
@@ -42,7 +42,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         public Task<List<Guid>> GetUsersCourses(Guid courseId)
         {
-           return _studentCourseRipository.GetCourseUsersId(courseId);
+            return _studentCourseRipository.GetCourseUsersId(courseId);
         }
 
 
@@ -158,10 +158,10 @@ namespace MAhface.Domain.Core1.Interface.IServices
                             UserId = user.Id,
                             CourseId = courseId,
                             CreatedUserID=user.Id,
-                            CreatedDate= DateTime.Now,  
+                            CreatedDate= DateTime.Now,
                             IsDeleted=false,
                             ISActive=true,
-                            
+
 
                         });
                     }
@@ -202,16 +202,18 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         public async Task<bool> HasExist(Guid userId, Guid courseId)
         {
-           
+
             var userCourses = await _studentCourseRipository.GetUserCoursesId(userId);
 
-          
+
             if (userCourses == null || !userCourses.Any())
                 return false;
 
-           
+
             return userCourses.Any(c => c == courseId);
         }
 
     }
 }
+
+

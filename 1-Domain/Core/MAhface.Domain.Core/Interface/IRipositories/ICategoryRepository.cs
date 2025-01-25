@@ -1,5 +1,6 @@
 ﻿using MAhface.Domain.Core.Entities.BasicInfo.Business;
 using MAhface.Domain.Core1.Dto;
+using MAhface.Domain.Core1.Entities.Study.Course;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace MAhface.Domain.Core1.Interface.IRipositories
         Task AddCategoryAsync(Category category);
         Task UpdateCategoryAsync(Category category);
         Task DeleteCategoryAsync(Guid id);
+        Task<AddStatusVm> SeedData(List<Category> categories);
     }
 }

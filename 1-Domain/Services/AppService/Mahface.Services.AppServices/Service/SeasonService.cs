@@ -45,6 +45,11 @@ namespace Mahface.Services.AppServices.Service
             return _seasonRepository.Create(season);
         }
 
+        public Task<UpdateStatus> DeleteCourse(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<SeasonsDto> GetAll()
         {
             var seasons = _seasonRepository.GetAll();

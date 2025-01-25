@@ -33,7 +33,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 {
                     vm.IsValid = false;
                     vm.StatusMessage="کاربر یافت نشد ";
-                   
+
                 }
 
                 var teacher = new Teacher
@@ -147,6 +147,31 @@ namespace MAhface.Infrastructure.EfCore.Repositories
             {
 
                 throw;
+            }
+        }
+
+        public async Task<AddStatusVm> SeedData(List<Teacher> teachers)
+        {
+            try
+            {
+                await _context.Teachers.AddRangeAsync(teachers);
+                await _context.SaveChangesAsync();
+
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "اساتید  با موفقیت اضافه شدند.",
+                    AddedId = null
+                };
+            }
+            catch (Exception ex)
+            {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"خطا در افزودن اساتید: {ex.Message}",
+                    AddedId = null
+                };
             }
         }
     }

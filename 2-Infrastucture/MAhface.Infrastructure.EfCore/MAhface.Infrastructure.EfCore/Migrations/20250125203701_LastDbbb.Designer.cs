@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAhface.Infrastructure.EfCore.Migrations
 {
     [DbContext(typeof(AllamehPrroject))]
-    [Migration("20250117182733_NewDb3")]
-    partial class NewDb3
+    [Migration("20250125203701_LastDbbb")]
+    partial class LastDbbb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,78 +124,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Teacher", "BasicInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Code = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5459),
-                            CreatedUserID = new Guid("76ff161d-b79c-40c6-8260-e1e25c3b7ea4"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44")
-                        },
-                        new
-                        {
-                            Id = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Code = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5468),
-                            CreatedUserID = new Guid("891294b1-1877-4613-aacd-14b046afe14f"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd")
-                        },
-                        new
-                        {
-                            Id = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
-                            Code = 3,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5476),
-                            CreatedUserID = new Guid("cfaf4145-926a-4366-ad51-0884efa152e2"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("0c7938f9-e881-42fa-242b-08dd2592d1dd"),
-                            Code = 4,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5481),
-                            CreatedUserID = new Guid("9904db92-c8bf-460c-bc47-2b809ba78554"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("3a4086aa-1278-4325-242c-08dd2592d1dd"),
-                            Code = 5,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5485),
-                            CreatedUserID = new Guid("c0865aa7-e2c7-463b-b32e-9a7895c56982"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("ecf68ade-4b48-4307-242d-08dd2592d1dd"),
-                            Code = 6,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5490),
-                            CreatedUserID = new Guid("707c40ed-2330-4516-a7c0-a7021223c38c"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        },
-                        new
-                        {
-                            Id = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Code = 7,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5494),
-                            CreatedUserID = new Guid("2385e5c7-423f-481a-a7f4-7dfe08127e9e"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            UserId = new Guid("05c5b88d-af8c-407e-d068-08dd15005342")
-                        });
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", b =>
@@ -223,6 +151,9 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.Property<string>("Firstname")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GenderType")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("ImageId")
                         .HasColumnType("uniqueidentifier");
@@ -311,17 +242,18 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "ac995c2e-edc6-4816-90e7-c5330e99881c",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "AshkanTeacher@gmail.com",
                             EmailConfirmed = false,
-                            Firstname = "Ashkan",
+                            Firstname = "استاد",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = false,
                             IsSystemAccount = false,
                             IsSystemAdmin = false,
                             IsTeacher = true,
-                            LastName = "Teacher",
+                            LastName = "اشکان",
                             LockoutEnabled = false,
                             NationalCode = "1234567890",
                             PhoneNumber = "09123655654",
@@ -333,10 +265,11 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 11, 25, 19, 32, 45, 25, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "99816dba-dba0-4601-add4-9ea3d02e5d10",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "jadi@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "جادی",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = false,
@@ -355,17 +288,18 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("d5c19e8c-d8da-421c-a82c-08dd12f8ba89"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2002, 11, 2, 17, 41, 12, 121, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "ff799f78-12c8-49f3-b9e2-390036c77aa9",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "vahidJF@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "وحید",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = false,
                             IsSystemAccount = false,
                             IsSystemAdmin = false,
                             IsTeacher = true,
-                            LastName = "2جعفری",
+                            LastName = "جعفری",
                             LockoutEnabled = false,
                             NationalCode = "",
                             PhoneNumber = "09129129120",
@@ -377,20 +311,21 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 5, 7, 42, 7, 242, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "738cb7cd-5dea-41a2-a99f-28b42ba97a19",
-                            Email = "string",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
+                            Email = "stringMahmood@Gmail.com",
                             EmailConfirmed = false,
-                            Firstname = "string",
+                            Firstname = "عباس",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = false,
                             IsSystemAccount = false,
                             IsSystemAdmin = false,
                             IsTeacher = true,
-                            LastName = "string",
+                            LastName = "محمودی",
                             LockoutEnabled = false,
-                            NationalCode = "string",
-                            PhoneNumber = "string",
+                            NationalCode = "123324526",
+                            PhoneNumber = "09121234569",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false
                         },
@@ -399,10 +334,11 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("e2caf058-47c5-4c10-3fc6-08dd1604c009"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 6, 14, 45, 29, 103, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "76dcbc56-c595-4b5f-9e55-1dff559759a3",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "sobhandanger81@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "sopo",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = true,
@@ -421,10 +357,11 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("81e27342-10ef-4faf-74ca-08dd1ad120c3"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2004, 12, 12, 17, 22, 1, 253, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "136b5974-f0f4-4041-9c89-06f9a67c6b41",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "u@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "sobhan",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = false,
@@ -443,17 +380,18 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("282a7f03-1dca-4d15-b706-08dd20626fc4"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 19, 19, 21, 28, 118, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "3459d17b-68d2-4e32-8746-890f51564bab",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "razaviash21@gmail.com",
                             EmailConfirmed = false,
-                            Firstname = "test email",
+                            Firstname = "مجتبی ",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = true,
                             IsSystemAccount = false,
                             IsSystemAdmin = false,
                             IsTeacher = false,
-                            LastName = "ashkan",
+                            LastName = "محمدی",
                             LockoutEnabled = false,
                             NationalCode = "1215",
                             PhoneNumber = "0915215",
@@ -465,17 +403,18 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("9f5dac63-d870-4424-7166-08dd2064841e"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2024, 12, 19, 19, 36, 36, 471, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "74bf6b3c-8f3e-4f9c-88f6-78baa1657e7c",
-                            Email = "string@",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
+                            Email = "strg@gmail.com",
                             EmailConfirmed = false,
-                            Firstname = "5651",
+                            Firstname = "احسان",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = true,
                             IsSystemAccount = false,
                             IsSystemAdmin = false,
                             IsTeacher = false,
-                            LastName = "hfyhb55",
+                            LastName = "علیخانی",
                             LockoutEnabled = false,
                             NationalCode = "366551",
                             PhoneNumber = "21521",
@@ -487,10 +426,11 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("b373c277-e096-465f-a7e2-08dd33ff4451"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2000, 1, 18, 18, 21, 33, 105, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "afdfc366-00e0-4628-ae90-2feb64b6fc1f",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "abolfazlVafaDost@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "ابوالفضل",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = true,
@@ -509,20 +449,21 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("c13acae2-6d50-47cf-f711-08dd347f841d"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2025, 1, 14, 9, 39, 55, 273, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "492eea8d-c477-493e-8b54-131917756377",
-                            Email = "s",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
+                            Email = "s@gmail.com",
                             EmailConfirmed = false,
-                            Firstname = "s",
+                            Firstname = "رضا",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = true,
                             IsSystemAccount = false,
                             IsSystemAdmin = false,
                             IsTeacher = false,
-                            LastName = "2",
+                            LastName = "مرتضوی",
                             LockoutEnabled = false,
-                            NationalCode = "b",
-                            PhoneNumber = "f",
+                            NationalCode = "12313",
+                            PhoneNumber = "09152585",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false
                         },
@@ -531,10 +472,11 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                             Id = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
                             AccessFailedCount = 0,
                             BirthDate = new DateTime(2002, 11, 25, 17, 47, 55, 494, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d716e4bb-bfff-487c-95bc-7822abdc9721",
+                            ConcurrencyStamp = "76b1da8d-1986-4020-840f-bbba1a97a295",
                             Email = "AshkanTeacher@gmail.com",
                             EmailConfirmed = false,
                             Firstname = "Admin",
+                            GenderType = 0,
                             IsActived = false,
                             IsDeleted = false,
                             IsStudent = false,
@@ -597,128 +539,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category", "BasicInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4a6ef880-e352-49dc-0976-08dd0d886873"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4909),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "string",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 0,
-                            Title = "تستی"
-                        },
-                        new
-                        {
-                            Id = new Guid("13dc2597-a7a3-482e-b54a-23e83d2ab18b"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4928),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 7,
-                            Title = "دانشگاهی علوم پایه پزشکی"
-                        },
-                        new
-                        {
-                            Id = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4932),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 3,
-                            Title = "زبان های خارجی"
-                        },
-                        new
-                        {
-                            Id = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4935),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 9,
-                            Title = "هنر"
-                        },
-                        new
-                        {
-                            Id = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4939),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 1,
-                            Title = "برنامه نویسی"
-                        },
-                        new
-                        {
-                            Id = new Guid("35f3bf57-7f05-41a7-8ecb-9b48bcd52fa7"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4945),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 6,
-                            Title = "دانشگاهی فنی و مهندسی"
-                        },
-                        new
-                        {
-                            Id = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4949),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 2,
-                            Title = "آی تی  و نرم افزار"
-                        },
-                        new
-                        {
-                            Id = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4954),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 5,
-                            Title = "مالی و سرمایه گذاری"
-                        },
-                        new
-                        {
-                            Id = new Guid("75f6493f-813e-4d97-a0ea-e4203b90f436"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4957),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 8,
-                            Title = "علوم پایه"
-                        },
-                        new
-                        {
-                            Id = new Guid("a2a57c78-7043-42e3-a156-ea5ad99fc083"),
-                            Code = 0,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(4962),
-                            CreatedUserID = new Guid("85f9967b-1011-40c0-a32e-87370b013966"),
-                            Description = "",
-                            ISActive = true,
-                            IsDeleted = false,
-                            OrderNo = 4,
-                            Title = "مدیریت و کسب وکار"
-                        });
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.BasicInfo.Business.View", b =>
@@ -759,6 +579,9 @@ namespace MAhface.Infrastructure.EfCore.Migrations
 
                     b.Property<TimeOnly>("LastVideoTime")
                         .HasColumnType("time");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -840,376 +663,6 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Course", "Study");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5f2b414d-63ec-4d3b-bfd3-08dd37aa0f43"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 101,
-                            Cost = 1200000m,
-                            CourseDescription = "دوره جامع و پروژه محور سی‌شارپ مناسب برای مبتدی تا پیشرفته.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5553),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "آموزش برنامه‌نویسی سی‌شارپ"
-                        },
-                        new
-                        {
-                            Id = new Guid("af8d7e39-0f8f-42b9-b1c3-08dd37aa0f44"),
-                            CategoryId = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
-                            Code = 102,
-                            Cost = 1500000m,
-                            CourseDescription = "آشنایی با اصول مدیریت مالی و تکنیک‌های سرمایه‌گذاری در بازار.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5561),
-                            CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Title = "مدیریت مالی و سرمایه‌گذاری"
-                        },
-                        new
-                        {
-                            Id = new Guid("71b3bede-4e8e-4207-a7d4-08dd37aa0f45"),
-                            CategoryId = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
-                            Code = 103,
-                            Cost = 800000m,
-                            CourseDescription = "دوره ویژه یادگیری زبان انگلیسی از سطح پایه با استفاده از روش‌های کاربردی.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5567),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
-                            Title = "آموزش زبان  برای مبتدیان"
-                        },
-                        new
-                        {
-                            Id = new Guid("b3e0b271-f8e0-4b3a-a7e5-08dd37aa0f46"),
-                            CategoryId = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
-                            Code = 104,
-                            Cost = 900000m,
-                            CourseDescription = "آشنایی با اصول طراحی و نقاشی برای هنرجویان مبتدی.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5573),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "مبانی هنر و طراحی"
-                        },
-                        new
-                        {
-                            Id = new Guid("c1e3b450-628f-4a43-b7e3-08dd37aa0f47"),
-                            CategoryId = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
-                            Code = 105,
-                            Cost = 2000000m,
-                            CourseDescription = "دوره تخصصی برای یادگیری اصول هوش مصنوعی و پیاده‌سازی الگوریتم‌های یادگیری ماشین.",
-                            CourseLevelId = 3,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5579),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "هوش مصنوعی و یادگیری ماشین"
-                        },
-                        new
-                        {
-                            Id = new Guid("9d7f57a8-26d1-4b9f-a255-08dd37ab6f01"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 201,
-                            Cost = 500000m,
-                            CourseDescription = "دوره‌ای مناسب برای آشنایی با اصول اولیه ریاضیات پایه و کاربردهای آن.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5586),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "مبانی ریاضیات پایه"
-                        },
-                        new
-                        {
-                            Id = new Guid("42d99c9a-7d35-4a45-a256-08dd37ab6f02"),
-                            CategoryId = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
-                            Code = 202,
-                            Cost = 800000m,
-                            CourseDescription = "آشنایی با مفاهیم پایه‌ای فیزیک و حل مسائل کاربردی.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5591),
-                            CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Title = "فیزیک عمومی 1"
-                        },
-                        new
-                        {
-                            Id = new Guid("7f6f6aab-c44f-4d30-a257-08dd37ab6f03"),
-                            CategoryId = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
-                            Code = 203,
-                            Cost = 1000000m,
-                            CourseDescription = "یادگیری مفاهیم آمار و احتمالات برای حل مسائل مهندسی.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5597),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
-                            Title = "آمار و احتمالات مهندسی"
-                        },
-                        new
-                        {
-                            Id = new Guid("b8c1131e-c817-44ea-a258-08dd37ab6f04"),
-                            CategoryId = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
-                            Code = 204,
-                            Cost = 1500000m,
-                            CourseDescription = "آشنایی با اصول بازاریابی در دنیای دیجیتال و راه‌های جذب مشتری.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5603),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "اصول بازاریابی دیجیتال"
-                        },
-                        new
-                        {
-                            Id = new Guid("d52d29fb-80da-40b0-a259-08dd37ab6f05"),
-                            CategoryId = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
-                            Code = 205,
-                            Cost = 1200000m,
-                            CourseDescription = "دوره‌ای جامع برای یادگیری طراحی صفحات وب با HTML و CSS.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5609),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "طراحی وب با HTML و CSS"
-                        },
-                        new
-                        {
-                            Id = new Guid("12f272c9-f198-45c4-a260-08dd37ab6f06"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 206,
-                            Cost = 2000000m,
-                            CourseDescription = "آموزش پیشرفته پایتون برای تحلیل داده، هوش مصنوعی و طراحی سیستم.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5615),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "برنامه‌نویسی پیشرفته با پایتون"
-                        },
-                        new
-                        {
-                            Id = new Guid("89e4b1db-9b95-4fa8-a261-08dd37ab6f07"),
-                            CategoryId = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
-                            Code = 207,
-                            Cost = 1800000m,
-                            CourseDescription = "آشنایی با ابزارها و تکنیک‌های طراحی سه‌بعدی در نرم‌افزار Blender.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5661),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "طراحی و مدل‌سازی  با Blender"
-                        },
-                        new
-                        {
-                            Id = new Guid("c7f3d234-9fc3-453a-b500-08dd37ab7f01"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 208,
-                            Cost = 900000m,
-                            CourseDescription = "آموزش مفاهیم اولیه برنامه‌نویسی با زبان جاوا برای مبتدیان.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5673),
-                            CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Title = "آموزش مقدماتی زبان جاوا"
-                        },
-                        new
-                        {
-                            Id = new Guid("f9ad1d79-7325-497e-b501-08dd37ab7f02"),
-                            CategoryId = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
-                            Code = 209,
-                            Cost = 1100000m,
-                            CourseDescription = "آشنایی با اصول پایه شبکه‌های کامپیوتری و پروتکل‌های ارتباطی.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5679),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "اصول شبکه‌های کامپیوتری"
-                        },
-                        new
-                        {
-                            Id = new Guid("a12c08e7-8827-4912-b502-08dd37ab7f03"),
-                            CategoryId = new Guid("3cfad89a-7c7b-497e-acd6-9bfc97d48a9b"),
-                            Code = 210,
-                            Cost = 1500000m,
-                            CourseDescription = "آموزش تحلیل داده‌های سازمانی با استفاده از زبان SQL.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5684),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "تحلیل داده با SQL"
-                        },
-                        new
-                        {
-                            Id = new Guid("d75d8d12-fdf9-45c8-b503-08dd37ab7f04"),
-                            CategoryId = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
-                            Code = 211,
-                            Cost = 2500000m,
-                            CourseDescription = "آموزش مفاهیم پایه‌ای یادگیری ماشین و الگوریتم‌های آن.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5690),
-                            CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Title = "یادگیری ماشین برای مبتدیان"
-                        },
-                        new
-                        {
-                            Id = new Guid("bf3ea476-bc8f-4572-b504-08dd37ab7f05"),
-                            CategoryId = new Guid("a654d03d-4e58-47fb-b70c-5e9433677052"),
-                            Code = 212,
-                            Cost = 800000m,
-                            CourseDescription = "یادگیری اصول پایه‌ای مدارهای الکترونیکی و کاربردهای آن‌ها.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5697),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("55a3337f-cfa5-4440-242a-08dd2592d1dd"),
-                            Title = "مبانی برق و الکترونیک"
-                        },
-                        new
-                        {
-                            Id = new Guid("f3e321eb-94d8-4b8d-b505-08dd37ab7f06"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 213,
-                            Cost = 2200000m,
-                            CourseDescription = "آموزش ساخت اپلیکیشن‌های موبایل برای اندروید و iOS با Flutter.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5704),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "توسعه اپلیکیشن‌های موبایل با Flutter"
-                        },
-                        new
-                        {
-                            Id = new Guid("6d9c7e02-56c7-4a77-b506-08dd37ab7f07"),
-                            CategoryId = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
-                            Code = 214,
-                            Cost = 1700000m,
-                            CourseDescription = "آشنایی با تکنیک‌ها و ابزارهای مدیریت پروژه‌های نرم‌افزاری.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5710),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "مدیریت پروژه‌های نرم‌افزاری"
-                        },
-                        new
-                        {
-                            Id = new Guid("ef123b19-3b99-4c24-b507-08dd37ab7f08"),
-                            CategoryId = new Guid("463044b4-343f-4101-b2a3-73012d059ac9"),
-                            Code = 215,
-                            Cost = 1200000m,
-                            CourseDescription = "آموزش طراحی رابط کاربری زیبا و کاربردی با ابزارهای مدرن.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5716),
-                            CreatedUserID = new Guid("9ceea18b-7117-4059-805c-08dd0d8a09bd"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("2603e63f-9b46-4807-72be-08dd0d8f6f8f"),
-                            Title = "طراحی رابط کاربری (UI)"
-                        },
-                        new
-                        {
-                            Id = new Guid("39a2b245-8188-4b47-b508-08dd37ab7f09"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 216,
-                            Cost = 2500000m,
-                            CourseDescription = "آموزش ساخت برنامه‌های تحت وب بااستفاده از ASP.NETCore.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5722),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "توسعه وب ASP.NET Core"
-                        },
-                        new
-                        {
-                            Id = new Guid("876a3131-1dc9-4a21-b509-08dd37ab7f10"),
-                            CategoryId = new Guid("7dbb7444-f7a7-46d7-aa82-d35f70b2165d"),
-                            Code = 217,
-                            Cost = 1800000m,
-                            CourseDescription = "یادگیری اصول و تکنیک‌های پایه‌ای هوش مصنوعی.",
-                            CourseLevelId = 1,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5728),
-                            CreatedUserID = new Guid("bd53a164-26df-45ab-bf5c-08dd0d797a44"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 4,
-                            TeacherId = new Guid("1f262031-5db7-47ae-893d-08dd0d86a8be"),
-                            Title = "آموزش مقدماتی هوش مصنوعی"
-                        },
-                        new
-                        {
-                            Id = new Guid("ab3e4a26-9e2f-46fa-b510-08dd37ab7f11"),
-                            CategoryId = new Guid("c758ad65-5f5d-43cf-b676-8dac2d2cf948"),
-                            Code = 218,
-                            Cost = 2000000m,
-                            CourseDescription = "آموزش مفاهیم شیءگرایی و پیاده‌سازی آن با زبان C#.",
-                            CourseLevelId = 2,
-                            CreatedDate = new DateTime(2025, 1, 17, 21, 57, 30, 779, DateTimeKind.Local).AddTicks(5734),
-                            CreatedUserID = new Guid("05c5b88d-af8c-407e-d068-08dd15005342"),
-                            ISActive = true,
-                            IsDeleted = false,
-                            StarsNumber = 5,
-                            TeacherId = new Guid("486c341e-03d9-4616-242e-08dd2592d1dd"),
-                            Title = "برنامه‌نویسی شیءگرا با C#"
-                        });
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core.Entities.Study.Season.Seasons", b =>
@@ -1368,6 +821,54 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.ToTable("Otps");
                 });
 
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.StudentFavoriteCourses", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Code"));
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ISActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("StudentFavoriteCourses", "Study");
+                });
+
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.TeacherRequests", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1449,6 +950,54 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.ToTable("Image", "BasicInfo");
                 });
 
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Business.StudentCourses", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Code"));
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ISActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("StudentCourseRegistrations", "Study");
+                });
+
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.ErrorLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1477,6 +1026,58 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ErrorLog", "System");
+                });
+
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.Study.Course.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Code"));
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedUserID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ISActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.Study.Episode.Episode", b =>
@@ -1737,6 +1338,25 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                     b.Navigation("SentByUser");
                 });
 
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.StudentFavoriteCourses", b =>
+                {
+                    b.HasOne("MAhface.Domain.Core.Entities.Study.Course.Courses", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Accounting.TeacherRequests", b =>
                 {
                     b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "User")
@@ -1746,6 +1366,44 @@ namespace MAhface.Infrastructure.EfCore.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.BasicInfo.Business.StudentCourses", b =>
+                {
+                    b.HasOne("MAhface.Domain.Core.Entities.Study.Course.Courses", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MAhface.Domain.Core1.Entities.Study.Course.Comment", b =>
+                {
+                    b.HasOne("MAhface.Domain.Core.Entities.Study.Course.Courses", "course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MAhface.Domain.Core.Entities.BasicInfo.Accounting.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("course");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("MAhface.Domain.Core1.Entities.Study.Episode.Episode", b =>

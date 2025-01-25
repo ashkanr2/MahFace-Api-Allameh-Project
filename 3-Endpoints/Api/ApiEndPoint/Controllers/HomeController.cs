@@ -1,6 +1,7 @@
 ﻿using ApiEndPoint.ViewModel;
 using Mahface.Services.AppServices.Service;
 using MAhface.Domain.Core.Entities.BasicInfo.Business;
+using MAhface.Domain.Core.Interface.IServices;
 using MAhface.Domain.Core1.Dto;
 using MAhface.Domain.Core1.Interface.IServices;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +21,12 @@ namespace ApiEndPoint.Controllers
         private readonly IViewService _viewService;
         private readonly ICommentService _commentService;
         private readonly IStudentCourseService _studentCourseService;
-        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService , IViewService viewService,ICommentService commentService ,IStudentCourseService studentCourseService)
+        private readonly ICategoryService _categoryService;
+        private readonly ITeacherService _teacherService;
+        private readonly ICourseService _courseService;
+        public HomeController(IUserService Userservice , IOtpService otpService , IEmailService emailService ,ISeasonService seasonService ,
+            IViewService viewService,ICommentService commentService ,IStudentCourseService studentCourseService,
+            ICategoryService categoryService,ITeacherService teacherService , ICourseService courseService)
         {
             _UserService  = Userservice;            
             _otpService = otpService;
@@ -29,6 +35,9 @@ namespace ApiEndPoint.Controllers
             _viewService =viewService;
             _commentService = commentService;
             _studentCourseService=studentCourseService;
+            _categoryService = categoryService;
+            _teacherService = teacherService;
+            _courseService = courseService;
         }
 
         [HttpGet("GetUrls")]
@@ -65,7 +74,58 @@ namespace ApiEndPoint.Controllers
 
         }
 
-         
+
+
+        [HttpGet("SeedCategories")]
+        public async Task<ActionResult<AddStatusVm>> SeedCategories(string adminEmail)
+        {
+            if (adminEmail=="razaviash21@gmail.com")
+            {
+                var result = await _categoryService.SeedCategories();
+                return result;
+
+            }
+
+            AddStatusVm addStatusVm = new AddStatusVm();
+            addStatusVm.IsValid=false;
+            addStatusVm.StatusMessage="Email is not correct";
+            return addStatusVm;
+        }
+
+        [HttpGet("SeedTeacher")]
+        public async Task<ActionResult<AddStatusVm>> SeedTeacher(string adminEmail)
+        {
+            if (adminEmail=="razaviash21@gmail.com")
+            {
+                var result = await _teacherService.SeedTeachers();
+                return result;
+
+            }
+
+            AddStatusVm addStatusVm = new AddStatusVm();
+            addStatusVm.IsValid=false;
+            addStatusVm.StatusMessage="Email is not correct";
+            return addStatusVm;
+        }
+
+        [HttpGet("SeedCourse")]
+        public async Task<ActionResult<AddStatusVm>> SeedCourse(string adminEmail)
+        {
+            if (adminEmail=="razaviash21@gmail.com")
+            {
+                var result = await _courseService.SeedCourses();    
+                return result;
+
+            }
+
+            AddStatusVm addStatusVm = new AddStatusVm();
+            addStatusVm.IsValid=false;
+            addStatusVm.StatusMessage="Email is not correct";
+            return addStatusVm;
+        }
+
+
+
         [HttpGet("SeedSeasonsData")]
         public async Task<ActionResult<AddStatusVm>> SeedSeasonsData(string adminEmail)
         {

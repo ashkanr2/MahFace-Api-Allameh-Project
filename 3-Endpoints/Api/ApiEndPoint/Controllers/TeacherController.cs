@@ -20,6 +20,11 @@ namespace ApiEndPoint.Controllers
             _teacherService = teacherService;
         }
 
+        /// <summary>
+        /// دریافت تمامی معلمان فعال
+        /// این متد لیستی از معلمان فعال را برمی‌گرداند.
+        /// </summary>
+
         // GET: api/teacher/GetAllActive
         [HttpGet("GetAllActive")]
         public async Task<ActionResult<IEnumerable<TeacherDto>>> GetAllActiveTeachers()
@@ -27,6 +32,10 @@ namespace ApiEndPoint.Controllers
             var teachers = await _teacherService.GetAllActiveTeachers();
             return Ok(teachers);
         }
+        /// <summary>
+        /// دریافت تمامی معلمان غیرفعال
+        /// این متد لیستی از معلمان غیرفعال را برمی‌گرداند.
+        /// </summary>
 
         // GET: api/teacher/GetAllInactive
         [HttpGet("GetAllInactive")]
@@ -35,6 +44,10 @@ namespace ApiEndPoint.Controllers
             var teachers = await _teacherService.GetAllInactiveTeachers();
             return Ok(teachers);
         }
+        /// <summary>
+        /// دریافت اطلاعات یک معلم بر اساس شناسه معلم
+        /// این متد اطلاعات یک معلم را با استفاده از شناسه آن برمی‌گرداند.
+        /// </summary>
 
         // GET: api/teacher/GetById/{id}
         [HttpGet("GetById/{teacherId}")]
@@ -47,6 +60,10 @@ namespace ApiEndPoint.Controllers
             }
             return Ok(teacher);
         }
+        /// <summary>
+        /// دریافت اطلاعات یک معلم بر اساس شناسه کاربری
+        /// این متد اطلاعات معلم را با استفاده از شناسه کاربری آن برمی‌گرداند.
+        /// </summary>
 
         [HttpGet("GetByUserId/{userId}")]
         public async Task<ActionResult<TeacherDto>> GetTeacherByUserId(Guid userId)
@@ -59,6 +76,10 @@ namespace ApiEndPoint.Controllers
             return Ok(teacher);
         }
 
+        /// <summary>
+        /// ایجاد یک معلم جدید
+        /// این متد یک معلم جدید را با استفاده از شناسه کاربری آن ایجاد می‌کند.
+        /// </summary>
 
         // POST: api/teacher/Create
         [HttpPost("Create")]
@@ -77,7 +98,11 @@ namespace ApiEndPoint.Controllers
             
         }
 
-        
+
+        /// <summary>
+        /// حذف یک معلم بر اساس شناسه معلم
+        /// این متد معلمی را که شناسه آن مشخص شده است حذف می‌کند.
+        /// </summary>
 
         // DELETE: api/teacher/Delete/{id}
         [HttpDelete("Delete/{id}")]

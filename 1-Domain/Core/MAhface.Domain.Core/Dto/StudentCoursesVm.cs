@@ -21,6 +21,17 @@ namespace MAhface.Domain.Core1.Dto
         public List<Guid> RequestIds { get; set; }
     }
 
+    public class StudentFavoriteCoursesVm
+    {
+        /// <summary>
+        /// شناسه کاربر (دانش‌آموز) که دوره را به عنوان دوره مورد علاقه خود انتخاب کرده است.
+        /// </summary>
+        public Guid UserId { get; set; }
 
+        /// <summary>
+        /// شناسه دوره‌ای که به عنوان دوره مورد علاقه برای دانش‌آموز انتخاب شده است.
+        /// </summary>
+        public Guid CourseId { get; set; }
+    }
 
 }

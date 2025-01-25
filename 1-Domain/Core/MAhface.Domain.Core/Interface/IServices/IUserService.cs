@@ -20,5 +20,6 @@ namespace MAhface.Domain.Core1.Interface.IServices
          Task<LoginResponseVm> Login(string email, string password);
          Task<UserDto> GetUserByTeacherId(Guid teacherId);
          Task<UpdateStatus>EmailConfirm(Guid userId ,string emailToken );
+
     }
 }

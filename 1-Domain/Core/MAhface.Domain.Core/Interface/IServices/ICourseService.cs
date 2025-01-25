@@ -18,11 +18,12 @@ namespace MAhface.Domain.Core.Interface.IServices
         Task<List<CourseVm>> GetAllCoursesWithFilterCategoryId(Guid categoryId);
         Task<List<CourseVm>> GetAllTeacherCourses(Guid userId);
         Task<List<NavVM>> GetAllCoursesTitleWithCategoryId(Guid categoryId);
-        
         Task<List<CourseVm>> GetAllCoursesWithFilter(string Input);
         Task<AddStatusVm> AddCourse(AddCourseVm addCourse);
         Task<UpdateStatus> UpdateCourse(Guid id, AddCourseVm course);
         Task<UpdateStatus> DeleteCourse(Guid id);
+        Task<AddStatusVm> SeedCourses();
     }
+
 }
 

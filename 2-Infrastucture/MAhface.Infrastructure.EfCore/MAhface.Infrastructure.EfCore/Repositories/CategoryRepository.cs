@@ -69,5 +69,32 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<AddStatusVm> SeedData(List<Category> categories)
+        {
+
+            try
+            {
+                // Add comments to the database
+                await _context.Categories.AddRangeAsync(categories);
+                await _context.SaveChangesAsync();
+
+                return new AddStatusVm
+                {
+                    IsValid = true,
+                    StatusMessage = "دسته بندی ها  با موفقیت اضافه شدند.",
+                    AddedId = null
+                };
+            }
+            catch (Exception ex)
+            {
+                return new AddStatusVm
+                {
+                    IsValid = false,
+                    StatusMessage = $"خطا در افزودن دسته بندی ها: {ex.Message}",
+                    AddedId = null
+                };
+            }
+        }
     }
 }

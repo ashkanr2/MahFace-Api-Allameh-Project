@@ -14,5 +14,5 @@ public interface ITeacherService
     Task DeleteTeacher(Guid teacherId);
     Task UpdateTeacher(TeacherDto teacherDto);
     Task<TeacherDto> GetTeacherByUSerId(Guid userId);
-    
+    Task<AddStatusVm> SeedTeachers();
 }
