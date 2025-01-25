@@ -121,24 +121,24 @@ namespace ApiEndPoint.Controllers
             }
         }
 
-        /// <summary>
-        /// بارگذاری داده‌های اولیه برای دوره‌های مورد علاقه
-        /// این متد برای افزودن داده‌های اولیه یا تصادفی به دوره‌های مورد علاقه دانش‌آموزان استفاده می‌شود.
-        /// </summary>
-        [HttpPost("SeedData")]
-        public async Task<IActionResult> SeedData()
-        {
-            try
-            {
-                var result = await _studentFavoritsCourseService.SeedData();
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                // ثبت خطا (اختیاری)
-                return BadRequest($"خطا در بارگذاری داده‌های اولیه: {ex.Message}");
-            }
-        }
+        ///// <summary>
+        ///// بارگذاری داده‌های اولیه برای دوره‌های مورد علاقه
+        ///// این متد برای افزودن داده‌های اولیه یا تصادفی به دوره‌های مورد علاقه دانش‌آموزان استفاده می‌شود.
+        ///// </summary>
+        //[HttpPost("SeedData")]
+        //public async Task<IActionResult> SeedData()
+        //{
+        //    try
+        //    {
+        //        var result = await _studentFavoritsCourseService.SeedData();
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // ثبت خطا (اختیاری)
+        //        return BadRequest($"خطا در بارگذاری داده‌های اولیه: {ex.Message}");
+        //    }
+        //}
     }
 
 }
