@@ -33,7 +33,26 @@ namespace ApiEndPoint.Controllers
             }
         }
 
-      
+        [HttpGet("HasExistForUser")]
+        public async Task<IActionResult> HasExistForUser(Guid courseId, Guid userId)
+        {
+            try
+            {
+                // بررسی وجود کاربر در دوره با استفاده از سرویس
+                var result = await _studentCourseService.HasExist(userId, courseId);
+
+                // بازگشت نتیجه
+                return Ok(result); // اگر true یا false باشد، به‌صورت مناسب برگردانده می‌شود
+            }
+            catch (Exception ex)
+            {
+                // مدیریت خطا و بازگشت BadRequest با پیام مناسب
+                return BadRequest($"خطا در بررسی وجود کاربر در دوره: {ex.Message}");
+            }
+        }
+
+
+
         [HttpPost("Add")]
         public async Task<IActionResult> AddStudentToCourse(StudentCoursesVm studentCoursesVm)
         {

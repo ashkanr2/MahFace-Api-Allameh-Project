@@ -200,9 +200,18 @@ namespace MAhface.Domain.Core1.Interface.IServices
             }
         }
 
+        public async Task<bool> HasExist(Guid userId, Guid courseId)
+        {
+           
+            var userCourses = await _studentCourseRipository.GetUserCoursesId(userId);
 
+          
+            if (userCourses == null || !userCourses.Any())
+                return false;
 
-
+           
+            return userCourses.Any(c => c == courseId);
+        }
 
     }
 }

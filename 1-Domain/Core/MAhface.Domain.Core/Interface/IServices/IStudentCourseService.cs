@@ -12,6 +12,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
     {
         Task<List<CourseVm>> GetUserCourses(Guid userId); // Retrieves all courses for a specific user
         Task<List<Guid>> GetUsersCourses(Guid courseId); // Retrieves all users for a specific course
+        Task<bool>HasExist(Guid userId , Guid courseId);
         Task<AddStatusVm> AddStudentToCourse(StudentCourses studentCourses); // Adds a student to a course
         Task<AddStatusVm> AddStudentMultipleCourse(StudentMultipleCoursesVm model);
         Task<UpdateStatus> UpdateStudentCourse(StudentCourses studentCourses); // Updates student-course relation
