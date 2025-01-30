@@ -80,6 +80,7 @@ public class SeasonController : ControllerBase
         seasonDto.Title = seasonVm.Title;
         seasonDto.SeasonsDescription = seasonVm.SeasonsDescription;
         seasonDto.CourseId = seasonVm.CourseId;
+        seasonDto.CreatedUserId = seasonVm.CreatedUserId;
         seasonDto.Id=new Guid();
         var result = _seasonService.Create(seasonDto);
         return Ok(result);

@@ -46,11 +46,11 @@ namespace MAhface.Infrastructure.EfCore.Repositories
 
         public string Create(Seasons season)
         {
-            var CreateUserId = _context.Users.FirstOrDefault(x => x.IsSystemAccount).Id;
+            //var CreateUserId = _context.Users.FirstOrDefault(x => x.IsSystemAccount).Id;
             try
             {
                 season.CreatedDate= DateTime.Now;
-                season.CreatedUserID=CreateUserId;
+                //season.CreatedUserID=CreateUserId;
                 _context.Seasons.Add(season);
                 _context.SaveChanges();
                 return "Season created successfully.";
