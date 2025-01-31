@@ -23,7 +23,7 @@ namespace MAhface.Domain.Core1.Interface.IServices
 
         public string Update(SeasonsDto season);
 
-        public string Create(SeasonsDto season);
+        public AddStatusVm Create(SeasonsDto season);
 
         public TimeOnly CalculateSumSections(Guid SeasonId);
 

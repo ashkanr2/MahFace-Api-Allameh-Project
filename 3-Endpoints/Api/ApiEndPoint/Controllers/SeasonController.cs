@@ -74,7 +74,7 @@ public class SeasonController : ControllerBase
     /// </summary>
 
     [HttpPost("AddSeason")]
-    public ActionResult<string> Create(AddSeasonVM seasonVm)
+    public ActionResult<AddStatusVm> Create(AddSeasonVM seasonVm)
     {
         SeasonsDto seasonDto = new SeasonsDto();
         seasonDto.Title = seasonVm.Title;
@@ -83,7 +83,7 @@ public class SeasonController : ControllerBase
         seasonDto.CreatedUserId = seasonVm.CreatedUserId;
         seasonDto.Id=new Guid();
         var result = _seasonService.Create(seasonDto);
-        return Ok(result);
+        return result;
     }
     /// <summary>
     /// به‌روزرسانی فصل
@@ -91,7 +91,7 @@ public class SeasonController : ControllerBase
     /// </summary>
 
     [HttpPut("Update")]
-    public ActionResult<string> Update( SeasonVm seasonVm)
+    public ActionResult<UpdateStatus> Update( SeasonVm seasonVm)
     {
         SeasonsDto seasonDto = new SeasonsDto();
         seasonDto.Title = seasonVm.Title;
@@ -99,7 +99,11 @@ public class SeasonController : ControllerBase
         seasonDto.CourseId = seasonVm.CourseId;
         seasonDto.Id=seasonVm.Id;
         var result = _seasonService.Update(seasonDto);
-        return Ok(result);
+        return new UpdateStatus
+        {
+            IsValid = result=="Season updated successfully." ? true : false,
+            StatusMessage=result=="Season updated successfully."? "با موفقیت اپدیت شد" : result
+        };
     }
 
     /// <summary>

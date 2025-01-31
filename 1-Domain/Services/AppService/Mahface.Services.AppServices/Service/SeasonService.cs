@@ -40,12 +40,18 @@ namespace Mahface.Services.AppServices.Service
             throw new NotImplementedException();
         }
 
-        public string Create(SeasonsDto seasonDto)
+        public AddStatusVm Create(SeasonsDto seasonDto)
         {
             var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
             var season = _mapper.Map<Seasons>(seasonDto);
             season.Description="Created By Ip = "+ ip;
-            return _seasonRepository.Create(season);
+            var result =_seasonRepository.Create(season);
+            return new AddStatusVm
+            {
+                IsValid = result=="با موفقیت اضافه شد" ?  true: false,
+                StatusMessage=result,
+                AddedId=season.Id
+            };
         }
 
         public async Task<UpdateStatus> DeleteSeason(Guid id)

@@ -53,7 +53,7 @@ namespace MAhface.Infrastructure.EfCore.Repositories
                 //season.CreatedUserID=CreateUserId;
                 _context.Seasons.Add(season);
                 _context.SaveChanges();
-                return "Season created successfully.";
+                return "با موفقیت اضافه شد";
             }
             catch (Exception ex)
             {
