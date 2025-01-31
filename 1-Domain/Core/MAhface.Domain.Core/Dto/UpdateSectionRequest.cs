@@ -12,7 +12,7 @@ namespace MAhface.Domain.Core1.Dto
         public string Title { get; set; }
 
         // Property for updating the course level
-        public int? CourseLevel { get; set; }
+        //public int? CourseLevel { get; set; }
 
         // Property for updating the SeasonId
         public Guid? SeasionId { get; set; }
