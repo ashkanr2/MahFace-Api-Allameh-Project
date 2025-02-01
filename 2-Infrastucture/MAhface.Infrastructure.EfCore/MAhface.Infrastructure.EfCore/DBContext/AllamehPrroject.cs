@@ -74,9 +74,9 @@ namespace MAhface.Infrastructure.EfCore.DBContext
             modelBuilder.Entity<EmailSetting>().HasData(new EmailSetting
             {
                 Id = Guid.Parse("D4819E1B-3DAB-4D13-9EE5-DFB6C2AEE0FF"), // یک GUID ثابت وارد کنید
-                EmailAddress = "Register@mahface-allameh.ir",
-                Password = "MahfaceAllamEh",
-                SMTPHost = "mail.mahface-allameh.ir",
+                EmailAddress = "mahface@ashkanrazavi.ir",
+                Password = "Ashkan12345678",
+                SMTPHost = "mail.ashkanrazavi.ir",
                 SMTPPort = 587
             });
 
